@@ -10,7 +10,7 @@ public class GunController : MonoBehaviour
     {
         bool shootAble = currentGun.gunData.ammoInMagazine > 0 && _lastShootTime + currentGun.gunData.shotRate < Time.time;
         
-        if (Input.GetKeyDown(KeyCode.Space) && shootAble)
+        if (Input.GetKey(KeyCode.Space) && shootAble)
         {
             currentGun.Shoot();
             

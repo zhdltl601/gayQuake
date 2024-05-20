@@ -22,8 +22,8 @@ public class GunDataSO : ScriptableObject
     public float shotRate;
     
     public float bulletSpeed;
-    
     public GameObject bullet;
-    
-    
+
+    public int maxShotCount;
+    public int minShotCount;
 }
