@@ -5,7 +5,7 @@ public class PlayerCamera : MonoBehaviour
     public Transform cameraRot;
     public void SetCameraRotation(float x, float y, float z = 0)
     {
-        cameraRot.rotation = Quaternion.Euler(x, y, z);
+        cameraRot.localRotation = Quaternion.Euler(x, y, z);
     }
     public void SetCameraPosition(float x, float y, float z)
     {
@@ -18,5 +18,13 @@ public class PlayerCamera : MonoBehaviour
     public Transform GetCameraPosTransform()
     {
         return cameraPos;
+    }
+    public void CameraShakePos(Vector3 dir)
+    {
+
+    }
+    public void CameraShakeRot(Vector3 rot)
+    {
+
     }
 }
