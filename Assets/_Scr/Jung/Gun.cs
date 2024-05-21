@@ -17,10 +17,15 @@ public abstract class Gun : MonoBehaviour
     public virtual void Shoot()
     {
         gunData.ammoInMagazine--;
-        GameObject bullet = Instantiate(gunData.bullet,_firePos.position,Quaternion.identity);
+                
+        GameObject bullet = ObjectPooling.instanc.GetObject(gunData.bullet);
+        
+        bullet.transform.position = _firePos.position;
         bullet.GetComponent<Rigidbody>().AddForce(_firePos.right * gunData.bulletSpeed);
         
-        StartCoroutine(ReboundCoroutine());
+        ObjectPooling.instanc.ReTurnObject(bullet , 2);
+        
+        //StartCoroutine(ReboundCoroutine());
     }
 
     public virtual void ReLoad()

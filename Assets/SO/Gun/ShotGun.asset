@@ -15,10 +15,10 @@ MonoBehaviour:
   gunType: 1
   gunName: "\uC0F7\uAC74"
   maxAmmoInMagazine: 16000
-  ammoInMagazine: 14194
+  ammoInMagazine: 14154
   totalAmmo: 1000
   damage: 15
-  shotRate: 0.8
+  shotRate: 1.2
   bulletSpeed: 1000
   bullet: {fileID: 326910291759959485, guid: 6565a56a34c42b1409b096b78cbbd2b1, type: 3}
   maxShotCount: 7
