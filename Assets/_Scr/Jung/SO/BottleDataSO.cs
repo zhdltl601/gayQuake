@@ -11,6 +11,8 @@ public class BottleDataSO : ScriptableObject
 {
     public string bottleName;
     public BottleType bottleType;
-    public float buffPercent;//현재 버프가 얼마나 찼는지
-    
+    public StatType statType;
+        
+    public float decreaseTime;
+    public int increaseAmount;
 }

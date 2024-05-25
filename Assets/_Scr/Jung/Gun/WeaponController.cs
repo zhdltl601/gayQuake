@@ -11,26 +11,42 @@ public class WeaponController : MonoBehaviour
     public Bottle currentBottle;
     public List<Bottle> bottleList;
     
+    
     private void Update()
+    {
+        Shot();
+        Reload();
+        ChangeBottle();
+        
+        currentBottle.DecreaseBottle();
+    }
+
+    private void Reload()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            currentGun.ReLoad();
+        }
+    }
+
+    private void Shot()
     {
         bool shootAble = currentGun.gunData.ammoInMagazine > 0 &&
                          _lastShootTime + currentGun.gunData.shotRate < Time.time;
         
         if (Input.GetKey(KeyCode.Space) && shootAble)
         {
-            currentGun.Shoot();
-            
+            GameObject[] bullets = currentGun.Shoot();
+
+            for (int i = 0; i < bullets.Length; i++)
+            {
+                Bullet newBullet = bullets[i].GetComponent<Bullet>();
+                
+                newBullet.SetBullet(currentBottle._bottleDataSo.statType , currentBottle._bottleDataSo.increaseAmount);
+            }
             _lastShootTime = Time.time;
         }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            currentGun.ReLoad();
-        }
-
-        ChangeBottle();
     }
-
     private void ChangeBottle()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -48,8 +64,8 @@ public class WeaponController : MonoBehaviour
     }
     private void SwitchBottle(int index)
     {
-        
-        
-        
+        currentBottle.gameObject.SetActive(false);
+        currentBottle = bottleList[index];
+        currentBottle.gameObject.SetActive(true);
     }
 }

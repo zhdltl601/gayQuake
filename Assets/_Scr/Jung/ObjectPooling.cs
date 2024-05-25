@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ObjectPooling : MonoSingleton<ObjectPooling>
 {
-   public static ObjectPooling instanc;
 
    private Dictionary<GameObject, Queue<GameObject>> _dictionary = new Dictionary<GameObject, Queue<GameObject>>();
    

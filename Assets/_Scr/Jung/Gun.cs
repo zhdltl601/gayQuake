@@ -14,18 +14,22 @@ public abstract class Gun : MonoBehaviour
         _firePos = GetComponentInChildren<GunModel>().GetFirePos();
     }
     
-    public virtual void Shoot()
+    public virtual GameObject[] Shoot()
     {
         gunData.ammoInMagazine--;
-                
-        GameObject bullet = ObjectPooling.instanc.GetObject(gunData.bullet);
+
+        GameObject[] bullet = new GameObject[1];
         
-        bullet.transform.position = _firePos.position;
-        bullet.GetComponent<Rigidbody>().AddForce(_firePos.right * gunData.bulletSpeed);
+        bullet[0] = ObjectPooling.Instance.GetObject(gunData.bullet);
         
-        ObjectPooling.instanc.ReTurnObject(bullet , 2);
+        bullet[0].transform.position = _firePos.position;
+        bullet[0].GetComponent<Rigidbody>().AddForce(_firePos.right * gunData.bulletSpeed);
+        
+        ObjectPooling.Instance.ReTurnObject(bullet[0] , 2);
         
         //StartCoroutine(ReboundCoroutine());
+
+        return bullet;
     }
 
     public virtual void ReLoad()
