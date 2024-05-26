@@ -19,11 +19,11 @@ public class PlayerCamera : MonoBehaviour
     {
         return cameraPos;
     }
-    public void CameraShakePos(Vector3 dir)
+    public void CameraShakeRot(Vector3 rot)
     {
 
     }
-    public void CameraShakeRot(Vector3 rot)
+    public void CameraShakePos(Vector3 dir)
     {
 
     }

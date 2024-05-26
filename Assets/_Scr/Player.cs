@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     [SerializeField] private AnimationCurve dashCurve;
     private float dashMulti;
 
-    private Vector3 direction;
+    private Vector3 inputDirection;
     private float speed;
     private float yVal;
 
@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float viewmodelValue;
     private float viewmodelY = 0;
     private float viewmodelX = 0;
+    private bool b_value;
+    [SerializeField] private LayerMask lm;
     private void Awake()
     {
         playerCamera = GetComponentInChildren<PlayerCamera>();
@@ -45,8 +47,8 @@ public class Player : MonoBehaviour
     private void Start()
     {
         //player Looks down when start?
-        playerCamera.SetCameraPosition(0, 0, 0);
-        playerCamera.SetCameraRotation(0, 0, 0);
+        //playerCamera.SetCameraPosition(0, 0, 0);
+        //playerCamera.SetCameraRotation(0, 0, 0);
         xRotation = 0;
         yRotation = 0;
 
@@ -66,11 +68,28 @@ public class Player : MonoBehaviour
     }
     private void PlayerApplyMovement()
     {
-        direction *= speed * dashCurve.Evaluate(dashMulti);
+        Vector3 direction = inputDirection;
+        //direction = direction.magnitude < 1 ? direction : direction.normalized; needs optimazation
+        direction *= speed;
         void PlayerAdditionalPhysics()
         {
-            bool isGround = playerController.IsGround;//isGround will change later
+            //dash
+            direction *= dashCurve.Evaluate(dashMulti);
+
+            //wallRun
+            bool isWallRunning = Physics.Raycast(playerCamera.GetCameraRotTransform().position, playerCamera.GetCameraRotTransform().TransformDirection(Vector3.left), out RaycastHit raycastHit, 2, lm);
+            //PlayerUI.Instance.lists[0].text = isWallRunning.ToString();
+            if (isWallRunning)
+            {
+                Debug.DrawRay(raycastHit.point, raycastHit.normal, Color.red);
+                //bool r = true;
+                //direction = 
+            }
+
+
             //if (b_bufferJump && isGround) PlayerJump(); // jumpbuffer needs implementation
+
+            bool isGround = playerController.IsGround;//isGround will change later
 
             if (isGround && yVal < 0) yVal = onGroundYVal;
             else yVal += gravity * Time.deltaTime;
@@ -93,7 +112,7 @@ public class Player : MonoBehaviour
         camForward.y = 0;
         camForward.Normalize();
         Vector3 camRight = playerCamera.GetCameraRotTransform().right;
-        direction = camForward * Input.GetAxis("Vertical") + camRight * Input.GetAxis("Horizontal");
+        inputDirection = camForward * Input.GetAxis("Vertical") + camRight * Input.GetAxis("Horizontal");
 
         void Jump()
         {
@@ -109,7 +128,10 @@ public class Player : MonoBehaviour
         else dashMulti = 0;
         if (Input.GetKeyDown(KeyCode.LeftShift)) Dash(); 
 
+
+
         #region debug
+        b_value = Input.GetKeyDown(KeyCode.C);
         float amount = viewmodelValue;
         if (Input.GetKey(KeyCode.I)) viewmodelY += Time.deltaTime * amount;
         if (Input.GetKey(KeyCode.K)) viewmodelY -= Time.deltaTime * amount;
