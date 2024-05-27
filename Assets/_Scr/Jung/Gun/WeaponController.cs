@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
@@ -10,14 +12,27 @@ public class WeaponController : MonoBehaviour
     [Header("Bottle Settings")] 
     public Bottle currentBottle;
     public List<Bottle> bottleList;
-    
-    
+
+    public Transform gunTrm;
+
+    private void Start()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     private void Update()
     {
-        Shot();
-        Reload();
-        ChangeBottle();
+        if (currentGun != null)
+        {
+            Shot();
+            Reload();
+            ThrowGun();
+            
+        }   
+       
         
+        ChangeBottle();
         currentBottle.DecreaseBottle();
     }
 
@@ -28,9 +43,19 @@ public class WeaponController : MonoBehaviour
             currentGun.ReLoad();
         }
     }
-
+    
+    private void ThrowGun()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            currentGun.ThrowGun();
+            currentGun = null;
+        }
+    }
+    
     private void Shot()
     {
+        
         bool shootAble = currentGun.gunData.ammoInMagazine > 0 &&
                          _lastShootTime + currentGun.gunData.shotRate < Time.time;
         

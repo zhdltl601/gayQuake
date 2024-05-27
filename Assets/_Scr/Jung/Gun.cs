@@ -8,10 +8,17 @@ public abstract class Gun : MonoBehaviour
     [SerializeField] protected float minRebound;
     
     protected Transform _firePos;
+    protected Rigidbody _rigidbody;
+    protected BoxCollider _collider;
+    
+    
+    private bool throwing;
     
     protected virtual void Start()
     {
         _firePos = GetComponentInChildren<GunModel>().GetFirePos();
+        _rigidbody = GetComponent<Rigidbody>();
+        _collider = GetComponent<BoxCollider>();
     }
     
     public virtual GameObject[] Shoot()
@@ -39,9 +46,20 @@ public abstract class Gun : MonoBehaviour
         gunData.ammoInMagazine = gunData.maxAmmoInMagazine;
     }
 
-    public virtual void Aim()
+    public virtual void ThrowGun()
     {
+        transform.parent = null;
+        _rigidbody.isKinematic = false;
+        _rigidbody.useGravity = true;
         
+        _rigidbody.constraints = RigidbodyConstraints.None;
+        
+        _rigidbody.AddForce(gameObject.transform.forward * 100);
+
+        throwing = true;
+        
+        _collider.enabled = true;
+        _collider.isTrigger = true;
     }
     
     protected IEnumerator ReboundCoroutine()
@@ -76,5 +94,27 @@ public abstract class Gun : MonoBehaviour
     
     private float EaseInSine(float x) {
         return 1 - Mathf.Cos((x * Mathf.PI) / 2);
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Ground")
+        {
+            throwing = false;
+        }
+        
+        if (other.gameObject.TryGetComponent(out WeaponController weaponController) && throwing == false)
+        {
+            weaponController.currentGun = this;
+            transform.parent = weaponController.gunTrm;
+            
+            _rigidbody.isKinematic = true;
+            _rigidbody.useGravity = false;
+        
+            _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.Euler(0,0,0);
+        }
     }
 }

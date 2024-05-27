@@ -19,5 +19,7 @@ MonoBehaviour:
   totalAmmo: 1000
   damage: 15
   shotRate: 0.125
-  bulletSpeed: 1200
+  bulletSpeed: 3000
   bullet: {fileID: 326910291759959485, guid: 6565a56a34c42b1409b096b78cbbd2b1, type: 3}
+  maxShotCount: 0
+  minShotCount: 0
