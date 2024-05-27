@@ -67,8 +67,8 @@ public class Player : MonoBehaviour
     {
         //...
         PlayerApplyMovement();
-        //playerCamera.SetCameraRotation(xRotation, yRotation);
-        //playerViewmodel.SetViewmodelRotation(xRotation, yRotation);
+        playerCamera.SetCameraRotation(xRotation, yRotation);
+        playerViewmodel.SetViewmodelRotation(xRotation, yRotation);
     }
     private void PlayerApplyMovement()
     {
