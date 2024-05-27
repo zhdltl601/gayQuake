@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 2611700850084124846}
   - component: {fileID: 4271194871905619883}
   - component: {fileID: 7136164691560908765}
-  - component: {fileID: 5929885212675667995}
   - component: {fileID: 8965774360004912015}
   - component: {fileID: 2453315155047909646}
+  - component: {fileID: 4487490104680601711}
+  - component: {fileID: 9058097901762377256}
   m_Layer: 0
   m_Name: DefaultBullet
   m_TagString: Untagged
@@ -64,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a4b04c55ce7a17548a814a30c6be8bca, type: 2}
+  - {fileID: 2100000, guid: 6d7771b577af6c4419923c250c380c46, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,27 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5929885212675667995
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 326910291759959485}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &8965774360004912015
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -132,7 +112,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!96 &2453315155047909646
 TrailRenderer:
@@ -194,13 +174,22 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.9808307
-        value: 0
-        inSlope: 0
-        outSlope: 0
+        time: 0.28502142
+        value: 0.5970513
+        inSlope: -2.2624447
+        outSlope: -2.2624447
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.6038318
+        value: 0
+        inSlope: -0.77608305
+        outSlope: -0.77608305
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.4550246
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -247,3 +236,40 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!136 &4487490104680601711
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326910291759959485}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5424441
+  m_Height: 0.9246588
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.0005379319}
+--- !u!114 &9058097901762377256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326910291759959485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d03498a9a7f5034fa71ba8b8b9666e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 8965774360004912015}
+  _trailRenderer: {fileID: 2453315155047909646}

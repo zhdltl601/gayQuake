@@ -13,6 +13,7 @@ public class PlayerCamera : MonoBehaviour
     }
     public Transform GetCameraRotTransform()
     {
+        //프로퍼티로 바꾸기 
         return cameraRot;
     }
     public Transform GetCameraPosTransform()
@@ -26,5 +27,9 @@ public class PlayerCamera : MonoBehaviour
     public void CameraShakePos(Vector3 dir)
     {
 
+    }
+    public void CameraWallRun(float z)
+    {
+        //cameraRot.eulerAngles.Set(0, 0, z);
     }
 }

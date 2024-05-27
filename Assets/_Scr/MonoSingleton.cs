@@ -15,6 +15,7 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
         print("Init");
         //CreateInstance
         GameObject gameObject = new GameObject();
+        gameObject.name = "Singleton_" + typeof(T).Name;
         T result = gameObject.AddComponent<T>();
         print("endInit");
         return result;
@@ -30,7 +31,6 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
             return;
         }
         _instance = this as T;
-        name = "Singleton_" + typeof(T).Name;
         print("awakeEnd");
     }
     protected virtual void OnDestroy()

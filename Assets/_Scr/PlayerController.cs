@@ -3,7 +3,7 @@ public class PlayerController : MonoBehaviour
 {
     //private Rigidbody rigidBody;
     private CharacterController characterController;
-    public bool IsGround => characterController.isGrounded;
+    public bool IsGround => characterController.isGrounded; // will change later
     private void Awake()
     {
         //rigidBody = GetComponent<Rigidbody>();
