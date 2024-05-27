@@ -15,8 +15,17 @@ public class EnemyIdleState : EnemyState
     public override void Update()
     {
         base.Update();
+
+        if (_enemy.target != null && Vector3.Distance(_enemy.transform.position , _enemy.target.position) <= _enemy.attackDistance)
+        {
+            _enemy.StateMachine.ChangeState(_enemy.AttackState);
+            return;
+        }
         
-        if(_enemy.target != null)return;
+        if (_enemy.target != null)
+        {
+            _enemy.StateMachine.ChangeState(_enemy.MoveState);
+        }
         
         Collider player = _enemy.IsPlayerDetected();
         if (player != null)
