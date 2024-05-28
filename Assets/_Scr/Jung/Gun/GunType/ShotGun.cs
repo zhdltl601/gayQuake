@@ -18,7 +18,6 @@ public class ShotGun : Gun
             
             bullets[i] = ObjectPooling.Instance.GetObject(gunData.bullet);
             bullets[i].transform.position = _firePos.position;
-            
             bullets[i].GetComponent<Rigidbody>().AddForce((_firePos.right + randPos).normalized * gunData.bulletSpeed);
         }
         //StartCoroutine(ReboundCoroutine());

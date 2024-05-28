@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Cinemachine.Utility;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ public class WeaponController : MonoBehaviour
     public List<Bottle> bottleList;
 
     public Transform gunTrm;
-
+    
     private void Start()
     {
         Cursor.visible = false;
@@ -59,15 +60,15 @@ public class WeaponController : MonoBehaviour
         bool shootAble = currentGun.gunData.ammoInMagazine > 0 &&
                          _lastShootTime + currentGun.gunData.shotRate < Time.time;
         
-        if (Input.GetKey(KeyCode.Space) && shootAble)
+        if (Input.GetKey(KeyCode.Mouse0) && shootAble)
         {
             GameObject[] bullets = currentGun.Shoot();
 
             for (int i = 0; i < bullets.Length; i++)
             {
                 Bullet newBullet = bullets[i].GetComponent<Bullet>();
-                
-                newBullet.SetBullet(currentBottle._bottleDataSo.statType , currentBottle._bottleDataSo.increaseAmount);
+                newBullet.SetBullet(currentBottle._bottleDataSo.statType , currentBottle._bottleDataSo.increaseAmount,
+                    currentGun._firePos.right);
             }
             _lastShootTime = Time.time;
         }

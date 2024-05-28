@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     private void OnEnable()
     {
         _trailRenderer.emitting = true;
+       
     }
 
     private void OnDisable()
@@ -20,10 +21,11 @@ public class Bullet : MonoBehaviour
         _trailRenderer.Clear();
     }
 
-    public void SetBullet(StatType _stat , int _increaseAmount)
+    public void SetBullet(StatType _stat , int _increaseAmount,Vector3 lookAt)
     {
         statType = _stat;
         increaseAmount = _increaseAmount;
+        transform.forward = lookAt;
     }
     
     private void OnTriggerEnter(Collider other)

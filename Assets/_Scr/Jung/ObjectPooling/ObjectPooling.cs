@@ -11,12 +11,14 @@ public class ObjectPooling : MonoSingleton<ObjectPooling>
    
    [Header("Initialize")] 
    [SerializeField] private GameObject bullet;
-   
+
+   [SerializeField] private GameObject caseShell;
    
 
    private void Start()
    {
       InitializeNewPool(bullet);
+      InitializeNewPool(caseShell);
    }
 
    public GameObject GetObject(GameObject prefab)
@@ -33,7 +35,7 @@ public class ObjectPooling : MonoSingleton<ObjectPooling>
 
       GameObject objectToGet = _dictionary[prefab].Dequeue();
       objectToGet.SetActive(true);
-      transform.parent = null;
+      //transform.parent = null;
       return objectToGet;
    }
 
@@ -50,7 +52,7 @@ public class ObjectPooling : MonoSingleton<ObjectPooling>
       GameObject newPrefab = prefab.GetComponent<PooledObject>().originalPrefab;
       
       prefab.SetActive(false);
-      prefab.transform.parent = transform;
+      //prefab.transform.parent = transform;
       
       _dictionary[newPrefab].Enqueue(prefab);
    }

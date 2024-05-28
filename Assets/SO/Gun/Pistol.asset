@@ -15,11 +15,11 @@ MonoBehaviour:
   gunType: 0
   gunName: "\uAD8C\uCD1D"
   maxAmmoInMagazine: 16000
-  ammoInMagazine: 15611
+  ammoInMagazine: 15143
   totalAmmo: 1000
   damage: 10
   shotRate: 0.25
-  bulletSpeed: 3000
-  bullet: {fileID: 326910291759959485, guid: 6565a56a34c42b1409b096b78cbbd2b1, type: 3}
+  bulletSpeed: 1200
+  bullet: {fileID: 7383199481331753142, guid: 3f834e4dd9eef9b4695d65797ae7cd8c, type: 3}
   maxShotCount: 0
   minShotCount: 0

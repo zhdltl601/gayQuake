@@ -20,6 +20,6 @@ MonoBehaviour:
   damage: 15
   shotRate: 1.2
   bulletSpeed: 3000
-  bullet: {fileID: 326910291759959485, guid: 6565a56a34c42b1409b096b78cbbd2b1, type: 3}
+  bullet: {fileID: 7383199481331753142, guid: 3f834e4dd9eef9b4695d65797ae7cd8c, type: 3}
   maxShotCount: 7
   minShotCount: 3
