@@ -22,13 +22,13 @@ public class Enemy : MonoBehaviour
     public SkinnedMeshRenderer _MeshRenderer;
     #endregion
     
-    
     private Collider[] _enemyCheckCollider;
 
     public Transform target;
     public LayerMask _whatIsPlayer;
-    
+
     [Header("Movement Values")]
+    public float moveSpeed;
     public float runAwayDistance;
     public float attackDistance;
     private void Awake()
@@ -53,6 +53,8 @@ public class Enemy : MonoBehaviour
     {
         _enemyCheckCollider = new Collider[1];
         StateMachine.Init(IdleState);
+
+        NavMeshAgent.speed = moveSpeed;
     }
 
     private void Update()
@@ -89,7 +91,30 @@ public class Enemy : MonoBehaviour
         }
         
         yield return new WaitForSeconds(0.1f);
-               
+        
+        Destroy(gameObject);
+    }
+
+    public void HitEvent()
+    {
+        Animator.SetTrigger("Hit");
+        
+        StartCoroutine(HitCoroutine());
+    }
+
+    public void DieEvent()
+    {
+        StateMachine.ChangeState(DeadState);
+        
+        NavMeshAgent.isStopped = true;
+        Animator.SetLayerWeight(1 , 0);
+    }
+    
+    IEnumerator HitCoroutine()
+    {
+        NavMeshAgent.speed = moveSpeed / 10;
+        yield return new WaitForSeconds(0.4f);
+        NavMeshAgent.speed = moveSpeed;
     }
     
     public void OnDrawGizmosSelected()

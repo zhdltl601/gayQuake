@@ -65,7 +65,7 @@ Material:
     - _Brightness: 2
     - _DissolveEdgeWidth: 0.25
     - _DissolveHeight: 2
-    - _Metalic: 0.145
+    - _Metalic: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0.4472136
