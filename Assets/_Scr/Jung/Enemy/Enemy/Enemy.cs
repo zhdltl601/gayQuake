@@ -5,7 +5,10 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     public EnemyStateMachine StateMachine { get; private set; }
-
+    
+    private readonly int _blinkValue = Shader.PropertyToID("_BlinkValue");
+    private bool _IsHit = false; 
+    
     #region states
 
     public EnemyIdleState IdleState { get; private set; }
@@ -75,8 +78,6 @@ public class Enemy : MonoBehaviour
     
     public IEnumerator StartDissolve(int _dissolveHash)
     {
-        //여기서 셰이더 처리 할거고
-
         Material[] mat = _MeshRenderer.materials;
 
         float currentTime = 0;
@@ -97,8 +98,9 @@ public class Enemy : MonoBehaviour
 
     public void HitEvent()
     {
-        Animator.SetTrigger("Hit");
+        if (_IsHit) return;
         
+        Animator.SetTrigger("Hit");
         StartCoroutine(HitCoroutine());
     }
 
@@ -112,9 +114,23 @@ public class Enemy : MonoBehaviour
     
     IEnumerator HitCoroutine()
     {
-        NavMeshAgent.speed = moveSpeed / 10;
+        _IsHit = true;
+        Material[] mat = _MeshRenderer.materials;
+        
+        mat[0].SetFloat(_blinkValue,0);
+        mat[1].SetFloat(_blinkValue,0);
+        
+        NavMeshAgent.speed = moveSpeed / 2;
+        
         yield return new WaitForSeconds(0.4f);
+        
+        _IsHit = false;
+     
+        mat[0].SetFloat(_blinkValue,1);
+        mat[1].SetFloat(_blinkValue,1);
+                
         NavMeshAgent.speed = moveSpeed;
+
     }
     
     public void OnDrawGizmosSelected()

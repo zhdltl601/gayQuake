@@ -15,9 +15,13 @@ public class WeaponController : MonoBehaviour
     public List<Bottle> bottleList;
 
     public Transform gunTrm;
+
+    private Transform playerCam;
     
     private void Start()
     {
+        playerCam = Camera.main.transform;
+        
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -29,7 +33,6 @@ public class WeaponController : MonoBehaviour
             Shot();
             Reload();
             ThrowGun();
-            
         }   
        
         
@@ -69,7 +72,7 @@ public class WeaponController : MonoBehaviour
                 Bullet newBullet = bullets[i].GetComponent<Bullet>();
                 newBullet.SetBullet(currentBottle._bottleDataSo.statType , 
                     currentBottle._bottleDataSo.increaseAmount,
-                    currentGun._firePos.right);
+                    playerCam.forward);
             }
             _lastShootTime = Time.time;
         }

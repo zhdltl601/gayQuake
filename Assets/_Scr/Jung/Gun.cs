@@ -1,26 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 public abstract class Gun : MonoBehaviour
 {
     public GunDataSO gunData;
+    [SerializeField] private LayerMask whatIsEnemy;
     [SerializeField] protected float maxRebound;
     [SerializeField] protected float minRebound;
-
+    
     [SerializeField] private GameObject caseShell;
 
     [SerializeField] private List<ParticleSystem> muzzles;
     
-    public Transform _firePos;
+    [HideInInspector] public Transform _firePos;
+    
     protected Transform _caseShellPos;
     protected Rigidbody _rigidbody;
     protected BoxCollider _collider;
     
+    private Transform playerCam;
     private bool throwing;
     
     protected virtual void Start()
     {
+        playerCam = Camera.main.transform;
+        
         _firePos = GetComponentInChildren<GunModel>().GetFirePos();
         _caseShellPos = GetComponentInChildren<GunModel>().GetCaseShell();
         
@@ -35,12 +42,23 @@ public abstract class Gun : MonoBehaviour
         GameObject[] bullet = new GameObject[1];
         
         bullet[0] = ObjectPooling.Instance.GetObject(gunData.bullet);
-        bullet[0].transform.position = _firePos.position;
-        bullet[0].GetComponent<Rigidbody>().AddForce(_firePos.right * gunData.bulletSpeed);
-        
         ObjectPooling.Instance.ReTurnObject(bullet[0] , 2);
+    
+        bool isHit = Physics.Raycast(playerCam.position , playerCam.forward,out RaycastHit hit ,100,whatIsEnemy);
+        Vector3 direction = playerCam.forward;
         
+        if (isHit)
+        {
+            direction = hit.point - _firePos.position;
+            Health enemyHealth = hit.transform.GetComponent<Health>();
+            enemyHealth.ApplyDamage(PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Attack].GetValue());
+            enemyHealth.onHitEvent?.Invoke();
+        }
         
+        bullet[0].transform.position = _firePos.position;
+        bullet[0].GetComponent<Rigidbody>().AddForce(direction.normalized * gunData.bulletSpeed);
+        
+                
         //탄피
         GameObject newCaseShell = ObjectPooling.Instance.GetObject(caseShell);
         
@@ -75,7 +93,7 @@ public abstract class Gun : MonoBehaviour
         
         _rigidbody.constraints = RigidbodyConstraints.None;
         
-        _rigidbody.AddForce(gameObject.transform.forward * 100);
+        _rigidbody.AddForce(gameObject.transform.forward * 300);
 
         throwing = true;
         
