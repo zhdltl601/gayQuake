@@ -9,8 +9,8 @@ public class Player : MonoBehaviour
     [Header("Camera")]
     [SerializeField] private float xSens;
     [SerializeField] private float ySens;
-    private float xRotation;
-    private float yRotation;
+    public float xRotation;//임시로 퍼블릭 박은거임..
+    public float yRotation;//임시로 퍼블릭 박은거임..
     //private float xFucker;
     //private float yFucker;
 

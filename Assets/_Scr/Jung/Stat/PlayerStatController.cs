@@ -30,7 +30,7 @@ public class PlayerStatController : MonoSingleton<PlayerStatController>
             }
             else
             {
-                health.SetDefaultValue(health.GetValue() - 1);
+                health.SetDefaultValue(health.GetValue() - healthBottleSo.increaseAmount);
             }
         }
     }

@@ -26,10 +26,13 @@ public class Enemy : MonoBehaviour
     #endregion
     
     private Collider[] _enemyCheckCollider;
-
+    private StatType dieStat;
+    
     public Transform target;
     public LayerMask _whatIsPlayer;
 
+    private Bottle _playerBottle;
+    
     [Header("Movement Values")]
     public float moveSpeed;
     public float runAwayDistance;
@@ -39,7 +42,6 @@ public class Enemy : MonoBehaviour
         Animator = GetComponentInChildren<Animator>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
         Rigidbody = GetComponent<Rigidbody>();
-        
         
         StateMachine = new EnemyStateMachine();
 
@@ -57,7 +59,8 @@ public class Enemy : MonoBehaviour
         _enemyCheckCollider = new Collider[1];
         StateMachine.Init(IdleState);
 
-        NavMeshAgent.speed = moveSpeed;
+        NavMeshAgent.speed = Random.Range(moveSpeed - 2f,moveSpeed);
+        Animator.speed =  Random.Range(0.8f,1.3f);;
     }
 
     private void Update()
@@ -100,6 +103,7 @@ public class Enemy : MonoBehaviour
     {
         if (_IsHit) return;
         
+        
         Animator.SetTrigger("Hit");
         StartCoroutine(HitCoroutine());
     }
@@ -107,7 +111,13 @@ public class Enemy : MonoBehaviour
     public void DieEvent()
     {
         StateMachine.ChangeState(DeadState);
-        
+
+        if (target != null)
+        {
+            _playerBottle = target.GetComponent<WeaponController>().currentBottle;
+            PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].AddModifier(10);
+        }
+                
         NavMeshAgent.isStopped = true;
         Animator.SetLayerWeight(1 , 0);
     }
@@ -120,7 +130,7 @@ public class Enemy : MonoBehaviour
         mat[0].SetFloat(_blinkValue,0);
         mat[1].SetFloat(_blinkValue,0);
         
-        NavMeshAgent.speed = moveSpeed / 2;
+        NavMeshAgent.speed = moveSpeed / 5;
         
         yield return new WaitForSeconds(0.4f);
         
@@ -130,7 +140,6 @@ public class Enemy : MonoBehaviour
         mat[1].SetFloat(_blinkValue,1);
                 
         NavMeshAgent.speed = moveSpeed;
-
     }
     
     public void OnDrawGizmosSelected()
@@ -138,6 +147,5 @@ public class Enemy : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position , runAwayDistance);
     }
-    
     
 }

@@ -7,14 +7,14 @@ public class Health : MonoBehaviour
     
     public UnityEvent onHitEvent;
     public UnityEvent onDieEvent;
-
+    
     public void ApplyDamage(float damage)
     {
         health -= damage;
-        if(health <= 0)
+        if (health <= 0)
+        {
             onDieEvent?.Invoke();
+        }
     }
-    
-    
     
 }

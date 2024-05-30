@@ -7,14 +7,12 @@ using Vector3 = UnityEngine.Vector3;
 public abstract class Gun : MonoBehaviour
 {
     public GunDataSO gunData;
+    
     [SerializeField] private LayerMask whatIsEnemy;
-    [SerializeField] protected float maxRebound;
-    [SerializeField] protected float minRebound;
+    [SerializeField] private LayerMask whatIsGround;
     
     [SerializeField] private GameObject caseShell;
-
     [SerializeField] private List<ParticleSystem> muzzles;
-    
     [HideInInspector] public Transform _firePos;
     
     protected Transform _caseShellPos;
@@ -22,7 +20,7 @@ public abstract class Gun : MonoBehaviour
     protected BoxCollider _collider;
     
     private Transform playerCam;
-    private bool throwing;
+    public bool throwing;
     
     protected virtual void Start()
     {
@@ -65,7 +63,7 @@ public abstract class Gun : MonoBehaviour
         newCaseShell.transform.position = _caseShellPos.position;
         newCaseShell.GetComponent<Rigidbody>().AddForce((Vector3.right + Vector3.up) * Random.Range(100, 140));
         
-        ObjectPooling.Instance.ReTurnObject(newCaseShell , 2);
+        ObjectPooling.Instance.ReTurnObject(newCaseShell , 3);
         
         
         //muzzle Effect
@@ -74,10 +72,9 @@ public abstract class Gun : MonoBehaviour
             item.Simulate(0);
             item.Play();
         }
-        
+
         return bullet;
     }
-
     public virtual void ReLoad()
     {
         int tempAmmo = gunData.maxAmmoInMagazine - gunData.ammoInMagazine;
@@ -92,43 +89,15 @@ public abstract class Gun : MonoBehaviour
         _rigidbody.useGravity = true;
         
         _rigidbody.constraints = RigidbodyConstraints.None;
-        
-        _rigidbody.AddForce(gameObject.transform.forward * 300);
 
+        Vector3 random = (gameObject.transform.forward);
+        _rigidbody.angularVelocity = new Vector3(Random.Range(1, 2.3f), Random.Range(1, 2.3f), Random.Range(1, 2.3f));
+        _rigidbody.AddForce(random* 300);
+        
         throwing = true;
         
         _collider.enabled = true;
         _collider.isTrigger = true;
-    }
-    
-    protected IEnumerator ReboundCoroutine()
-    {
-        float halfShotRate = gunData.shotRate / 2f;
-        float elapsedTime = 0f;
-        Quaternion targetRotation = Quaternion.Euler(
-            Random.Range(minRebound, maxRebound),
-            transform.rotation.eulerAngles.y,
-            transform.rotation.eulerAngles.z
-        );
-        
-        while (elapsedTime <halfShotRate)
-        {
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / gunData.shotRate;
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, EaseInSine(t));
-            yield return null;
-        }
-
-        elapsedTime = 0f;
-        while (elapsedTime < halfShotRate)
-        {
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / gunData.shotRate;
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0,0,0) , EaseInSine(t));
-            yield return null;
-        }
-        
-        //transform.rotation = Quaternion.Euler(0,0,0);
     }
     
     private float EaseInSine(float x) {
@@ -137,7 +106,7 @@ public abstract class Gun : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Ground")
+        if ((whatIsGround & (1 << other.gameObject.gameObject.layer)) != 0)//layerMask가 2진수로 저장되기 때문에 이러한 연산이 필요함..
         {
             throwing = false;
         }

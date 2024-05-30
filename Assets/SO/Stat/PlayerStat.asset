@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerStat
   m_EditorClassIdentifier: 
   health:
-    _baseValue: 150
+    _baseValue: 500
     modifiers: 
   money:
     _baseValue: 0

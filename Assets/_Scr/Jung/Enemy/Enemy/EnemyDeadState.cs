@@ -13,7 +13,6 @@ public class EnemyDeadState : EnemyState
     {
         base.Enter();
         _isDissolving = false;
-        
     }
 
     public override void Update()
