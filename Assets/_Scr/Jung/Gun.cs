@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
@@ -19,6 +18,7 @@ public abstract class Gun : MonoBehaviour
     protected Rigidbody _rigidbody;
     protected BoxCollider _collider;
     
+    public Animator gunAnimator;
     private Transform playerCam;
     public bool throwing;
     
@@ -28,7 +28,7 @@ public abstract class Gun : MonoBehaviour
         
         _firePos = GetComponentInChildren<GunModel>().GetFirePos();
         _caseShellPos = GetComponentInChildren<GunModel>().GetCaseShell();
-        
+        gunAnimator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<BoxCollider>();
     }
@@ -55,8 +55,7 @@ public abstract class Gun : MonoBehaviour
         
         bullet[0].transform.position = _firePos.position;
         bullet[0].GetComponent<Rigidbody>().AddForce(direction.normalized * gunData.bulletSpeed);
-        
-                
+                        
         //탄피
         GameObject newCaseShell = ObjectPooling.Instance.GetObject(caseShell);
         
@@ -64,7 +63,6 @@ public abstract class Gun : MonoBehaviour
         newCaseShell.GetComponent<Rigidbody>().AddForce((Vector3.right + Vector3.up) * Random.Range(100, 140));
         
         ObjectPooling.Instance.ReTurnObject(newCaseShell , 3);
-        
         
         //muzzle Effect
         foreach (var item in muzzles)
@@ -77,9 +75,18 @@ public abstract class Gun : MonoBehaviour
     }
     public virtual void ReLoad()
     {
-        int tempAmmo = gunData.maxAmmoInMagazine - gunData.ammoInMagazine;
-        gunData.totalAmmo -= tempAmmo;
-        gunData.ammoInMagazine = gunData.maxAmmoInMagazine;
+        int needAmmo = gunData.maxAmmoInMagazine - gunData.ammoInMagazine;
+
+        if (gunData.totalAmmo - needAmmo < 0)
+        {
+            gunData.ammoInMagazine += gunData.totalAmmo;
+            gunData.totalAmmo = 0;
+        }
+        else
+        {
+            gunData.totalAmmo -= needAmmo;
+            gunData.ammoInMagazine = gunData.maxAmmoInMagazine;
+        }
     }
 
     public virtual void ThrowGun()
@@ -100,9 +107,6 @@ public abstract class Gun : MonoBehaviour
         _collider.isTrigger = true;
     }
     
-    private float EaseInSine(float x) {
-        return 1 - Mathf.Cos((x * Mathf.PI) / 2);
-    }
     
     private void OnTriggerEnter(Collider other)
     {

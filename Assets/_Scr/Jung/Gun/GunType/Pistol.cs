@@ -2,7 +2,7 @@
 
 public class Pistol : Gun
 {
-
+    
     
 
 }

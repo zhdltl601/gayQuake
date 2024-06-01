@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,8 @@ public class WeaponController : MonoBehaviour
     [Header("Gun Settings")]
     public Gun currentGun;
     private float _lastShootTime;
-
+    private float shotTime;
+    
     [Header("Bottle Settings")] 
     public Bottle currentBottle;
     public List<Bottle> bottleList;
@@ -15,15 +17,15 @@ public class WeaponController : MonoBehaviour
     private Player _player;
     private Transform playerCam;
     
-    
     private void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
+        
         playerCam = Camera.main.transform;
 
         _player = GetComponent<Player>();
+        
     }
 
     private void Update()
@@ -35,7 +37,6 @@ public class WeaponController : MonoBehaviour
             ThrowGun();
         }   
        
-        
         ChangeBottle();
         currentBottle.DecreaseBottle();
     }
@@ -45,6 +46,8 @@ public class WeaponController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             currentGun.ReLoad();
+            
+            UIManager.Instance.SetAmmoText();
         }
     }
     
@@ -59,6 +62,8 @@ public class WeaponController : MonoBehaviour
     
     private void Shot()
     {
+        shotTime += Time.deltaTime;
+        
         bool shootAble = currentGun.gunData.ammoInMagazine > 0 &&
                          _lastShootTime + currentGun.gunData.shotRate < Time.time;
         
@@ -74,21 +79,27 @@ public class WeaponController : MonoBehaviour
                     playerCam.transform.forward);
             }
             _lastShootTime = Time.time;
+
+            float randomXRecoil = Random.Range(-currentGun.gunData.xBound,currentGun.gunData.xBound);
+            Recoil(randomXRecoil * Time.deltaTime, currentGun.gunData.yBound * Time.deltaTime);
+
+            currentGun.gunAnimator.SetBool("Shot",true);
             
-            Recoil();
+            UIManager.Instance.SetAmmoText();
+        }
+        else if (Input.GetKeyUp(KeyCode.Mouse0) || shootAble == false)
+        {
+            currentGun.gunAnimator.SetBool("Shot",false);
+            
+            Recoil(0,0);
         }
     }
 
-
-    private void Recoil()
+    private void Recoil(float xAmount , float yAmount)
     {
-        float xBound = Random.Range(currentGun.gunData.xBound.x, currentGun.gunData.xBound.y);
-        float yBound = Random.Range(currentGun.gunData.yBound.x, currentGun.gunData.yBound.x);
-        
-        _player.xRotation += xBound;
-        _player.yRotation += yBound;
+        _player.AddRecoil(xAmount,yAmount);
     }
-    
+        
     private void ChangeBottle()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -109,5 +120,10 @@ public class WeaponController : MonoBehaviour
         currentBottle.gameObject.SetActive(false);
         currentBottle = bottleList[index];
         currentBottle.gameObject.SetActive(true);
+    }
+    
+    public Gun GetCurrentGun()
+    {
+        return currentGun == null ? null : currentGun;
     }
 }

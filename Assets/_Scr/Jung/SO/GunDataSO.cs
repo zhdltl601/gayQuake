@@ -29,8 +29,8 @@ public class GunDataSO : ScriptableObject
     public int minShotCount;
     
     [Header("Bound")]
-    public Vector2 xBound;
-    public Vector2 yBound;
-
+    [Range(0,200)]public float xBound;
+    [Range(0,200)]public float yBound;
+    
     
 }

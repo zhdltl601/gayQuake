@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunType: 2
   gunName: "\uC18C\uCD1D"
-  maxAmmoInMagazine: 16000
-  ammoInMagazine: 10712
-  totalAmmo: 1000
-  damage: 15
+  maxAmmoInMagazine: 40
+  ammoInMagazine: 34
+  totalAmmo: 699997493
+  damage: 20
   shotRate: 0.125
   bulletSpeed: 3000
   bullet: {fileID: 7383199481331753142, guid: 3f834e4dd9eef9b4695d65797ae7cd8c, type: 3}
   maxShotCount: 0
   minShotCount: 0
-  xBound: {x: -0.3, y: -1}
-  yBound: {x: 0.4, y: -0.4}
+  xBound: 87
+  yBound: 152

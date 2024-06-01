@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     [Header("Camera")]
     [SerializeField] private float xSens;
     [SerializeField] private float ySens;
+    private float xRecoil;
+    private float yRecoil;
+    
     public float xRotation;//임시로 퍼블릭 박은거임..
     public float yRotation;//임시로 퍼블릭 박은거임..
     //private float xFucker;
@@ -117,10 +120,10 @@ public class Player : MonoBehaviour
     private void PlayerInput()
     {
         //mouse
-        xRotation -= Input.GetAxisRaw("Mouse Y") * ySens;
+        xRotation -= Input.GetAxisRaw("Mouse Y") * ySens + yRecoil;
         xRotation = Mathf.Clamp(xRotation, -89, 89);
-        yRotation += Input.GetAxisRaw("Mouse X") * xSens;
-
+        yRotation += Input.GetAxisRaw("Mouse X") * xSens + xRecoil;
+        
         //movement
         Transform camTrm = playerCamera.GetCameraRotTransform();
         Vector3 camForward = camTrm.forward;
@@ -154,6 +157,12 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.L)) viewmodelX += Time.deltaTime * amount;
         playerViewmodel.SetViewmodelHintPosition(viewmodelX, viewmodelY, 0);
         #endregion
+    }
+
+    public void AddRecoil(float xRecoil , float yRecoil)
+    {
+        this.xRecoil = xRecoil;
+        this.yRecoil = yRecoil;
     }
     
 }
