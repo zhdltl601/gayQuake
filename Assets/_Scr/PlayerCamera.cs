@@ -30,6 +30,9 @@ public class PlayerCamera : MonoBehaviour
     }
     public void CameraWallRun(float z)
     {
-        //cameraRot.eulerAngles.Set(0, 0, z);
+        //print("onwall");
+        Vector3 a = new Vector3(cameraRot.eulerAngles.x, cameraRot.eulerAngles.y, z);
+        cameraRot.eulerAngles = a;
+        print("gay");
     }
 }
