@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7592310066932801546
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8299603400342117942, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: L_Fing_Ring
+      objectReference: {fileID: 0}
+    - target: {fileID: -8141116844827709060, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: L_Fing_Thumb
+      objectReference: {fileID: 0}
+    - target: {fileID: -7311638377812424655, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: L_Fing_Mid
+      objectReference: {fileID: 0}
+    - target: {fileID: -5777937614330718634, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: L_Fing_Index3
+      objectReference: {fileID: 0}
+    - target: {fileID: -2779322090612981579, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: L_Fing_Pinky
+      objectReference: {fileID: 0}
+    - target: {fileID: -2483754857439455479, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: L_Fing_Ring2
+      objectReference: {fileID: 0}
+    - target: {fileID: -653370671933601756, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: L_Hand
+      objectReference: {fileID: 0}
+    - target: {fileID: -253793190939647795, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: L_Fing_Index
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: gayQuake_leftARM
+      objectReference: {fileID: 0}
+    - target: {fileID: 1910765030098543367, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: L_Fing_Pinky3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2256645074953973588, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: L_ForceArm
+      objectReference: {fileID: 0}
+    - target: {fileID: 2495789598428349478, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: L_Arm
+      objectReference: {fileID: 0}
+    - target: {fileID: 3121093819721930259, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: L_Fing_Index2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4561666044740705309, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: L_Fing_Mid3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4699804775930053461, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: L_Fing_Thumb2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5651691826526151717, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: L_Fing_Ring3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5881653257344767963, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: Skin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343887311535613741, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: Armature
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019259149906051403, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: L_Fing_Mid2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611210874347469556, guid: 87b8671cee5770f43902e6b5c0efdcd4,
+        type: 3}
+      propertyPath: m_Name
+      value: L_Fing_Pinky2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 87b8671cee5770f43902e6b5c0efdcd4, type: 3}
