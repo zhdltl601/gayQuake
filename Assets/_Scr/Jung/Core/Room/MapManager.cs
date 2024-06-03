@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
@@ -18,7 +20,7 @@ public class MapManager : MonoSingleton<MapManager>
     [Space]
     [Header("LayerMask")] 
     [SerializeField] private LayerMask whatIsMap;
-    
+
     protected override void Awake()
     {
         base.Awake();
@@ -28,6 +30,12 @@ public class MapManager : MonoSingleton<MapManager>
         GenerateMap();
         GeneratePortal();
     }
+
+    private void Start()
+    {
+        _maps[0].GetComponent<Room>().EnterRoom();
+    }
+
     private void DefaultSetting()
     {
         _mapDir = new Vector3[3];
@@ -84,13 +92,14 @@ public class MapManager : MonoSingleton<MapManager>
             Vector3 direction = (endPos - startPos).normalized;
             Vector3 adjustedMidPoint = midPoint - (direction * 30);
                      
-            
             GameObject newPortal = Instantiate(portal, adjustedMidPoint, Quaternion.identity);
             
             newPortal.transform.forward = -direction;
             newPortal.transform.parent = _maps[i];
+            
             newPortal.GetComponent<Portal>().SetPos(startPos , endPos);
-
+            newPortal.GetComponent<Portal>().SetRoom(_maps[i + 1].GetComponent<Room>());
+            
             GameObject newCorridor = Instantiate(corridor , midPoint , quaternion.identity);
             newCorridor.transform.right = direction;
             

@@ -17,7 +17,7 @@ MonoBehaviour:
     modifiers: 
   money:
     _baseValue: 0
-    modifiers: 
+    modifiers: 0a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a000000
   attack:
     _baseValue: 10
     modifiers: 

@@ -12,6 +12,7 @@ public class EnemyDeadState : EnemyState
     public override void Enter()
     {
         base.Enter();
+        _enemy.Collider.enabled = false;
         _isDissolving = false;
     }
 
@@ -24,7 +25,6 @@ public class EnemyDeadState : EnemyState
             _isDissolving = true;
             _enemy.StartCoroutine(_enemy.StartDissolve(_dissolveHash));
         }
-        
     }
 
     public override void Exit()
