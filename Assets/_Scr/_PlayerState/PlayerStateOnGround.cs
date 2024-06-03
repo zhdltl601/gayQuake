@@ -15,7 +15,7 @@ public class PlayerStateOnGround : PlayerStateBaseDefault
     }
     protected override void HandleState()
     {
-        if(player.CheckWallRun(out RaycastHit raycastHit, out bool isRight))
+        if(player.CheckWallRun(out RaycastHit raycastHit, out bool isRight) && !player.playerController.IsGround)
         {
             StateMachine<PlayerStateEnum>.Instance.ChangeState2(PlayerStateEnum.OnWallrun);
         }

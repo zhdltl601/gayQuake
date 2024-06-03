@@ -6,6 +6,9 @@ public class PlayerViewmodel : MonoBehaviour
 {
     public Transform viewmodelPivot;
     public Transform viewmodelPivotHint;
+
+    [Header("AL")]
+    public Transform al_wallrun;
     public void SetViewmodelHintPosition(float x, float y, float z)
     {
         viewmodelPivotHint.localPosition = new Vector3(x, y, z);
@@ -21,5 +24,9 @@ public class PlayerViewmodel : MonoBehaviour
     public void SetViewmodelRotation(float x, float y, float z = 0)
     {
         viewmodelPivot.localRotation = Quaternion.Euler(x, y, z);
+    }
+    public void WallRun(float z)
+    {
+        al_wallrun.localRotation = Quaternion.Euler(0, 0, z);
     }
 }
