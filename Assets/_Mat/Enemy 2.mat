@@ -28,11 +28,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AO:
-        m_Texture: {fileID: 2800000, guid: 7a28499b87f22584a8bd201c8f5a118e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 107791fe7bcb5d346aec63aa004da19d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseTexture:
-        m_Texture: {fileID: 2800000, guid: 2b1af5d3b0b0e394d996d1b2bf6dfb5a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 71343ac249478ce4d89708fb0813d002, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionTexture:
@@ -40,11 +40,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetalicSmoothness:
-        m_Texture: {fileID: 2800000, guid: 78d9d762994d39f46946d08e58e17b59, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4daef6b303e071c4595fc0ce1911b93b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
-        m_Texture: {fileID: 2800000, guid: 292d5a2e1bf28804da63b0ca90654119, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5f13e839d7a2e9a46af62315cf0cf219, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -62,7 +62,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _BlinkValue: 1
-    - _Brightness: 1
+    - _Brightness: 2
     - _DissolveEdgeWidth: 0.25
     - _DissolveHeight: 2
     - _Metalic: 0.145
@@ -72,7 +72,7 @@ Material:
     m_Colors:
     - _BlinkColor: {r: 0, g: 0, b: 0, a: 0}
     - _DissolveColor: {r: 6.415094, g: 0.4538981, b: 0.4538981, a: 1}
-    - _EmissionColor: {r: 1.6603773, g: 0.44642216, b: 0.44642216, a: 1}
+    - _EmissionColor: {r: 0.29277626, g: 0.04004959, b: 0.04004959, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &7242684499654377994
 MonoBehaviour:

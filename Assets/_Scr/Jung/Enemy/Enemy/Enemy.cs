@@ -5,7 +5,10 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     public EnemyStateMachine StateMachine { get; private set; }
-
+    
+    private readonly int _blinkValue = Shader.PropertyToID("_BlinkValue");
+    private bool _IsHit = false; 
+    
     #region states
 
     public EnemyIdleState IdleState { get; private set; }
@@ -23,10 +26,13 @@ public class Enemy : MonoBehaviour
     #endregion
     
     private Collider[] _enemyCheckCollider;
-
+    private StatType dieStat;
+    
     public Transform target;
     public LayerMask _whatIsPlayer;
 
+    private Bottle _playerBottle;
+    
     [Header("Movement Values")]
     public float moveSpeed;
     public float runAwayDistance;
@@ -36,7 +42,6 @@ public class Enemy : MonoBehaviour
         Animator = GetComponentInChildren<Animator>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
         Rigidbody = GetComponent<Rigidbody>();
-        
         
         StateMachine = new EnemyStateMachine();
 
@@ -54,7 +59,8 @@ public class Enemy : MonoBehaviour
         _enemyCheckCollider = new Collider[1];
         StateMachine.Init(IdleState);
 
-        NavMeshAgent.speed = moveSpeed;
+        NavMeshAgent.speed = Random.Range(moveSpeed - 2f,moveSpeed);
+        Animator.speed =  Random.Range(0.8f,1.3f);;
     }
 
     private void Update()
@@ -75,18 +81,16 @@ public class Enemy : MonoBehaviour
     
     public IEnumerator StartDissolve(int _dissolveHash)
     {
-        //여기서 셰이더 처리 할거고
-
         Material[] mat = _MeshRenderer.materials;
 
         float currentTime = 0;
         while(currentTime <= 1f)
         {
             currentTime += Time.deltaTime;
-            float currentDissovle = Mathf.Lerp(2f, -2f, currentTime);
+            float currentDissolve = Mathf.Lerp(2f, -2f, currentTime);
             
-            mat[0].SetFloat(_dissolveHash, currentDissovle);
-            mat[1].SetFloat(_dissolveHash, currentDissovle);
+            mat[0].SetFloat(_dissolveHash, currentDissolve);
+            mat[1].SetFloat(_dissolveHash, currentDissolve);
             yield return null;
         }
         
@@ -97,23 +101,44 @@ public class Enemy : MonoBehaviour
 
     public void HitEvent()
     {
-        Animator.SetTrigger("Hit");
+        if (_IsHit) return;
         
+        
+        Animator.SetTrigger("Hit");
         StartCoroutine(HitCoroutine());
     }
 
     public void DieEvent()
     {
         StateMachine.ChangeState(DeadState);
-        
+
+        if (target != null)
+        {
+            _playerBottle = target.GetComponent<WeaponController>().currentBottle;
+            PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].AddModifier(10);
+        }
+                
         NavMeshAgent.isStopped = true;
         Animator.SetLayerWeight(1 , 0);
     }
     
     IEnumerator HitCoroutine()
     {
-        NavMeshAgent.speed = moveSpeed / 10;
+        _IsHit = true;
+        Material[] mat = _MeshRenderer.materials;
+        
+        mat[0].SetFloat(_blinkValue,0);
+        mat[1].SetFloat(_blinkValue,0);
+        
+        NavMeshAgent.speed = moveSpeed / 5;
+        
         yield return new WaitForSeconds(0.4f);
+        
+        _IsHit = false;
+     
+        mat[0].SetFloat(_blinkValue,1);
+        mat[1].SetFloat(_blinkValue,1);
+                
         NavMeshAgent.speed = moveSpeed;
     }
     
@@ -122,6 +147,5 @@ public class Enemy : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position , runAwayDistance);
     }
-    
     
 }
