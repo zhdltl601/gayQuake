@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Net;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,8 +21,7 @@ public class Enemy : MonoBehaviour
     #region component
     public Animator Animator { get; private set; }
     public NavMeshAgent NavMeshAgent { get; private set; }
-    public Rigidbody Rigidbody { get; private set; }
-    public SkinnedMeshRenderer _MeshRenderer;
+    public Renderer _MeshRenderer;
     public Collider Collider { get; private set; }
 
     #endregion
@@ -45,7 +43,6 @@ public class Enemy : MonoBehaviour
     {
         Animator = GetComponentInChildren<Animator>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
-        Rigidbody = GetComponent<Rigidbody>();
         Collider = GetComponent<Collider>();
         StateMachine = new EnemyStateMachine();
 
