@@ -10,7 +10,7 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     {
         base.Enter();
         player.CheckWallRun(out RaycastHit raycastHit, out bool isRight);
-        player.playerCamera.CameraWallRun(isRight ? 30 : -30);
+        player.playerViewmodel.WallRun(isRight ? 30 : -30);
     }
     protected override Vector3 GetDirection(Vector3 inputDirection)
     {
@@ -26,7 +26,7 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     }
     protected override void HandleState()
     {
-        if (!player.CheckWallRun(out RaycastHit raycastHit, out bool isRight))
+        if (!player.CheckWallRun(out RaycastHit raycastHit, out bool isRight) || player.playerController.IsGround)
         {
             StateMachine<PlayerStateEnum>.Instance.ChangeState2(PlayerStateEnum.OnGround);
         }
@@ -34,6 +34,6 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     public override void Exit()
     {
         base.Exit();
-        player.playerCamera.CameraWallRun(0);
+        player.playerViewmodel.WallRun(0);
     }
 }

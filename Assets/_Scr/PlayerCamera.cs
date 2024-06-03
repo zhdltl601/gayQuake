@@ -28,11 +28,4 @@ public class PlayerCamera : MonoBehaviour
     {
 
     }
-    public void CameraWallRun(float z)
-    {
-        //print("onwall");
-        Vector3 a = new Vector3(cameraRot.eulerAngles.x, cameraRot.eulerAngles.y, z);
-        cameraRot.eulerAngles = a;
-        print("gay");
-    }
 }

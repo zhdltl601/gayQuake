@@ -15,6 +15,7 @@ MonoBehaviour:
   sceneDatas_byGuid:
     keys:
     - 0c2a3323c94e0dd479a963e62ed2af1d
+    - f6c93b2225a66c547a51441959af176c
     values:
     - goDatas_byGlobalId:
         keys:
@@ -25,3 +26,6 @@ MonoBehaviour:
           iconNameOrGuid: Settings Icon
         - colorIndex: 8
           iconNameOrGuid: 
+    - goDatas_byGlobalId:
+        keys: []
+        values: []
