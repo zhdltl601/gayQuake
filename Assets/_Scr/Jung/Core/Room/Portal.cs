@@ -5,19 +5,24 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    [SerializeField] private MeshRenderer[] meshRenderers;
-    [SerializeField] private GameObject surface;
     private readonly int dissolveValue = Shader.PropertyToID("_Value");
     
+    [SerializeField] private MeshRenderer[] meshRenderers;
+    [SerializeField] private GameObject surface;
+
+    protected Room room;
     private Vector3 _startPos;
     private Vector3 _nextPos;
     private bool isFinishing = false;
     
-    
     [SerializeField] private CharacterController player;
-    
 
-    public void Dissolve()
+    private void OnEnable()
+    {
+        Dissolve();
+    }
+
+    private void Dissolve()
     {
         StartCoroutine(StartDissolve(dissolveValue));
     }   
@@ -31,7 +36,7 @@ public class Portal : MonoBehaviour
         }
 
         float currentTime = 0;
-        while (currentTime <= 1f)
+        while (currentTime <= 2f)
         {
             currentTime += Time.deltaTime;
             float currentDissolve = Mathf.Lerp(1, 0f, currentTime);
@@ -59,11 +64,10 @@ public class Portal : MonoBehaviour
         if (other.GetComponent<Player>())
         {
             player = other.GetComponent<CharacterController>();
-            
             player.enabled = false;
             other.transform.localPosition = _nextPos;
-            
             Invoke("PlayerMoveOn" , 0.1f);
+            
         }
     }
     private void PlayerMoveOn()
@@ -71,6 +75,12 @@ public class Portal : MonoBehaviour
         if (player == null) return;
 
         player.enabled = true;
+        room.EnterRoom();
+        
+    }
+    public void SetRoom(Room _room)
+    {
+        room = _room;
     }
 
 }

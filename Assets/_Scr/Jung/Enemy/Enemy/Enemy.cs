@@ -21,8 +21,9 @@ public class Enemy : MonoBehaviour
     #region component
     public Animator Animator { get; private set; }
     public NavMeshAgent NavMeshAgent { get; private set; }
-    public Rigidbody Rigidbody { get; private set; }
-    public SkinnedMeshRenderer _MeshRenderer;
+    public Renderer _MeshRenderer;
+    public Collider Collider { get; private set; }
+
     #endregion
     
     private Collider[] _enemyCheckCollider;
@@ -32,6 +33,7 @@ public class Enemy : MonoBehaviour
     public LayerMask _whatIsPlayer;
 
     private Bottle _playerBottle;
+    [HideInInspector] public Room currentRoom;
     
     [Header("Movement Values")]
     public float moveSpeed;
@@ -41,8 +43,7 @@ public class Enemy : MonoBehaviour
     {
         Animator = GetComponentInChildren<Animator>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
-        Rigidbody = GetComponent<Rigidbody>();
-        
+        Collider = GetComponent<Collider>();
         StateMachine = new EnemyStateMachine();
 
         #region stats
@@ -111,15 +112,17 @@ public class Enemy : MonoBehaviour
     public void DieEvent()
     {
         StateMachine.ChangeState(DeadState);
+        
 
         if (target != null)
         {
             _playerBottle = target.GetComponent<WeaponController>().currentBottle;
             PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].AddModifier(10);
         }
-                
-        NavMeshAgent.isStopped = true;
+        
+        currentRoom.enemys.Remove(gameObject);
         Animator.SetLayerWeight(1 , 0);
+        NavMeshAgent.isStopped = true;
     }
     
     IEnumerator HitCoroutine()
