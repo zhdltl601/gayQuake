@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunType: 0
   gunName: "\uAD8C\uCD1D"
-  maxAmmoInMagazine: 40
-  ammoInMagazine: 40
-  totalAmmo: 6626
+  maxAmmoInMagazine: 20
+  ammoInMagazine: 20
+  totalAmmo: 6544
   damage: 10
   shotRate: 0.35
   bulletSpeed: 1200

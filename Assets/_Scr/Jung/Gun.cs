@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
@@ -12,13 +13,13 @@ public abstract class Gun : MonoBehaviour
     
     [SerializeField] private GameObject caseShell;
     [SerializeField] private List<ParticleSystem> muzzles;
-    [HideInInspector] public Transform _firePos;
     
     protected Transform _caseShellPos;
     protected Rigidbody _rigidbody;
     protected BoxCollider _collider;
     
-    public Animator gunAnimator;
+    [HideInInspector] public Transform _firePos;
+    [FormerlySerializedAs("gunAnimator")] [HideInInspector] public Animator _gunAnimator;
     private Transform playerCam;
     public bool throwing;
     
@@ -28,9 +29,14 @@ public abstract class Gun : MonoBehaviour
         
         _firePos = GetComponentInChildren<GunModel>().GetFirePos();
         _caseShellPos = GetComponentInChildren<GunModel>().GetCaseShell();
-        gunAnimator = GetComponent<Animator>();
+        _gunAnimator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<BoxCollider>();
+
+        if (transform.root.GetComponent<Player>() == null)
+        {
+            SetOnGround();
+        }
     }
     
     public virtual GameObject[] Shoot()
@@ -91,23 +97,30 @@ public abstract class Gun : MonoBehaviour
 
     public virtual void ThrowGun()
     {
-        transform.parent = null;
-        _rigidbody.isKinematic = false;
-        _rigidbody.useGravity = true;
+        SetOnGround();
         
-        _rigidbody.constraints = RigidbodyConstraints.None;
-
         Vector3 random = (gameObject.transform.forward);
         _rigidbody.angularVelocity = new Vector3(Random.Range(1, 2.3f), Random.Range(1, 2.3f), Random.Range(1, 2.3f));
-        _rigidbody.AddForce(random* 300);
+        _rigidbody.AddForce(random * 300);
         
+    }
+
+    private void SetOnGround()
+    {
         throwing = true;
-        
+
+        transform.parent = null;
+        _rigidbody.isKinematic = false;
+        _gunAnimator.enabled = false;
+
+        _rigidbody.useGravity = true;
         _collider.enabled = true;
         _collider.isTrigger = true;
+
+        _rigidbody.constraints = RigidbodyConstraints.None;
     }
-    
-    
+
+
     private void OnTriggerEnter(Collider other)
     {
         if ((whatIsGround & (1 << other.gameObject.gameObject.layer)) != 0)//layerMask가 2진수로 저장되기 때문에 이러한 연산이 필요함..
@@ -117,14 +130,17 @@ public abstract class Gun : MonoBehaviour
         
         if (other.gameObject.TryGetComponent(out WeaponController weaponController) && throwing == false)
         {
+            if (weaponController.GetCurrentGun() != null) return;
+            
             weaponController.currentGun = this;
             transform.parent = weaponController.gunTrm;
             
             _rigidbody.isKinematic = true;
             _rigidbody.useGravity = false;
-        
+                
+            _gunAnimator.enabled = true;
             _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-
+            
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.Euler(0,0,0);
         }

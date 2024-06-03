@@ -87,10 +87,10 @@ public class Enemy : MonoBehaviour
         while(currentTime <= 1f)
         {
             currentTime += Time.deltaTime;
-            float currentDissovle = Mathf.Lerp(2f, -2f, currentTime);
+            float currentDissolve = Mathf.Lerp(2f, -2f, currentTime);
             
-            mat[0].SetFloat(_dissolveHash, currentDissovle);
-            mat[1].SetFloat(_dissolveHash, currentDissovle);
+            mat[0].SetFloat(_dissolveHash, currentDissolve);
+            mat[1].SetFloat(_dissolveHash, currentDissolve);
             yield return null;
         }
         

@@ -173,6 +173,7 @@ MonoBehaviour:
   - {fileID: 9084384560709345273}
   - {fileID: 9084384560709345275}
   _firePos: {fileID: 0}
+  gunAnimator: {fileID: 0}
   throwing: 0
 --- !u!95 &1828107017834309302
 Animator:
@@ -357,7 +358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 30b4cc2728d8cec499fad63ba93785a4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.074
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 30b4cc2728d8cec499fad63ba93785a4, type: 3}
       propertyPath: m_LocalPosition.z

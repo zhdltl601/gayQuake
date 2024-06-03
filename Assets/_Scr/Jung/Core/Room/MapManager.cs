@@ -9,24 +9,29 @@ public class MapManager : MonoSingleton<MapManager>
 {
     public int mapCount;
     public List<GameObject> mapTypes;
+    public GameObject portal;
     public GameObject corridor;
-
     private Transform _lastRoomTrm;
     private Vector3[] _mapDir;
-    private List<Vector3> _maps;
-
-    private void Start()
+    private List<Transform> _maps;
+    
+    [Space]
+    [Header("LayerMask")] 
+    [SerializeField] private LayerMask whatIsMap;
+    
+    protected override void Awake()
     {
+        base.Awake();
+        
         DefaultSetting();
         
         GenerateMap();
-        GeneraCorridor();
+        GeneratePortal();
     }
-
     private void DefaultSetting()
     {
         _mapDir = new Vector3[3];
-        _maps = new List<Vector3>();
+        _maps = new List<Transform>();
 
         _mapDir[0] = transform.forward;
         _mapDir[1] = transform.right;
@@ -40,36 +45,56 @@ public class MapManager : MonoSingleton<MapManager>
         //startRoom
         GameObject startRoom = Instantiate(mapTypes[Random.Range(0, mapTypes.Count)], _lastRoomTrm.position, Quaternion.identity);
         _lastRoomTrm = startRoom.transform;
-        _maps.Add(startRoom.transform.position);
+        _maps.Add(startRoom.transform);
         
         //randomRoom
         for (int i = 0; i < mapCount;)
         {
             Vector3 position = _lastRoomTrm.position + _mapDir[Random.Range(0, _mapDir.Length)] * 60;
 
-            if (!_maps.Contains(position))
+            bool positionOccupied = false;
+            foreach (Transform map in _maps)
+            {
+                if (map.position == position)
+                {
+                    positionOccupied = true;
+                    break;
+                }
+            }
+
+            if (!positionOccupied)
             {
                 GameObject newMapObj = Instantiate(mapTypes[Random.Range(0, mapTypes.Count)], position, Quaternion.identity);
                 _lastRoomTrm = newMapObj.transform;
-                _maps.Add(newMapObj.transform.position);
-                
+                _maps.Add(newMapObj.transform);
+
                 i++;
             }
         }
     }
-
-    private void GeneraCorridor()
+    
+    private void GeneratePortal()
     {
         for (int i = 0; i < _maps.Count - 1; i++)
         {
-            Vector3 startPos = _maps[i];
-            Vector3 endPos = _maps[i + 1];
-            
+            Vector3 startPos = _maps[i].position;
+            Vector3 endPos = _maps[i + 1].position;
             Vector3 midPoint = (startPos + endPos) / 2;
-            Vector3 direction = (endPos - startPos).normalized;
             
-            GameObject newCorridor = Instantiate(corridor, midPoint, Quaternion.identity);
+            Vector3 direction = (endPos - startPos).normalized;
+            Vector3 adjustedMidPoint = midPoint - (direction * 30);
+                     
+            
+            GameObject newPortal = Instantiate(portal, adjustedMidPoint, Quaternion.identity);
+            
+            newPortal.transform.forward = -direction;
+            newPortal.transform.parent = _maps[i];
+            newPortal.GetComponent<Portal>().SetPos(startPos , endPos);
+
+            GameObject newCorridor = Instantiate(corridor , midPoint , quaternion.identity);
             newCorridor.transform.right = direction;
+            
         }
     }
+        
 }

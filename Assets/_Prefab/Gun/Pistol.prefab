@@ -42,15 +42,15 @@ GameObject:
   - component: {fileID: 7097411574049967033}
   - component: {fileID: 4602000348765348289}
   - component: {fileID: 8769294462617153628}
-  - component: {fileID: 2462980614521218381}
   - component: {fileID: 1302048935133484613}
+  - component: {fileID: 2462980614521218381}
   m_Layer: 7
   m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7097411574049967033
 Transform:
   m_ObjectHideFlags: 0
@@ -111,10 +111,31 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &1302048935133484613
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5196217338208197147}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 7af22f61317b57e46aa02fb927b1c334, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &2462980614521218381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,28 +162,8 @@ MonoBehaviour:
   - {fileID: 7104669652333048037}
   - {fileID: 7104669652333048039}
   _firePos: {fileID: 0}
+  _gunAnimator: {fileID: 0}
   throwing: 0
---- !u!95 &1302048935133484613
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5196217338208197147}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 50d468c4e5cbfdd4bb48dccd16282a48, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7243824724285517917
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +313,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3945439267341455232, guid: d203906c532c7414bb2292dc2ec075b5,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2126075907879377471}
+      addedObject: {fileID: 854218734815776661}
   m_SourcePrefab: {fileID: 100100000, guid: d203906c532c7414bb2292dc2ec075b5, type: 3}
 --- !u!4 &1891662088695325321 stripped
 Transform:
@@ -340,7 +341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePos: {fileID: 5337526117375002836}
   caseShell: {fileID: 2942754908150215771}
---- !u!65 &2126075907879377471
+--- !u!65 &854218734815776661
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -359,8 +360,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7788103, y: 0.15896153, z: 0.14334509}
-  m_Center: {x: 0.03108257, y: 0.13019264, z: -0.051457815}
+  m_Size: {x: 0.9229882, y: 0.5863173, z: 0.33543298}
+  m_Center: {x: -0.019049391, y: -0.016875267, z: -0.050950646}
 --- !u!1001 &7104669652317450023
 PrefabInstance:
   m_ObjectHideFlags: 0
