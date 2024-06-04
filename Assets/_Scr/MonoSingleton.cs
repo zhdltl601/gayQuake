@@ -12,18 +12,16 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
     }
     private static T Initialize()
     {
-        print("Init");
         //CreateInstance
         GameObject gameObject = new GameObject();
         gameObject.name = "Singleton_" + typeof(T).Name;
         T result = gameObject.AddComponent<T>();
-        print("endInit");
         return result;
     }
 
     protected virtual void Awake()
     {
-        print("-AwakeInit-");
+        print("-AwakeInit-" + typeof(T).Name);
         if (_instance is not null)
         {
             Debug.LogError("twoSingletons");
@@ -31,7 +29,6 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
             return;
         }
         _instance = this as T;
-        print("awakeEnd");
     }
     protected virtual void OnDestroy()
     {
