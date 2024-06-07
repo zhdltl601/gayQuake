@@ -13,12 +13,13 @@ public class ObjectPooling : MonoSingleton<ObjectPooling>
    [SerializeField] private GameObject bullet;
 
    [SerializeField] private GameObject caseShell;
-   
+   [SerializeField] private GameObject enemyBullet;
 
    private void Start()
    {
       InitializeNewPool(bullet);
       InitializeNewPool(caseShell);
+      InitializeNewPool(enemyBullet);
    }
 
    public GameObject GetObject(GameObject prefab)

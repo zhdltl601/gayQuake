@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
     {
         playerStateMachine.UpdateState();
         PlayerInput();
-        PlayerUI.Instance.lists[2].text = playerStateMachine.CurrentState.ToString();
+        //PlayerUI.Instance.lists[2].text = playerStateMachine.CurrentState.ToString();
     }
     private void FixedUpdate()
     {

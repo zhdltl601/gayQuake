@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour,EnemyMapSetting
 {
     public EnemyStateMachine StateMachine { get; private set; }
     
@@ -32,7 +32,6 @@ public class Enemy : MonoBehaviour
     public Transform target;
     public LayerMask _whatIsPlayer;
 
-    private Bottle _playerBottle;
     [HideInInspector] public Room currentRoom;
     
     [Header("Movement Values")]
@@ -90,8 +89,11 @@ public class Enemy : MonoBehaviour
             currentTime += Time.deltaTime;
             float currentDissolve = Mathf.Lerp(2f, -2f, currentTime);
             
-            mat[0].SetFloat(_dissolveHash, currentDissolve);
-            mat[1].SetFloat(_dissolveHash, currentDissolve);
+            foreach (var item in mat)
+            {
+                item.SetFloat(_dissolveHash, currentDissolve);
+            }
+            
             yield return null;
         }
         
@@ -113,14 +115,14 @@ public class Enemy : MonoBehaviour
     {
         StateMachine.ChangeState(DeadState);
         
-
         if (target != null)
         {
-            _playerBottle = target.GetComponent<WeaponController>().currentBottle;
+            Bottle _playerBottle = target.GetComponent<WeaponController>().currentBottle;
             PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].AddModifier(10);
         }
+
+        RemoveEnemy();
         
-        currentRoom.enemys.Remove(gameObject);
         Animator.SetLayerWeight(1 , 0);
         NavMeshAgent.isStopped = true;
     }
@@ -130,8 +132,10 @@ public class Enemy : MonoBehaviour
         _IsHit = true;
         Material[] mat = _MeshRenderer.materials;
         
-        mat[0].SetFloat(_blinkValue,0);
-        mat[1].SetFloat(_blinkValue,0);
+        foreach (var item in mat)
+        {
+            item.SetFloat(_blinkValue,1);
+        }
         
         NavMeshAgent.speed = moveSpeed / 5;
         
@@ -139,8 +143,10 @@ public class Enemy : MonoBehaviour
         
         _IsHit = false;
      
-        mat[0].SetFloat(_blinkValue,1);
-        mat[1].SetFloat(_blinkValue,1);
+        foreach (var item in mat)
+        {
+            item.SetFloat(_blinkValue,0);
+        }
                 
         NavMeshAgent.speed = moveSpeed;
     }
@@ -150,5 +156,14 @@ public class Enemy : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position , runAwayDistance);
     }
-    
+
+    public void SetRoom(Room room)
+    {
+        currentRoom = room;
+    }
+
+    public void RemoveEnemy()
+    {
+        currentRoom.aliveEnemyNames.Remove(gameObject);
+    }
 }
