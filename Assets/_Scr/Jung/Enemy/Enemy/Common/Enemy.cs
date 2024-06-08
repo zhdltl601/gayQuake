@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     public EnemyStateMachine StateMachine { get; private set; }
     
     private readonly int _blinkValue = Shader.PropertyToID("_BlinkValue");
+    private readonly int _dissolveHash = Shader.PropertyToID("_DissolveHeight");
     private bool _IsHit = false; 
     
     #region states
@@ -21,7 +22,7 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     #region component
     public Animator Animator { get; private set; }
     public NavMeshAgent NavMeshAgent { get; private set; }
-    public Renderer _MeshRenderer;
+    public Renderer[] _MeshRenderer;
     public Collider Collider { get; private set; }
 
     #endregion
@@ -38,6 +39,10 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     public float moveSpeed;
     public float runAwayDistance;
     public float attackDistance;
+    
+    public int increaseAmount;
+    public float dissolveDuration;
+    
     private void Awake()
     {
         Animator = GetComponentInChildren<Animator>();
@@ -68,6 +73,120 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         StateMachine.currentState.Update();
     }
     
+    #region DieLogic
+
+    public void DieEvent()
+    {
+        StateMachine.ChangeState(DeadState);
+        
+        if (target != null)
+        {
+            Bottle _playerBottle = target.GetComponent<WeaponController>().currentBottle;
+            PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].AddValue(increaseAmount);
+        }
+        
+        RemoveEnemy();
+        
+        Animator.SetLayerWeight(1 , 0);
+        NavMeshAgent.isStopped = true;
+       
+    }
+    public void Dissolve()
+    {
+        StartCoroutine(StartDissolve());
+    }
+    private IEnumerator StartDissolve()
+    {
+        Material[] mat;
+        if (_MeshRenderer.Length >= 2)
+        {
+            mat = new Material[_MeshRenderer.Length];
+            for (int i = 0; i < _MeshRenderer.Length; i++)
+            {
+                mat[i] = _MeshRenderer[i].material;
+            }
+        }
+        else
+        {
+            mat = _MeshRenderer[0].materials;
+           
+        } 
+        
+        float currentTime = 0;
+        while(currentTime <= dissolveDuration)
+        {
+            currentTime += Time.deltaTime;
+            float currentDissolve = Mathf.Lerp(5f, -5f, currentTime/dissolveDuration);
+
+            foreach (var item in mat)
+            {
+                item.SetFloat(_dissolveHash, currentDissolve);
+            }   
+            
+            yield return null;
+        }
+        
+        yield return new WaitForSeconds(0.1f);
+        
+        Destroy(gameObject);
+    }
+
+    #endregion
+
+    #region HitLogit
+
+    public void HitEvent()
+    {
+        if (_IsHit) return;
+        
+        
+        Animator.SetTrigger("Hit");
+        StartCoroutine(HitCoroutine());
+    }
+    IEnumerator HitCoroutine()
+    {
+        _IsHit = true;
+
+        Material[] mat;
+        if (_MeshRenderer.Length >= 2)
+        {
+            mat = new Material[_MeshRenderer.Length];
+            for (int i = 0; i < _MeshRenderer.Length; i++)
+            {
+                mat[i] = _MeshRenderer[i].material;
+            }
+        }
+        else
+        {
+            mat = _MeshRenderer[0].materials;
+           
+        } 
+                
+        for (int i = 0; i < _MeshRenderer.Length; i++)
+        {
+            mat[i] = _MeshRenderer[i].material;
+        }
+                    
+        foreach (var item in mat)
+        {
+            item.SetFloat(_blinkValue,1);
+        }
+            
+        yield return new WaitForSeconds(0.4f);
+        _IsHit = false;
+            
+        NavMeshAgent.speed = moveSpeed / 5;
+     
+        foreach (var item in mat)
+        {
+            item.SetFloat(_blinkValue,0);
+        }
+                
+        NavMeshAgent.speed = moveSpeed;
+    }
+
+    #endregion
+   
     public virtual Collider IsPlayerDetected()
     {
         int cnt = Physics.OverlapSphereNonAlloc(transform.position, runAwayDistance, _enemyCheckCollider, _whatIsPlayer);
@@ -78,79 +197,7 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     {
         StateMachine.currentState.AnimationFinish();;
     }
-    
-    public IEnumerator StartDissolve(int _dissolveHash)
-    {
-        Material[] mat = _MeshRenderer.materials;
-
-        float currentTime = 0;
-        while(currentTime <= 1f)
-        {
-            currentTime += Time.deltaTime;
-            float currentDissolve = Mathf.Lerp(2f, -2f, currentTime);
-            
-            foreach (var item in mat)
-            {
-                item.SetFloat(_dissolveHash, currentDissolve);
-            }
-            
-            yield return null;
-        }
         
-        yield return new WaitForSeconds(0.1f);
-        
-        Destroy(gameObject);
-    }
-
-    public void HitEvent()
-    {
-        if (_IsHit) return;
-        
-        
-        Animator.SetTrigger("Hit");
-        StartCoroutine(HitCoroutine());
-    }
-
-    public void DieEvent()
-    {
-        StateMachine.ChangeState(DeadState);
-        
-        if (target != null)
-        {
-            Bottle _playerBottle = target.GetComponent<WeaponController>().currentBottle;
-            PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].AddModifier(10);
-        }
-
-        RemoveEnemy();
-        
-        Animator.SetLayerWeight(1 , 0);
-        NavMeshAgent.isStopped = true;
-    }
-    
-    IEnumerator HitCoroutine()
-    {
-        _IsHit = true;
-        Material[] mat = _MeshRenderer.materials;
-        
-        foreach (var item in mat)
-        {
-            item.SetFloat(_blinkValue,1);
-        }
-        
-        NavMeshAgent.speed = moveSpeed / 5;
-        
-        yield return new WaitForSeconds(0.4f);
-        
-        _IsHit = false;
-     
-        foreach (var item in mat)
-        {
-            item.SetFloat(_blinkValue,0);
-        }
-                
-        NavMeshAgent.speed = moveSpeed;
-    }
-    
     public void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -161,7 +208,7 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     {
         currentRoom = room;
     }
-
+    
     public void RemoveEnemy()
     {
         currentRoom.aliveEnemyNames.Remove(gameObject);

@@ -55,7 +55,7 @@ public abstract class Gun : MonoBehaviour
         {
             direction = hit.point - _firePos.position;
             Health enemyHealth = hit.transform.GetComponent<Health>();
-            enemyHealth.ApplyDamage(PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Attack].GetValue());
+            enemyHealth.ApplyDamage(PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Attack].GetValue() + gunData.damage);
             enemyHealth.onHitEvent?.Invoke();
         }
         

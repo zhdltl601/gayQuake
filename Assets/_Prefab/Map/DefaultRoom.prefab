@@ -959,12 +959,10 @@ MonoBehaviour:
   corridor: {fileID: 0}
   _enemySettingsArray:
   - enemy: {fileID: 1146452743183490814, guid: 0b0e604325413a642b9dd057657d32ac, type: 3}
-    enemyCount: 2
-  - enemy: {fileID: 8414851538182959628, guid: 8643348e80ca899458b03e67aff4871f, type: 3}
-    enemyCount: 0
-  - enemy: {fileID: 8556251462323275892, guid: da0b91d127fc7d44988372b112ee13ab, type: 3}
-    enemyCount: 0
-  enemys: []
+    enemyCount: 1
+  - enemy: {fileID: 5001055590820185352, guid: e1c57e4bd243bda4aaf4bbc4ffe0378a, type: 3}
+    enemyCount: 1
+  aliveEnemyNames: []
 --- !u!1 &3610922709050550307
 GameObject:
   m_ObjectHideFlags: 0

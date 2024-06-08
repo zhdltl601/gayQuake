@@ -21,6 +21,7 @@ public class EnemyDrone : MonoBehaviour,EnemyMapSetting
     public float moveSpeed;
     public float runAwayDistance;
     public float attackDistance;
+    public int increaseAmount;
     
     [Header("ZigZag~")]
     public float zigzagTime;
@@ -73,7 +74,7 @@ public class EnemyDrone : MonoBehaviour,EnemyMapSetting
         if (target != null)
         {
             Bottle _playerBottle = target.GetComponent<WeaponController>().currentBottle;
-            PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].AddModifier(10);
+            PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].AddValue(increaseAmount);
         }
         
         foreach (var item in explosionParticleList )

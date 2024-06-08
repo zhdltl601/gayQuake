@@ -10,12 +10,12 @@ public class UIManager : MonoSingleton<UIManager>
     public Transform minimapCam;
     private void Start()
     {
-        _ammoText.SetText($"{Player.GetCurrentGun().gunData.ammoInMagazine} / {Player.GetCurrentGun().gunData.maxAmmoInMagazine}");
+        SetAmmoText();
     }
 
     public void SetAmmoText()
     {
-        _ammoText.SetText($"{Player.GetCurrentGun().gunData.ammoInMagazine} / {Player.GetCurrentGun().gunData.maxAmmoInMagazine}");
+        _ammoText.SetText($"{Player.GetCurrentGun().gunData.ammoInMagazine}/{Player.GetCurrentGun().gunData.maxAmmoInMagazine}");
     }
 
     private void LateUpdate()
