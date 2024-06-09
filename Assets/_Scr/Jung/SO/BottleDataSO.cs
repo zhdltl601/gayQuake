@@ -16,5 +16,5 @@ public class BottleDataSO : ScriptableObject
     public int drinkAmount;
     
     public float decreaseTime;
-    public int increaseAmount;
+    public int decreaseAmount;
 }

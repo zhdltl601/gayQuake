@@ -26,7 +26,7 @@ public class PlayerStatController : MonoSingleton<PlayerStatController>
             _timer = 0;
             if (health.GetValue() >= 0)
             {
-                health.RemoveValue(healthBottleSo.increaseAmount);
+                health.RemoveValue(healthBottleSo.decreaseAmount);
             }
             else
             {

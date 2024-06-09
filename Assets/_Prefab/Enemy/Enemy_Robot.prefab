@@ -1409,6 +1409,37 @@ Transform:
   - {fileID: 2835205736676385651}
   m_Father: {fileID: 6814799489357608920}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4789076679408451680
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5181250978786276313}
+  m_Layer: 0
+  m_Name: FirePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5181250978786276313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4789076679408451680}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 11832.3, y: 9940, z: 5969.6}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7126040065909914190}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4798050298165810827
 GameObject:
   m_ObjectHideFlags: 0
@@ -1762,8 +1793,11 @@ MonoBehaviour:
   moveSpeed: 4
   runAwayDistance: 24
   attackDistance: 12
+  attackDamage: 20
+  attackTime: 0.7
   increaseAmount: 12
   dissolveDuration: 6
+  lastAttackTime: 0
 --- !u!114 &1684546342829574727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1998,6 +2032,7 @@ GameObject:
   - component: {fileID: 2180233112215502536}
   - component: {fileID: 7001755010053712486}
   - component: {fileID: 2427862741349116620}
+  - component: {fileID: 9030403347936408599}
   m_Layer: 0
   m_Name: PBRCharacter
   m_TagString: Untagged
@@ -2061,6 +2096,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemy: {fileID: 5267916489815521621}
+--- !u!114 &9030403347936408599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5642833173613210915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 515aca509bc2a594dbbadab2cfb2c495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePos: {fileID: 5181250978786276313}
+  bullet: {fileID: 7383199481331753142, guid: 62f8319da2f2ad243814c2f2c73ada42, type: 3}
+  _enemy: {fileID: 5267916489815521621}
 --- !u!1 &5812915630089306274
 GameObject:
   m_ObjectHideFlags: 0
@@ -2216,7 +2266,8 @@ Transform:
   m_LocalPosition: {x: -118.131454, y: -98.01, z: -57.969975}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5181250978786276313}
   m_Father: {fileID: 2180233112215502536}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &4491271834132303576

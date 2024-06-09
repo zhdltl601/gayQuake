@@ -1085,6 +1085,37 @@ Transform:
   - {fileID: 5013377968959250508}
   m_Father: {fileID: 884136958992912981}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1612320901398106811
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 420938901159225848}
+  m_Layer: 6
+  m_Name: AttackTrm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &420938901159225848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612320901398106811}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.981, z: 1.603}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7313768355570481760}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1697891891729884436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,6 +1150,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3863430072375605579}
+  - {fileID: 420938901159225848}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &6070677240434001055
@@ -1186,6 +1218,7 @@ MonoBehaviour:
   moveSpeed: 7
   runAwayDistance: 12
   attackDistance: 2
+  attackDamage: 0
   increaseAmount: 5
   dissolveDuration: 3
 --- !u!114 &6154480225197386332
@@ -3995,6 +4028,7 @@ GameObject:
   - component: {fileID: 3863430072375605579}
   - component: {fileID: 3721560813480554727}
   - component: {fileID: 4722497137351643003}
+  - component: {fileID: 6092814960030983233}
   m_Layer: 0
   m_Name: VIsual
   m_TagString: Untagged
@@ -4053,6 +4087,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemy: {fileID: 1287307149442661200}
+--- !u!114 &6092814960030983233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5391343643429721931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5894cabf3d44a44cb33b4437c901073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackTrm: {fileID: 420938901159225848}
+  attackRadius: 0.71
+  _enemy: {fileID: 1287307149442661200}
 --- !u!1 &5413726675479286242
 GameObject:
   m_ObjectHideFlags: 0

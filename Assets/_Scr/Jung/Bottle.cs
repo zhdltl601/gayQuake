@@ -37,7 +37,7 @@ public abstract class Bottle : MonoBehaviour
         {
             _timer = 0;
             
-            PlayerStatController.Instance.PlayerStatSo._statDic[_bottleDataSo.statType].RemoveValue(_bottleDataSo.increaseAmount);
+            PlayerStatController.Instance.PlayerStatSo._statDic[_bottleDataSo.statType].RemoveValue(_bottleDataSo.decreaseAmount);
         }
     }
 

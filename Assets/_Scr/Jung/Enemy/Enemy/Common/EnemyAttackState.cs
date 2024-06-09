@@ -10,8 +10,7 @@ public class EnemyAttackState : EnemyState
     public override void Enter()
     {
         base.Enter();
-        _enemy.NavMeshAgent.isStopped = true;
-
+        
     }
 
     public override void Update()
@@ -29,15 +28,17 @@ public class EnemyAttackState : EnemyState
     public override void Exit()
     {
         base.Exit();
-        _enemy.NavMeshAgent.isStopped = false;
+        
+        _enemy.lastAttackTime = Time.time;
     }
 
     private void LookPlayer()
     {
         Vector3 target = _enemy.target.position - _enemy.transform.position;
         target.y = 0;
-        Quaternion targetRot = Quaternion.Lerp(_enemy.transform.rotation,Quaternion.LookRotation(target) , 10 * Time.deltaTime);
+        
+        //Quaternion targetRot = Quaternion.Lerp(_enemy.transform.rotation, , 10 * Time.deltaTime);
 
-        _enemy.transform.rotation = targetRot;
+        _enemy.transform.rotation = Quaternion.LookRotation(target);
     }
 }

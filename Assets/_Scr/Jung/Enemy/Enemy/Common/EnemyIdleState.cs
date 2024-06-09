@@ -15,7 +15,10 @@ public class EnemyIdleState : EnemyState
     public override void Update()
     {
         base.Update();
-
+        
+        if(_enemy.CanAttack() == false)
+            return;
+                
         if (_enemy.target != null && Vector3.Distance(_enemy.transform.position , _enemy.target.position) <= _enemy.attackDistance)
         {
             _enemy.StateMachine.ChangeState(_enemy.AttackState);

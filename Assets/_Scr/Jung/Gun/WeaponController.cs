@@ -78,9 +78,8 @@ public class WeaponController : MonoBehaviour
             for (int i = 0; i < bullets.Length; i++)
             {
                 Bullet newBullet = bullets[i].GetComponent<Bullet>();
-                newBullet.SetBullet( 
-                    currentBottle._bottleDataSo.increaseAmount,
-                    playerCam.transform.forward);
+                newBullet.SetBullet(playerCam.transform.forward);
+                   
             }
             _lastShootTime = Time.time;
 

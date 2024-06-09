@@ -16,8 +16,10 @@ public class EnemyMoveState : EnemyState
     {
         base.Update();
         
-        if(Vector3.Distance(_enemy.transform.position , _enemy.target.position) <= _enemy.attackDistance)
+        if(Vector3.Distance(_enemy.transform.position , _enemy.target.position) <= _enemy.attackDistance && _enemy.CanAttack())
+        {
             _enemy.StateMachine.ChangeState(_enemy.AttackState);
+        }
         
         _enemy.NavMeshAgent.SetDestination(_enemy.target.position);
         LookTarget();

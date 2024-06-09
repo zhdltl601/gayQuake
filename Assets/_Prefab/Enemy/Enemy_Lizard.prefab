@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: 6915738334857632185}
   - component: {fileID: 1423970541219760260}
   - component: {fileID: 4213088314585236262}
+  - component: {fileID: 1731797178349721146}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -357,6 +358,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemy: {fileID: 6119632890725956913}
+--- !u!114 &1731797178349721146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065713811670395029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5894cabf3d44a44cb33b4437c901073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackTrm: {fileID: 8258939028126514057}
+  attackRadius: 1.45
+  _enemy: {fileID: 6119632890725956913}
 --- !u!1 &2092714944153668898
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,6 +722,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6915738334857632185}
+  - {fileID: 8258939028126514057}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &1991807735311689812
@@ -775,6 +792,7 @@ MonoBehaviour:
   moveSpeed: 5
   runAwayDistance: 12
   attackDistance: 4
+  attackDamage: 0
   increaseAmount: 20
   dissolveDuration: 3
 --- !u!114 &7776171704557284075
@@ -918,6 +936,37 @@ Transform:
   - {fileID: 6438343489857975681}
   - {fileID: 4001577487667188163}
   m_Father: {fileID: 1631312752479628704}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5022434885179380387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8258939028126514057}
+  m_Layer: 6
+  m_Name: AttackTrm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8258939028126514057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5022434885179380387}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.93, z: 1.121}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5463999594568465586}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5254125708317746841
 GameObject:

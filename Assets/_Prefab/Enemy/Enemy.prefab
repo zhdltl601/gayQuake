@@ -34,6 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1254621375878893284}
+  - {fileID: 4847766033696099956}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &5052503590849656900
@@ -103,8 +104,11 @@ MonoBehaviour:
   moveSpeed: 4
   runAwayDistance: 20
   attackDistance: 2
+  attackDamage: 50
+  attackTime: 3
   increaseAmount: 20
   dissolveDuration: 4
+  lastAttackTime: 0
 --- !u!114 &2959197794308616236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +152,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &7079571858640388251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4847766033696099956}
+  m_Layer: 6
+  m_Name: AttackTrm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4847766033696099956
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7079571858640388251}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.162, z: 1.021}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8917071091861650861}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1649432381333104911
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -583,6 +618,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1456991734561454397}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a7213b2f91876144e916293a81366da7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8745437235618574006}
   m_SourcePrefab: {fileID: 100100000, guid: a7213b2f91876144e916293a81366da7, type: 3}
 --- !u!4 &1254621375878893284 stripped
 Transform:
@@ -609,6 +648,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemy: {fileID: 1466554867538681146}
+--- !u!114 &8745437235618574006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883243322352325726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5894cabf3d44a44cb33b4437c901073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackTrm: {fileID: 4847766033696099956}
+  attackRadius: 0.9
+  _enemy: {fileID: 1466554867538681146}
 --- !u!137 &2460999257412380054 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 3802392452450634905, guid: a7213b2f91876144e916293a81366da7,

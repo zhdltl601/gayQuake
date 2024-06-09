@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour,EnemyMapSetting
 {
@@ -39,9 +40,13 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     public float moveSpeed;
     public float runAwayDistance;
     public float attackDistance;
-    
+    [Space]
+    public int attackDamage;
+    public float attackTime;
     public int increaseAmount;
     public float dissolveDuration;
+    
+    [HideInInspector] public float lastAttackTime; 
     
     private void Awake()
     {
@@ -50,7 +55,7 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         Collider = GetComponent<Collider>();
         StateMachine = new EnemyStateMachine();
 
-        #region stats
+        #region states
         IdleState = new EnemyIdleState(this , Animator , "Idle");
         MoveState = new EnemyMoveState(this , Animator , "Move");
         AttackState = new EnemyAttackState(this , Animator , "Attack");
@@ -213,4 +218,10 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     {
         currentRoom.aliveEnemyNames.Remove(gameObject);
     }
+
+    public bool CanAttack()
+    {
+        return Time.time >= lastAttackTime + attackTime;
+    }
+    
 }
