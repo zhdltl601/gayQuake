@@ -6,38 +6,24 @@ using UnityEngine;
 public class Stat
 {
     [SerializeField] private int _baseValue;
-    
-    
-    public List<int> modifiers;
-    
-    
+        
     public int GetValue()
     {
-        int finalValue = _baseValue;
-        foreach (int value in modifiers)
-            finalValue += value;
-
-        return finalValue;
+        return _baseValue;
     }
 
-    public void AddModifier(int value)
+    public void AddValue(int value)
     {
         if (value != 0)
-            modifiers.Add(value);
+            _baseValue += value;
     }
 
-    public void RemoveModifier(int value)
+    public void RemoveValue(int value)
     {
-        if (value != 0)
-            modifiers.Remove(value);
+        if (_baseValue > 0)
+            _baseValue -= value;
     }
-
-    public void Remove()
-    {
-        if(modifiers.Count > 0)
-             modifiers.RemoveAt(modifiers.Count - 1);
-    }
-
+    
     public void SetDefaultValue(int value)
     {
         _baseValue = value;

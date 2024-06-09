@@ -24,13 +24,13 @@ public class PlayerStatController : MonoSingleton<PlayerStatController>
         if (_timer > healthBottleSo.decreaseTime)
         {
             _timer = 0;
-            if (health.modifiers.Count > 0)
+            if (health.GetValue() >= 0)
             {
-                health.Remove();
+                health.RemoveValue(healthBottleSo.decreaseAmount);
             }
             else
             {
-                health.SetDefaultValue(health.GetValue() - healthBottleSo.increaseAmount);
+                print("체력이 0 입니다.");
             }
         }
     }

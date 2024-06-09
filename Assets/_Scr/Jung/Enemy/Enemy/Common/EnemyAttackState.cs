@@ -10,11 +10,14 @@ public class EnemyAttackState : EnemyState
     public override void Enter()
     {
         base.Enter();
+        
     }
 
     public override void Update()
     {
         base.Update();
+        
+        LookPlayer();
         
         if (endTriggerCalled)
         {
@@ -25,5 +28,17 @@ public class EnemyAttackState : EnemyState
     public override void Exit()
     {
         base.Exit();
+        
+        _enemy.lastAttackTime = Time.time;
+    }
+
+    private void LookPlayer()
+    {
+        Vector3 target = _enemy.target.position - _enemy.transform.position;
+        target.y = 0;
+        
+        //Quaternion targetRot = Quaternion.Lerp(_enemy.transform.rotation, , 10 * Time.deltaTime);
+
+        _enemy.transform.rotation = Quaternion.LookRotation(target);
     }
 }

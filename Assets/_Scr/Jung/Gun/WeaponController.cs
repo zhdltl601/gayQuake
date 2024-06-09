@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,10 +34,15 @@ public class WeaponController : MonoBehaviour
             Shot();
             Reload();
             ThrowGun();
-        }   
-       
+        }
+
+        if (currentBottle != null && currentBottle._bottleDataSo.bottleType != BottleType.Special)
+        {
+            DrinkBottle();
+            currentBottle.DecreaseBottle();
+        }
+        
         ChangeBottle();
-        currentBottle.DecreaseBottle();
     }
 
     private void Reload()
@@ -74,9 +78,8 @@ public class WeaponController : MonoBehaviour
             for (int i = 0; i < bullets.Length; i++)
             {
                 Bullet newBullet = bullets[i].GetComponent<Bullet>();
-                newBullet.SetBullet( 
-                    currentBottle._bottleDataSo.increaseAmount,
-                    playerCam.transform.forward);
+                newBullet.SetBullet(playerCam.transform.forward);
+                   
             }
             _lastShootTime = Time.time;
 
@@ -119,6 +122,25 @@ public class WeaponController : MonoBehaviour
     {
         currentBottle.gameObject.SetActive(false);
         currentBottle = bottleList[index];
+        currentBottle.gameObject.SetActive(true);
+    }
+
+    private void DrinkBottle()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            bottleList.Remove(currentBottle);
+            currentBottle.DrinkBottle();
+            
+            Invoke("SetBottleDefault" , 1f);
+           
+        }
+    }
+
+
+    private void SetBottleDefault()
+    {
+        currentBottle = bottleList[0];
         currentBottle.gameObject.SetActive(true);
     }
     
