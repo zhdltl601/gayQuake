@@ -1,24 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class PlayerStateOnGround : PlayerStateBaseDefault
 {
     public PlayerStateOnGround(Player player) : base(player)
     {
     }
-
     public override void Enter()
     {
         base.Enter();
-        //Debug.Log("on g");
     }
-    protected override void HandleState()
+    protected override Vector3 GetDirection(Vector3 inputDirection)
     {
-        if(player.CheckWallRun(out RaycastHit raycastHit, out bool isRight) && !player.playerController.IsGround)
+        return base.GetDirection(inputDirection) + inputDirection.normalized * player.GetDashCurve();
+    }
+    protected override void HandleOnJump()
+    {
+        bool isGround = player.playerController.IsGround;
+        if (isGround) Jump();
+        else if (player.CheckWall())
         {
-            StateMachine<PlayerStateEnum>.Instance.ChangeState2(PlayerStateEnum.OnWallrun);
+            StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnWallrun);
         }
-
     }
 }

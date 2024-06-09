@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 public class StateMachine<stateEnum> where stateEnum : Enum
 {
     public State CurrentState { get; protected set; }
@@ -31,14 +30,6 @@ public class StateMachine<stateEnum> where stateEnum : Enum
         //CurrentState.Current might need to change?
         CurrentState = StateDictionary[type];
         CurrentState.Enter();
-    }
-    public void ChangeState2(stateEnum type)
-    {
-        if(StateDictionary[type] != CurrentState)
-        {
-            Debug.Log("chang");
-            ChangeState(type);
-        }
     }
     public void UpdateState()
     {
