@@ -5,7 +5,8 @@ public enum GunType
     Pistol,
     ShotGun,
     Rifle,
-    
+    Revolver,
+    Rpg,
 }
 
 [CreateAssetMenu(menuName = "SO/gunData")]
