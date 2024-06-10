@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 public class PlayerStateOnWallrun : PlayerStateBaseDefault
 {
+    private float timerSinceEnter;
     private float gravityMultiplier;
     private Vector3 currentDir;
     private RaycastHit raycastHit;
@@ -10,16 +11,18 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     }
     public override void Enter()
     {
-        bool isRight = true;
-        player.CheckWall(out raycastHit);
+        base.Enter();
+        timerSinceEnter = 0;
+        player.CheckWall(out raycastHit, out bool isRight);
+        player.playerAnimator.camAnimator.Play("OnWall");
 
         currentDir = -raycastHit.normal;
         currentDir.Normalize();
 
-        player.playerViewmodel.WallRun(isRight ? 30 : -30);
+        player.playerViewmodel.WallRun(isRight ? 10 : -10);
         gravityMultiplier = 0;
-        player.StartCoroutine(Cor_MoveTowardsToWall(raycastHit.point, raycastHit.normal));
-        Current = Update;
+        //player.StartCoroutine(Cor_MoveTowardsToWall(raycastHit.point, raycastHit.normal));
+        //Current = Update;
     }
     private IEnumerator Cor_MoveTowardsToWall(Vector3 point, Vector3 normal)
     {
@@ -35,6 +38,12 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     protected override void HandleOnJump()
     {
         StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
+        //Vector3 pForward = player.playerCamera.GetCameraRotTransform().forward;
+        //Debug.DrawRay(pForward, Vector3.up, Color.yellow, 5);
+        //pForward.y = 0;
+        //pForward.Normalize();
+        //player.AddForce(pForward, 1);
+        //player.Jump(5);
     }
     protected override float GetGravitiyMultiplier()
     {
@@ -43,7 +52,8 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     }
     protected override float GetSpeed()
     {
-        return player.speedWall;
+        timerSinceEnter += Time.deltaTime;
+        return player.speedWall * player.GetWallrunCurve(timerSinceEnter);
     }
     protected override Vector3 GetDirection(Vector3 inputDirection)
     {
@@ -53,6 +63,17 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     }
     protected override void HandleState()
     {
+        Debug.DrawRay(player.transform.position, currentDir, Color.red, Time.deltaTime);
+        Vector3 pForward = player.playerCamera.GetCameraRotTransform().forward;
+        pForward.y = 0;
+        pForward.Normalize();
+        Debug.DrawRay(player.transform.position, pForward, Color.red, Time.deltaTime);
+        bool isOver = Vector3.Angle(pForward, currentDir) > 90 + 35;
+        if (isOver)
+        {
+            StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
+        }
+
         if (player.playerController.IsGround || !player.CheckWall(out raycastHit, ref currentDir))
         {
             StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
@@ -61,15 +82,16 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     protected override void HandleMove(Vector3 inputDirection)
     {
         base.HandleMove(inputDirection);
+        //player.CheckWall(out raycastHit, ref currentDir);
         Vector3 tar = raycastHit.point - new Vector3(0, raycastHit.point.y - player.transform.position.y, 0);
         tar += raycastHit.normal * 0.4f;
-        //Debug.DrawRay(tar, Vector3.up, Color.yellow, 2);
-        //Debug.DrawRay(player.transform.position, Vector3.up, Color.green, 2);
-        
-        Vector3 dir = tar - player.transform.position;
-        Debug.DrawRay(tar, dir, Color.blue, 2);
-        //player.AddMovementImpulse(dir, 1, 0);
 
+        //Debug.DrawRay(tar, Vector3.down, Color.red, Time.deltaTime);
+        //Debug.DrawRay(player.transform.position, Vector3.down, Color.yellow, Time.deltaTime);
+        //Vector3 dir = tar - player.transform.position;
+        //Debug.DrawRay(player.transform.position, dir, Color.blue, Time.deltaTime);
+
+        //player.AddMovementImpulse(dir, 1, 0);
     }
     public override void Exit()
     {

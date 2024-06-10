@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public PlayerCamera playerCamera;
     public PlayerViewmodel playerViewmodel;
     public PlayerController playerController;
+    public PlayerAnimator playerAnimator;
 
     [Header("Camera")]
     [SerializeField] private float xSens;
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour
 
     //dash
     [SerializeField] private AnimationCurve dashCurve;
+    [SerializeField] private AnimationCurve wallRunCurve;
     private float dashMulti;
 
     //private members
@@ -60,6 +62,7 @@ public class Player : MonoBehaviour
         playerStateMachine.Initialize(PlayerStateEnum.OnGround);
 
         playerCamera = GetComponentInChildren<PlayerCamera>();
+        playerAnimator = GetComponentInChildren<PlayerAnimator>();
         playerViewmodel = GetComponentInChildren<PlayerViewmodel>();
         playerController = GetComponentInChildren<PlayerController>();
 
@@ -79,7 +82,8 @@ public class Player : MonoBehaviour
         playerStateMachine.UpdateState();
         PlayerInput();
         //PlayerUI.Instance.lists[2].text = playerStateMachine.CurrentState.ToString();
-        if (Input.GetKeyDown(KeyCode.Backspace)) AddMovementImpulse(Vector3.forward, 1, 0);
+        //if (Input.GetKeyDown(KeyCode.Backspace)) AddMovementImpulse(Vector3.forward, 1, 0);
+        if (Input.GetKeyDown(KeyCode.Mouse0)) playerAnimator.leftArmAnimator.Play("AutoShoot", -1, 0f);
     }
     private void FixedUpdate()
     {
@@ -101,12 +105,8 @@ public class Player : MonoBehaviour
 
         direction.y = yVal;
         direction *= Time.deltaTime;
+        //direction 
 
-        playerController.Move(direction);
-    }
-    public void AddMovementImpulse(Vector3 direction, float speed, float gravityMultiplier = 0)
-    {
-        direction *= speed;
         playerController.Move(direction);
     }
     //private void PlayerApplyMovement()
@@ -211,6 +211,7 @@ public class Player : MonoBehaviour
     }
 
     #region state
+
     public void Jump(float val)
     {
         yVal = val;
@@ -219,31 +220,52 @@ public class Player : MonoBehaviour
     {
         return dashCurve.Evaluate(dashMulti);
     }
-    public bool CheckWall()
+    public float GetWallrunCurve(float x)
     {
-        Transform camTrm = playerCamera.GetCameraRotTransform();
-        float range = rangeWallRun;
-        bool result =
-            Physics.Raycast(camTrm.position, camTrm.right, range, lm_wallrunable) ||
-            Physics.Raycast(camTrm.position, camTrm.TransformDirection(Vector3.left), range, lm_wallrunable);
-        return result;
+        return wallRunCurve.Evaluate(x);
     }
-    public bool CheckWall(out RaycastHit raycastHit)
+    //public bool CheckWall()
+    //{
+    //    Transform camTrm = playerCamera.GetCameraRotTransform();
+    //    float range = rangeWallRun;
+    //    bool result =
+    //        Physics.Raycast(camTrm.position, camTrm.right, range, lm_wallrunable) ||
+    //        Physics.Raycast(camTrm.position, camTrm.TransformDirection(Vector3.left), range, lm_wallrunable);
+    //    return result;
+    //}
+    public bool CheckWall(out RaycastHit raycastHit, out bool isRight)
     {
         Transform camTrm = playerCamera.GetCameraRotTransform();
         float range = rangeWallRun;
         bool result = Physics.Raycast(camTrm.position, camTrm.right, out raycastHit, range, lm_wallrunable);
+        isRight = result;
         result = result ? true : Physics.Raycast(camTrm.position, camTrm.TransformDirection(Vector3.left), out raycastHit, range, lm_wallrunable);
+        return result;
+    }
+    public bool CheckWall(out RaycastHit raycastHit, out bool isRight, out Collider col)
+    {
+        Transform camTrm = playerCamera.GetCameraRotTransform();
+        float range = rangeWallRun;
+        bool result = Physics.Raycast(camTrm.position, camTrm.right, out raycastHit, range, lm_wallrunable);
+        isRight = result;
+        result = result ? true : Physics.Raycast(camTrm.position, camTrm.TransformDirection(Vector3.left), out raycastHit, range, lm_wallrunable);
+        col = raycastHit.collider;
         return result;
     }
     public bool CheckWall(out RaycastHit raycastHit, ref Vector3 dir)
     {
         Transform camTrm = playerCamera.GetCameraRotTransform();
         float range = rangeWallRun;
+        Debug.DrawRay(camTrm.position, dir, Color.yellow, Time.deltaTime);
         bool result = Physics.Raycast(camTrm.position, dir, out raycastHit, range, lm_wallrunable);
         dir = -raycastHit.normal;
         dir.Normalize();
         return result;
     }
     #endregion
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(playerCamera.GetCameraRotTransform().position, rangeWallRun);
+    }
 }
