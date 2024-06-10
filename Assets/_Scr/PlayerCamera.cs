@@ -1,8 +1,8 @@
 using UnityEngine;
 public class PlayerCamera : MonoBehaviour
 {
-    public Transform cameraPos;
     public Transform cameraRot;
+    public Transform cameraPos;
     public void SetCameraRotation(float x, float y, float z = 0)
     {
         cameraRot.localRotation = Quaternion.Euler(x, y, z);

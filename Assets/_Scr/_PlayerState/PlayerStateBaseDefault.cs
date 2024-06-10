@@ -10,17 +10,40 @@ public abstract class PlayerStateBaseDefault : State
     {
         base.Enter();
         player.Mov += HandleMove;
+        player.OnJump += HandleOnJump;
     }
     public override void Exit()
     {
         base.Exit();
         player.Mov -= HandleMove;
+        player.OnJump -= HandleOnJump;
+    }
+    public override void Update()
+    {
+        base.Update();
     }
     protected virtual void HandleMove(Vector3 inputDirection)
     {
         HandleState();
         Vector3 result = GetDirection(inputDirection);
-        player.PlayerApplyMovement2(result, player.speed);
+        float speed = GetSpeed();
+        float gravityMultiplier = GetGravitiyMultiplier();
+        player.PlayerApplyMovement(result, speed, gravityMultiplier);
+    }
+    protected virtual void HandleOnJump()
+    {
+    }
+    protected void Jump()
+    {
+        player.Jump(player.jumpForce);
+    }
+    protected virtual float GetGravitiyMultiplier()
+    {
+        return 1f;
+    }
+    protected virtual float GetSpeed()
+    {
+        return player.speed;
     }
     protected virtual Vector3 GetDirection(Vector3 inputDirection)
     {

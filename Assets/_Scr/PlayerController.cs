@@ -10,8 +10,8 @@ public class PlayerController : MonoBehaviour
         //rigidBody = GetComponent<Rigidbody>();
         characterController = GetComponent<CharacterController>();
     }
-    public void SetVelocity(Vector3 velocity)
+    public void Move(Vector3 velocitiy)
     {
-        characterController.Move(velocity);
+        characterController.Move(velocitiy);
     }
 }
