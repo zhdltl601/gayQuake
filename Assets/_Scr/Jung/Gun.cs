@@ -19,7 +19,6 @@ public abstract class Gun : MonoBehaviour
     protected BoxCollider _collider;
     
     [HideInInspector] public Transform _firePos;
-    [FormerlySerializedAs("gunAnimator")] [HideInInspector] public Animator _gunAnimator;
     private Transform playerCam;
     public bool throwing;
     
@@ -29,14 +28,13 @@ public abstract class Gun : MonoBehaviour
         
         _firePos = GetComponentInChildren<GunModel>().GetFirePos();
         _caseShellPos = GetComponentInChildren<GunModel>().GetCaseShell();
-        _gunAnimator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<BoxCollider>();
 
-        if (transform.root.GetComponent<Player>() == null)
+        /*if (transform.root.GetComponent<Player>() == null && transform.root.GetComponent<Cabinet>() == null)
         {
             SetOnGround();
-        }
+        }*/
     }
     
     public virtual GameObject[] Shoot()
@@ -111,7 +109,7 @@ public abstract class Gun : MonoBehaviour
 
         transform.parent = null;
         _rigidbody.isKinematic = false;
-        _gunAnimator.enabled = false;
+        //_gunAnimator.enabled = false;
 
         _rigidbody.useGravity = true;
         _collider.enabled = true;
@@ -138,7 +136,6 @@ public abstract class Gun : MonoBehaviour
             _rigidbody.isKinematic = true;
             _rigidbody.useGravity = false;
                 
-            _gunAnimator.enabled = true;
             _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             
             transform.localPosition = Vector3.zero;

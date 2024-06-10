@@ -6,7 +6,8 @@ using UnityEngine;
 public class Stat
 {
     [SerializeField] private int _baseValue;
-        
+    [SerializeField] private int _maxValue;
+    [SerializeField] private bool useMaxValue;
     public int GetValue()
     {
         return _baseValue;
@@ -14,6 +15,9 @@ public class Stat
 
     public void AddValue(int value)
     {
+        if(useMaxValue && _baseValue >= _maxValue)
+            return;
+        
         if (value != 0)
             _baseValue += value;
     }

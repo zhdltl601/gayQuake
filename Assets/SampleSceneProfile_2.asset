@@ -118,25 +118,25 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0, z: 0.3477869, w: -1}
+    m_Value: {x: 1, y: 0.29793108, z: 0.38917768, w: -1}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.0497576, z: 0.054004155, w: -0.093717866}
+    m_Value: {x: 1, y: 0.7466885, z: 0.72557056, w: -0.093717866}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 0.9965571, y: 0.99303913, z: 1, w: -0.031925607}
+    m_Value: {x: 1, y: 0.9658606, z: 0.8704029, w: -0.031925607}
   shadowsStart:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.05
   shadowsEnd:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.05
   highlightsStart:
     m_OverrideState: 1
-    m_Value: 0.8
+    m_Value: 0.6
   highlightsEnd:
     m_OverrideState: 1
-    m_Value: 1.6
+    m_Value: 0.6
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,10 +190,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
   m_Name: Tonemapping
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   mode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   neutralHDRRangeReductionMode:
     m_OverrideState: 0
     m_Value: 2

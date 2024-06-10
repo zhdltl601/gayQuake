@@ -73,7 +73,6 @@ GameObject:
   m_Component:
   - component: {fileID: 37346934132643914}
   - component: {fileID: 1949286318712915176}
-  - component: {fileID: 7331402992946482072}
   - component: {fileID: 1709974733387167913}
   - component: {fileID: 7538513668417666442}
   m_Layer: 11
@@ -125,29 +124,7 @@ MonoBehaviour:
   - {fileID: 7701625768114179525}
   - {fileID: 7701625768114179527}
   _firePos: {fileID: 0}
-  _gunAnimator: {fileID: 0}
   throwing: 0
---- !u!95 &7331402992946482072
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7320894290877536740}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!54 &1709974733387167913
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -190,12 +167,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.19446504, y: 0.33227503, z: 0.73346335}
-  m_Center: {x: -0.0010779798, y: -0.046090662, z: -0.03700623}
+  m_Size: {x: 0.86411035, y: 0.7460743, z: 0.73346335}
+  m_Center: {x: 0.0007112026, y: -0.058463737, z: -0.03700623}
 --- !u!1001 &2213156973671131926
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -275,6 +252,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2804061846473082561}
+    - targetCorrespondingSourceObject: {fileID: 9182609717624478720, guid: 5a0b1282c5db10f418b3f97b3f98e926,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8069383135864365994}
   m_SourcePrefab: {fileID: 100100000, guid: 5a0b1282c5db10f418b3f97b3f98e926, type: 3}
 --- !u!4 &7050834265509047094 stripped
 Transform:
@@ -302,6 +283,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePos: {fileID: 8767633614969838908}
   caseShell: {fileID: 6247171976796714474}
+--- !u!65 &8069383135864365994
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7050834265509345046}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.19446504, y: 0.33227503, z: 0.73346335}
+  m_Center: {x: -0.0010779798, y: -0.046090662, z: -0.03700623}
 --- !u!1001 &7701625768096223751
 PrefabInstance:
   m_ObjectHideFlags: 0

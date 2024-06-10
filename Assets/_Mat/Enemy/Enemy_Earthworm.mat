@@ -58,8 +58,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BlinkValue: 1
-    - _Brightness: 3.44
+    - _BlinkValue: 0
+    - _Brightness: 2.53
     - _DissolveEdgeWidth: 0.151
     - _DissolveHeight: 5
     - _Metalic: 0.456

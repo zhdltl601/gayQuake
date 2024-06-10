@@ -17,4 +17,4 @@ MonoBehaviour:
   statType: 0
   drinkAmount: 0
   decreaseTime: 0.3
-  increaseAmount: 3
+  decreaseAmount: 3

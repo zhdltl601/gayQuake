@@ -1,12 +1,16 @@
+using System;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Cabinet : MonoBehaviour
 {
     [SerializeField] private int price;
     [Space]
     [SerializeField] private float rotateSpeed;
-    [SerializeField] private GameObject goods;
+    [SerializeField] private GoodsList lists;
+    public GameObject goods;
+    
     [SerializeField] private TextMeshPro priceText;
     
     private Transform _camera;
@@ -14,6 +18,14 @@ public class Cabinet : MonoBehaviour
     private Vector3 direction;
 
     private bool isSell;
+
+    private void Awake()
+    {
+        goods = Instantiate(lists.goods[Random.Range(0 , lists.goods.Length - 1)], transform.position + Vector3.up * 1.5f,Quaternion.identity);
+        goods.transform.parent = transform;
+        
+    }
+
     private void Start()
     {
         _camera = Camera.main.transform;
@@ -23,7 +35,7 @@ public class Cabinet : MonoBehaviour
     private void Update()
     {
         if(isSell)return;
-                
+        
         goods.transform.Rotate(new Vector3(0,15,0) * (Time.deltaTime * rotateSpeed));
 
         if (priceText.gameObject.activeSelf)
@@ -57,14 +69,12 @@ public class Cabinet : MonoBehaviour
         if (PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Money].GetValue() - price >= 0)
         {
             PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Money].RemoveValue(price);
-            
+
             goods.GetComponent<Rigidbody>().AddForce(Vector3.up * 250);
             priceText.gameObject.SetActive(false);
             goods = null;
             isSell = true;
         }
-        
-    
     }
 
     private void LookPlayer()

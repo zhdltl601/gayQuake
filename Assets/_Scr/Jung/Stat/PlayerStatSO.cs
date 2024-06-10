@@ -21,6 +21,9 @@ public class PlayerStatSO : ScriptableObject
             { StatType.Speed, speed }
         };
         
-        health.SetDefaultValue(500);
+        health.SetDefaultValue(800);
+        money.SetDefaultValue(0);
+        attack.SetDefaultValue(0);
+        speed.SetDefaultValue(0);
     }
 }

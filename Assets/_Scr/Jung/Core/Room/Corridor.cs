@@ -54,7 +54,11 @@ public class Corridor : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        _nextRoom.EnterRoom();
-        _collider.enabled = false;
+        if (other.GetComponent<PlayerController>())
+        {
+            _nextRoom.EnterRoom();
+            _collider.enabled = false;
+        }
+        
     }
 }

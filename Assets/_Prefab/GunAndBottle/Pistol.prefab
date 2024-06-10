@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2942754908150215771}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: CaseShellPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,9 +42,8 @@ GameObject:
   - component: {fileID: 7097411574049967033}
   - component: {fileID: 4602000348765348289}
   - component: {fileID: 8769294462617153628}
-  - component: {fileID: 1302048935133484613}
   - component: {fileID: 2462980614521218381}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,27 +114,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &1302048935133484613
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5196217338208197147}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 7af22f61317b57e46aa02fb927b1c334, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &2462980614521218381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,7 +140,6 @@ MonoBehaviour:
   - {fileID: 7104669652333048037}
   - {fileID: 7104669652333048039}
   _firePos: {fileID: 0}
-  _gunAnimator: {fileID: 0}
   throwing: 0
 --- !u!1 &7243824724285517917
 GameObject:
@@ -173,7 +150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5337526117375002836}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FirePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +184,7 @@ PrefabInstance:
     - target: {fileID: 3364331208329070976, guid: d203906c532c7414bb2292dc2ec075b5,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3945439267341455232, guid: d203906c532c7414bb2292dc2ec075b5,
         type: 3}
@@ -217,27 +194,27 @@ PrefabInstance:
     - target: {fileID: 3945439267341455232, guid: d203906c532c7414bb2292dc2ec075b5,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3945439267341455234, guid: d203906c532c7414bb2292dc2ec075b5,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3945439267341455236, guid: d203906c532c7414bb2292dc2ec075b5,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3945439267341455238, guid: d203906c532c7414bb2292dc2ec075b5,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3945439267341455240, guid: d203906c532c7414bb2292dc2ec075b5,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3945439267341489056, guid: d203906c532c7414bb2292dc2ec075b5,
         type: 3}
@@ -292,7 +269,7 @@ PrefabInstance:
     - target: {fileID: 5758861614061744357, guid: d203906c532c7414bb2292dc2ec075b5,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -372,15 +349,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 30b4cc2728d8cec499fad63ba93785a4, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 30b4cc2728d8cec499fad63ba93785a4, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 30b4cc2728d8cec499fad63ba93785a4, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 30b4cc2728d8cec499fad63ba93785a4, type: 3}
       propertyPath: m_IsActive
@@ -392,7 +369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 30b4cc2728d8cec499fad63ba93785a4, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 30b4cc2728d8cec499fad63ba93785a4, type: 3}
       propertyPath: m_LocalPosition.x
