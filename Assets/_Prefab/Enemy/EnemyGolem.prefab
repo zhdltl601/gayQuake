@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5584833836611411669}
   - component: {fileID: 801451935353945664}
   - component: {fileID: 3463892026716237587}
+  - component: {fileID: 8779952239606488191}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -69,6 +70,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemy: {fileID: 6189556986111841217}
+--- !u!114 &8779952239606488191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152318549277563568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5894cabf3d44a44cb33b4437c901073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackTrm: {fileID: 5440999253671418469}
+  attackRadius: 2.63
+  _enemy: {fileID: 6189556986111841217}
 --- !u!1 &709512950519345951
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,7 +739,6 @@ GameObject:
   - component: {fileID: 4264250361064021030}
   - component: {fileID: 6189556986111841217}
   - component: {fileID: 6091399781929379080}
-  - component: {fileID: 2570403115789768922}
   m_Layer: 6
   m_Name: EnemyGolem
   m_TagString: Untagged
@@ -814,8 +829,10 @@ MonoBehaviour:
   runAwayDistance: 12
   attackDistance: 7
   attackDamage: 0
+  attackTime: 0
   increaseAmount: 30
   dissolveDuration: 4
+  lastAttackTime: 0
 --- !u!114 &6091399781929379080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -859,21 +876,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2570403115789768922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8556251462323275892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5894cabf3d44a44cb33b4437c901073, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackTrm: {fileID: 5440999253671418469}
-  attackRadius: 2.63
-  _enemy: {fileID: 6189556986111841217}
 --- !u!1 &8886122317234887666
 GameObject:
   m_ObjectHideFlags: 0

@@ -72,7 +72,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _BlinkValue: 0
-    - _Brightness: 10
+    - _Brightness: 5.4
     - _DissolveEdgeWidth: 0.25
     - _DissolveHeight: 5
     - _Metalic: 1
