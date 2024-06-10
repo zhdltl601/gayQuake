@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63d432581d5c00c45ac61342ece4e6b2, type: 3}
-  m_Name: ShotGun
+  m_Name: Revolver
   m_EditorClassIdentifier: 
-  gunType: 1
-  gunName: "\uC0F7\uAC74"
+  gunType: 3
+  gunName: "\uB9AC\uB85C\uBC8C\uBC84"
   maxAmmoInMagazine: 16000
   ammoInMagazine: 15797
   totalAmmo: 378
-  damage: 15
-  shotRate: 2.4
+  damage: 20
+  shotRate: 2.7
   bulletSpeed: 3000
   bullet: {fileID: 7383199481331753142, guid: 3f834e4dd9eef9b4695d65797ae7cd8c, type: 3}
-  maxShotCount: 7
-  minShotCount: 3
-  xBound: 149
-  yBound: 181
+  maxShotCount: 0
+  minShotCount: 0
+  xBound: 62
+  yBound: 50
