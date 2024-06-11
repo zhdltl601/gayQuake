@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
     [Header("Debug/Viewmodel")]
     [SerializeField] private float viewmodelValue;
     private float viewmodelY = 0;
-    private float viewmodelX = 0;
+    private float viewmodelX = 0;float
     private bool b_value;
     [Header("Debug/Wallrun")]
     public LayerMask lm_wallrunable;
@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
         PlayerInput();
         //PlayerUI.Instance.lists[2].text = playerStateMachine.CurrentState.ToString();
         //if (Input.GetKeyDown(KeyCode.Backspace)) AddMovementImpulse(Vector3.forward, 1, 0);
-        if (Input.GetKeyDown(KeyCode.Mouse0)) playerAnimator.leftArmAnimator.Play("AutoShoot", -1, 0f);
+        //if (Input.GetKeyDown(KeyCode.Mouse0)) playerAnimator.leftArmAnimator.Play("AutoShoot", -1, 0f);
     }
     private void FixedUpdate()
     {
