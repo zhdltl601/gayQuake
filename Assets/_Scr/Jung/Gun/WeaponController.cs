@@ -128,7 +128,7 @@ public class WeaponController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             bottleList.Remove(currentBottle);
-            currentBottle.DrinkBottle();
+            currentBottle.DrinkBottle(_player.playerAnimator.rightArmAnimator);
             
             Invoke("SetBottleDefault" , 1f);
            
