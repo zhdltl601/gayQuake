@@ -85,8 +85,8 @@ public class WeaponController : MonoBehaviour
 
             float randomXRecoil = Random.Range(-currentGun.gunData.xBound,currentGun.gunData.xBound);
             Recoil(randomXRecoil * Time.deltaTime, currentGun.gunData.yBound * Time.deltaTime);
+            _player.playerAnimator.leftArmAnimator.Play("AutoShoot", -1, 0f);
 
-            
             UIManager.Instance.SetAmmoText();
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0) || shootAble == false)
