@@ -7,7 +7,6 @@ public class PlayerAnimator : MonoBehaviour
     public Animator camAnimator;
     public Animator rightArmAnimator;
     public Animator leftArmAnimator;
-    
     /*
     Viewmodel
     -in Animator

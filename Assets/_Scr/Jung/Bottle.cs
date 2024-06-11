@@ -5,23 +5,17 @@ public abstract class Bottle : MonoBehaviour
 {
     public BottleDataSO _bottleDataSo;
 
-    private Animator _animator;
     
     private float _timer;
-
-    private void Start()
-    {
-        _animator = GetComponent<Animator>();
-    }
 
     private void Update()
     {
         _timer += Time.deltaTime;
     }
 
-    public virtual void DrinkBottle()
+    public virtual void DrinkBottle(Animator _animator)
     {
-        _animator.SetTrigger("Drink");
+        _animator.Play("Drink", -1, 0f);
         print(_animator);
         PlayerStatController.Instance.PlayerStatSo._statDic[_bottleDataSo.statType].AddValue(_bottleDataSo.drinkAmount);
     }
