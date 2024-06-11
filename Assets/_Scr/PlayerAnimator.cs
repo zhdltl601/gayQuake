@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
@@ -7,6 +5,10 @@ public class PlayerAnimator : MonoBehaviour
     public Animator camAnimator;
     public Animator rightArmAnimator;
     public Animator leftArmAnimator;
+    private void Awake()
+    {
+       
+    }
     /*
     Viewmodel
     -in Animator

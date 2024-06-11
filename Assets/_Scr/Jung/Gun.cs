@@ -7,6 +7,8 @@ using Vector3 = UnityEngine.Vector3;
 public abstract class Gun : MonoBehaviour
 {
     public GunDataSO gunData;
+
+    [SerializeField] private RuntimeAnimatorController runtimeAnimatorController;
     
     [SerializeField] private LayerMask whatIsEnemy;
     [SerializeField] private LayerMask whatIsGround;
@@ -21,6 +23,8 @@ public abstract class Gun : MonoBehaviour
     [HideInInspector] public Transform _firePos;
     private Transform playerCam;
     public bool throwing;
+    
+    
     
     protected virtual void Start()
     {
@@ -133,6 +137,8 @@ public abstract class Gun : MonoBehaviour
         if (other.gameObject.TryGetComponent(out WeaponController weaponController) && throwing == false)
         {
             if (weaponController.GetCurrentGun() != null) return;
+            
+            
             
             weaponController.currentGun = this;
             transform.parent = weaponController.gunTrm;

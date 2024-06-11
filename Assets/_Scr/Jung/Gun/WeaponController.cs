@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
+    public PlayerAnimator PlayerAnimator;
+    
     [Header("Gun Settings")]
     public Gun currentGun;
     private float _lastShootTime;
@@ -15,6 +17,8 @@ public class WeaponController : MonoBehaviour
 
     private Player _player;
     private Transform playerCam;
+
+    private bool equip = false;
     
     private void Start()
     {
@@ -31,9 +35,21 @@ public class WeaponController : MonoBehaviour
     {
         if (currentGun != null)
         {
+            if (equip == false)
+            {
+                equip = true;
+                PlayerAnimator.leftArmAnimator.Play("Equip");
+                PlayerAnimator.leftArmAnimator.Rebind();
+            }
+            
+            
             Shot();
             Reload();
             ThrowGun();
+        }
+        else
+        {
+            equip = false;
         }
 
         if (currentBottle != null && currentBottle._bottleDataSo.bottleType != BottleType.Special)
@@ -88,7 +104,7 @@ public class WeaponController : MonoBehaviour
             float randomXRecoil = Random.Range(-currentGun.gunData.xBound,currentGun.gunData.xBound);
             Recoil(randomXRecoil * Time.deltaTime, currentGun.gunData.yBound * Time.deltaTime);
             _player.playerAnimator.leftArmAnimator.Play("AutoShoot", -1, 0f);
-
+            
             UIManager.Instance.SetAmmoText();
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0) || shootAble == false)
