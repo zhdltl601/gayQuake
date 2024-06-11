@@ -749,16 +749,14 @@ MonoBehaviour:
   - enemy: {fileID: 1146452743183490814, guid: 0b0e604325413a642b9dd057657d32ac, type: 3}
     enemyCount: 1
   - enemy: {fileID: 8414851538182959628, guid: 8643348e80ca899458b03e67aff4871f, type: 3}
-    enemyCount: 1
+    enemyCount: 0
   - enemy: {fileID: 1697891891729884436, guid: 7ec5f5e45cd40364698abeb4b2fe4b35, type: 3}
-    enemyCount: 1
+    enemyCount: 0
   - enemy: {fileID: 4513811498531013135, guid: e0a859a63d7be7045ad6eaf3f14ac7e2, type: 3}
-    enemyCount: 1
+    enemyCount: 0
   - enemy: {fileID: 5001055590820185352, guid: e1c57e4bd243bda4aaf4bbc4ffe0378a, type: 3}
-    enemyCount: 1
-  - enemy: {fileID: 7855126151910296497, guid: d13cf1a3e14e5d044b8f18b4decd4382, type: 3}
-    enemyCount: 1
-  - enemy: {fileID: 8556251462323275892, guid: da0b91d127fc7d44988372b112ee13ab, type: 3}
+    enemyCount: 0
+  - enemy: {fileID: 6425937166378154614, guid: f9668bc55661c1c4686b2b457aa23a4c, type: 3}
     enemyCount: 1
   aliveEnemyNames: []
 --- !u!1 &3610922709050550307

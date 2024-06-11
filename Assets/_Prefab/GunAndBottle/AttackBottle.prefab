@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 5505010627457257824}
   - component: {fileID: 7864038514998407898}
   - component: {fileID: 1852736296419784882}
-  - component: {fileID: 64943001216597354}
   m_Layer: 0
   m_Name: AttackBottle
   m_TagString: Untagged
@@ -183,27 +182,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bottleDataSo: {fileID: 11400000, guid: c68d0d3390dd76343aa80206806edb81, type: 2}
---- !u!95 &64943001216597354
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 50618607230761338}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6fa009b98ddc4884db513a9e699f70b0, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5454875283337336876
 GameObject:
   m_ObjectHideFlags: 0

@@ -64,7 +64,11 @@ public abstract class Gun : MonoBehaviour
         GameObject newCaseShell = ObjectPooling.Instance.GetObject(caseShell);
         
         newCaseShell.transform.position = _caseShellPos.position;
-        newCaseShell.GetComponent<Rigidbody>().AddForce((Vector3.right + Vector3.up) * Random.Range(100, 140));
+
+        newCaseShell.GetComponent<Rigidbody>().AddForce((Vector3.right + Vector3.up) * Random.Range(200, 220));
+        newCaseShell.GetComponent<Rigidbody>().angularVelocity = new 
+                Vector3(Random.Range(-100 ,100) , Random.Range(-100 , 100) , Random.Range(-100 , 100));
+        
         
         ObjectPooling.Instance.ReTurnObject(newCaseShell , 3);
         

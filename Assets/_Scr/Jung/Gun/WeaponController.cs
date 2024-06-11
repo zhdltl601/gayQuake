@@ -40,9 +40,11 @@ public class WeaponController : MonoBehaviour
         {
             DrinkBottle();
             currentBottle.DecreaseBottle();
+            
+            ChangeBottle();
         }
         
-        ChangeBottle();
+       
     }
 
     private void Reload()

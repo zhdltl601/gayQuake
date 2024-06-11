@@ -31,7 +31,7 @@ public class GunDataSO : ScriptableObject
     
     [Header("Bound")]
     [Range(0,200)]public float xBound;
-    [Range(0,200)]public float yBound;
+    [Range(0,400)]public float yBound;
     
     
 }

@@ -15,6 +15,6 @@ MonoBehaviour:
   bottleName: "\uCCB4\uB825\uBCD1"
   bottleType: 0
   statType: 0
-  drinkAmount: 0
+  drinkAmount: 200
   decreaseTime: 0.3
   decreaseAmount: 3

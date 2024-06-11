@@ -15,8 +15,8 @@ MonoBehaviour:
   gunType: 2
   gunName: "\uC18C\uCD1D"
   maxAmmoInMagazine: 40
-  ammoInMagazine: 34
-  totalAmmo: 699997493
+  ammoInMagazine: 9
+  totalAmmo: 699996694
   damage: 20
   shotRate: 0.125
   bulletSpeed: 3000
