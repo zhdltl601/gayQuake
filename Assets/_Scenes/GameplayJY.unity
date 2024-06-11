@@ -3788,51 +3788,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 239369520}
     m_Modifications:
-    - target: {fileID: 4122639659620306357, guid: b28c657a418268544a2b752f539625d8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -12.2815
-      objectReference: {fileID: 0}
-    - target: {fileID: 4122639659620306357, guid: b28c657a418268544a2b752f539625d8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 92.00711
-      objectReference: {fileID: 0}
-    - target: {fileID: 4122639659620306357, guid: b28c657a418268544a2b752f539625d8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -122.33894
-      objectReference: {fileID: 0}
-    - target: {fileID: 4467262626367649681, guid: b28c657a418268544a2b752f539625d8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -11.879
-      objectReference: {fileID: 0}
-    - target: {fileID: 4467262626367649681, guid: b28c657a418268544a2b752f539625d8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -6.93
-      objectReference: {fileID: 0}
-    - target: {fileID: 4467262626367649681, guid: b28c657a418268544a2b752f539625d8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 48.233
-      objectReference: {fileID: 0}
-    - target: {fileID: 5962568397855219641, guid: b28c657a418268544a2b752f539625d8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 20.55117
-      objectReference: {fileID: 0}
-    - target: {fileID: 5962568397855219641, guid: b28c657a418268544a2b752f539625d8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 8.986569
-      objectReference: {fileID: 0}
-    - target: {fileID: 5962568397855219641, guid: b28c657a418268544a2b752f539625d8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -7.6055512
-      objectReference: {fileID: 0}
     - target: {fileID: 6581791253985770354, guid: b28c657a418268544a2b752f539625d8,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
