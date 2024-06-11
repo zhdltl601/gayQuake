@@ -1980,7 +1980,6 @@ MonoBehaviour:
   camAnimator: {fileID: 1352192667}
   rightArmAnimator: {fileID: 581258327}
   leftArmAnimator: {fileID: 1471376887}
-  gay: {fileID: 0}
 --- !u!1 &1070211175
 GameObject:
   m_ObjectHideFlags: 0
@@ -3029,7 +3028,7 @@ Animator:
   m_GameObject: {fileID: 1471376885}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: c2d2429f913fc5d4ba70daa6468ade68, type: 2}
+  m_Controller: {fileID: 9100000, guid: cc804681254b93c4a987e24fed042377, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3564,7 +3563,7 @@ PrefabInstance:
     - target: {fileID: 6874139926438019522, guid: 69c8513b9ff8c684b980ca21583d0b13,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4750,7 +4749,7 @@ PrefabInstance:
     - target: {fileID: 8954885641401316218, guid: e3ae674de7666094e9950d01e5862665,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1828107017834309302, guid: e3ae674de7666094e9950d01e5862665, type: 3}
