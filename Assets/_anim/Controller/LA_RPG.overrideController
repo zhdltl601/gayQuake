@@ -6,12 +6,12 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LA_Shotgun
+  m_Name: LA_RPG
   m_Controller: {fileID: 9100000, guid: cc804681254b93c4a987e24fed042377, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 1362caf60c1b602478b84acba6e56920, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 5bfaca47e59910c438b12f0d5f0d404e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b59fc6fa5493f0d41afd9c4ad0454458, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: cbc37ba2674e94b41801c4120b6f48aa, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 9739880e0f88e61479aff53b546082e7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: fdc5d36872a1ff947908ac7f595e09d0, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 806e35210eea687499179bbaedb18c6d, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 65fe5d32a23b22b449a839566a8052e5, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 17ab13866f4aa2c49afbf9c7eb9b355b, type: 2}
