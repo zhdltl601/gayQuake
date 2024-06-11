@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
     [Header("Debug/Viewmodel")]
     [SerializeField] private float viewmodelValue;
     private float viewmodelY = 0;
-    private float viewmodelX = 0;float
+    private float viewmodelX = 0;
     private bool b_value;
     [Header("Debug/Wallrun")]
     public LayerMask lm_wallrunable;
