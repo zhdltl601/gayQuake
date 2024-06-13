@@ -35,11 +35,11 @@ public abstract class PlayerStateBaseDefault : State
     }
     protected void Jump()
     {
-        player.Jump(player.jumpForce);
+        player.SetYVal(player.jumpForce);
     }
     protected virtual float GetGravitiyMultiplier()
     {
-        return 1f;
+        return 1.2f;
     }
     protected virtual float GetSpeed()
     {

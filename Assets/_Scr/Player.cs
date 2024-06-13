@@ -53,7 +53,6 @@ public class Player : MonoBehaviour
     private bool b_value;
     [Header("Debug/Wallrun")]
     public LayerMask lm_wallrunable;
-
     private void Awake()
     {
         playerStateMachine = new StateMachine<PlayerStateEnum>();// will change to ref singleton, singleton will automaticaly make instance when not initialized
@@ -65,7 +64,6 @@ public class Player : MonoBehaviour
         playerAnimator = GetComponentInChildren<PlayerAnimator>();
         playerViewmodel = GetComponentInChildren<PlayerViewmodel>();
         playerController = GetComponentInChildren<PlayerController>();
-
     }
     private void Start()
     {
@@ -81,6 +79,7 @@ public class Player : MonoBehaviour
     {
         playerStateMachine.UpdateState();
         PlayerInput();
+        playerAnimator.camAnimator.SetFloat("x", Input.GetAxis("Horizontal"));
         //PlayerUI.Instance.lists[2].text = playerStateMachine.CurrentState.ToString();
         //if (Input.GetKeyDown(KeyCode.Backspace)) AddMovementImpulse(Vector3.forward, 1, 0);
         //if (Input.GetKeyDown(KeyCode.Mouse0)) playerAnimator.leftArmAnimator.Play("AutoShoot", -1, 0f);
@@ -100,8 +99,7 @@ public class Player : MonoBehaviour
         bool isGround = playerController.IsGround;
 
         if (isGround && yVal < 0) yVal = onGroundYVal;
-        else yVal += gravity * Time.deltaTime;
-        yVal *= gravityMultiplier;
+        else yVal += gravity * gravityMultiplier * Time.deltaTime;
 
         direction.y = yVal;
         direction *= Time.deltaTime;
@@ -188,6 +186,7 @@ public class Player : MonoBehaviour
         {
             yVal = 0;
             dashMulti = 0.1f;//length of m_dashCurve
+            playerAnimator.camAnimator.Play("OnDash", -1, 0);
         }
         if (Input.GetKeyDown(KeyCode.LeftShift)) Dash(); 
         if (dashMulti > 0) dashMulti -= Time.deltaTime; // will change later 
@@ -212,7 +211,7 @@ public class Player : MonoBehaviour
 
     #region state
 
-    public void Jump(float val)
+    public void SetYVal(float val)
     {
         yVal = val;
     }

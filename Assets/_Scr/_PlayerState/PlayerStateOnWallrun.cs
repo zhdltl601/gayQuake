@@ -12,6 +12,7 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     public override void Enter()
     {
         base.Enter();
+        player.SetYVal(1.2f);
         timerSinceEnter = 0;
         player.CheckWall(out raycastHit, out bool isRight);
         player.playerAnimator.camAnimator.Play("OnWall");
@@ -47,7 +48,7 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     }
     protected override float GetGravitiyMultiplier()
     {
-        gravityMultiplier += Time.deltaTime * 0.5f * 0;
+        gravityMultiplier += Time.deltaTime * 0.5f;
         return gravityMultiplier;
     }
     protected override float GetSpeed()
@@ -68,7 +69,8 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
         pForward.y = 0;
         pForward.Normalize();
         Debug.DrawRay(player.transform.position, pForward, Color.red, Time.deltaTime);
-        bool isOver = Vector3.Angle(pForward, currentDir) > 90 + 35;
+        float angle = Vector3.Angle(pForward, currentDir);
+        bool isOver = angle > 90 + 35 || angle < 90 - 10;
         if (isOver)
         {
             StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
@@ -83,8 +85,8 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     {
         base.HandleMove(inputDirection);
         //player.CheckWall(out raycastHit, ref currentDir);
-        Vector3 tar = raycastHit.point - new Vector3(0, raycastHit.point.y - player.transform.position.y, 0);
-        tar += raycastHit.normal * 0.4f;
+        //Vector3 tar = raycastHit.point - new Vector3(0, raycastHit.point.y - player.transform.position.y, 0);
+        //tar += raycastHit.normal * 0.4f;
 
         //Debug.DrawRay(tar, Vector3.down, Color.red, Time.deltaTime);
         //Debug.DrawRay(player.transform.position, Vector3.down, Color.yellow, Time.deltaTime);
