@@ -372,7 +372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackTrm: {fileID: 8258939028126514057}
   attackRadius: 1.45
-  _enemy: {fileID: 6119632890725956913}
+  enemy: {fileID: 6119632890725956913}
 --- !u!1 &2092714944153668898
 GameObject:
   m_ObjectHideFlags: 0

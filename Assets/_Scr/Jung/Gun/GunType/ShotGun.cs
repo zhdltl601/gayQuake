@@ -68,9 +68,9 @@ public class ShotGun : Gun
         return bullets;
     }
 
-    private void OnDrawGizmosSelected()
+    /*private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(_firePos.position , shotgunSize);
-    }
+    }*/
 }
