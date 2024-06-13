@@ -25,7 +25,6 @@ public class EnemyExplostion : MonoBehaviour
         }
                     
         int player = Physics.OverlapSphereNonAlloc(transform.position ,explosionRadius ,_collider, _enemy._whatIsPlayer);
-        print(player);
         if (player > 0)
         {
             PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Health].RemoveValue(_enemy.attackDamage);    

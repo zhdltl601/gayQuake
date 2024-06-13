@@ -8,13 +8,13 @@ public class WeaponController : MonoBehaviour
     [Header("Gun Settings")]
     public Gun currentGun;
     private float _lastShootTime;
-    private float shotTime;
     
     [Header("Bottle Settings")] 
     public Bottle currentBottle;
     public List<Bottle> bottleList;
     public Transform gunTrm;
-
+    private int currentBottleIndex;
+    
     private Player _player;
     private Transform playerCam;
 
@@ -39,7 +39,8 @@ public class WeaponController : MonoBehaviour
             {
                 equip = true;
                 PlayerAnimator.leftArmAnimator.Play("Equip");
-                PlayerAnimator.leftArmAnimator.Rebind();
+                PlayerAnimator.leftArmAnimator.runtimeAnimatorController = currentGun.runtimeAnimatorController;
+                PlayerAnimator.leftArmAnimator.enabled = true;
             }
             
             
@@ -56,10 +57,9 @@ public class WeaponController : MonoBehaviour
         {
             DrinkBottle();
             currentBottle.DecreaseBottle();
-            
-            ChangeBottle();
         }
         
+        ChangeBottle();
        
     }
 
@@ -77,6 +77,8 @@ public class WeaponController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
+            PlayerAnimator.leftArmAnimator.enabled = false;
+            
             currentGun.ThrowGun();
             currentGun = null;
         }
@@ -84,25 +86,24 @@ public class WeaponController : MonoBehaviour
     
     private void Shot()
     {
-        shotTime += Time.deltaTime;
-        
         bool shootAble = currentGun.gunData.ammoInMagazine > 0 &&
                          _lastShootTime + currentGun.gunData.shotRate < Time.time;
         
         if (Input.GetKey(KeyCode.Mouse0) && shootAble)
         {
             GameObject[] bullets = currentGun.Shoot();
-
+            
             for (int i = 0; i < bullets.Length; i++)
             {
                 Bullet newBullet = bullets[i].GetComponent<Bullet>();
                 newBullet.SetBullet(playerCam.transform.forward);
-                   
             }
+            
             _lastShootTime = Time.time;
 
             float randomXRecoil = Random.Range(-currentGun.gunData.xBound,currentGun.gunData.xBound);
             Recoil(randomXRecoil * Time.deltaTime, currentGun.gunData.yBound * Time.deltaTime);
+            
             _player.playerAnimator.leftArmAnimator.Play("AutoShoot", -1, 0f);
             
             UIManager.Instance.SetAmmoText();
@@ -121,21 +122,18 @@ public class WeaponController : MonoBehaviour
         
     private void ChangeBottle()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SwitchBottle(0);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SwitchBottle(1);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            SwitchBottle(2);
-        }
+        float scroll = -Input.GetAxisRaw("Mouse ScrollWheel") * 10;
+        
+        if(scroll == 0)return;
+        currentBottleIndex += (int)scroll;
+        
+        currentBottleIndex = Mathf.Clamp(currentBottleIndex,0 ,bottleList.Count - 1);
+        SwitchBottle(currentBottleIndex);
     }
     private void SwitchBottle(int index)
     {
+        if(currentGun == null)return;
+        
         currentBottle.gameObject.SetActive(false);
         currentBottle = bottleList[index];
         currentBottle.gameObject.SetActive(true);

@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EnemyDamageCaster : MonoBehaviour
 {
     [SerializeField] private Transform attackTrm;
     [SerializeField] private float attackRadius;
     
-    public Enemy _enemy;
+    public Enemy enemy;
 
     private new Collider[] _collider;
     private void Start()
@@ -15,11 +16,11 @@ public class EnemyDamageCaster : MonoBehaviour
 
     public void DamageCaster()
     {
-        int player = Physics.OverlapSphereNonAlloc(attackTrm.position ,attackRadius ,_collider, _enemy._whatIsPlayer);
+        int player = Physics.OverlapSphereNonAlloc(attackTrm.position ,attackRadius ,_collider, enemy._whatIsPlayer);
         
         if (player > 0)
         {
-            PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Health].RemoveValue(_enemy.attackDamage);    
+            PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Health].RemoveValue(enemy.attackDamage);    
         }
     }
 
