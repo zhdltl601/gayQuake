@@ -749,13 +749,13 @@ MonoBehaviour:
   - enemy: {fileID: 1146452743183490814, guid: 0b0e604325413a642b9dd057657d32ac, type: 3}
     enemyCount: 1
   - enemy: {fileID: 8414851538182959628, guid: 8643348e80ca899458b03e67aff4871f, type: 3}
-    enemyCount: 0
+    enemyCount: 1
   - enemy: {fileID: 1697891891729884436, guid: 7ec5f5e45cd40364698abeb4b2fe4b35, type: 3}
-    enemyCount: 0
+    enemyCount: 1
   - enemy: {fileID: 4513811498531013135, guid: e0a859a63d7be7045ad6eaf3f14ac7e2, type: 3}
-    enemyCount: 0
+    enemyCount: 1
   - enemy: {fileID: 5001055590820185352, guid: e1c57e4bd243bda4aaf4bbc4ffe0378a, type: 3}
-    enemyCount: 0
+    enemyCount: 1
   - enemy: {fileID: 6425937166378154614, guid: f9668bc55661c1c4686b2b457aa23a4c, type: 3}
     enemyCount: 1
   aliveEnemyNames: []
@@ -1200,7 +1200,7 @@ GameObject:
   - component: {fileID: 6854838471804409867}
   - component: {fileID: 5160120224258544821}
   - component: {fileID: 8102859978882449213}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WestWall_Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2586,7 +2586,7 @@ GameObject:
   - component: {fileID: 2087998536325643078}
   - component: {fileID: 2629469449570537612}
   - component: {fileID: 2715262573840294036}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SouthWall_Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3513,7 +3513,7 @@ GameObject:
   - component: {fileID: 2080336889722173627}
   - component: {fileID: 1056497395190288605}
   - component: {fileID: 6953271048931247545}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NorthWall_Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4087,7 +4087,7 @@ GameObject:
   - component: {fileID: 3016938848344645399}
   - component: {fileID: 5414829150635864713}
   - component: {fileID: 3467375303044032068}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EastWall_Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}

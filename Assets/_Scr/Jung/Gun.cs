@@ -8,20 +8,20 @@ public abstract class Gun : MonoBehaviour
 {
     public GunDataSO gunData;
 
-    [SerializeField] private RuntimeAnimatorController runtimeAnimatorController;
+    public RuntimeAnimatorController runtimeAnimatorController;
     
-    [SerializeField] private LayerMask whatIsEnemy;
+    [SerializeField] protected LayerMask whatIsEnemy;
     [SerializeField] private LayerMask whatIsGround;
     
     [SerializeField] private GameObject caseShell;
-    [SerializeField] private List<ParticleSystem> muzzles;
+    [SerializeField] protected List<ParticleSystem> muzzles;
     
     protected Transform _caseShellPos;
     protected Rigidbody _rigidbody;
     protected BoxCollider _collider;
     
     [HideInInspector] public Transform _firePos;
-    private Transform playerCam;
+    protected Transform playerCam;
     public bool throwing;
     
     
@@ -100,7 +100,6 @@ public abstract class Gun : MonoBehaviour
             gunData.ammoInMagazine = gunData.maxAmmoInMagazine;
         }
     }
-
     public virtual void ThrowGun()
     {
         SetOnGround();
@@ -110,23 +109,19 @@ public abstract class Gun : MonoBehaviour
         _rigidbody.AddForce(random * 300);
         
     }
-
     private void SetOnGround()
     {
         throwing = true;
 
         transform.parent = null;
         _rigidbody.isKinematic = false;
-        //_gunAnimator.enabled = false;
-
+        
         _rigidbody.useGravity = true;
         _collider.enabled = true;
         _collider.isTrigger = true;
 
         _rigidbody.constraints = RigidbodyConstraints.None;
     }
-
-
     private void OnTriggerEnter(Collider other)
     {
         if ((whatIsGround & (1 << other.gameObject.gameObject.layer)) != 0)//layerMask가 2진수로 저장되기 때문에 이러한 연산이 필요함..
@@ -138,8 +133,6 @@ public abstract class Gun : MonoBehaviour
         {
             if (weaponController.GetCurrentGun() != null) return;
             
-            
-            
             weaponController.currentGun = this;
             transform.parent = weaponController.gunTrm;
             
@@ -148,8 +141,6 @@ public abstract class Gun : MonoBehaviour
                 
             _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             
-            transform.localPosition = Vector3.zero;
-            transform.localRotation = Quaternion.Euler(0,0,0);
         }
     }
 }

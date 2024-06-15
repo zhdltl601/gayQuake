@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29076cbb14dc4b74a8abb7d47d3e25bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerAnimator: {fileID: 0}
   currentGun: {fileID: 0}
   currentBottle: {fileID: 0}
   bottleList:
@@ -1289,13 +1290,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29076cbb14dc4b74a8abb7d47d3e25bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerAnimator: {fileID: 6469881376783245840}
   currentGun: {fileID: 8547252094404346200}
   currentBottle: {fileID: 7624592957245764247}
   bottleList:
   - {fileID: 1090875558247190991}
   - {fileID: 7624592957245764247}
   - {fileID: 7702352958818679927}
-  gunTrm: {fileID: 948172604399632951}
+  gunTrm: {fileID: 1724102009473214220}
 --- !u!114 &839351844340190572
 MonoBehaviour:
   m_ObjectHideFlags: 0

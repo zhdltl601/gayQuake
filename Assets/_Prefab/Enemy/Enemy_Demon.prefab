@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _MeshRenderer:
   - {fileID: 4970396685236776039}
+  - {fileID: 8207506200579863836}
   target: {fileID: 0}
   _whatIsPlayer:
     serializedVersion: 2
@@ -60,7 +61,7 @@ MonoBehaviour:
   attackDistance: 20
   attackDamage: 70
   attackTime: 1.2
-  increaseAmount: 50
+  increaseAmount: 80
   dissolveDuration: 1.5
   lastAttackTime: 0
 --- !u!114 &8471399187693971834
@@ -366,6 +367,12 @@ MonoBehaviour:
 --- !u!4 &5550118091863098096 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c3d73ba06daaeef40b556c623d33fc02,
+    type: 3}
+  m_PrefabInstance: {fileID: 5372587109595309339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8207506200579863836 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4281138625131155463, guid: c3d73ba06daaeef40b556c623d33fc02,
     type: 3}
   m_PrefabInstance: {fileID: 5372587109595309339}
   m_PrefabAsset: {fileID: 0}

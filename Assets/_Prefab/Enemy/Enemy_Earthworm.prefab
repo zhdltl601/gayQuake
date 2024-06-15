@@ -1219,8 +1219,10 @@ MonoBehaviour:
   runAwayDistance: 12
   attackDistance: 2
   attackDamage: 0
-  increaseAmount: 5
+  attackTime: 0
+  increaseAmount: 70
   dissolveDuration: 3
+  lastAttackTime: 0
 --- !u!114 &6154480225197386332
 MonoBehaviour:
   m_ObjectHideFlags: 0

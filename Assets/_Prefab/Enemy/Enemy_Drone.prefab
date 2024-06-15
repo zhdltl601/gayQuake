@@ -170,7 +170,7 @@ MonoBehaviour:
   moveSpeed: 5
   runAwayDistance: 12
   attackDistance: 5
-  increaseAmount: 0
+  increaseAmount: 50
   zigzagTime: 2
   zigzagDuration: 0
   firePos:

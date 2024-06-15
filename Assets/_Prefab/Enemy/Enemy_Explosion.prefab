@@ -106,7 +106,7 @@ MonoBehaviour:
   attackDistance: 2
   attackDamage: 150
   attackTime: 1.5
-  increaseAmount: 20
+  increaseAmount: 40
   dissolveDuration: 4
   lastAttackTime: 0
 --- !u!114 &2959197794308616236
