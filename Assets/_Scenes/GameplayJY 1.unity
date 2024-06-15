@@ -736,6 +736,18 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &58540250 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8547252094404346200, guid: 395fc952240798342855a141fd9c6b46,
+    type: 3}
+  m_PrefabInstance: {fileID: 356975802}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56840b842d0f9a0478e8931e4a507891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &72126388
 Mesh:
   m_ObjectHideFlags: 0
@@ -2961,7 +2973,7 @@ PrefabInstance:
     - target: {fileID: 3123182273415085691, guid: 395fc952240798342855a141fd9c6b46,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5008551278997361474, guid: 395fc952240798342855a141fd9c6b46,
         type: 3}
@@ -2972,7 +2984,7 @@ PrefabInstance:
         type: 3}
       propertyPath: currentGun
       value: 
-      objectReference: {fileID: 905637259}
+      objectReference: {fileID: 58540250}
     - target: {fileID: 6994555101402632495, guid: 395fc952240798342855a141fd9c6b46,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4230,6 +4242,7 @@ MonoBehaviour:
   mapCount: 50
   normalMapTypes:
   - {fileID: 2059590313112161601, guid: 3238e8761be036942b6c60e72e17fa1d, type: 3}
+  - {fileID: 2059590313112161601, guid: 8f897a96ab55d724684b788dd4fac635, type: 3}
   specialMapTypes: []
   startRoom: {fileID: 2059590313112161601, guid: 3238e8761be036942b6c60e72e17fa1d,
     type: 3}
@@ -5177,18 +5190,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1846349600}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &905637259 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5307668506412498159, guid: 69c8513b9ff8c684b980ca21583d0b13,
-    type: 3}
-  m_PrefabInstance: {fileID: 1846349600}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e4bf025ede56c54bb72613cf4f78e1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &910366822
 GameObject:
   m_ObjectHideFlags: 0
