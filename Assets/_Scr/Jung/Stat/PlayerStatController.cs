@@ -30,7 +30,7 @@ public class PlayerStatController : MonoSingleton<PlayerStatController>
             }
             else
             {
-                print("체력이 0 입니다.");
+                //print("체력이 0 입니다.");
             }
         }
     }

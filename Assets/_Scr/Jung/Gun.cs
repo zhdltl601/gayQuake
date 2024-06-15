@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Quaternion = UnityEngine.Quaternion;
+using UnityEngine.Rendering;
 using Vector3 = UnityEngine.Vector3;
 
 public abstract class Gun : MonoBehaviour
@@ -23,22 +22,20 @@ public abstract class Gun : MonoBehaviour
     [HideInInspector] public Transform _firePos;
     protected Transform playerCam;
     public bool throwing;
-    
+
+    protected WeaponController _weaponController;
     
     
     protected virtual void Start()
     {
         playerCam = Camera.main.transform;
+
+        _weaponController = transform.root.GetComponent<WeaponController>();
         
         _firePos = GetComponentInChildren<GunModel>().GetFirePos();
         _caseShellPos = GetComponentInChildren<GunModel>().GetCaseShell();
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<BoxCollider>();
-
-        /*if (transform.root.GetComponent<Player>() == null && transform.root.GetComponent<Cabinet>() == null)
-        {
-            SetOnGround();
-        }*/
     }
     
     public virtual GameObject[] Shoot()
@@ -57,8 +54,16 @@ public abstract class Gun : MonoBehaviour
         {
             direction = hit.point - _firePos.position;
             Health enemyHealth = hit.transform.GetComponent<Health>();
-            enemyHealth.ApplyDamage(PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Attack].GetValue() + gunData.damage);
-            enemyHealth.onHitEvent?.Invoke();
+
+            if (_weaponController.GetCurrenBottle() is AttackBottle)
+            {
+                enemyHealth.ApplyDamage(PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Attack].GetValue() + gunData.damage,hit.normal , hit.point);
+            }
+            else
+            {
+                enemyHealth.ApplyDamage(gunData.damage , hit.normal , hit.point);
+            }
+                        
         }
         
         bullet[0].transform.position = _firePos.position;

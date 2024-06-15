@@ -23,7 +23,7 @@ public class Room : MonoBehaviour
     [SerializeField] private Corridor corridor;
     [SerializeField] private EnemySettings[] _enemySettingsArray;
 
-    public List<GameObject> aliveEnemyNames = new List<GameObject>();
+    public List<GameObject> aliveEnemys = new List<GameObject>();
     private bool _isInPlayer;
     
     private void Start()
@@ -32,7 +32,7 @@ public class Room : MonoBehaviour
     }
     private void Update()
     {
-        if (aliveEnemyNames.Count <= 0 && _isInPlayer)
+        if (aliveEnemys.Count <= 0 && _isInPlayer)
         {
             FinishRoom();
         }  
@@ -57,7 +57,7 @@ public class Room : MonoBehaviour
             {
                 GameObject newEnemy = Instantiate(item.enemy,transform.position + new Vector3(Random.Range(1,10) , 0 , Random.Range(1,10)) , Quaternion.identity);
                 newEnemy.GetComponent<EnemyMapSetting>().SetRoom(this);
-                aliveEnemyNames.Add(newEnemy);
+                aliveEnemys.Add(newEnemy);
             }
         }
     }

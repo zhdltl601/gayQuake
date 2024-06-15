@@ -1214,14 +1214,23 @@ MonoBehaviour:
   _whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  currentRoom: {fileID: 0}
   moveSpeed: 7
-  runAwayDistance: 12
+  checkPlayerDistance: 0
+  isDead: 0
+  dissolveDuration: 3
+  whatIsObstacle:
+    serializedVersion: 2
+    m_Bits: 0
   attackDistance: 2
   attackDamage: 0
   attackTime: 0
   increaseAmount: 70
-  dissolveDuration: 3
+  attackSpeed: {x: 0, y: 0}
+  runAwayCount: 0
+  runAwayDistance: 12
+  runAwayTrm: {fileID: 0}
+  runAwayAble: 0
+  runningAway: 0
   lastAttackTime: 0
 --- !u!114 &6154480225197386332
 MonoBehaviour:
@@ -4103,7 +4112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackTrm: {fileID: 420938901159225848}
   attackRadius: 0.71
-  _enemy: {fileID: 1287307149442661200}
+  enemy: {fileID: 0}
 --- !u!1 &5413726675479286242
 GameObject:
   m_ObjectHideFlags: 0
