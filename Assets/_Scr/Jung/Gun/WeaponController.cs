@@ -93,8 +93,13 @@ public class WeaponController : MonoBehaviour
         {
             GameObject[] bullets = currentGun.Shoot();
             
+            
             for (int i = 0; i < bullets.Length; i++)
             {
+                if(bullets[i] == null){
+                    continue;
+                }
+                
                 Bullet newBullet = bullets[i].GetComponent<Bullet>();
                 newBullet.SetBullet(playerCam.transform.forward);
             }
@@ -161,5 +166,10 @@ public class WeaponController : MonoBehaviour
     public Gun GetCurrentGun()
     {
         return currentGun == null ? null : currentGun;
+    }
+
+    public Bottle GetCurrenBottle()
+    {
+        return currentBottle;
     }
 }

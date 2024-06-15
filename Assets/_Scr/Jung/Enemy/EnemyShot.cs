@@ -1,15 +1,20 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class EnemyShot : MonoBehaviour
 {
     [SerializeField] private Transform firePos;
     [SerializeField] private GameObject bullet;
-    
+
+    [SerializeField] private float duration;
+    [SerializeField] private float targetIntensity;
+    [SerializeField] private float screenTime;
+    [SerializeField] private Color screenColor;
     public Enemy _enemy;
 
     public void Shot()
     {
-        bool isHit = Physics.Raycast(firePos.position  , firePos.forward ,out RaycastHit hit,_enemy.attackDistance ,_enemy._whatIsPlayer);
+        bool isHit = Physics.Raycast(firePos.position  , firePos.forward ,out RaycastHit hit,_enemy.attackDistance ,_enemy._whatIsPlayer | _enemy.whatIsObstacle);
 
         GameObject newBullet = ObjectPooling.Instance.GetObject(bullet);
         newBullet.transform.position = firePos.position;
@@ -18,6 +23,8 @@ public class EnemyShot : MonoBehaviour
         if (isHit)
         {
             PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Health].RemoveValue(_enemy.attackDamage);
+            UIManager.Instance.BloodScreen(duration , targetIntensity , screenColor , screenTime);
+            
             dir = (hit.point - firePos.position);
         }
         else
@@ -30,11 +37,5 @@ public class EnemyShot : MonoBehaviour
         newBullet.GetComponent<Bullet>().SetBullet(firePos.forward);
         
         ObjectPooling.Instance.ReTurnObject(newBullet , 1.5f);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(firePos.position , firePos.forward * _enemy.attackDistance);
     }
 }

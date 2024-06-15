@@ -8,15 +8,15 @@ public class EnemyDamageCaster : MonoBehaviour
     
     public Enemy enemy;
 
-    private new Collider[] _collider;
+    private Collider[] _playerCount;
     private void Start()
     {
-        _collider = new Collider[1];
+        _playerCount = new Collider[1];
     }
 
     public void DamageCaster()
     {
-        int player = Physics.OverlapSphereNonAlloc(attackTrm.position ,attackRadius ,_collider, enemy._whatIsPlayer);
+        int player = Physics.OverlapSphereNonAlloc(attackTrm.position ,attackRadius ,_playerCount, enemy._whatIsPlayer);
         
         if (player > 0)
         {

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 public abstract class PlayerStateBaseDefault : State
 {
@@ -28,8 +29,15 @@ public abstract class PlayerStateBaseDefault : State
         Vector3 result = GetDirection(inputDirection);
         float speed = GetSpeed();
         float gravityMultiplier = GetGravitiyMultiplier();
-        player.PlayerApplyMovement(result, speed, gravityMultiplier);
+        float forceMulti = GetForceMultiplier();
+        player.PlayerApplyMovement(result, speed, gravityMultiplier, forceMulti);
     }
+
+    protected virtual float GetForceMultiplier()
+    {
+        return player.GetForceVectorCurve();
+    }
+
     protected virtual void HandleOnJump()
     {
     }
@@ -48,7 +56,7 @@ public abstract class PlayerStateBaseDefault : State
     protected virtual Vector3 GetDirection(Vector3 inputDirection)
     {
         Vector3 direction = inputDirection;
-        direction = direction.magnitude < 1 ? direction : direction.normalized; // needs optimazation
+        direction = direction.sqrMagnitude < 1 ? direction : direction.normalized; // needs optimazation
 
         return direction;
     }

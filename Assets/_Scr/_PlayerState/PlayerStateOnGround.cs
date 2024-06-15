@@ -2,10 +2,10 @@ using UnityEngine;
 public class PlayerStateOnGround : PlayerStateBaseDefault
 {
     private float delayWallrun;
-    private float wallRunTime;
-    private float wallRunTimerEnd = 0.1f;
-    private bool? isRight = null;
-    private Collider lastWall;
+    private float wallRunHoldTime;
+    private float wallRunHoldTimerEnd = 0.12f;
+    //private bool? isRightLast = null;
+    private Collider lastWall = null;
     public PlayerStateOnGround(Player player) : base(player)
     {
     }
@@ -13,7 +13,7 @@ public class PlayerStateOnGround : PlayerStateBaseDefault
     {
         base.Enter();
         delayWallrun = 0.4f;
-        wallRunTime = 0;
+        wallRunHoldTime = 0;
     }
     protected override Vector3 GetDirection(Vector3 inputDirection)
     {
@@ -24,25 +24,24 @@ public class PlayerStateOnGround : PlayerStateBaseDefault
         base.HandleState();
         bool isOnWall = player.CheckWall(out RaycastHit r, out bool isRight, out Collider col);
         bool isGround = player.playerController.IsGround;
-        float wallRunPercent = wallRunTime / wallRunTimerEnd;
-        this.isRight = isGround ? null : this.isRight;
+        bool isPlWallrunable = isOnWall && !isGround;
 
-        bool isSamewall = this.isRight == isRight && lastWall == col;
+        bool isWallRunDealyEnded = wallRunHoldTime > wallRunHoldTimerEnd && delayWallrun < 0;
+        //bool isSameDirection = isRightLast == isRight;
+        bool isSameWall = lastWall == col;
 
-        if (isOnWall && !isGround && delayWallrun < 0 && wallRunPercent > 1 && !isSamewall)
+        //isRightLast = isGround ? null : isRightLast;
+        lastWall = isGround ? null : lastWall;
+
+        if (isPlWallrunable && isWallRunDealyEnded && !isSameWall)
         {
             StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnWallrun);
             lastWall = col;
-            this.isRight = isRight;
+            //this.isRightLast = isRight;
         }
-        wallRunTime = isOnWall ? wallRunTime : 0;
-        wallRunTime += isOnWall && !isGround ? Time.deltaTime : 0;
-    }
-    public override void Update()
-    {
-        base.Update();
+        wallRunHoldTime = isOnWall ? wallRunHoldTime : 0;
+        wallRunHoldTime += isPlWallrunable? Time.deltaTime : 0;
         delayWallrun -= Time.deltaTime;
-        //PlayerUI.Instance.lists[0].text = wallRunTime.ToString();
     }
     protected override void HandleOnJump()
     {

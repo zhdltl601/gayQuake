@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -5,6 +6,11 @@ public class Bullet : MonoBehaviour
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private TrailRenderer _trailRenderer;
 
+    private GameObject originalPrefab;
+    private void Start()
+    {
+        originalPrefab = GetComponent<PooledObject>().originalPrefab;
+    }
 
     private void OnEnable()
     {
@@ -22,7 +28,11 @@ public class Bullet : MonoBehaviour
     {
         transform.forward = lookAt;
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        ObjectPooling.Instance.ReTurnObject(gameObject);
+    }
 }
 
 

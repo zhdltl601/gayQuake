@@ -2407,8 +2407,8 @@ Transform:
   m_GameObject: {fileID: 1167815687}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.84, y: 1.5, z: -4}
-  m_LocalScale: {x: 1, y: 5.2005, z: 14.579101}
+  m_LocalPosition: {x: 7.84, y: 4.5, z: -4}
+  m_LocalScale: {x: 1, y: 10.401, z: 14.579101}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3908,6 +3908,39 @@ MonoBehaviour:
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.044209365
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  forceVectorCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 30
+      inSlope: 0.6328181
+      outSlope: 0.6328181
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.59386647
+    - serializedVersion: 3
+      time: 0.37369534
+      value: 26.202208
+      inSlope: -71.71549
+      outSlope: -71.71549
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11679514
+      outWeight: 0.3395853
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: -377.30725
+      outSlope: -377.30725
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.19055426
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
