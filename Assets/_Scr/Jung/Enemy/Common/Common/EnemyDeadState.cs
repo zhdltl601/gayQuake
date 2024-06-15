@@ -20,7 +20,7 @@ public class EnemyDeadState : EnemyState
         if (endTriggerCalled && isDissolving == false)
         {
             isDissolving = true;
-            _enemy.Dissolve();
+            _enemy.Dissolve(5 , -5 , true);
         }
     }
 

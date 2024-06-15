@@ -80,6 +80,11 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         runAwayTrm.position -= (transform.forward * runAwayDistance);
     }
 
+    private void OnEnable() 
+    {
+        Dissolve(-2, 5 , false);    
+    }
+
     private void Start()
     {
         _enemyCheckCollider = new Collider[1];
@@ -115,11 +120,11 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         NavMeshAgent.isStopped = true;
        
     }
-    public void Dissolve()
+    public void Dissolve(float startValue , float endValue , bool isEead)
     {
-        StartCoroutine(StartDissolve());
+        StartCoroutine(StartDissolve(startValue , endValue , isDead));
     }
-    private IEnumerator StartDissolve()
+    private IEnumerator StartDissolve(float startValue , float endValue , bool isDead)
     {
         Material[] mat;
         if (_MeshRenderer.Length >= 2)
@@ -140,7 +145,7 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         while(currentTime <= dissolveDuration)
         {
             currentTime += Time.deltaTime;
-            float currentDissolve = Mathf.Lerp(5f, -5f, currentTime/dissolveDuration);
+            float currentDissolve = Mathf.Lerp(startValue, endValue, currentTime/dissolveDuration);
 
             foreach (var item in mat)
             {
@@ -149,10 +154,12 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
             
             yield return null;
         }
-        
-        yield return new WaitForSeconds(0.1f);
-        
-        Destroy(gameObject);
+
+        if(isDead){
+            yield return new WaitForSeconds(0.1f);
+            Destroy(gameObject);
+        }        
+       
     }
 
     #endregion
@@ -230,7 +237,6 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     {
         currentRoom.aliveEnemys.Remove(gameObject);
     }
-
     #endregion
      public void AnimationEnd()
     {

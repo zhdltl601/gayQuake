@@ -910,8 +910,8 @@ GameObject:
   - component: {fileID: 1467061952311115124}
   - component: {fileID: 3389367559133288286}
   - component: {fileID: 3143500698627205152}
-  - component: {fileID: 1742510074589278802}
   - component: {fileID: 840353612681433182}
+  - component: {fileID: 1742510074589278802}
   m_Layer: 6
   m_Name: Enemy_Robot
   m_TagString: Untagged
@@ -1056,6 +1056,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &840353612681433182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3780603835876572747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1507e4073be347249a04b3a3d0bb125c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particleSystem:
+  - {fileID: 795686920191467002}
+  - {fileID: 795686920191466998}
+  - {fileID: 795686920191466996}
+  - {fileID: 795686920191466994}
+  - {fileID: 795686920191467006}
+  - {fileID: 795686920191466992}
+  - {fileID: 795686920191466980}
+  - {fileID: 795686920191467004}
+  - {fileID: 795686920191467000}
 --- !u!136 &1742510074589278802
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1079,28 +1101,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &840353612681433182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3780603835876572747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1507e4073be347249a04b3a3d0bb125c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _particleSystem:
-  - {fileID: 795686920191467002}
-  - {fileID: 795686920191466998}
-  - {fileID: 795686920191466996}
-  - {fileID: 795686920191466994}
-  - {fileID: 795686920191467006}
-  - {fileID: 795686920191466992}
-  - {fileID: 795686920191466980}
-  - {fileID: 795686920191467004}
-  - {fileID: 795686920191467000}
 --- !u!1 &3856689419593241348
 GameObject:
   m_ObjectHideFlags: 0

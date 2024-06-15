@@ -10,9 +10,9 @@ public abstract class Gun : MonoBehaviour
     public RuntimeAnimatorController runtimeAnimatorController;
     
     [SerializeField] protected LayerMask whatIsEnemy;
-    [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] protected LayerMask whatIsGround;
     
-    [SerializeField] private GameObject caseShell;
+    [SerializeField] protected GameObject caseShell;
     [SerializeField] protected List<ParticleSystem> muzzles;
     
     protected Transform _caseShellPos;
