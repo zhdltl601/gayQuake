@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.Rendering;
+using VHierarchy.Libs;
 using Vector3 = UnityEngine.Vector3;
 
 public abstract class Gun : MonoBehaviour
@@ -46,7 +48,7 @@ public abstract class Gun : MonoBehaviour
         
         bullet[0] = ObjectPooling.Instance.GetObject(gunData.bullet);
         ObjectPooling.Instance.ReTurnObject(bullet[0] , 2);
-    
+        
         bool isHit = Physics.Raycast(playerCam.position , playerCam.forward,out RaycastHit hit ,100,whatIsEnemy);
         Vector3 direction = playerCam.forward;
         
@@ -54,16 +56,8 @@ public abstract class Gun : MonoBehaviour
         {
             direction = hit.point - _firePos.position;
             Health enemyHealth = hit.transform.GetComponent<Health>();
-
-            if (_weaponController.GetCurrenBottle() is AttackBottle)
-            {
-                enemyHealth.ApplyDamage(PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Attack].GetValue() + gunData.damage,hit.normal , hit.point);
-            }
-            else
-            {
-                enemyHealth.ApplyDamage(gunData.damage , hit.normal , hit.point);
-            }
-                        
+            ApplyDamage(enemyHealth, hit.normal , hit.point);  
+            
         }
         
         bullet[0].transform.position = _firePos.position;
@@ -90,6 +84,21 @@ public abstract class Gun : MonoBehaviour
 
         return bullet;
     }
+
+    protected void ApplyDamage(Health enemyHealth , Vector3 normal , Vector3 point)
+    {
+        if (_weaponController.GetCurrenBottle() is AttackBottle)
+        {
+            enemyHealth.ApplyDamage(
+                PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Attack].GetValue() + gunData.damage,
+                normal, point);
+        }
+        else
+        {
+            enemyHealth.ApplyDamage(gunData.damage, normal, point);
+        }
+    }
+
     public virtual void ReLoad()
     {
         int needAmmo = gunData.maxAmmoInMagazine - gunData.ammoInMagazine;

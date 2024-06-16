@@ -720,7 +720,7 @@ Transform:
   m_GameObject: {fileID: 2059590313112161601}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -730,6 +730,7 @@ Transform:
   - {fileID: 9067004956090678039}
   - {fileID: 7623342593170197914}
   - {fileID: 9112101287063990537}
+  - {fileID: 5965723308678599799}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6461502788699607316
@@ -756,10 +757,11 @@ MonoBehaviour:
   - enemy: {fileID: 4513811498531013135, guid: e0a859a63d7be7045ad6eaf3f14ac7e2, type: 3}
     enemyCount: 0
   - enemy: {fileID: 3780603835876572747, guid: e1c57e4bd243bda4aaf4bbc4ffe0378a, type: 3}
-    enemyCount: 1
+    enemyCount: 5
   - enemy: {fileID: 6425937166378154614, guid: f9668bc55661c1c4686b2b457aa23a4c, type: 3}
     enemyCount: 0
   aliveEnemys: []
+  generationTrm: {fileID: 5965723308678599799}
 --- !u!1 &3610922709050550307
 GameObject:
   m_ObjectHideFlags: 0
@@ -1897,7 +1899,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: b0d2fa53f6bb94543ae0bb48ee1d0a59, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: a447404c610810f47b47a6c82ed633ac, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &6501058848133248421
 GameObject:
@@ -5018,3 +5020,34 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!1 &8848837686798346263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5965723308678599799}
+  m_Layer: 0
+  m_Name: Trm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5965723308678599799
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8848837686798346263}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7753974505097575410}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

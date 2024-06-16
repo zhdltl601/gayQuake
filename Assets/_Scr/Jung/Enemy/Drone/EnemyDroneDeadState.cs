@@ -5,6 +5,7 @@ public class EnemyDroneDeadState : EnemyDroneBaseState
     
     public EnemyDroneDeadState(EnemyDrone enemyDrone, Animator animator) : base(enemyDrone, animator)
     {
+        
     }
     
     public override void Enter()
@@ -13,6 +14,8 @@ public class EnemyDroneDeadState : EnemyDroneBaseState
         _enemyDrone.Rigidbody.constraints = RigidbodyConstraints.None;
         _enemyDrone.Rigidbody.isKinematic = false;
         _enemyDrone.Rigidbody.useGravity = true;
+
+        _enemyDrone.isDead = true;
     }
 
     public override void Update()

@@ -28,8 +28,9 @@ public class EnemyDrone : MonoBehaviour,EnemyMapSetting
     public GameObject bullet;
     public float attackTime;
     public int damage;
-    
-    [Space]
+
+    [Space] 
+    public bool isDead;
     public List<ParticleSystem> explosionParticleList;
     public float dissolveDuration;
     
@@ -51,7 +52,7 @@ public class EnemyDrone : MonoBehaviour,EnemyMapSetting
         
         StateMachine.Initialize(EnemyStateEnum.Idle);
 
-        transform.position = new Vector3(transform.position.x , 4, transform.position.z);
+        transform.position = new Vector3(transform.position.x , 6, transform.position.z);
     }
 
     private void Update()
@@ -66,6 +67,7 @@ public class EnemyDrone : MonoBehaviour,EnemyMapSetting
     
     public void DeadEvent()
     {
+        if(isDead)return;
         
         if (target != null)
         {

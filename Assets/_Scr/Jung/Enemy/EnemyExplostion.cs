@@ -27,7 +27,8 @@ public class EnemyExplostion : MonoBehaviour
         int player = Physics.OverlapSphereNonAlloc(transform.position ,explosionRadius ,_collider, _enemy._whatIsPlayer);
         if (player > 0)
         {
-            PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Health].RemoveValue(_enemy.attackDamage);    
+            PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Health].RemoveValue(_enemy.attackDamage);
+            UIManager.Instance.BloodScreen(0.2f , 0.5f ,Color.red, 0);
         }
         
         _enemy.DieEvent();
