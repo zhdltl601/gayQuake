@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 [CreateAssetMenu(menuName = "SO/Stat")]
 public class PlayerStatSO : ScriptableObject
@@ -8,6 +9,7 @@ public class PlayerStatSO : ScriptableObject
     public Stat money;
     public Stat attack;
     public Stat speed;
+    public Stat ammo;
     
     public Dictionary<StatType, Stat> _statDic; 
     
@@ -18,12 +20,14 @@ public class PlayerStatSO : ScriptableObject
             { StatType.Health, health },
             { StatType.Money, money },
             { StatType.Attack, attack },
-            { StatType.Speed, speed }
+            { StatType.Speed, speed },
+            { StatType.Ammo  , ammo}
         };
         
         health.SetDefaultValue(800);
         money.SetDefaultValue(0);
         attack.SetDefaultValue(0);
         speed.SetDefaultValue(0);
+        ammo.SetDefaultValue(0);
     }
 }

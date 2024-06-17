@@ -71,8 +71,10 @@ public class EnemyDrone : MonoBehaviour,EnemyMapSetting
         
         if (target != null)
         {
-            Bottle _playerBottle = target.GetComponent<WeaponController>().currentBottle;
-            PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].AddValue(increaseAmount);
+            Bottle _playerBottle = target.GetComponent<WeaponController>().GetCurrenBottle();
+            
+            PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].
+                AddValue(_playerBottle._bottleDataSo.increaseAmount);
         }
         
         foreach (var item in explosionParticleList )

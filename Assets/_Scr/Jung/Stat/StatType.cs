@@ -4,4 +4,5 @@
     Money,
     Attack,
     Speed,
+    Ammo
 }

@@ -38,6 +38,8 @@ public abstract class Gun : MonoBehaviour
         _caseShellPos = GetComponentInChildren<GunModel>().GetCaseShell();
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<BoxCollider>();
+        
+        
     }
     
     public virtual GameObject[] Shoot()
