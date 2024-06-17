@@ -15,6 +15,7 @@ MonoBehaviour:
   bottleName: AttackBottle
   bottleType: 1
   statType: 2
+  increaseAmount: 60
   drinkAmount: 200
   decreaseTime: 0.4
   decreaseAmount: 2
