@@ -68,6 +68,8 @@ public class Room : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if(type == RoomType.Special)return;
+        
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(generationTrm.position , new Vector3(30 ,3 , 30));
     }
