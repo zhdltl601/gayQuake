@@ -371,7 +371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTrm: {fileID: 8258939028126514057}
-  attackRadius: 1.45
+  attackRadius: 2.42
   enemy: {fileID: 6119632890725956913}
 --- !u!1 &2092714944153668898
 GameObject:
@@ -723,6 +723,7 @@ Transform:
   m_Children:
   - {fileID: 6915738334857632185}
   - {fileID: 8258939028126514057}
+  - {fileID: 8932074450279136605}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &1991807735311689812
@@ -788,14 +789,23 @@ MonoBehaviour:
   _whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  currentRoom: {fileID: 0}
   moveSpeed: 5
-  runAwayDistance: 12
-  attackDistance: 4
-  attackDamage: 0
-  attackTime: 0
-  increaseAmount: 60
+  checkPlayerDistance: 20
+  isDead: 0
   dissolveDuration: 3
+  whatIsObstacle:
+    serializedVersion: 2
+    m_Bits: 4096
+  attackDistance: 4
+  attackDamage: 49
+  attackTime: 1.42
+  increaseAmount: 60
+  attackSpeed: {x: 1, y: 1.4}
+  runAwayCount: 0
+  runAwayDistance: 0
+  runAwayTrm: {fileID: 8932074450279136605}
+  runAwayAble: 0
+  runningAway: 0
   lastAttackTime: 0
 --- !u!114 &7776171704557284075
 MonoBehaviour:
@@ -809,7 +819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c9822a63190c24899a0eebd0bda136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
+  health: 700
   onHitEvent:
     m_PersistentCalls:
       m_Calls:
@@ -964,7 +974,7 @@ Transform:
   m_GameObject: {fileID: 5022434885179380387}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.93, z: 1.121}
+  m_LocalPosition: {x: 0, y: 1.93, z: 2.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1293,6 +1303,37 @@ Transform:
   m_Children:
   - {fileID: 3301988423395728603}
   m_Father: {fileID: 4001577487667188163}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7113128136760257243
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8932074450279136605}
+  m_Layer: 6
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8932074450279136605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7113128136760257243}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5463999594568465586}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7822990912197569450
 GameObject:

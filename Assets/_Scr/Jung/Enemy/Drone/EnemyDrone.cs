@@ -28,8 +28,9 @@ public class EnemyDrone : MonoBehaviour,EnemyMapSetting
     public GameObject bullet;
     public float attackTime;
     public int damage;
-    
-    [Space]
+
+    [Space] 
+    public bool isDead;
     public List<ParticleSystem> explosionParticleList;
     public float dissolveDuration;
     
@@ -51,7 +52,7 @@ public class EnemyDrone : MonoBehaviour,EnemyMapSetting
         
         StateMachine.Initialize(EnemyStateEnum.Idle);
 
-        transform.position = new Vector3(transform.position.x , 4, transform.position.z);
+        transform.position = new Vector3(transform.position.x , 6, transform.position.z);
     }
 
     private void Update()
@@ -66,11 +67,14 @@ public class EnemyDrone : MonoBehaviour,EnemyMapSetting
     
     public void DeadEvent()
     {
+        if(isDead)return;
         
         if (target != null)
         {
-            Bottle _playerBottle = target.GetComponent<WeaponController>().currentBottle;
-            PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].AddValue(increaseAmount);
+            Bottle _playerBottle = target.GetComponent<WeaponController>().GetCurrenBottle();
+            
+            PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].
+                AddValue(_playerBottle._bottleDataSo.increaseAmount);
         }
         
         foreach (var item in explosionParticleList )

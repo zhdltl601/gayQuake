@@ -16,7 +16,6 @@ public class Health : MonoBehaviour
     {
         health -= damage;
         onHitEvent?.Invoke();
-        
 
         if (health <= 0)
         {

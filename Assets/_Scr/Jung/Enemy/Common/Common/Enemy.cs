@@ -48,7 +48,6 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     public float attackDistance;
     public int attackDamage;
     public float attackTime;
-    public int increaseAmount;
     public Vector2 attackSpeed;
     //min =x max = y;    
 
@@ -111,7 +110,9 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         if (target != null)
         {
             Bottle _playerBottle = target.GetComponent<WeaponController>().currentBottle;
-            PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].AddValue(increaseAmount);
+            
+            PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].
+                AddValue(_playerBottle._bottleDataSo.increaseAmount);
         }
         
         RemoveEnemy();

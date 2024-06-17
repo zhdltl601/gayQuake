@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum GunType
@@ -16,6 +17,8 @@ public class GunDataSO : ScriptableObject
     public GunType gunType;
     public string gunName;
     
+    
+    
     [Header("Ammo Values")]
     public int maxAmmoInMagazine;
     public int ammoInMagazine;
@@ -32,6 +35,7 @@ public class GunDataSO : ScriptableObject
     [Header("Bound")]
     [Range(0,200)]public float xBound;
     [Range(0,400)]public float yBound;
-    
+
+   
     
 }

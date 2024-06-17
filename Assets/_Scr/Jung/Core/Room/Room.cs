@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -25,11 +26,14 @@ public class Room : MonoBehaviour
 
     public List<GameObject> aliveEnemys = new List<GameObject>();
     private bool _isInPlayer;
+
+    [SerializeField] private Transform generationTrm;
     
     private void Start()
     {
         corridor = GetComponentInChildren<Corridor>();
     }
+
     private void Update()
     {
         if (aliveEnemys.Count <= 0 && _isInPlayer)
@@ -55,10 +59,16 @@ public class Room : MonoBehaviour
         {
             for (int i = 0; i < item.enemyCount; i++)
             {
-                GameObject newEnemy = Instantiate(item.enemy,transform.position + new Vector3(Random.Range(1,10) , 0 , Random.Range(1,10)) , Quaternion.identity);
+                GameObject newEnemy = Instantiate(item.enemy,transform.position + new Vector3(Random.Range(-15,15) , 0 , Random.Range(-15,15)) , Quaternion.identity);
                 newEnemy.GetComponent<EnemyMapSetting>().SetRoom(this);
                 aliveEnemys.Add(newEnemy);
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(generationTrm.position , new Vector3(30 ,3 , 30));
     }
 }

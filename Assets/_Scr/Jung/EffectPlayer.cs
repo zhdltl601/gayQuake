@@ -21,7 +21,7 @@ public class EffectPlayer : MonoBehaviour
         foreach (var item in _particleSystem)
         {
             item.gameObject.transform.position = _actionData.hitPoint;
-            item.transform.rotation = Quaternion.LookRotation(_actionData.hitNormal);
+            item.transform.rotation = Quaternion.LookRotation(-_actionData.hitNormal);
             
             item.Simulate(0);
             item.Play();

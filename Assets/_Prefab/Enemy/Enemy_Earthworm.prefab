@@ -1110,7 +1110,7 @@ Transform:
   m_GameObject: {fileID: 1612320901398106811}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.981, z: 1.603}
+  m_LocalPosition: {x: 0, y: 0.981, z: 1.162}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1151,6 +1151,7 @@ Transform:
   m_Children:
   - {fileID: 3863430072375605579}
   - {fileID: 420938901159225848}
+  - {fileID: 1062195358631750610}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &6070677240434001055
@@ -1167,7 +1168,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.96
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1214,21 +1215,21 @@ MonoBehaviour:
   _whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  moveSpeed: 7
-  checkPlayerDistance: 0
+  moveSpeed: 11
+  checkPlayerDistance: 40
   isDead: 0
   dissolveDuration: 3
   whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
   attackDistance: 2
-  attackDamage: 0
-  attackTime: 0
+  attackDamage: 110
+  attackTime: 0.4
   increaseAmount: 70
-  attackSpeed: {x: 0, y: 0}
+  attackSpeed: {x: 1, y: 1.5}
   runAwayCount: 0
-  runAwayDistance: 12
-  runAwayTrm: {fileID: 0}
+  runAwayDistance: 0
+  runAwayTrm: {fileID: 1062195358631750610}
   runAwayAble: 0
   runningAway: 0
   lastAttackTime: 0
@@ -1244,7 +1245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c9822a63190c24899a0eebd0bda136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 200
   onHitEvent:
     m_PersistentCalls:
       m_Calls:
@@ -4111,8 +4112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTrm: {fileID: 420938901159225848}
-  attackRadius: 0.71
-  enemy: {fileID: 0}
+  attackRadius: 1.29
+  enemy: {fileID: 1287307149442661200}
 --- !u!1 &5413726675479286242
 GameObject:
   m_ObjectHideFlags: 0
@@ -5301,6 +5302,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6959165949678914773}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7389405617262600562
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1062195358631750610}
+  m_Layer: 6
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1062195358631750610
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7389405617262600562}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7313768355570481760}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7400433834883122275
 GameObject:

@@ -167,18 +167,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   meshRenderer: {fileID: 8766805320075690031}
-  moveSpeed: 5
-  runAwayDistance: 12
+  moveSpeed: 8
+  runAwayDistance: 35
   attackDistance: 5
   increaseAmount: 50
-  zigzagTime: 2
-  zigzagDuration: 0
   firePos:
   - {fileID: 5352973178703802625}
   - {fileID: 759700940832168658}
   bullet: {fileID: 7383199481331753142, guid: 85124f15db9531e408640d6c8cd4d038, type: 3}
   attackTime: 1
   damage: 20
+  isDead: 0
   explosionParticleList:
   - {fileID: 4432784657503819382}
   - {fileID: 4432784657503819384}
