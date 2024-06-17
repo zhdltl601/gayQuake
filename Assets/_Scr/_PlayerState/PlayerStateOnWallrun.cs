@@ -53,17 +53,26 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     }
     protected override Vector3 GetDirection(Vector3 inputDirection)
     {
+        Vector3 igVector = inputDirection;
+        igVector = player.playerCamera.GetCameraRotTransform().InverseTransformDirection(igVector);
+        igVector.x = 0f;
+        //Debug.DrawRay(Vector3.zero, igVector, Color.red, Time.deltaTime);
+        if (igVector.sqrMagnitude < 0.15f)
+        {
+            StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
+            player.AddForce(currentDir.normalized, 4);
+        }
         Vector3 forwardVector = Vector3.ProjectOnPlane(inputDirection, raycastHit.normal);
         forwardVector = forwardVector.sqrMagnitude < 1 ? forwardVector : forwardVector.normalized;
         return forwardVector;
     }
     protected override void HandleState()
     {
-        Debug.DrawRay(player.transform.position, currentDir, Color.red, Time.deltaTime);
+        //Debug.DrawRay(player.transform.position, currentDir, Color.red, Time.deltaTime);
         Vector3 pForward = player.playerCamera.GetCameraRotTransform().forward;
         pForward.y = 0;
         pForward.Normalize();
-        Debug.DrawRay(player.transform.position, pForward, Color.red, Time.deltaTime);
+        //Debug.DrawRay(player.transform.position, pForward, Color.red, Time.deltaTime);
 
         float angle = Vector3.Angle(pForward, currentDir);
         bool isOver = angle > 90 + 35 || angle < 90 - 10;

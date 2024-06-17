@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float onGroundYVal;
     public float rangeWallRun;
 
-    //dash
+    //Additional Movement
     [SerializeField] private AnimationCurve dashCurve;
     [SerializeField] private AnimationCurve wallRunCurve;
     [SerializeField] private AnimationCurve forceVectorCurve;
@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
     private StateMachine<PlayerStateEnum> playerStateMachine;//will be removed, check Awake() 
     public Action<Vector3> Mov;
     public Action OnJump;
+    public Action OnDash;
 
     [Header("Debug")]
     [Header("Debug/Viewmodel")]
@@ -192,7 +193,7 @@ public class Player : MonoBehaviour
         {
             yVal = 0;
             dashMulti = 0.1f;//length of m_dashCurve
-            playerAnimator.camAnimator.Play("OnDash", -1, 0);
+            OnDash?.Invoke();
         }
         if (Input.GetKeyDown(KeyCode.LeftShift)) Dash(); 
         if (dashMulti > 0) dashMulti -= Time.deltaTime; // will change later 

@@ -12,12 +12,14 @@ public abstract class PlayerStateBaseDefault : State
         base.Enter();
         player.Mov += HandleMove;
         player.OnJump += HandleOnJump;
+        player.OnDash += HandleOnDash;
     }
     public override void Exit()
     {
         base.Exit();
         player.Mov -= HandleMove;
         player.OnJump -= HandleOnJump;
+        player.OnDash -= HandleOnDash;
     }
     public override void Update()
     {
@@ -37,13 +39,19 @@ public abstract class PlayerStateBaseDefault : State
     {
         return player.GetForceVectorCurve();
     }
-
     protected virtual void HandleOnJump()
+    {
+    }
+    protected virtual void HandleOnDash()
     {
     }
     protected void Jump()
     {
         player.SetYVal(player.jumpForce);
+    }
+    protected void Dash()
+    {
+        player.playerAnimator.camAnimator.Play("OnDash", -1, 0);
     }
     protected virtual float GetGravitiyMultiplier()
     {

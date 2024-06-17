@@ -1,7 +1,7 @@
 public enum PlayerStateEnum
 {
-    OnJump,
-    OnDash,
+    //OnJump,
+    //OnDash,
     OnGround,
     OnWallrun
 }
