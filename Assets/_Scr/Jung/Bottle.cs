@@ -16,7 +16,7 @@ public abstract class Bottle : MonoBehaviour
     public virtual void DrinkBottle(Animator _animator)
     {
         _animator.Play("Drink", -1, 0f);
-        print(_animator);
+        
         PlayerStatController.Instance.PlayerStatSo._statDic[_bottleDataSo.statType].AddValue(_bottleDataSo.drinkAmount);
     }
 

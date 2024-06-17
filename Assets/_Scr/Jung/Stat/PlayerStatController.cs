@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerStatController : MonoSingleton<PlayerStatController>
 {
@@ -12,6 +10,7 @@ public class PlayerStatController : MonoSingleton<PlayerStatController>
     private float _timer;
 
     private Stat health;
+    private bool isDie;
     private void Start()
     {
         health = PlayerStatSo._statDic[StatType.Health];
@@ -30,7 +29,11 @@ public class PlayerStatController : MonoSingleton<PlayerStatController>
             }
             else
             {
-                //print("체력이 0 입니다.");
+                if (isDie == false)
+                {
+                    isDie = true;
+                    UIManager.Instance.OnDiePanel();
+                }
             }
         }
     }

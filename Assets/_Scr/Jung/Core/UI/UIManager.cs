@@ -9,12 +9,14 @@ using VHierarchy.Libs;
 public class UIManager : MonoSingleton<UIManager>
 {
     public TextMeshProUGUI _ammoText;
-
     public WeaponController Player;
     public Transform minimapCam;
-
+    
     public Volume Volume;
     private bool screenEffectting;
+
+    public DiePanel DiePanel;
+    
     private void Start()
     {
         SetAmmoText();
@@ -43,6 +45,11 @@ public class UIManager : MonoSingleton<UIManager>
         }
     }
 
+    public void OnDiePanel()
+    {
+        DiePanel.OnPanel();
+    }
+    
     IEnumerator BloodScreenCoroutine(Vignette vignette , float _duration , float _targetIntensity , float screenTime)
     {
         screenEffectting = true;

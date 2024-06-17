@@ -43,7 +43,6 @@ public class WeaponController : MonoBehaviour
                 PlayerAnimator.leftArmAnimator.enabled = true;
             }
             
-            
             Shot();
             Reload();
             ThrowGun();
@@ -57,6 +56,11 @@ public class WeaponController : MonoBehaviour
         {
             DrinkBottle();
             currentBottle.DecreaseBottle();
+        }
+
+        if (currentBottle as AmmoBottle)
+        {
+            currentGun.gunData.totalAmmo += (currentBottle as AmmoBottle).GetAmmo();
         }
         
         ChangeBottle();

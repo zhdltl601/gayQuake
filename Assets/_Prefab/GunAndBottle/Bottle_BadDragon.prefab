@@ -90,3 +90,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa14dcc5a0b95e4a9575c341826d8c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bottleDataSo: {fileID: 11400000, guid: 103f06f4387eaa840a76e577e596dfa3, type: 2}
