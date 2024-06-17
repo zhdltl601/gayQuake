@@ -12,6 +12,7 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     public override void Enter()
     {
         base.Enter();
+        player.SetYVal(1.2f);
         timerSinceEnter = 0;
         player.CheckWall(out raycastHit, out bool isRight);
         player.playerAnimator.camAnimator.Play("OnWall");
@@ -38,16 +39,11 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     protected override void HandleOnJump()
     {
         StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
-        //Vector3 pForward = player.playerCamera.GetCameraRotTransform().forward;
-        //Debug.DrawRay(pForward, Vector3.up, Color.yellow, 5);
-        //pForward.y = 0;
-        //pForward.Normalize();
-        //player.AddForce(pForward, 1);
-        //player.Jump(5);
+        player.SetYVal(6.5f);
     }
     protected override float GetGravitiyMultiplier()
     {
-        gravityMultiplier += Time.deltaTime * 0.5f * 0;
+        gravityMultiplier += Time.deltaTime * 0.4f;
         return gravityMultiplier;
     }
     protected override float GetSpeed()
@@ -57,18 +53,29 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     }
     protected override Vector3 GetDirection(Vector3 inputDirection)
     {
+        Vector3 igVector = inputDirection;
+        igVector = player.playerCamera.GetCameraRotTransform().InverseTransformDirection(igVector);
+        igVector.x = 0f;
+        //Debug.DrawRay(Vector3.zero, igVector, Color.red, Time.deltaTime);
+        if (igVector.sqrMagnitude < 0.15f)
+        {
+            StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
+            player.AddForce(currentDir.normalized, 4);
+        }
         Vector3 forwardVector = Vector3.ProjectOnPlane(inputDirection, raycastHit.normal);
-        forwardVector = forwardVector.magnitude < 1 ? forwardVector : forwardVector.normalized;
+        forwardVector = forwardVector.sqrMagnitude < 1 ? forwardVector : forwardVector.normalized;
         return forwardVector;
     }
     protected override void HandleState()
     {
-        Debug.DrawRay(player.transform.position, currentDir, Color.red, Time.deltaTime);
+        //Debug.DrawRay(player.transform.position, currentDir, Color.red, Time.deltaTime);
         Vector3 pForward = player.playerCamera.GetCameraRotTransform().forward;
         pForward.y = 0;
         pForward.Normalize();
-        Debug.DrawRay(player.transform.position, pForward, Color.red, Time.deltaTime);
-        bool isOver = Vector3.Angle(pForward, currentDir) > 90 + 35;
+        //Debug.DrawRay(player.transform.position, pForward, Color.red, Time.deltaTime);
+
+        float angle = Vector3.Angle(pForward, currentDir);
+        bool isOver = angle > 90 + 35 || angle < 90 - 10;
         if (isOver)
         {
             StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
@@ -79,23 +86,11 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
             StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
         }
     }
-    protected override void HandleMove(Vector3 inputDirection)
-    {
-        base.HandleMove(inputDirection);
-        //player.CheckWall(out raycastHit, ref currentDir);
-        Vector3 tar = raycastHit.point - new Vector3(0, raycastHit.point.y - player.transform.position.y, 0);
-        tar += raycastHit.normal * 0.4f;
 
-        //Debug.DrawRay(tar, Vector3.down, Color.red, Time.deltaTime);
-        //Debug.DrawRay(player.transform.position, Vector3.down, Color.yellow, Time.deltaTime);
-        //Vector3 dir = tar - player.transform.position;
-        //Debug.DrawRay(player.transform.position, dir, Color.blue, Time.deltaTime);
-
-        //player.AddMovementImpulse(dir, 1, 0);
-    }
     public override void Exit()
     {
         base.Exit();
         player.playerViewmodel.WallRun(0);
+        player.AddForce(-currentDir, 7);
     }
 }

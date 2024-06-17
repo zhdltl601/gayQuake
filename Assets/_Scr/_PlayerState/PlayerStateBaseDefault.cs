@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 public abstract class PlayerStateBaseDefault : State
 {
@@ -11,12 +12,14 @@ public abstract class PlayerStateBaseDefault : State
         base.Enter();
         player.Mov += HandleMove;
         player.OnJump += HandleOnJump;
+        player.OnDash += HandleOnDash;
     }
     public override void Exit()
     {
         base.Exit();
         player.Mov -= HandleMove;
         player.OnJump -= HandleOnJump;
+        player.OnDash -= HandleOnDash;
     }
     public override void Update()
     {
@@ -28,18 +31,31 @@ public abstract class PlayerStateBaseDefault : State
         Vector3 result = GetDirection(inputDirection);
         float speed = GetSpeed();
         float gravityMultiplier = GetGravitiyMultiplier();
-        player.PlayerApplyMovement(result, speed, gravityMultiplier);
+        float forceMulti = GetForceMultiplier();
+        player.PlayerApplyMovement(result, speed, gravityMultiplier, forceMulti);
+    }
+
+    protected virtual float GetForceMultiplier()
+    {
+        return player.GetForceVectorCurve();
     }
     protected virtual void HandleOnJump()
     {
     }
+    protected virtual void HandleOnDash()
+    {
+    }
     protected void Jump()
     {
-        player.Jump(player.jumpForce);
+        player.SetYVal(player.jumpForce);
+    }
+    protected void Dash()
+    {
+        player.playerAnimator.camAnimator.Play("OnDash", -1, 0);
     }
     protected virtual float GetGravitiyMultiplier()
     {
-        return 1f;
+        return 1.2f;
     }
     protected virtual float GetSpeed()
     {
@@ -48,7 +64,7 @@ public abstract class PlayerStateBaseDefault : State
     protected virtual Vector3 GetDirection(Vector3 inputDirection)
     {
         Vector3 direction = inputDirection;
-        direction = direction.magnitude < 1 ? direction : direction.normalized; // needs optimazation
+        direction = direction.sqrMagnitude < 1 ? direction : direction.normalized; // needs optimazation
 
         return direction;
     }

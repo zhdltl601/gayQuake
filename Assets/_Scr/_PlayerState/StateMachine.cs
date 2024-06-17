@@ -3,7 +3,7 @@ using System.Collections.Generic;
 public class StateMachine<stateEnum> where stateEnum : Enum
 {
     public State CurrentState { get; protected set; }
-    public Dictionary<stateEnum, State> StateDictionary { get; } //can replace T to PlayerState(State)
+    public Dictionary<stateEnum, State> StateDictionary { get; }
 
     //singleton needs rework
     //singleton will automaticaly make instance when not initialized
