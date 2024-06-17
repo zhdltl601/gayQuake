@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 297750282435473694}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0013, y: 0.0783, z: 0.3817}
+  m_LocalPosition: {x: 0.0013, y: 0.114, z: 0.5692}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -57,7 +57,7 @@ Transform:
   m_GameObject: {fileID: 1881689754785396112}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0636, y: 0.0783, z: 0.025}
+  m_LocalPosition: {x: 0.0684, y: 0.0888, z: 0.025}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -159,7 +159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunData: {fileID: 11400000, guid: 1458eda9cb554244bbb1fc50cfc556dc, type: 2}
-  runtimeAnimatorController: {fileID: 0}
+  runtimeAnimatorController: {fileID: 22100000, guid: c36da35511f9c93429d973a38fb0528a,
+    type: 2}
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 64

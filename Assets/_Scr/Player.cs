@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
     {
         playerStateMachine.UpdateState();
         PlayerInput();
-        PlayerUI.Instance.lists[0].text = playerStateMachine.CurrentState.ToString();
+        //PlayerUI.Instance.lists[0].text = playerStateMachine.CurrentState.ToString();
         //PlayerUI.Instance.lists[2].text = playerStateMachine.CurrentState.ToString();
         //if (Input.GetKeyDown(KeyCode.Backspace)) AddMovementImpulse(Vector3.forward, 1, 0);
         //if (Input.GetKeyDown(KeyCode.Mouse0)) playerAnimator.leftArmAnimator.Play("AutoShoot", -1, 0f);

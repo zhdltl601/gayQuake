@@ -11,15 +11,19 @@ public class ObjectPooling : MonoSingleton<ObjectPooling>
    
    [Header("Initialize")] 
    [SerializeField] private GameObject bullet;
+   [SerializeField] private GameObject rocket;
    [SerializeField] private GameObject caseShell;
    [SerializeField] private GameObject enemyBullet;
    [SerializeField] private GameObject enemyRobotBullet;
+   [SerializeField] private GameObject boomEffect;
    private void Start()
    {
       InitializeNewPool(bullet);
       InitializeNewPool(caseShell);
       InitializeNewPool(enemyBullet);
       InitializeNewPool(enemyRobotBullet);
+      InitializeNewPool(boomEffect);
+      InitializeNewPool(rocket);
    }
 
    public GameObject GetObject(GameObject prefab)
