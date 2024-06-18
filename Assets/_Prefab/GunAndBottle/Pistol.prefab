@@ -106,7 +106,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7702447783540567042}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 4
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -170,9 +170,9 @@ MonoBehaviour:
   caseShell: {fileID: 8220347518728662566, guid: f02734e092c683f479c2b635e9bcf64c,
     type: 3}
   muzzles:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8711855796923749548}
+  - {fileID: 8711855796923749546}
+  - {fileID: 8711855796923749544}
   _firePos: {fileID: 0}
   throwing: 0
 --- !u!1001 &4792911604269723456
@@ -443,6 +443,24 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1529471664548583651}
   m_SourcePrefab: {fileID: 100100000, guid: 30b4cc2728d8cec499fad63ba93785a4, type: 3}
+--- !u!198 &8711855796923749544 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19800000, guid: 30b4cc2728d8cec499fad63ba93785a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 8711855796943539048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8711855796923749546 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19800002, guid: 30b4cc2728d8cec499fad63ba93785a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 8711855796943539048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8711855796923749548 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19800004, guid: 30b4cc2728d8cec499fad63ba93785a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 8711855796943539048}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8711855796943147502 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400006, guid: 30b4cc2728d8cec499fad63ba93785a4,

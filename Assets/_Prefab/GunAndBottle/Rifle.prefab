@@ -159,6 +159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunData: {fileID: 11400000, guid: 3fbafe78a25edba4aa4d9ae19d08af24, type: 2}
+  runtimeAnimatorController: {fileID: 9100000, guid: cc804681254b93c4a987e24fed042377,
+    type: 2}
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 64

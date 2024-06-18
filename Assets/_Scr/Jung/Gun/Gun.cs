@@ -38,8 +38,7 @@ public abstract class Gun : MonoBehaviour
         _caseShellPos = GetComponentInChildren<GunModel>().GetCaseShell();
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<BoxCollider>();
-        
-        
+
     }
     
     public virtual GameObject[] Shoot()
@@ -118,14 +117,14 @@ public abstract class Gun : MonoBehaviour
     }
     public virtual void ThrowGun()
     {
-        SetOnGround();
+        SettingThrow();
         
         Vector3 random = (gameObject.transform.forward);
         _rigidbody.angularVelocity = new Vector3(Random.Range(1, 2.3f), Random.Range(1, 2.3f), Random.Range(1, 2.3f));
         _rigidbody.AddForce(random * 300);
         
     }
-    private void SetOnGround()
+    private void SettingThrow()
     {
         throwing = true;
 
@@ -151,10 +150,11 @@ public abstract class Gun : MonoBehaviour
             
             weaponController.currentGun = this;
             transform.parent = weaponController.gunTrm;
+                        
             
             _rigidbody.isKinematic = true;
             _rigidbody.useGravity = false;
-                
+            
             _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             
         }

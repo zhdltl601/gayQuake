@@ -13,11 +13,6 @@ MonoBehaviour:
   m_Name: GoodsList
   m_EditorClassIdentifier: 
   goods:
-  - {fileID: 8595215584238823259, guid: dac91a195c8c568438b4a3e67feec436, type: 3}
-  - {fileID: 50618607230761338, guid: d582cb4ce82c6204ea9488c996ffd49b, type: 3}
-  - {fileID: 1186848788507412696, guid: e75dedc34d3e5af4f83f637258f76e6a, type: 3}
-  - {fileID: 4901771741241673434, guid: a4ec6ddfeb3d036418919542e8f20b6a, type: 3}
-  - {fileID: 8595215584238823259, guid: bbd0af009b6056d4c9e0619272b23f72, type: 3}
   - {fileID: 7702447783540567042, guid: 1b915ef09c589d14ea6ef49efabc843f, type: 3}
   - {fileID: 8954885641401316218, guid: e3ae674de7666094e9950d01e5862665, type: 3}
   - {fileID: 53626345523260558, guid: 69c8513b9ff8c684b980ca21583d0b13, type: 3}

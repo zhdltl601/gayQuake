@@ -33,9 +33,11 @@ public class RPG : Gun
             
             foreach (var item in cols)
             {
-                if (item != null && item.transform.GetComponent<Health>() != null)
+                if (item != null)
                 {
                     Health health = item.transform.GetComponent<Health>();
+                    if(health == null)continue;
+                    
                     Vector3 closestPoint = item.ClosestPoint(hit.point);
                     Vector3 normal = (hit.point - closestPoint).normalized;
                     ApplyDamage(health , normal , closestPoint);
