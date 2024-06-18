@@ -59,7 +59,7 @@ public abstract class PlayerStateBaseDefault : State
     }
     protected virtual float GetSpeed()
     {
-        return player.speed;
+        return player.Speed;
     }
     protected virtual Vector3 GetDirection(Vector3 inputDirection)
     {

@@ -3,7 +3,7 @@ public class PlayerStateOnGround : PlayerStateBaseDefault
 {
     private float delayWallrun;
     private float wallRunHoldTime;
-    private float wallRunHoldTimerEnd = 0.12f;
+    private const float wallRunHoldTimerEnd = 0.12f;
     //private bool? isRightLast = null;
     private Collider lastWall = null;
     private Vector3 dir;

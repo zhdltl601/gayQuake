@@ -23,8 +23,13 @@ public class Player : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float speedWalk;
     [SerializeField] private float speedRun;
-    public float speedWall;
     public float jumpForce;
+
+    [Header("Wallrun")]
+    public float speedWall;
+    public float allowedWallrunAngleMin;
+    public float allowedWallrunAngleMax;
+    public float wallrunViewmodelAngle;
 
     [Header("Movement/Physics")]
     [SerializeField] private float gravity;
@@ -42,7 +47,7 @@ public class Player : MonoBehaviour
     private Vector3 inputDirection;
     private Vector3 forceVec = Vector3.zero;
 
-    public float speed { get; private set; }
+    public float Speed { get; private set; }
     private float yVal;
 
     private StateMachine<PlayerStateEnum> playerStateMachine;//will be removed, check Awake() 
@@ -78,7 +83,7 @@ public class Player : MonoBehaviour
         xRotation = 0;
         yRotation = 0;
 
-        speed = speedWalk;
+        Speed = speedWalk;
     }
     private void Update()
     {
@@ -206,7 +211,7 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.K)) viewmodelY -= Time.deltaTime * amount;
         if (Input.GetKey(KeyCode.J)) viewmodelX -= Time.deltaTime * amount;
         if (Input.GetKey(KeyCode.L)) viewmodelX += Time.deltaTime * amount;
-        playerViewmodel.SetViewmodelHintPosition(viewmodelX, viewmodelY, 0);
+        //playerViewmodel.SetViewmodelHintPosition(viewmodelX, viewmodelY, 0);
         #endregion
     }
 
@@ -272,8 +277,8 @@ public class Player : MonoBehaviour
         pForward.y = 0;
         pForward.Normalize();
         Vector3 currentDir = -raycastHit.normal;
-        float angle = Vector3.Angle(pForward, currentDir);
-        bool isOver = angle > 90 + 35 || angle < 90 - 10;
+        float angle = Vector3.Angle(pForward, currentDir);//need optimazation
+        bool isOver = angle > 90 + allowedWallrunAngleMax || angle < 90 - allowedWallrunAngleMin;
         result &= !isOver;
 
         col = raycastHit.collider;

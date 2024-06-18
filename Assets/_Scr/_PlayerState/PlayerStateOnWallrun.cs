@@ -20,21 +20,9 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
         currentDir = -raycastHit.normal;
         currentDir.Normalize();
 
-        player.playerViewmodel.WallRun(isRight ? 10 : -10);
+        player.playerViewmodel.WallRun(isRight ? player.wallrunViewmodelAngle : -player.wallrunViewmodelAngle);
         gravityMultiplier = 0;
-        //player.StartCoroutine(Cor_MoveTowardsToWall(raycastHit.point, raycastHit.normal));
-        //Current = Update;
-    }
-    private IEnumerator Cor_MoveTowardsToWall(Vector3 point, Vector3 normal)
-    {
-        Vector3 tar = point - new Vector3(0, point.y - player.transform.position.y, 0);
-        tar += normal * 0.4f;
-        while (Vector3.Distance(player.transform.position, tar) > 0.01f)
-        {
-            yield return new WaitForFixedUpdate();
-            player.transform.position = Vector3.MoveTowards(player.transform.position, tar, Time.deltaTime * 0.4f);
-        }
-        base.Enter();
+
     }
     protected override void HandleOnJump()
     {
@@ -74,8 +62,8 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
         pForward.Normalize();
         //Debug.DrawRay(player.transform.position, pForward, Color.red, Time.deltaTime);
 
-        float angle = Vector3.Angle(pForward, currentDir);
-        bool isOver = angle > 90 + 35 || angle < 90 - 10;
+        float angle = Vector3.Angle(pForward, currentDir); //need optimazation
+        bool isOver = angle > 90 + player.allowedWallrunAngleMax || angle < 90 - player.allowedWallrunAngleMin;
         if (isOver)
         {
             StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);

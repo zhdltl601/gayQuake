@@ -24,7 +24,7 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
         print("-AwakeInit-" + typeof(T).Name);
         if (_instance is not null)
         {
-            Debug.LogError("twoSingletons");
+            Debug.LogError("twoSingletons_" + typeof(T).Name);
             Destroy(gameObject);
             return;
         }
