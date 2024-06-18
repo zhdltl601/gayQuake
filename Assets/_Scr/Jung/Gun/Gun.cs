@@ -119,6 +119,7 @@ public abstract class Gun : MonoBehaviour
     {
         SettingThrow();
         
+        
         Vector3 random = (gameObject.transform.forward);
         _rigidbody.angularVelocity = new Vector3(Random.Range(1, 2.3f), Random.Range(1, 2.3f), Random.Range(1, 2.3f));
         _rigidbody.AddForce(random * 300);
@@ -139,7 +140,7 @@ public abstract class Gun : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if ((whatIsGround & (1 << other.gameObject.gameObject.layer)) != 0)//layerMask가 2진수로 저장되기 때문에 이러한 연산이 필요함..
+        if ((whatIsGround & (1 << other.gameObject.layer)) != 0)//layerMask가 2진수로 저장되기 때문에 이러한 연산이 필요함..
         {
             throwing = false;
         }

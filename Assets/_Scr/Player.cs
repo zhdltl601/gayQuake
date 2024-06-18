@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float speedWalk;
-    [SerializeField] private float speedRun;
     public float jumpForce;
 
     [Header("Wallrun")]
@@ -230,8 +229,6 @@ public class Player : MonoBehaviour
         forceVec = dir * speed;
         forceMulti = 0.5f;//legnth of forceVectorCurve;
     }
-    #region state
-
     public void SetYVal(float value)
     {
         yVal = value;
@@ -240,6 +237,8 @@ public class Player : MonoBehaviour
     {
         yVal += value;
     }
+    #region state
+
     public float GetDashCurve(float x = -1)
     {
         x = x == -1 ? dashMulti : x;

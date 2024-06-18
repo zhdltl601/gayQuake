@@ -39,13 +39,13 @@ public class WeaponController : MonoBehaviour
             if (equip == false)
             {
                 equip = true;
-                currentGun.transform.localPosition = Vector3.zero;
+                //currentGun.transform.localPosition = Vector3.zero;
                 //currentGun.transform.localRotation = Quaternion.Euler(0,0,0);
                 
                 PlayerAnimator.leftArmAnimator.enabled = true;
-                PlayerAnimator.leftArmAnimator.Rebind();
-                PlayerAnimator.leftArmAnimator.Play("Equip");
                 PlayerAnimator.leftArmAnimator.runtimeAnimatorController = currentGun.runtimeAnimatorController;
+                //PlayerAnimator.leftArmAnimator.Rebind();
+                PlayerAnimator.leftArmAnimator.Play("Equip", -1, 0);
             }
             
             Shot();
@@ -86,10 +86,10 @@ public class WeaponController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
+            PlayerAnimator.leftArmAnimator.enabled = false;
             currentGun.ThrowGun();
             currentGun = null;
             
-            PlayerAnimator.leftArmAnimator.enabled = false;
         }
     }
     
@@ -160,7 +160,7 @@ public class WeaponController : MonoBehaviour
             bottleList.Remove(currentBottle);
             currentBottle.DrinkBottle(_player.playerAnimator.rightArmAnimator);
             
-            Invoke("SetBottleDefault" , 1f);
+            Invoke(nameof(SetBottleDefault), 1f);
            
         }
     }

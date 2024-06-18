@@ -4209,6 +4209,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerGay
       objectReference: {fileID: 0}
+    - target: {fileID: 2516205335798575286, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5464206632120881757, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5635063621471903205, guid: d2051f78688dbf549a4afa281dbb790a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4259,8 +4269,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8791820022246451802, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 38121c48ceda2584f95a58684c79b43b,
+        type: 2}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4212557341860479385, guid: d2051f78688dbf549a4afa281dbb790a, type: 3}
+    - {fileID: 8841489039526565321, guid: d2051f78688dbf549a4afa281dbb790a, type: 3}
+    - {fileID: 2516205335798575286, guid: d2051f78688dbf549a4afa281dbb790a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2051f78688dbf549a4afa281dbb790a, type: 3}
