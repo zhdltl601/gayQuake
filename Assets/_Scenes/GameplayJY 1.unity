@@ -4209,10 +4209,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerGay
       objectReference: {fileID: 0}
+    - target: {fileID: 1024220362824928702, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2516205335798575286, guid: d2051f78688dbf549a4afa281dbb790a,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329664278890721209, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: wallrunViewmodelAngle
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329664278890721209, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: allowedWallrunAngleMax
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329664278890721209, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: allowedWallrunAngleMin
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 5464206632120881757, guid: d2051f78688dbf549a4afa281dbb790a,
         type: 3}
@@ -10608,6 +10628,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShopRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 2059590313112161601, guid: 292b08b2602e5b0479f451053706718a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2382766937985355183, guid: 292b08b2602e5b0479f451053706718a,
         type: 3}
