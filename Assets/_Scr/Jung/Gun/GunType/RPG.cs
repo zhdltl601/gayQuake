@@ -1,71 +1,65 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RPG : Gun
 {
-    public float maxDistance;
+    public float rpgDistance;
     public float sphereRadius;
-    public GameObject boomEffect;
 
+    public GameObject boomEffect;
+    private Vector3 point;
      public override GameObject[] Shoot()
     {
-        //총알
+          //총알
         gunData.ammoInMagazine--;
-        GameObject[] bullet = new GameObject[1];
+        int shotCount = Random.Range(gunData.minShotCount , gunData.maxShotCount);
         
-        bullet[0] = ObjectPooling.Instance.GetObject(gunData.bullet);
-        ObjectPooling.Instance.ReTurnObject(bullet[0] , 2);
-    
-        bool isHit = Physics.SphereCast(playerCam.position, sphereRadius, playerCam.forward, out RaycastHit hit, maxDistance, whatIsEnemy);
+        GameObject[] bullet = new GameObject[shotCount];
         Vector3 direction = playerCam.forward;
-        
+
+        bool isHit = Physics.Raycast(playerCam.position , playerCam.forward,out RaycastHit hit ,rpgDistance,whatIsEnemy | whatIsGround);
         if (isHit)
         {
-            direction = hit.point - _firePos.position;
-            Health enemyHealth = hit.transform.GetComponent<Health>();
+            Collider[] cols = Physics.OverlapSphere(hit.point , sphereRadius , whatIsEnemy);
+            GameObject newbullet = ObjectPooling.Instance.GetObject(gunData.bullet);
+            newbullet.transform.position = _firePos.position;
+            newbullet.transform.forward = direction;
+            ObjectPooling.Instance.ReTurnObject(newbullet , 2);
+            
+            direction = hit.transform.position - _firePos.position;
+            newbullet.GetComponent<Rigidbody>().AddForce(direction.normalized * gunData.bulletSpeed);
 
-            if (_weaponController.GetCurrenBottle() is AttackBottle)
+            point = hit.point;
+            Invoke("BoomEffect",0.4f);
+            
+            foreach (var item in cols)
             {
-                enemyHealth.ApplyDamage(PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Attack].GetValue() + gunData.damage,hit.normal , hit.point);
+                if (item != null)
+                {
+                    Health health = item.transform.GetComponent<Health>();
+                    if(health == null)continue;
+                    
+                    Vector3 closestPoint = item.ClosestPoint(hit.point);
+                    Vector3 normal = (hit.point - closestPoint).normalized;
+                    ApplyDamage(health , normal , closestPoint);
+                }
             }
-            else
-            {
-                enemyHealth.ApplyDamage(gunData.damage , hit.normal , hit.point);
-            }
-
-             //boomParticle
-            GameObject newBoomEffect =  ObjectPooling.Instance.GetObject(boomEffect);
-            newBoomEffect.transform.position = hit.point;
-            newBoomEffect.transform.rotation = Quaternion.LookRotation(Vector3.up);
-            ObjectPooling.Instance.ReTurnObject(newBoomEffect,2f);
         }
-
-        bullet[0].transform.position = _firePos.position;
-        bullet[0].GetComponent<Rigidbody>().AddForce(direction.normalized * gunData.bulletSpeed);
-                        
-        //탄피
-        // GameObject newCaseShell = ObjectPooling.Instance.GetObject(caseShell);
         
-        // newCaseShell.transform.position = _caseShellPos.position;
-
-        // newCaseShell.GetComponent<Rigidbody>().AddForce((Vector3.right + Vector3.up) * Random.Range(200, 220));
-        // newCaseShell.GetComponent<Rigidbody>().angularVelocity = new 
-        //         Vector3(Random.Range(-100 ,100) , Random.Range(-100 , 100) , Random.Range(-100 , 100));
-        
-        
-        // ObjectPooling.Instance.ReTurnObject(newCaseShell , 3);
-        
-       
-
         //muzzle Effect
         foreach (var item in muzzles)
         {
             item.Simulate(0);
             item.Play();
         }
-
+        
         return bullet;
     }
 
-
+     private void BoomEffect()
+     {
+         GameObject newBoomEffect = ObjectPooling.Instance.GetObject(boomEffect);
+         newBoomEffect.transform.position = point;
+         newBoomEffect.GetComponent<EffectPlayer>().OnlyParticlePlay();
+         ObjectPooling.Instance.ReTurnObject(newBoomEffect, 2);
+     }
 }

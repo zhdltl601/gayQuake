@@ -97,7 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunData: {fileID: 11400000, guid: 4946daeff7d59d441a3e03e0b5b14898, type: 2}
-  runtimeAnimatorController: {fileID: 0}
+  runtimeAnimatorController: {fileID: 22100000, guid: c2d2429f913fc5d4ba70daa6468ade68,
+    type: 2}
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 64
@@ -116,7 +117,7 @@ MonoBehaviour:
   - {fileID: 4932762480785735062}
   _firePos: {fileID: 0}
   throwing: 0
-  maxDistance: 0
+  rpgDistance: 0
   sphereRadius: 0
   boomEffect: {fileID: 0}
 --- !u!1 &2224313120331379929

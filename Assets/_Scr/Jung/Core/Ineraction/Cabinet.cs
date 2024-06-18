@@ -21,8 +21,10 @@ public class Cabinet : MonoBehaviour
 
     private void Awake()
     {
-        goods = Instantiate(lists.goods[Random.Range(0 , lists.goods.Length - 1)], transform.position + Vector3.up * 1.5f,Quaternion.identity);
+        int random = Random.Range(0, lists.goods.Length - 1);
+        goods = Instantiate(lists.goods[random], transform.position + Vector3.up * 1.5f,Quaternion.identity);
         goods.transform.parent = transform;
+        goods.name = lists.goods[random].name;
         
     }
 
@@ -66,14 +68,20 @@ public class Cabinet : MonoBehaviour
 
     private void OnBuy()
     {
+        if(isSell)return;
+        
         if (PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Money].GetValue() - price >= 0)
         {
             PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Money].RemoveValue(price);
 
+            if (goods != null && goods.GetComponent<Gun>())
+            {
+                goods.GetComponent<Gun>().ThrowGun();
+            }
+            
             goods.GetComponent<Rigidbody>().AddForce(Vector3.up * 250);
-            priceText.gameObject.SetActive(false);
-            goods = null;
-            isSell = true;
+            
+            Destroy(this);
         }
     }
 
@@ -83,7 +91,7 @@ public class Cabinet : MonoBehaviour
         direction.y = 0;
                 
         priceText.transform.rotation = Quaternion.LookRotation(direction);
-
+        
         Vector3 currentRotation = priceText.transform.eulerAngles;
         currentRotation.y -= 180;
         priceText.transform.eulerAngles = currentRotation;

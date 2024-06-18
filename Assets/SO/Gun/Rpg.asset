@@ -15,11 +15,11 @@ MonoBehaviour:
   gunType: 4
   gunName: "\uC544\uB9AC\uD53C\uC9C0"
   maxAmmoInMagazine: 3
-  ammoInMagazine: 3
-  totalAmmo: 200
-  damage: 15
-  shotRate: 2.8
-  bulletSpeed: 3000
+  ammoInMagazine: 2
+  totalAmmo: 101
+  damage: 300
+  shotRate: 1
+  bulletSpeed: 1400
   bullet: {fileID: 4516051322833322506, guid: c1736f50d3ab7aa4c9d94073497c8c05, type: 3}
   maxShotCount: 0
   minShotCount: 0

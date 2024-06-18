@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
@@ -38,9 +39,13 @@ public class WeaponController : MonoBehaviour
             if (equip == false)
             {
                 equip = true;
+                currentGun.transform.localPosition = Vector3.zero;
+                //currentGun.transform.localRotation = Quaternion.Euler(0,0,0);
+                
+                PlayerAnimator.leftArmAnimator.enabled = true;
+                PlayerAnimator.leftArmAnimator.Rebind();
                 PlayerAnimator.leftArmAnimator.Play("Equip");
                 PlayerAnimator.leftArmAnimator.runtimeAnimatorController = currentGun.runtimeAnimatorController;
-                PlayerAnimator.leftArmAnimator.enabled = true;
             }
             
             Shot();
@@ -81,10 +86,10 @@ public class WeaponController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
-            PlayerAnimator.leftArmAnimator.enabled = false;
-            
             currentGun.ThrowGun();
             currentGun = null;
+            
+            PlayerAnimator.leftArmAnimator.enabled = false;
         }
     }
     

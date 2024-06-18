@@ -4852,6 +4852,7 @@ GameObject:
   - component: {fileID: 400002}
   - component: {fileID: 19800002}
   - component: {fileID: 19900002}
+  - component: {fileID: 2732324654498932693}
   m_Layer: 0
   m_Name: WFX_Nuke
   m_TagString: Untagged
@@ -9688,6 +9689,26 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &2732324654498932693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1507e4073be347249a04b3a3d0bb125c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particleSystem:
+  - {fileID: 19800002}
+  - {fileID: 19800012}
+  - {fileID: 19800006}
+  - {fileID: 19800008}
+  - {fileID: 19800004}
+  - {fileID: 19800010}
+  - {fileID: 19800000}
 --- !u!1 &100004
 GameObject:
   m_ObjectHideFlags: 0

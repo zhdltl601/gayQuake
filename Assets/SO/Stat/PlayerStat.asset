@@ -13,18 +13,22 @@ MonoBehaviour:
   m_Name: PlayerStat
   m_EditorClassIdentifier: 
   health:
-    _baseValue: 648
+    _baseValue: 524
     _maxValue: 800
     useMaxValue: 1
   money:
-    _baseValue: 240
+    _baseValue: 360
     _maxValue: 0
     useMaxValue: 0
   attack:
-    _baseValue: 104
+    _baseValue: 0
     _maxValue: 0
     useMaxValue: 0
   speed:
+    _baseValue: 0
+    _maxValue: 0
+    useMaxValue: 0
+  ammo:
     _baseValue: 0
     _maxValue: 0
     useMaxValue: 0
