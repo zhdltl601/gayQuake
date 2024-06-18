@@ -118,8 +118,7 @@ public abstract class Gun : MonoBehaviour
     public virtual void ThrowGun()
     {
         SettingThrow();
-        
-        
+                
         Vector3 random = (gameObject.transform.forward);
         _rigidbody.angularVelocity = new Vector3(Random.Range(1, 2.3f), Random.Range(1, 2.3f), Random.Range(1, 2.3f));
         _rigidbody.AddForce(random * 300);

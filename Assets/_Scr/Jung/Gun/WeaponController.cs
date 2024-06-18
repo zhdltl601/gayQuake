@@ -44,7 +44,7 @@ public class WeaponController : MonoBehaviour
                 
                 PlayerAnimator.leftArmAnimator.enabled = true;
                 PlayerAnimator.leftArmAnimator.runtimeAnimatorController = currentGun.runtimeAnimatorController;
-                //PlayerAnimator.leftArmAnimator.Rebind();
+                PlayerAnimator.leftArmAnimator.Rebind();
                 PlayerAnimator.leftArmAnimator.Play("Equip", -1, 0);
             }
             
