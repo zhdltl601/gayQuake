@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     public PlayerAnimator PlayerAnimator;
-    
+
     [Header("Gun Settings")]
     public Gun currentGun;
     private float _lastShootTime;
@@ -41,9 +41,9 @@ public class WeaponController : MonoBehaviour
                 equip = true;
                 //currentGun.transform.localPosition = Vector3.zero;
                 //currentGun.transform.localRotation = Quaternion.Euler(0,0,0);
-                
-                PlayerAnimator.leftArmAnimator.enabled = true;
+
                 PlayerAnimator.leftArmAnimator.runtimeAnimatorController = currentGun.runtimeAnimatorController;
+                PlayerAnimator.leftArmAnimator.enabled = true;
                 PlayerAnimator.leftArmAnimator.Rebind();
                 PlayerAnimator.leftArmAnimator.Play("Equip", -1, 0);
             }
