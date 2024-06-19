@@ -43,9 +43,8 @@ public class PlayerViewmodel : MonoBehaviour
         while (realGay != tar)
         {
             yield return null;
-            realGay = Mathf.MoveTowards(realGay, tar, Time.deltaTime * 20);
+            realGay = Mathf.MoveTowards(realGay, tar, Time.deltaTime * 15);
             SetWallrunViewmodeAngle(realGay);
-            print("¤µ¤²?");
         }
     }
 }

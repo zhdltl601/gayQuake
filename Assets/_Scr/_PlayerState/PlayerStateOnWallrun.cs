@@ -6,13 +6,15 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     private float gravityMultiplier;
     private Vector3 currentDir;
     private RaycastHit raycastHit;
+    private float forwardForce;
     public PlayerStateOnWallrun(Player player) : base(player)
     {
     }
     public override void Enter()
     {
         base.Enter();
-        player.SetYVal(1.3f);
+        forwardForce = 0;
+        player.SetYVal(2.15f);
         timerSinceEnter = 0;
         player.CheckWall(out raycastHit, out bool isRight);
         player.playerAnimator.camAnimator.Play("OnWall");
@@ -27,11 +29,11 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     protected override void HandleOnJump()
     {
         StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
-        player.SetYVal(6.5f);
+        player.SetYVal(9.5f);
     }
     protected override float GetGravitiyMultiplier()
     {
-        gravityMultiplier += Time.deltaTime * 0.4f;
+        gravityMultiplier += Time.deltaTime * player.gravityMultiOnWall;
         return gravityMultiplier;
     }
     protected override float GetSpeed()
@@ -69,9 +71,14 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
             StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
         }
 
-        if (player.playerController.IsGround || !player.CheckWall(out raycastHit, ref currentDir))
+        if (!player.CheckWall(out raycastHit, ref currentDir))
         {
             StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
+        }
+        if (player.playerController.IsGround)
+        {
+            StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
+            player.AddForce(currentDir, 4.2f);
         }
     }
 
@@ -79,6 +86,10 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     {
         base.Exit();
         player.playerViewmodel.WallRun(0);
-        player.AddForce(-currentDir, 7);
+        float wallrunCurveClamped = player.GetWallrunCurve(timerSinceEnter);
+        wallrunCurveClamped = Mathf.Clamp(wallrunCurveClamped, 1, 1.3f);
+        player.AddForce(-currentDir, 5f * wallrunCurveClamped);
+        player.AddForce(player.playerCamera.GetCameraRotTransform().forward, wallrunCurveClamped * 3);
+        player.SetYVal(1);
     }
 }

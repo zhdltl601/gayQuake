@@ -31,7 +31,9 @@ public class Player : MonoBehaviour
     public float wallrunViewmodelAngle;
 
     [Header("Movement/Physics")]
-    [SerializeField] private float gravity;
+    [SerializeField] private float gravity = -9.81f;
+    public float gravityMultiOnGround = 1;
+    public float gravityMultiOnWall = 0.4f;
     [SerializeField] private float onGroundYVal;
     public float rangeWallRun;
 

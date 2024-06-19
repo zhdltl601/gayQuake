@@ -51,7 +51,7 @@ public abstract class PlayerStateBaseDefault : State
     }
     protected virtual float GetGravitiyMultiplier()
     {
-        return 1.2f;
+        return 1;
     }
     protected virtual float GetSpeed()
     {
@@ -60,9 +60,6 @@ public abstract class PlayerStateBaseDefault : State
     protected virtual Vector3 GetDirection(Vector3 inputDirection)
     {
         Vector3 direction = inputDirection;
-        //direction.Normalize();
-        //direction *= player.GetSpeedCurve(inputDirection.sqrMagnitude / 1);
-        //Debug.Log(inputDirection.sqrMagnitude);
         direction = direction.sqrMagnitude < 1 ? direction : direction.normalized; // needs optimazation
 
         return direction;
