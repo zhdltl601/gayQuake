@@ -2928,18 +2928,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &341128627 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2654379780171762095, guid: d2051f78688dbf549a4afa281dbb790a,
-    type: 3}
-  m_PrefabInstance: {fileID: 775563022}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56840b842d0f9a0478e8931e4a507891, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &356305046
 Mesh:
   m_ObjectHideFlags: 0
@@ -4369,11 +4357,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1396542149318310680, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1396542149318310680, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1559960562843002453, guid: d2051f78688dbf549a4afa281dbb790a,
         type: 3}
       propertyPath: currentGun
       value: 
-      objectReference: {fileID: 341128627}
+      objectReference: {fileID: 1618708540}
     - target: {fileID: 1559960562843002453, guid: d2051f78688dbf549a4afa281dbb790a,
         type: 3}
       propertyPath: bottleList.Array.size
@@ -4416,8 +4414,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4329664278890721209, guid: d2051f78688dbf549a4afa281dbb790a,
         type: 3}
+      propertyPath: speedWalk
+      value: 5.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329664278890721209, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
       propertyPath: gravityMultiOnWall
-      value: 0.4
+      value: 0.32
       objectReference: {fileID: 0}
     - target: {fileID: 4329664278890721209, guid: d2051f78688dbf549a4afa281dbb790a,
         type: 3}
@@ -4554,15 +4557,31 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6878632674332652664, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.47
+      objectReference: {fileID: 0}
     - target: {fileID: 7642816828455935621, guid: d2051f78688dbf549a4afa281dbb790a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8726979494352696972, guid: d2051f78688dbf549a4afa281dbb790a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791820022246451802, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: c36da35511f9c93429d973a38fb0528a,
+        type: 2}
+    - target: {fileID: 8885180631702007554, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: m_Height
+      value: 2.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8177,6 +8196,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1570562311}
   m_CullTransparentMesh: 1
+--- !u!114 &1618708540 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 406676808980457814, guid: d2051f78688dbf549a4afa281dbb790a,
+    type: 3}
+  m_PrefabInstance: {fileID: 775563022}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91700d0b6eb04ad4ca243e8e7e6560a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1667729059
 Mesh:
   m_ObjectHideFlags: 0
