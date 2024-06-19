@@ -21,7 +21,7 @@ public class EnemyDamageCaster : MonoBehaviour
         if (player > 0)
         {
             PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Health].RemoveValue(enemy.attackDamage);    
-            UIManager.Instance.BloodScreen(0.2f , 0.6f , Color.red, 0.2f);
+            UIManager.Instance.BloodScreen(Color.red);
         }
     }
 

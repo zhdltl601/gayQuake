@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public enum GunType
 {
@@ -17,12 +18,9 @@ public class GunDataSO : ScriptableObject
     public GunType gunType;
     public string gunName;
     
-    
-    
     [Header("Ammo Values")]
-    public int maxAmmoInMagazine;
-    public int ammoInMagazine;
-    public int totalAmmo;
+    [SerializeField] private int maxAmmoInMagazine;
+    [SerializeField] private int totalAmmo;
     
     [Header("Shot values")]
     public float damage;
@@ -36,6 +34,16 @@ public class GunDataSO : ScriptableObject
     [Range(0,200)]public float xBound;
     [Range(0,400)]public float yBound;
 
-   
+    public Sprite crossHair;
+
+    public int GetMaxAmmoInMagazine()
+    {
+        return maxAmmoInMagazine;
+    }
+
+    public int GetTotalAmmo()
+    {
+        return totalAmmo;
+    }
     
 }

@@ -182,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bottleDataSo: {fileID: 11400000, guid: c68d0d3390dd76343aa80206806edb81, type: 2}
+  AnimatorController: {fileID: 22100000, guid: 54c2607dfe5718d49a61b3462dc85cb5, type: 2}
 --- !u!1 &3940011766825186255
 GameObject:
   m_ObjectHideFlags: 0

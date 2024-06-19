@@ -15,6 +15,9 @@ public class Health : MonoBehaviour
     public void ApplyDamage(float damage , Vector3 normal , Vector3 pos)
     {
         health -= damage;
+        _actionData.hitNormal = normal;
+        _actionData.hitPoint = pos;
+        
         onHitEvent?.Invoke();
 
         if (health <= 0)
@@ -22,8 +25,7 @@ public class Health : MonoBehaviour
             onDieEvent?.Invoke();
         }
         
-        _actionData.hitNormal = normal;
-        _actionData.hitPoint = pos;
+     
 
     }
     

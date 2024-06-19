@@ -16,22 +16,30 @@ public class EnemyIdleState : EnemyState
     {
         base.Update();
         
-        if(_enemy.CanAttack() == false)
+        if(_enemy.CanAction() == false)
             return;
 
         if (RunAway()) return;
-
-        if (_enemy.target != null)
-        {
-            _enemy.StateMachine.ChangeState(_enemy.MoveState);
-            return;
-        }
-
+                
         if (_enemy.target != null && Vector3.Distance(_enemy.transform.position , _enemy.target.position) <= _enemy.attackDistance)
         {
             _enemy.StateMachine.ChangeState(_enemy.AttackState);
             return;
         }
+        
+        /*if (_enemy.target != null && Vector3.Distance(_enemy.transform.position , _enemy.target.position) >= _enemy.minDistance)
+        {
+            _enemy.isAttackMove = true;
+            _enemy.StateMachine.ChangeState(_enemy.MoveState);
+            return;
+        }*/
+        
+        if (_enemy.target != null)
+        {
+            _enemy.StateMachine.ChangeState(_enemy.MoveState);
+            return;
+        }
+                
 
         Collider player = _enemy.IsPlayerDetected();
         if (player != null)

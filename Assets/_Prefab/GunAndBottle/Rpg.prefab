@@ -97,6 +97,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunData: {fileID: 11400000, guid: 4946daeff7d59d441a3e03e0b5b14898, type: 2}
+  gunMagazine:
+    maxAmmoInMagazine: 0
+    ammoInMagazine: 0
+    totalAmmo: 0
   runtimeAnimatorController: {fileID: 22100000, guid: c2d2429f913fc5d4ba70daa6468ade68,
     type: 2}
   whatIsEnemy:
@@ -176,7 +180,7 @@ Transform:
   m_GameObject: {fileID: 4488206641820553249}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.102, z: -0.672}
+  m_LocalPosition: {x: 0, y: 0.102, z: 1.133}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -56,18 +56,17 @@ MonoBehaviour:
   _whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  currentRoom: {fileID: 0}
   moveSpeed: 5
-  checkPlayerDistance: 36.9
+  checkPlayerDistance: 20
   isDead: 0
   dissolveDuration: 1.5
   whatIsObstacle:
     serializedVersion: 2
     m_Bits: 4096
   attackDistance: 19.5
+  minDistance: 5
   attackDamage: 70
   attackTime: 1.2
-  increaseAmount: 80
   attackSpeed: {x: 0.8, y: 1.2}
   runAwayCount: 2
   runAwayDistance: 6
@@ -75,6 +74,7 @@ MonoBehaviour:
   runAwayAble: 1
   runningAway: 0
   lastAttackTime: 0
+  isAttackMove: 0
 --- !u!114 &8471399187693971834
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -297,3 +297,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bottleDataSo: {fileID: 11400000, guid: 103f06f4387eaa840a76e577e596dfa3, type: 2}
+  AnimatorController: {fileID: 22100000, guid: ab53b4e1d03f72c4cb69b78a6d6fdee9, type: 2}

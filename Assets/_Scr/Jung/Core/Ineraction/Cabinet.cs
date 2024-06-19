@@ -77,11 +77,16 @@ public class Cabinet : MonoBehaviour
             if (goods != null && goods.GetComponent<Gun>())
             {
                 goods.GetComponent<Gun>().ThrowGun();
+                goods.GetComponent<Rigidbody>().AddForce(Vector3.up * 250);
+                Destroy(this);
             }
-            
-            goods.GetComponent<Rigidbody>().AddForce(Vector3.up * 250);
-            
-            Destroy(this);
+            else if (goods != null && goods.TryGetComponent(out Bottle bottle) && interaction.TryGetComponent(out WeaponController weaponController))
+            {
+                goods.SetActive(false);
+                goods.GetComponent<Bottle>().SetBottleParent(weaponController.bottleTrm);
+                weaponController.bottleList.Add(goods.GetComponent<Bottle>());
+                Destroy(this); Debug.Log("지랄하네 진짜");
+            }
         }
     }
 

@@ -6,10 +6,6 @@ public class EnemyShot : MonoBehaviour
     [SerializeField] private Transform firePos;
     [SerializeField] private GameObject bullet;
 
-    [SerializeField] private float duration;
-    [SerializeField] private float targetIntensity;
-    [SerializeField] private float screenTime;
-    [SerializeField] private Color screenColor;
     public Enemy _enemy;
 
     public void Shot()
@@ -23,7 +19,7 @@ public class EnemyShot : MonoBehaviour
         if (isHit)
         {
             PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Health].RemoveValue(_enemy.attackDamage);
-            UIManager.Instance.BloodScreen(duration , targetIntensity , screenColor , screenTime);
+            UIManager.Instance.BloodScreen(Color.red);
             
             dir = (hit.point - firePos.position);
         }

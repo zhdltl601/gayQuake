@@ -58,40 +58,40 @@ public class MapManager : MonoSingleton<MapManager>
     }
     
     #region GenerationMethos
-     private void GenerationStartRoom()
-  {
+    private void GenerationStartRoom()
+    {
         GameObject room = Instantiate(startRoom, _lastRoomTrm.position,
             Quaternion.identity);
         _lastRoomTrm = room.transform;
         _maps.Add(room.transform);
 
         room.name = "StartRoom";
-  }
+    }
   
-  private void GenerationEndRoom()
-  {
-      bool positionOccupied = false;
-      Vector3 position = Vector3.zero;
+    private void GenerationEndRoom()
+    {
+        bool positionOccupied = false;
+        Vector3 position = Vector3.zero;
       
-      while (!positionOccupied)
-      {
-          position = _lastRoomTrm.position + _mapDir[Random.Range(0, _mapDir.Length)] * 60;
+        while (!positionOccupied)
+        {
+            position = _lastRoomTrm.position + _mapDir[Random.Range(0, _mapDir.Length)] * 60;
       
-          foreach (Transform map in _maps)
-          {
-              if (map.position != position)
-              {
-                  positionOccupied = true;
-              }
-          }
-      }
+            foreach (Transform map in _maps)
+            {
+                if (map.position != position)
+                {
+                    positionOccupied = true;
+                }
+            }
+        }
       
-      GameObject room = Instantiate(endRoom, position, Quaternion.identity);
-      _lastRoomTrm = room.transform;
-      _maps.Add(room.transform);
+        GameObject room = Instantiate(endRoom, position, Quaternion.identity);
+        _lastRoomTrm = room.transform;
+        _maps.Add(room.transform);
       
-      room.name = "EndRoom";
-  }
+        room.name = "EndRoom";
+    }
   
   
     private void GenerateMap()
@@ -148,7 +148,7 @@ public class MapManager : MonoSingleton<MapManager>
     private void GenerationNormal()
     {
         Vector3 position = _lastRoomTrm.position + _mapDir[Random.Range(0, _mapDir.Length)] * 60;
-        Generation(position, normalMapTypes);
+        Generation(position, normalMapTypes,false);
     }
     private void GenerateCorridor()
     {

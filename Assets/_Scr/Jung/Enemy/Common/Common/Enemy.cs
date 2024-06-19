@@ -43,14 +43,15 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     public bool isDead = false;
     public float dissolveDuration;
     public LayerMask whatIsObstacle;
-
+    
     [Header("AttackValue")]
     public float attackDistance;
+    public float minDistance;
     public int attackDamage;
     public float attackTime;
     public Vector2 attackSpeed;
     //min =x max = y;    
-
+    
     [Header("RumAway")] 
     public int runAwayCount;
     public float runAwayDistance;
@@ -58,7 +59,8 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     public bool runAwayAble;
     public bool runningAway;
     
-    [HideInInspector] public float lastAttackTime; 
+    [HideInInspector] public float lastAttackTime;
+    [HideInInspector] public bool isAttackMove;
     
     private void Awake()
     {
@@ -98,7 +100,6 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         StateMachine.currentState.Update();
         
         LookPlayer();
-            
     }
     
     #region DieLogic
@@ -244,7 +245,7 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         StateMachine.currentState.AnimationFinish();;
     }
 
-    public bool CanAttack()
+    public bool CanAction()
     {
         return Time.time >= lastAttackTime + attackTime;
     }
