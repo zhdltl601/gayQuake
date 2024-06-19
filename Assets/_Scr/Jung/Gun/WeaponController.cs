@@ -129,6 +129,7 @@ public class WeaponController : MonoBehaviour
             _player.playerAnimator.leftArmAnimator.Play("AutoShoot", -1, 0f);
             
             UIManager.Instance.SetAmmoText();
+          
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0) || shootAble == false)
         {

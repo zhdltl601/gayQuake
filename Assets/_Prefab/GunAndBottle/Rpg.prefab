@@ -121,9 +121,9 @@ MonoBehaviour:
   - {fileID: 4932762480785735062}
   _firePos: {fileID: 0}
   throwing: 0
-  rpgDistance: 0
-  sphereRadius: 0
-  boomEffect: {fileID: 0}
+  rpgDistance: 12
+  sphereRadius: 4
+  boomEffect: {fileID: 100002, guid: 6ecf76dc4f268d340b2666896a954bcc, type: 3}
 --- !u!1 &2224313120331379929
 GameObject:
   m_ObjectHideFlags: 0
