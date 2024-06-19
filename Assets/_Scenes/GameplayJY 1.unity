@@ -4291,7 +4291,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1559960562843002453, guid: d2051f78688dbf549a4afa281dbb790a,
         type: 3}
+      propertyPath: currentBottle
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1559960562843002453, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
       propertyPath: bottleList.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1559960562843002453, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: bottleList.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1559960562843002453, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: bottleList.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1559960562843002453, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: bottleList.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1559960562843002453, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: bottleList.Array.data[4]
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2516205335798575286, guid: d2051f78688dbf549a4afa281dbb790a,
@@ -4358,6 +4383,61 @@ PrefabInstance:
         type: 3}
       propertyPath: allowedWallrunAngleMin
       value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329664278890721209, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329664278890721209, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[0].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329664278890721209, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329664278890721209, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329664278890721209, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329664278890721209, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[0].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329664278890721209, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329664278890721209, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[0].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329664278890721209, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329664278890721209, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329664278890721209, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].tangentMode
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 4371160668347478711, guid: d2051f78688dbf549a4afa281dbb790a,
         type: 3}
@@ -4428,8 +4508,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 22100000, guid: 54c2607dfe5718d49a61b3462dc85cb5,
-        type: 2}
+      objectReference: {fileID: 9100000, guid: 11b8be24616e01e48b41ba806d0fa12d, type: 2}
     - target: {fileID: 6412754270136561405, guid: d2051f78688dbf549a4afa281dbb790a,
         type: 3}
       propertyPath: m_IsActive
@@ -7981,7 +8060,7 @@ PrefabInstance:
     - target: {fileID: 50618607230761338, guid: d582cb4ce82c6204ea9488c996ffd49b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1678044905045405676, guid: d582cb4ce82c6204ea9488c996ffd49b,
         type: 3}

@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     [SerializeField] private AnimationCurve dashCurve;
     [SerializeField] private AnimationCurve wallRunCurve;
     [SerializeField] private AnimationCurve forceVectorCurve;
+    [SerializeField] private AnimationCurve speedCurve;
     private float dashMulti;
     private float forceMulti;
 
@@ -252,6 +253,10 @@ public class Player : MonoBehaviour
     {
         x = x == -1 ? forceMulti : x;
         return forceVectorCurve.Evaluate(x);
+    }
+    public float GetSpeedCurve(float x)
+    {
+        return speedCurve.Evaluate(x);
     }
     public bool CheckWall(out RaycastHit raycastHit, out bool isRight)
     {
