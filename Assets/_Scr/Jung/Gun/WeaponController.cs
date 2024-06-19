@@ -152,7 +152,7 @@ public class WeaponController : MonoBehaviour
         SwitchBottle(currentBottleIndex);
         
         PlayerAnimator.rightArmAnimator.runtimeAnimatorController = currentBottle.AnimatorController;
-        PlayerAnimator.rightArmAnimator.Rebind();
+        //PlayerAnimator.rightArmAnimator.Rebind();
         
         PlayerAnimator.rightArmAnimator.Play("Equip" , -1 , 0f);
     }

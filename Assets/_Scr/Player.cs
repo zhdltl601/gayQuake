@@ -100,7 +100,6 @@ public class Player : MonoBehaviour
 
         playerCamera.SetCameraRotation(xRotation, yRotation);
         playerViewmodel.SetViewmodelRotation(xRotation, yRotation);
-        //playerViewmodel.SetViewmodelRotation(playerCamera.GetCameraRotTransform().eulerAngles.x, playerCamera.GetCameraRotTransform().eulerAngles.y);
     }
     public void PlayerApplyMovement(Vector3 direction, float speed, float gravityMultiplier = 0, float forceMulti = 1)
     {

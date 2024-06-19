@@ -21,10 +21,6 @@ public abstract class PlayerStateBaseDefault : State
         player.OnJump -= HandleOnJump;
         player.OnDash -= HandleOnDash;
     }
-    public override void Update()
-    {
-        base.Update();
-    }
     protected virtual void HandleMove(Vector3 inputDirection)
     {
         HandleState();
