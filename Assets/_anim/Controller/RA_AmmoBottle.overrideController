@@ -9,9 +9,9 @@ AnimatorOverrideController:
   m_Name: RA_AmmoBottle
   m_Controller: {fileID: 9100000, guid: 11b8be24616e01e48b41ba806d0fa12d, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: b5a6e8b5791e84f46bd2f984d3c3d2e2, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: cef0f41065a91f747974975284be3453, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: 7042cb92c44d6dc47b42074143756a55, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 605933ca55b90814fb2f4f79cf6458c1, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 58b1ba8d664f60a4fb7e51cdd98e223e, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 3032b8eec7ebbbf4ab3d22193f6f47dc, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 501a34992626f5b4ab75dfa047ca1674, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 605933ca55b90814fb2f4f79cf6458c1, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 7bf654ec25e48034683ed7e38cf87a45, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: cef0f41065a91f747974975284be3453, type: 2}

@@ -409,7 +409,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Piv_WeaponController/BottleRig/BottlePivot/HealthBottle/Liquid
+    path: Piv_WeaponController/BottleRig/BottlePivot/HealthBottle/Cap
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -430,7 +430,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Piv_WeaponController/BottleRig/BottlePivot/HealthBottle/Cap
+    path: Piv_WeaponController/BottleRig/BottlePivot/HealthBottle/Piv/Liquid
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -452,7 +452,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1772905671
+      path: 553804675
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -461,7 +461,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 553804675
+      path: 3548829209
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -1984,7 +1984,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Piv_WeaponController/BottleRig/BottlePivot/HealthBottle/Liquid
+    path: Piv_WeaponController/BottleRig/BottlePivot/HealthBottle/Cap
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -2005,7 +2005,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Piv_WeaponController/BottleRig/BottlePivot/HealthBottle/Cap
+    path: Piv_WeaponController/BottleRig/BottlePivot/HealthBottle/Piv/Liquid
     classID: 1
     script: {fileID: 0}
     flags: 0
