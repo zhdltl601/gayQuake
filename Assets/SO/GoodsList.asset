@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: GoodsList
   m_EditorClassIdentifier: 
   goods:
-  - {fileID: 7702447783540567042, guid: 1b915ef09c589d14ea6ef49efabc843f, type: 3}
+  - {fileID: 8954885641401316218, guid: e3ae674de7666094e9950d01e5862665, type: 3}

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 public class PlayerCamera : MonoBehaviour
 {
@@ -24,8 +25,21 @@ public class PlayerCamera : MonoBehaviour
     {
 
     }
-    public void CameraShakePos(Vector3 dir)
+    public void CameraShakePos(float duration = 0, float power= 0.01f)
     {
-
+        StartCoroutine(CameraRecoilPos(duration, power));
+    }
+    private IEnumerator CameraRecoilPos(float duration, float power)
+    {
+        float timer = 0;
+        Vector3 originalPos = cameraPos.localPosition;
+        while (duration >= timer)
+        {
+            timer += Time.deltaTime;
+            Vector3 randomVector = Random.onUnitSphere * power;
+            cameraPos.localPosition = randomVector;
+            yield return null;
+        }
+        cameraPos.localPosition = originalPos;
     }
 }

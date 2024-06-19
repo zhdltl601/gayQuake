@@ -101,7 +101,7 @@ public class WeaponController : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0) && shootAble)
         {
             GameObject[] bullets = currentGun.Shoot();
-            
+            _player.playerCamera.CameraShakePos(0.11f);
             
             for (int i = 0; i < bullets.Length; i++)
             {

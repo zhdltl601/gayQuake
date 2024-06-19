@@ -12,7 +12,7 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     public override void Enter()
     {
         base.Enter();
-        player.SetYVal(1.2f);
+        player.SetYVal(1.3f);
         timerSinceEnter = 0;
         player.CheckWall(out raycastHit, out bool isRight);
         player.playerAnimator.camAnimator.Play("OnWall");
