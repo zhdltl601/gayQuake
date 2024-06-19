@@ -17,10 +17,10 @@ public class EnemyAttackState : EnemyState
     {
         base.Update();
 
-        
         if (endTriggerCalled)
         {
-            _enemy.StateMachine.ChangeState(_enemy.IdleState);
+            _enemy.isAttackMove = true;
+            _enemy.StateMachine.ChangeState(_enemy.MoveState);
         }
     }
 

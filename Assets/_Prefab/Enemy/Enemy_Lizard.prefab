@@ -797,9 +797,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   attackDistance: 4
+  minDistance: 0
   attackDamage: 49
   attackTime: 1.42
-  increaseAmount: 60
   attackSpeed: {x: 1, y: 1.4}
   runAwayCount: 0
   runAwayDistance: 0
@@ -807,6 +807,7 @@ MonoBehaviour:
   runAwayAble: 0
   runningAway: 0
   lastAttackTime: 0
+  isAttackMove: 0
 --- !u!114 &7776171704557284075
 MonoBehaviour:
   m_ObjectHideFlags: 0

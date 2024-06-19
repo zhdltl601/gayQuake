@@ -28,7 +28,7 @@ public class EnemyExplostion : MonoBehaviour
         if (player > 0)
         {
             PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Health].RemoveValue(_enemy.attackDamage);
-            UIManager.Instance.BloodScreen(0.2f , 0.5f ,Color.red, 0);
+            UIManager.Instance.BloodScreen(Color.red);
         }
         
         _enemy.DieEvent();

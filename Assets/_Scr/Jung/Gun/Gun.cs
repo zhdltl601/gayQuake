@@ -1,14 +1,19 @@
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Serialization;
 using VHierarchy.Libs;
+using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
 public abstract class Gun : MonoBehaviour
 {
     public GunDataSO gunData;
-
+    [FormerlySerializedAs("gunInfo")] public GunMagazine gunMagazine;
+    
+    
     public RuntimeAnimatorController runtimeAnimatorController;
     
     [SerializeField] protected LayerMask whatIsEnemy;
@@ -26,8 +31,16 @@ public abstract class Gun : MonoBehaviour
     public bool throwing;
 
     protected WeaponController _weaponController;
-    
-    
+
+
+    private void Awake()
+    {
+        gunMagazine.maxAmmoInMagazine = gunData.GetMaxAmmoInMagazine();
+        gunMagazine.ammoInMagazine = gunMagazine.maxAmmoInMagazine;
+        gunMagazine.totalAmmo = gunData.GetTotalAmmo();
+
+    }
+
     protected virtual void Start()
     {
         playerCam = Camera.main.transform;
@@ -39,12 +52,13 @@ public abstract class Gun : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<BoxCollider>();
 
+        
     }
     
     public virtual GameObject[] Shoot()
     {
         //총알
-        gunData.ammoInMagazine--;
+        gunMagazine.ammoInMagazine--;
         GameObject[] bullet = new GameObject[1];
         
         bullet[0] = ObjectPooling.Instance.GetObject(gunData.bullet);
@@ -58,6 +72,9 @@ public abstract class Gun : MonoBehaviour
             direction = hit.point - _firePos.position;
             Health enemyHealth = hit.transform.GetComponent<Health>();
             ApplyDamage(enemyHealth, hit.normal , hit.point);  
+            
+            
+            UIManager.Instance.ChangeCrosshair();
             
         }
         
@@ -102,17 +119,17 @@ public abstract class Gun : MonoBehaviour
 
     public virtual void ReLoad()
     {
-        int needAmmo = gunData.maxAmmoInMagazine - gunData.ammoInMagazine;
+        int needAmmo = gunMagazine.maxAmmoInMagazine - gunMagazine.ammoInMagazine;
 
-        if (gunData.totalAmmo - needAmmo < 0)
+        if (gunMagazine.totalAmmo - needAmmo < 0)
         {
-            gunData.ammoInMagazine += gunData.totalAmmo;
-            gunData.totalAmmo = 0;
+            gunMagazine.ammoInMagazine += gunMagazine.totalAmmo;
+            gunMagazine.totalAmmo = 0;
         }
         else
         {
-            gunData.totalAmmo -= needAmmo;
-            gunData.ammoInMagazine = gunData.maxAmmoInMagazine;
+            gunMagazine.totalAmmo -= needAmmo;
+            gunMagazine.ammoInMagazine = gunMagazine.maxAmmoInMagazine;
         }
     }
     public virtual void ThrowGun()

@@ -4,10 +4,9 @@ using UnityEngine;
 public abstract class Bottle : MonoBehaviour
 {
     public BottleDataSO _bottleDataSo;
-
-    
+    public RuntimeAnimatorController AnimatorController;
     private float _timer;
-
+    
     private void Update()
     {
         _timer += Time.deltaTime;
@@ -35,4 +34,20 @@ public abstract class Bottle : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out WeaponController weaponController))
+        {
+            weaponController.PlayerAnimator.rightArmAnimator.runtimeAnimatorController = AnimatorController;
+            weaponController.PlayerAnimator.rightArmAnimator.Rebind();
+            transform.parent = weaponController.bottleTrm;
+            weaponController.bottleList.Add(this);
+        }
+    }
+
+    public void ThrowBottle(Transform trm)
+    {
+        transform.parent = trm;
+        
+    }
 }

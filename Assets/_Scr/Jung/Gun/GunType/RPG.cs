@@ -10,7 +10,7 @@ public class RPG : Gun
      public override GameObject[] Shoot()
     {
           //총알
-        gunData.ammoInMagazine--;
+        gunMagazine.ammoInMagazine--;
         int shotCount = Random.Range(gunData.minShotCount , gunData.maxShotCount);
         
         GameObject[] bullet = new GameObject[shotCount];
@@ -23,6 +23,7 @@ public class RPG : Gun
             GameObject newbullet = ObjectPooling.Instance.GetObject(gunData.bullet);
             newbullet.transform.position = _firePos.position;
             newbullet.transform.forward = direction;
+            
             ObjectPooling.Instance.ReTurnObject(newbullet , 2);
             
             direction = hit.transform.position - _firePos.position;

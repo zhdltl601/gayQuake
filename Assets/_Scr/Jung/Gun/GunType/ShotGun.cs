@@ -10,7 +10,7 @@ public class ShotGun : Gun
     public override GameObject[] Shoot()
     {
         //총알
-        gunData.ammoInMagazine--;
+        gunMagazine.ammoInMagazine--;
         int shotCount = Random.Range(gunData.minShotCount , gunData.maxShotCount);
         
         GameObject[] bullet = new GameObject[shotCount];
@@ -42,6 +42,8 @@ public class ShotGun : Gun
                 
                 newbullet.GetComponent<Rigidbody>().AddForce(direction.normalized * gunData.bulletSpeed);
             }
+            
+            UIManager.Instance.ChangeCrosshair();
         }
         else
         {

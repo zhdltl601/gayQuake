@@ -70,6 +70,7 @@ public class EnemyDroneMoveState : EnemyDroneBaseState
             
             if (Physics.Raycast(_enemyDrone.firePos[i].position + new Vector3(0,0.5f, 0) , direction , out RaycastHit hit , _enemyDrone.attackDistance,_enemyDrone.whatIsPlayer))
             {
+                UIManager.Instance.BloodScreen(Color.red);
                 PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Health].SetDefaultValue(PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Health].GetValue() - _enemyDrone.damage);
             }
             

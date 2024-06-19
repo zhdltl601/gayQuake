@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
@@ -13,7 +12,11 @@ public class WeaponController : MonoBehaviour
     [Header("Bottle Settings")] 
     public Bottle currentBottle;
     public List<Bottle> bottleList;
+    
+    [Header("Pivots")]
     public Transform gunTrm;
+    public Transform bottleTrm;
+    
     private int currentBottleIndex;
     
     private Player _player;
@@ -46,6 +49,8 @@ public class WeaponController : MonoBehaviour
                 PlayerAnimator.leftArmAnimator.runtimeAnimatorController = currentGun.runtimeAnimatorController;
                 PlayerAnimator.leftArmAnimator.Rebind();
                 PlayerAnimator.leftArmAnimator.Play("Equip", -1, 0);
+
+                UIManager.Instance.SetCrosshair(currentGun.gunData.crossHair);
             }
             
             Shot();
@@ -65,7 +70,7 @@ public class WeaponController : MonoBehaviour
 
         if (currentBottle as AmmoBottle)
         {
-            currentGun.gunData.totalAmmo += (currentBottle as AmmoBottle).GetAmmo();
+            currentGun.gunMagazine.totalAmmo += (currentBottle as AmmoBottle).GetAmmo();
         }
         
         ChangeBottle();
@@ -95,14 +100,13 @@ public class WeaponController : MonoBehaviour
     
     private void Shot()
     {
-        bool shootAble = currentGun.gunData.ammoInMagazine > 0 &&
+        bool shootAble = currentGun.gunMagazine.ammoInMagazine > 0 &&
                          _lastShootTime + currentGun.gunData.shotRate < Time.time;
         
         if (Input.GetKey(KeyCode.Mouse0) && shootAble)
         {
             GameObject[] bullets = currentGun.Shoot();
-            
-            
+                        
             for (int i = 0; i < bullets.Length; i++)
             {
                 if(bullets[i] == null){
