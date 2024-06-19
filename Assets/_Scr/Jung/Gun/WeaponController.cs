@@ -39,19 +39,7 @@ public class WeaponController : MonoBehaviour
     {
         if (currentGun != null)
         {
-            if (equip == false)
-            {
-                equip = true;
-                //currentGun.transform.localPosition = Vector3.zero;
-                //currentGun.transform.localRotation = Quaternion.Euler(0,0,0);
-
-                PlayerAnimator.leftArmAnimator.runtimeAnimatorController = currentGun.runtimeAnimatorController;
-                PlayerAnimator.leftArmAnimator.enabled = true;
-                PlayerAnimator.leftArmAnimator.Rebind();
-                PlayerAnimator.leftArmAnimator.Play("Equip", -1, 0);
-
-                UIManager.Instance.SetCrosshair(currentGun.gunData.crossHair);
-            }
+            Equip();
             
             Shot();
             Reload();
@@ -62,19 +50,33 @@ public class WeaponController : MonoBehaviour
             equip = false;
         }
 
-        if (currentBottle != null && currentBottle._bottleDataSo.bottleType != BottleType.Special)
+        if (currentBottle != null && currentBottle)
         {
             DrinkBottle();
             currentBottle.DecreaseBottle();
         }
 
-        if (currentBottle as AmmoBottle)
+        if (currentGun != null && currentBottle as AmmoBottle)
         {
             currentGun.gunMagazine.totalAmmo += (currentBottle as AmmoBottle).GetAmmo();
         }
         
         ChangeBottle();
        
+    }
+
+    private void Equip()
+    {
+        if (equip == false)
+        {
+            equip = true;
+            PlayerAnimator.leftArmAnimator.runtimeAnimatorController = currentGun.runtimeAnimatorController;
+            PlayerAnimator.leftArmAnimator.enabled = true;
+            PlayerAnimator.leftArmAnimator.Rebind();
+            PlayerAnimator.leftArmAnimator.Play("Equip", -1, 0);
+            
+            UIManager.Instance.SetCrosshair(currentGun.gunData.crossHair);
+        }
     }
 
     private void Reload()
@@ -146,9 +148,13 @@ public class WeaponController : MonoBehaviour
         
         if(scroll == 0)return;
         currentBottleIndex += (int)scroll;
-        
         currentBottleIndex = Mathf.Clamp(currentBottleIndex,0 ,bottleList.Count - 1);
         SwitchBottle(currentBottleIndex);
+        
+        PlayerAnimator.rightArmAnimator.runtimeAnimatorController = currentBottle.AnimatorController;
+        PlayerAnimator.rightArmAnimator.Rebind();
+        
+        PlayerAnimator.rightArmAnimator.Play("Equip" , -1 , 0f);
     }
     private void SwitchBottle(int index)
     {
@@ -163,11 +169,15 @@ public class WeaponController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            bottleList.Remove(currentBottle);
+            if (currentBottle._bottleDataSo.bottleType == BottleType.Normal)
+            {
+                Destroy(currentBottle.gameObject);
+                bottleList.Remove(currentBottle);
+            }
+            
             currentBottle.DrinkBottle(_player.playerAnimator.rightArmAnimator);
             
             Invoke(nameof(SetBottleDefault), 1f);
-           
         }
     }
 

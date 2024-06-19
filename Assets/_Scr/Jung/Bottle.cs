@@ -38,16 +38,13 @@ public abstract class Bottle : MonoBehaviour
     {
         if (other.TryGetComponent(out WeaponController weaponController))
         {
-            weaponController.PlayerAnimator.rightArmAnimator.runtimeAnimatorController = AnimatorController;
-            weaponController.PlayerAnimator.rightArmAnimator.Rebind();
             transform.parent = weaponController.bottleTrm;
             weaponController.bottleList.Add(this);
         }
     }
-
-    public void ThrowBottle(Transform trm)
+    
+    public void SetBottleParent(Transform trm)
     {
         transform.parent = trm;
-        
     }
 }
