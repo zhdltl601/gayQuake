@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.TestTools;
 using Random = UnityEngine.Random;
 
 [System.Serializable]
@@ -10,6 +7,7 @@ public struct EnemySettings
 {
   public GameObject enemy;
   public int enemyCount;
+  public Transform[] enemyPos;
 }
 
 public enum RoomType
@@ -23,8 +21,10 @@ public class Room : MonoBehaviour
      public RoomType type;
     [SerializeField] private Corridor corridor;
     [SerializeField] private EnemySettings[] _enemySettingsArray;
-
     public List<GameObject> aliveEnemys = new List<GameObject>();
+
+    public bool customMap;
+    
     private bool _isInPlayer;
 
     [SerializeField] private Transform generationTrm;
@@ -84,13 +84,29 @@ public class Room : MonoBehaviour
     }
     private void GenerationEnemy()
     {
-        foreach (var item in _enemySettingsArray)
+        if (customMap)
         {
-            for (int i = 0; i < item.enemyCount; i++)
+            foreach (var item in _enemySettingsArray)
             {
-                GameObject newEnemy = Instantiate(item.enemy,transform.position + new Vector3(Random.Range(-15,15) , 0 , Random.Range(-15,15)) , Quaternion.identity);
-                newEnemy.GetComponent<EnemyMapSetting>().SetRoom(this);
-                aliveEnemys.Add(newEnemy);
+                for (int i = 0; i < item.enemyCount; i++)
+                {
+                    GameObject newEnemy = Instantiate(item.enemy, item.enemyPos[i].position, Quaternion.identity);
+                    
+                    newEnemy.GetComponent<EnemyMapSetting>().SetRoom(this);
+                    aliveEnemys.Add(newEnemy);
+                }
+            }
+        }
+        else
+        {
+            foreach (var item in _enemySettingsArray)
+            {
+                for (int i = 0; i < item.enemyCount; i++)
+                {
+                    GameObject newEnemy = Instantiate(item.enemy,transform.position + new Vector3(Random.Range(-15,15) , 0 , Random.Range(-15,15)) , Quaternion.identity);
+                    newEnemy.GetComponent<EnemyMapSetting>().SetRoom(this);
+                    aliveEnemys.Add(newEnemy);
+                }
             }
         }
     }
