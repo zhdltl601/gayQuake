@@ -73,9 +73,7 @@ public abstract class Gun : MonoBehaviour
             Health enemyHealth = hit.transform.GetComponent<Health>();
             ApplyDamage(enemyHealth, hit.normal , hit.point);  
             
-            
             UIManager.Instance.ChangeCrosshair();
-            
         }
         
         bullet[0].transform.position = _firePos.position;
@@ -99,7 +97,9 @@ public abstract class Gun : MonoBehaviour
             item.Simulate(0);
             item.Play();
         }
-
+       
+        SoundManager.Instance.PlayPlayerSOund("Shot");
+        
         return bullet;
     }
 

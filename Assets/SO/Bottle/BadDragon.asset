@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bottleName: "\uD788\uD788\uD788\uBCA0\uB4DC\uB4DC\uB798"
   bottleType: 1
-  statType: 0
+  statType: 3
   increaseAmount: 400
   drinkAmount: 40
   decreaseTime: 1

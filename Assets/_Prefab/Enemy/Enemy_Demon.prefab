@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e1167c35152414f857e0c0eaba6190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dieSound: Enemy_Demon
   _MeshRenderer:
   - {fileID: 4970396685236776039}
   - {fileID: 8207506200579863836}
@@ -392,11 +393,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePos: {fileID: 3101806543966212596}
   bullet: {fileID: 7383199481331753142, guid: 62f8319da2f2ad243814c2f2c73ada42, type: 3}
+  _enemy: {fileID: 8336166438252292031}
   duration: 0.1
   targetIntensity: 1
-  screenTime: 4
-  screenColor: {r: 0, g: 0, b: 0, a: 1}
-  _enemy: {fileID: 8336166438252292031}
+  screenTime: 2.4
 --- !u!114 &2731310540674562258
 MonoBehaviour:
   m_ObjectHideFlags: 0

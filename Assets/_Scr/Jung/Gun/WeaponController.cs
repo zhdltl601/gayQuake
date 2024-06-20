@@ -76,6 +76,7 @@ public class WeaponController : MonoBehaviour
             PlayerAnimator.leftArmAnimator.Play("Equip", -1, 0);
             
             UIManager.Instance.SetCrosshair(currentGun.gunData.crossHair);
+            SoundManager.Instance.PlayPlayerSOund("Equip");
         }
     }
 
@@ -129,6 +130,7 @@ public class WeaponController : MonoBehaviour
             _player.playerAnimator.leftArmAnimator.Play("AutoShoot", -1, 0f);
             
             UIManager.Instance.SetAmmoText();
+          
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0) || shootAble == false)
         {
