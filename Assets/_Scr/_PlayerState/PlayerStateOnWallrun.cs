@@ -56,11 +56,9 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     }
     protected override void HandleState()
     {
-        //Debug.DrawRay(player.transform.position, currentDir, Color.red, Time.deltaTime);
         Vector3 pForward = player.playerCamera.GetCameraRotTransform().forward;
         pForward.y = 0;
         pForward.Normalize();
-        //Debug.DrawRay(player.transform.position, pForward, Color.red, Time.deltaTime);
 
         float angle = Vector3.Angle(pForward, currentDir); //need optimazation
         bool isOver = angle > 90 + player.allowedWallrunAngleMax || angle < 90 - player.allowedWallrunAngleMin;
@@ -87,7 +85,7 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
         Vector3 forwardVector = player.playerCamera.GetCameraRotTransform().forward;
         forwardVector.y = 0;
         forwardVector.Normalize();
-        player.AddForce(forwardVector, wallrunCurveClampedForward * 5.5f);
+        player.AddForce(forwardVector, wallrunCurveClampedForward * 5.6f);
         player.SetYVal(1);
     }
 }
