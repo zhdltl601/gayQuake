@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunType: 2
   gunName: "\uC18C\uCD1D"
+  reloadTime: 0.35
   maxAmmoInMagazine: 40
   totalAmmo: 699996694
   damage: 20

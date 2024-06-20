@@ -17,6 +17,7 @@ public class GunDataSO : ScriptableObject
     [Header("Default Values")]
     public GunType gunType;
     public string gunName;
+    public float reloadTime;
     
     [Header("Ammo Values")]
     [SerializeField] private int maxAmmoInMagazine;

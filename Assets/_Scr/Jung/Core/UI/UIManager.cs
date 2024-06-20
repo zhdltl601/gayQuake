@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
+using System.Numerics;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
+using Vector3 = UnityEngine.Vector3;
 
 public class UIManager : MonoSingleton<UIManager>
 {
@@ -15,6 +17,7 @@ public class UIManager : MonoSingleton<UIManager>
     public Transform minimapCam;
     public Image hitCrossHair;
     public Image crossHair;
+    public Image reloadImage;
     private bool isCrossChange;
     
     [Header("Graphic")]
@@ -162,7 +165,7 @@ public class UIManager : MonoSingleton<UIManager>
         
         Time.timeScale = 0;
         Vector3 originalScale = SettingPanel.transform.localScale;
-        
+
         SettingPanel.transform.localScale = Vector3.zero;
         
         SettingPanel.gameObject.SetActive(true);
@@ -188,5 +191,11 @@ public class UIManager : MonoSingleton<UIManager>
     public void GoToExitBtn()
     {
         Application.Quit();
+    }
+
+    public void Reload(float duration)
+    {
+        reloadImage.fillAmount = 1;
+        reloadImage.DOFillAmount(0, duration);
     }
 }

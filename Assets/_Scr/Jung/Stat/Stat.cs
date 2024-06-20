@@ -12,14 +12,22 @@ public class Stat
     {
         return _baseValue;
     }
-
+    
+    public int GetMaxValue()
+    {
+        return _maxValue;
+    }
+    
     public void AddValue(int value)
     {
         if(useMaxValue && _baseValue >= _maxValue)
             return;
-        
+
         if (value != 0)
+        {
             _baseValue += value;
+            SoundManager.Instance.PlayEnemyrSound("BottleIncrease");
+        }
     }
 
     public void RemoveValue(int value)

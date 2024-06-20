@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
@@ -8,6 +10,7 @@ public class WeaponController : MonoBehaviour
     [Header("Gun Settings")]
     public Gun currentGun;
     private float _lastShootTime;
+    private bool reloading;
     
     [Header("Bottle Settings")] 
     public Bottle currentBottle;
@@ -30,11 +33,8 @@ public class WeaponController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         
         playerCam = Camera.main.transform;
-
         _player = GetComponent<Player>();
-        
     }
-
     private void Update()
     {
         if (currentGun != null)
@@ -55,7 +55,7 @@ public class WeaponController : MonoBehaviour
             DrinkBottle();
             currentBottle.DecreaseBottle();
         }
-
+        
         if (currentGun != null && currentBottle as AmmoBottle)
         {
             currentGun.gunMagazine.totalAmmo += (currentBottle as AmmoBottle).GetAmmo();
@@ -64,7 +64,6 @@ public class WeaponController : MonoBehaviour
         ChangeBottle();
        
     }
-
     private void Equip()
     {
         if (equip == false)
@@ -85,14 +84,14 @@ public class WeaponController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             currentGun.ReLoad();
+            StartCoroutine(ReloadCoroutine(currentGun.gunData.reloadTime));
             
-            UIManager.Instance.SetAmmoText();
+            UIManager.Instance.Reload(currentGun.gunData.reloadTime);
         }
     }
-    
     private void ThrowGun()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.G) && reloading == false)
         {
             PlayerAnimator.leftArmAnimator.enabled = false;
             currentGun.ThrowGun();
@@ -100,11 +99,10 @@ public class WeaponController : MonoBehaviour
             
         }
     }
-    
     private void Shot()
     {
         bool shootAble = currentGun.gunMagazine.ammoInMagazine > 0 &&
-                         _lastShootTime + currentGun.gunData.shotRate < Time.time;
+                         _lastShootTime + currentGun.gunData.shotRate < Time.time && !reloading;
         
         if (Input.GetKey(KeyCode.Mouse0) && shootAble)
         {
@@ -134,16 +132,13 @@ public class WeaponController : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0) || shootAble == false)
         {
-            
             Recoil(0,0);
         }
     }
-
     private void Recoil(float xAmount , float yAmount)
     {
         _player.AddRecoil(xAmount,yAmount);
     }
-        
     private void ChangeBottle()
     {
         float scroll = -Input.GetAxisRaw("Mouse ScrollWheel") * 10;
@@ -157,6 +152,8 @@ public class WeaponController : MonoBehaviour
         PlayerAnimator.rightArmAnimator.Rebind();
         
         PlayerAnimator.rightArmAnimator.Play("Equip" , -1 , 0f);
+        
+        UIManager.Instance.PopupText($"{currentBottle._bottleDataSo.bottleName}");
     }
     private void SwitchBottle(int index)
     {
@@ -166,7 +163,6 @@ public class WeaponController : MonoBehaviour
         currentBottle = bottleList[index];
         currentBottle.gameObject.SetActive(true);
     }
-
     private void DrinkBottle()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -182,12 +178,20 @@ public class WeaponController : MonoBehaviour
             Invoke(nameof(SetBottleDefault), 1f);
         }
     }
-
-
     private void SetBottleDefault()
     {
         currentBottle = bottleList[0];
         currentBottle.gameObject.SetActive(true);
+    }
+
+    IEnumerator ReloadCoroutine(float duration)
+    {
+        reloading = true;
+        yield return new WaitForSeconds(duration);
+        reloading = false;
+
+
+        UIManager.Instance.SetAmmoText();
     }
     
     public Gun GetCurrentGun()
