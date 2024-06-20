@@ -9,15 +9,23 @@ public abstract class Bottle : MonoBehaviour
     [SerializeField] private Transform piv;
     
     private float _timer;
-    
+
     private void Update()
     {
         _timer += Time.deltaTime;
+
         
-        float amount = PlayerStatController.Instance.PlayerStatSo._statDic[_bottleDataSo.statType].GetValue();
+        Stat s = PlayerStatController.Instance.PlayerStatSo._statDic[_bottleDataSo.statType];
+        float amount = s.GetValue();
         float amountMax = PlayerStatController.Instance.PlayerStatSo._statDic[_bottleDataSo.statType].GetMaxValue();
-            
-        piv.localScale = new Vector3(0,Mathf.Clamp(amount/amountMax , 0, 1),0);
+        
+        if (s.UseMaxValue() == false)
+        {
+            amountMax = 400;
+        }
+                
+        piv.localScale = new Vector3(1,Mathf.Clamp(amount/amountMax ,0 , 1),1);
+        
     }
 
     public virtual void DrinkBottle(Animator _animator)

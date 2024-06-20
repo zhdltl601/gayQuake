@@ -121,7 +121,6 @@ public class UIManager : MonoSingleton<UIManager>
 
         sequence.Append(hitCrossHair.DOFade(1, 0f));
         sequence.Append(hitCrossHair.DOFade(0, 0.2f));
-        sequence.OnComplete(() => Debug.Log("Crosshair animation complete"));
         yield return null;
     }
     public void SetCrosshair(Sprite sprite)

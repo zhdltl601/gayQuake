@@ -2003,7 +2003,7 @@ PrefabInstance:
     - target: {fileID: 5635063621471903205, guid: d2051f78688dbf549a4afa281dbb790a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5635063621471903205, guid: d2051f78688dbf549a4afa281dbb790a,
         type: 3}
@@ -2044,6 +2044,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7656037874720997093, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8726979494352696972, guid: d2051f78688dbf549a4afa281dbb790a,
         type: 3}
@@ -3381,6 +3386,8 @@ MonoBehaviour:
     AudioClip: {fileID: 8300000, guid: da3d44400aa6afd42a31ea2553370ced, type: 3}
   - name: BottleIncrease
     AudioClip: {fileID: 8300000, guid: d043a94e7ead9c848a71627fd8fc4236, type: 3}
+  - name: Enemy_Shot
+    AudioClip: {fileID: 8300000, guid: 6105290672727a343831fc08b895b05e, type: 3}
 --- !u!1 &1271396933
 GameObject:
   m_ObjectHideFlags: 0

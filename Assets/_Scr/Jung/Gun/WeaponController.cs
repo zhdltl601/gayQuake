@@ -34,6 +34,9 @@ public class WeaponController : MonoBehaviour
         
         playerCam = Camera.main.transform;
         _player = GetComponent<Player>();
+        
+        PlayerAnimator.rightArmAnimator.runtimeAnimatorController = currentBottle.AnimatorController;
+        PlayerAnimator.rightArmAnimator.Play("Equip" , -1 , 0f);
     }
     private void Update()
     {
@@ -150,10 +153,10 @@ public class WeaponController : MonoBehaviour
         
         PlayerAnimator.rightArmAnimator.runtimeAnimatorController = currentBottle.AnimatorController;
         //PlayerAnimator.rightArmAnimator.Rebind();
-        
         PlayerAnimator.rightArmAnimator.Play("Equip" , -1 , 0f);
         
-        UIManager.Instance.PopupText($"{currentBottle._bottleDataSo.bottleName}");
+        
+       
     }
     private void SwitchBottle(int index)
     {

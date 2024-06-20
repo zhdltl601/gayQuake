@@ -17,7 +17,10 @@ public class Stat
     {
         return _maxValue;
     }
-    
+    public bool UseMaxValue()
+    {
+        return useMaxValue;
+    }
     public void AddValue(int value)
     {
         if(useMaxValue && _baseValue >= _maxValue)
