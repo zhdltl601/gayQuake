@@ -31,7 +31,9 @@ public class Player : MonoBehaviour
     public float wallrunViewmodelAngle;
 
     [Header("Movement/Physics")]
-    [SerializeField] private float gravity;
+    [SerializeField] private float gravity = -9.81f;
+    public float gravityMultiOnGround = 1;
+    public float gravityMultiOnWall = 0.4f;
     [SerializeField] private float onGroundYVal;
     public float rangeWallRun;
 
@@ -39,6 +41,7 @@ public class Player : MonoBehaviour
     [SerializeField] private AnimationCurve dashCurve;
     [SerializeField] private AnimationCurve wallRunCurve;
     [SerializeField] private AnimationCurve forceVectorCurve;
+    [SerializeField] private AnimationCurve speedCurve;
     private float dashMulti;
     private float forceMulti;
 
@@ -99,7 +102,6 @@ public class Player : MonoBehaviour
 
         playerCamera.SetCameraRotation(xRotation, yRotation);
         playerViewmodel.SetViewmodelRotation(xRotation, yRotation);
-        //playerViewmodel.SetViewmodelRotation(playerCamera.GetCameraRotTransform().eulerAngles.x, playerCamera.GetCameraRotTransform().eulerAngles.y);
     }
     public void PlayerApplyMovement(Vector3 direction, float speed, float gravityMultiplier = 0, float forceMulti = 1)
     {
@@ -196,7 +198,7 @@ public class Player : MonoBehaviour
         void Dash()
         {
             yVal = 0;
-            dashMulti = 0.1f;//length of m_dashCurve
+            dashMulti = 0.09f;//length of m_dashCurve
             OnDash?.Invoke();
         }
         if (Input.GetKeyDown(KeyCode.LeftShift)) Dash(); 
@@ -252,6 +254,10 @@ public class Player : MonoBehaviour
     {
         x = x == -1 ? forceMulti : x;
         return forceVectorCurve.Evaluate(x);
+    }
+    public float GetSpeedCurve(float x)
+    {
+        return speedCurve.Evaluate(x);
     }
     public bool CheckWall(out RaycastHit raycastHit, out bool isRight)
     {

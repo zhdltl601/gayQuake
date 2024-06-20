@@ -7,6 +7,7 @@ public class PlayerStateOnGround : PlayerStateBaseDefault
     //private bool? isRightLast = null;
     private Collider lastWall = null;
     private Vector3 dir;
+    private float timeSinceMoving = 0;
     public PlayerStateOnGround(Player player) : base(player)
     {
     }
@@ -49,12 +50,27 @@ public class PlayerStateOnGround : PlayerStateBaseDefault
             //this.isRightLast = isRight;
         }
         wallRunHoldTime = isOnWall ? wallRunHoldTime : 0;
-        wallRunHoldTime += isPlWallrunable? Time.deltaTime : 0;
-        delayWallrun -= Time.deltaTime;
+        wallRunHoldTime += isPlWallrunable? Time.deltaTime * 2.2f : 0;
+        delayWallrun -= Time.deltaTime * 2.2f;
+    }
+    protected override float GetSpeed()
+    {
+        return base.GetSpeed() + player.GetSpeedCurve(timeSinceMoving);
+    }
+    protected override void HandleMove(Vector3 inputDirection)
+    {
+        base.HandleMove(inputDirection);
+        bool isMoving = inputDirection.sqrMagnitude > 0.25f;
+        timeSinceMoving += isMoving ? Time.deltaTime : -Time.deltaTime;
+        timeSinceMoving = Mathf.Clamp(timeSinceMoving, 0, 1);
     }
     protected override void HandleOnDash()
     {
         Dash();
+    }
+    protected override float GetGravitiyMultiplier()
+    {
+        return player.gravityMultiOnGround;
     }
     protected override void HandleOnJump()
     {

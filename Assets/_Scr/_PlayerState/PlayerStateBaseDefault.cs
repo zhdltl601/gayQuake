@@ -21,10 +21,6 @@ public abstract class PlayerStateBaseDefault : State
         player.OnJump -= HandleOnJump;
         player.OnDash -= HandleOnDash;
     }
-    public override void Update()
-    {
-        base.Update();
-    }
     protected virtual void HandleMove(Vector3 inputDirection)
     {
         HandleState();
@@ -55,7 +51,7 @@ public abstract class PlayerStateBaseDefault : State
     }
     protected virtual float GetGravitiyMultiplier()
     {
-        return 1.2f;
+        return 1;
     }
     protected virtual float GetSpeed()
     {
