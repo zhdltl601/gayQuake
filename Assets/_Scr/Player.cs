@@ -198,7 +198,7 @@ public class Player : MonoBehaviour
         void Dash()
         {
             yVal = 0;
-            dashMulti = 0.1f;//length of m_dashCurve
+            dashMulti = 0.09f;//length of m_dashCurve
             OnDash?.Invoke();
         }
         if (Input.GetKeyDown(KeyCode.LeftShift)) Dash(); 

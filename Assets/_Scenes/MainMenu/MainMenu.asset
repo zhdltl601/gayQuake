@@ -15,19 +15,59 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.61
+    m_Value: 0.74
   contrast:
     m_OverrideState: 1
-    m_Value: 40.5
+    m_Value: -6.2
   colorFilter:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   hueShift:
     m_OverrideState: 0
-    m_Value: 0
+    m_Value: -23
   saturation:
     m_OverrideState: 0
     m_Value: 0
+--- !u!114 &-1726917979264203235
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdfbdbb87d3286943a057f7791b43141, type: 3}
+  m_Name: ChannelMixer
+  m_EditorClassIdentifier: 
+  active: 1
+  redOutRedIn:
+    m_OverrideState: 0
+    m_Value: 100
+  redOutGreenIn:
+    m_OverrideState: 0
+    m_Value: 0
+  redOutBlueIn:
+    m_OverrideState: 0
+    m_Value: 0
+  greenOutRedIn:
+    m_OverrideState: 0
+    m_Value: 0
+  greenOutGreenIn:
+    m_OverrideState: 0
+    m_Value: 100
+  greenOutBlueIn:
+    m_OverrideState: 0
+    m_Value: 0
+  blueOutRedIn:
+    m_OverrideState: 1
+    m_Value: -5
+  blueOutGreenIn:
+    m_OverrideState: 1
+    m_Value: 19
+  blueOutBlueIn:
+    m_OverrideState: 1
+    m_Value: 92
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44,6 +84,7 @@ MonoBehaviour:
   - {fileID: 6957473065335742770}
   - {fileID: 6182772938788183065}
   - {fileID: -2736501459614262316}
+  - {fileID: -1726917979264203235}
 --- !u!114 &6182772938788183065
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -59,13 +100,13 @@ MonoBehaviour:
   active: 1
   lift:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: -0.066889696}
+    m_Value: {x: 1, y: 1, z: 1, w: -0.076907076}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: -0.17837219}
+    m_Value: {x: 1, y: 1, z: 1, w: -0.31805634}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.23411377}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.12271461}
 --- !u!114 &6957473065335742770
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -84,19 +125,19 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.57
+    m_Value: 0.59
   intensity:
     m_OverrideState: 1
-    m_Value: 2.05
+    m_Value: 4.86
   scatter:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.533
   clamp:
     m_OverrideState: 1
     m_Value: 65472
   tint:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 0.853259, b: 0.5503144, a: 1}
+    m_Value: {r: 0.45597476, g: 0.67488444, b: 1, a: 1}
   highQualityFiltering:
     m_OverrideState: 1
     m_Value: 0
