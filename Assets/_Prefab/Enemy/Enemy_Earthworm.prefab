@@ -1209,6 +1209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e1167c35152414f857e0c0eaba6190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dieSound: Enemy_Earthworm
   _MeshRenderer:
   - {fileID: 3564531154390435095}
   target: {fileID: 0}
@@ -1223,9 +1224,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   attackDistance: 2
+  minDistance: 0
   attackDamage: 110
   attackTime: 0.4
-  increaseAmount: 70
   attackSpeed: {x: 1, y: 1.5}
   runAwayCount: 0
   runAwayDistance: 0
@@ -1233,6 +1234,7 @@ MonoBehaviour:
   runAwayAble: 0
   runningAway: 0
   lastAttackTime: 0
+  isAttackMove: 0
 --- !u!114 &6154480225197386332
 MonoBehaviour:
   m_ObjectHideFlags: 0

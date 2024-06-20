@@ -23,6 +23,8 @@ public class EnemyDamageCaster : MonoBehaviour
             PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Health].RemoveValue(enemy.attackDamage);    
             UIManager.Instance.BloodScreen(Color.red);
         }
+        
+        SoundManager.Instance.PlayEnemyrSound(enemy.dieSound);
     }
 
     private void OnDrawGizmosSelected()

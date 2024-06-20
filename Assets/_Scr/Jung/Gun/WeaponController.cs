@@ -76,6 +76,7 @@ public class WeaponController : MonoBehaviour
             PlayerAnimator.leftArmAnimator.Play("Equip", -1, 0);
             
             UIManager.Instance.SetCrosshair(currentGun.gunData.crossHair);
+            SoundManager.Instance.PlayPlayerSOund("Equip");
         }
     }
 

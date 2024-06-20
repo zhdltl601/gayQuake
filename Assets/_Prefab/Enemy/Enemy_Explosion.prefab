@@ -95,13 +95,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e1167c35152414f857e0c0eaba6190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dieSound: Explosion1
   _MeshRenderer:
   - {fileID: 2460999257412380054}
   target: {fileID: 0}
   _whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  moveSpeed: 4
+  moveSpeed: 5
   checkPlayerDistance: 20
   isDead: 0
   dissolveDuration: 4

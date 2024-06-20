@@ -31,7 +31,7 @@ public class EnemyExplosion : MonoBehaviour
             UIManager.Instance.BloodScreen(Color.red);
         }
 
-        SoundManager.Instance.PlaySound("Explosion");
+        SoundManager.Instance.PlayEnemyrSound("Explosion");
         
         _enemy.DieEvent();
     }

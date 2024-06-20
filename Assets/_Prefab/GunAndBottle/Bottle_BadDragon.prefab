@@ -58,10 +58,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5435494692997583103, guid: ec718be3038282249abb93dc3dab1276,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bd8cfb84345a21246ae5ff25d5563166, type: 2}
+    - target: {fileID: -3743975858969745715, guid: ec718be3038282249abb93dc3dab1276,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3305478101090673430, guid: ec718be3038282249abb93dc3dab1276,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ec718be3038282249abb93dc3dab1276,
         type: 3}
       propertyPath: m_Name
       value: Bottle_BadDragon
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507767883509144192, guid: ec718be3038282249abb93dc3dab1276,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776705166948186808, guid: ec718be3038282249abb93dc3dab1276,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779745573541866595, guid: ec718be3038282249abb93dc3dab1276,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4570198776265331288, guid: ec718be3038282249abb93dc3dab1276,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -90,5 +125,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa14dcc5a0b95e4a9575c341826d8c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bottleDataSo: {fileID: 11400000, guid: 103f06f4387eaa840a76e577e596dfa3, type: 2}
+  _bottleDataSo: {fileID: 11400000, guid: 41a0c7a7a8ed97f45a10a48757cc122c, type: 2}
   AnimatorController: {fileID: 9100000, guid: 4b3710fd6978e9446a88b10b72b48a55, type: 2}

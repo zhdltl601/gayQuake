@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 public class EnemyDrone : MonoBehaviour,EnemyMapSetting
 {
     private readonly int _dissolveHash = Shader.PropertyToID("_DissolveHeight");
+    private readonly int _blinkValue = Shader.PropertyToID("_BlinkValue");
     public StateMachine<EnemyStateEnum> StateMachine { get; private set; }
     public Collider Collider { get; private set; }
     public Animator Animator  { get; private set; }
@@ -21,7 +22,8 @@ public class EnemyDrone : MonoBehaviour,EnemyMapSetting
     public float moveSpeed;
     public float runAwayDistance;
     public float attackDistance;
-    public int increaseAmount;
+
+    private bool _IsHit;
     
     [Header("Attack Settings")]
     public Transform[] firePos;
@@ -63,6 +65,23 @@ public class EnemyDrone : MonoBehaviour,EnemyMapSetting
     public void HitEvent()
     {
         Animator.SetTrigger("Hit");
+        StartCoroutine(HitCoroutine());
+    }
+    
+    IEnumerator HitCoroutine()
+    {
+        if (_IsHit) yield break;
+        
+        _IsHit = true;
+
+        Material mat = meshRenderer.material;
+                
+        mat.SetFloat(_blinkValue,1);
+            
+        yield return new WaitForSeconds(0.4f);
+        _IsHit = false;
+     
+        mat.SetFloat(_blinkValue,0);      
     }
     
     public void DeadEvent()
@@ -83,6 +102,8 @@ public class EnemyDrone : MonoBehaviour,EnemyMapSetting
             item.Play();
         }
         StateMachine.ChangeState(EnemyStateEnum.Dead);
+        
+        SoundManager.Instance.PlayEnemyrSound("Explosion1");
         
         StartDissolve();
         RemoveEnemy();

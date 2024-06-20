@@ -4,6 +4,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour,EnemyMapSetting
 {
+    public string dieSound;
     public EnemyStateMachine StateMachine { get; private set; }
     
     private readonly int _blinkValue = Shader.PropertyToID("_BlinkValue");
@@ -80,7 +81,7 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
 
         runAwayTrm.position -= (transform.forward * runAwayDistance);
     }
-
+    
     private void OnEnable() 
     {
         Dissolve(-2, 5 , false);    

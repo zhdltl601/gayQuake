@@ -53,7 +53,7 @@ public class RPG : Gun
             item.Play();
         }
         
-        SoundManager.Instance.PlaySound("Shot_Rocket");
+        SoundManager.Instance.PlayPlayerSOund("Shot_Rocket");
         
         return bullet;
     }

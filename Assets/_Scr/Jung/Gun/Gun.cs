@@ -97,9 +97,8 @@ public abstract class Gun : MonoBehaviour
             item.Simulate(0);
             item.Play();
         }
-        
        
-        SoundManager.Instance.PlaySound("Shot");
+        SoundManager.Instance.PlayPlayerSOund("Shot");
         
         return bullet;
     }

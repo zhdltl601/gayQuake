@@ -63,31 +63,49 @@ public class Cabinet : MonoBehaviour
         {
             priceText.gameObject.SetActive(false);
             interaction.onInteraction -= OnBuy;
+            interaction = null;
         }
     }
 
     private void OnBuy()
     {
-        if(isSell)return;
-        
         if (PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Money].GetValue() - price >= 0)
         {
-            PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Money].RemoveValue(price);
-
             if (goods != null && goods.GetComponent<Gun>())
             {
                 goods.GetComponent<Gun>().ThrowGun();
                 goods.GetComponent<Rigidbody>().AddForce(Vector3.up * 250);
-                Destroy(this);
+                
+                BuySetting();
             }
-            else if (goods != null && goods.TryGetComponent(out Bottle bottle) && interaction.TryGetComponent(out WeaponController weaponController))
+            else if (goods.TryGetComponent(out Bottle bottle) && interaction.TryGetComponent(out WeaponController weaponController))
             {
+                foreach (var item in weaponController.bottleList)
+                {
+                    if (bottle._bottleDataSo.statType == item._bottleDataSo.statType)
+                    {
+                        UIManager.Instance.PopupText($"{"이미 존재하는 아이템 입니다."}");
+                        return;
+                    }
+                }
+                
                 goods.SetActive(false);
                 goods.GetComponent<Bottle>().SetBottleParent(weaponController.bottleTrm);
                 weaponController.bottleList.Add(goods.GetComponent<Bottle>());
-                Destroy(this); Debug.Log("지랄하네 진짜");
+                
+                BuySetting();
             }
         }
+    }
+
+    private void BuySetting()
+    {
+        interaction.onInteraction -= OnBuy;
+        
+        PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Money].RemoveValue(price);
+        SoundManager.Instance.PlayPlayerSOund("Buy");
+        priceText.SetText("");
+        Destroy(this);
     }
 
     private void LookPlayer()
