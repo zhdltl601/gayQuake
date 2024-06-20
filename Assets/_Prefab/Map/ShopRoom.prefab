@@ -633,6 +633,14 @@ MonoBehaviour:
   _enemySettingsArray: []
   aliveEnemys: []
   generationTrm: {fileID: 0}
+  EastWall: {fileID: 3610922709050550307}
+  WestWall: {fileID: 1056176890322040706}
+  NorthWall: {fileID: 6501058848133248421}
+  SouthWall: {fileID: 8028756492423055268}
+  EastWall_Door: {fileID: 8680768830802303719}
+  WestWall_Door: {fileID: 5361837173988464663}
+  NorthWall_Door: {fileID: 8128405376658638890}
+  SouthWall_Door: {fileID: 7783432176969829837}
 --- !u!1 &3610922709050550307
 GameObject:
   m_ObjectHideFlags: 0

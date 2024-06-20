@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Resources;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
@@ -7,6 +9,7 @@ using Vector3 = UnityEngine.Vector3;
 
 public class MapManager : MonoSingleton<MapManager>
 {
+    public int chapterCount;
     public int mapCount;
     
     public List<GameObject> normalMapTypes;
@@ -18,31 +21,41 @@ public class MapManager : MonoSingleton<MapManager>
     public GameObject endRoom;
     
     public GameObject corridor;
+
+    public GameObject potal;
     
     private Transform _lastRoomTrm;
     private Vector3[] _mapDir;
     private List<Transform> _maps;
-    
-    [Space]
-    [Header("LayerMask")] 
-    [SerializeField] private LayerMask whatIsMap;
+
+    private bool specialRoomSpawn;
     
     protected override void Awake()
     {
         base.Awake();
         
+        ChapterGeneration();
+    }
+    
+    public void ChapterGeneration()
+    {
         DefaultSetting();
-        
+
         GenerationStartRoom();
         GenerateMap();
         GenerationEndRoom();
-        
-        GenerateCorridor();
-    }
 
-    private void Start()
-    {
+        GenerateCorridor();
+        
+        specialRoomSpawn = false;
         _maps[0].GetComponent<Room>().EnterRoom();
+    }
+    public void ClearMap()
+    {
+        for (int i = 0; i < _maps.Count; i++)
+        {
+            Destroy(_maps[i].gameObject);
+        }
     }
     
     private void DefaultSetting()
@@ -89,31 +102,42 @@ public class MapManager : MonoSingleton<MapManager>
         GameObject room = Instantiate(endRoom, position, Quaternion.identity);
         _lastRoomTrm = room.transform;
         _maps.Add(room.transform);
-      
+        
+        
+        GameObject newPortal = Instantiate(potal);
+        newPortal.transform.parent = room.transform;
+        newPortal.transform.localPosition = Vector3.zero;
+        
         room.name = "EndRoom";
     }
   
   
     private void GenerateMap()
     {
-        for (int i = 0; i < mapCount;)
+        int generatedMaps = 0;
+        while (generatedMaps < mapCount)
         {
-            int mapType = Random.Range(0,2);
-
-            if (mapType == 0 && specialMapTypes.Count > 0 && i > mapCount/2)
+            int mapType = Random.Range(0, 2);
+            bool mapGenerated = false;
+            
+            if (mapType == 0 && specialMapTypes.Count > 0 && generatedMaps >= mapCount / 3 && specialRoomSpawn == false)
             {
-                GenerationSpecial();
+                mapGenerated = GenerationSpecial();
+                specialRoomSpawn = true;
             }
             else 
             {
-                GenerationNormal();
+                mapGenerated = GenerationNormal();
             }
             
-            i++;
+            if (mapGenerated)
+            {
+                generatedMaps++;
+            }
         }
-        
     }
-    private void Generation(Vector3 position, List<GameObject> mapTypes, bool removeFromList = false)
+    
+    private bool Generation(Vector3 position, List<GameObject> mapTypes)
     {
         bool positionOccupied = false;
         foreach (Transform map in _maps)
@@ -132,24 +156,25 @@ public class MapManager : MonoSingleton<MapManager>
             
             _lastRoomTrm = newMapObj.transform;
             _maps.Add(newMapObj.transform);
-        
-            if (removeFromList)
-            {
-                mapTypes.RemoveAt(randomIndex);
-            }
+            
+
+            return true;
         }
-        
+        return false; 
     }
-    private void GenerationSpecial()
+
+    private bool GenerationSpecial()
     {
         Vector3 position = _lastRoomTrm.position + _mapDir[Random.Range(0, _mapDir.Length)] * 60;
-        Generation(position, specialMapTypes, true);
+        return Generation(position, specialMapTypes);
     }
-    private void GenerationNormal()
+
+    private bool GenerationNormal()
     {
         Vector3 position = _lastRoomTrm.position + _mapDir[Random.Range(0, _mapDir.Length)] * 60;
-        Generation(position, normalMapTypes,false);
+        return Generation(position, normalMapTypes);
     }
+
     private void GenerateCorridor()
     {
         for (int i = 0; i < _maps.Count - 1; i++)
@@ -169,46 +194,43 @@ public class MapManager : MonoSingleton<MapManager>
             newCorridor.transform.parent = _maps[i];
             
             newCorridor.GetComponent<Corridor>().SetRoom(nextRoom.GetComponent<Room>());
+
+            Room cRoom = currentRoom.GetComponent<Room>();
+            Room nRoom = nextRoom.GetComponent<Room>();
             
             if (Mathf.Approximately(direction.x, 1))
             {
-                // nextRoom이 currentRoom의 오른쪽에 있을 때
-                currentRoom.Find("Wall/EastWall").gameObject.SetActive(false);
-                nextRoom.Find("Wall/WestWall").gameObject.SetActive(false);
+                cRoom.EastWall.SetActive(false);
+                nRoom.WestWall.SetActive(false);
                 
-                currentRoom.Find("Wall/EastWall_Door").gameObject.SetActive(true);
-                nextRoom.Find("Wall/WestWall_Door").gameObject.SetActive(true);
+                cRoom.EastWall_Door.SetActive(true);
+                nRoom.WestWall_Door.SetActive(true);
             }
             else if (Mathf.Approximately(direction.x, -1))
             {
-                // nextRoom이 currentRoom의 왼쪽에 있을 때
-                currentRoom.Find("Wall/WestWall").gameObject.SetActive(false);
-                nextRoom.Find("Wall/EastWall").gameObject.SetActive(false);
+                cRoom.WestWall.SetActive(false);
+                nRoom.EastWall.SetActive(false);
                 
-                currentRoom.Find("Wall/WestWall_Door").gameObject.SetActive(true);
-                nextRoom.Find("Wall/EastWall_Door").gameObject.SetActive(true);
+                cRoom.WestWall_Door.SetActive(true);
+                nRoom.EastWall_Door.SetActive(true);
             }
             else if (Mathf.Approximately(direction.z, 1))
             {
-                // nextRoom이 currentRoom의 위쪽에 있을 때
-                currentRoom.Find("Wall/NorthWall").gameObject.SetActive(false);
-                nextRoom.Find("Wall/SouthWall").gameObject.SetActive(false);
+                cRoom.NorthWall.SetActive(false);
+                nRoom.SouthWall.SetActive(false);
 
-                currentRoom.Find("Wall/NorthWall_Door").gameObject.SetActive(true);
-                nextRoom.Find("Wall/SouthWall_Door").gameObject.SetActive(true);
+                cRoom.NorthWall_Door.SetActive(true);
+                nRoom.SouthWall_Door.SetActive(true);
             }
             else if (Mathf.Approximately(direction.z, -1))
             {
-                // nextRoom이 currentRoom의 아래쪽에 있을 때
-                currentRoom.Find("Wall/SouthWall").gameObject.SetActive(false);
-                nextRoom.Find("Wall/NorthWall").gameObject.SetActive(false);
+                cRoom.SouthWall.SetActive(false);
+                nRoom.NorthWall.SetActive(false);
                 
-                currentRoom.Find("Wall/SouthWall_Door").gameObject.SetActive(true);
-                nextRoom.Find("Wall/NorthWall_Door").gameObject.SetActive(true);
+                cRoom.SouthWall_Door.SetActive(true);
+                nRoom.NorthWall_Door.SetActive(true);
             }
         }
     }
     #endregion
-    
-        
 }
