@@ -28,10 +28,31 @@ public class Room : MonoBehaviour
     private bool _isInPlayer;
 
     [SerializeField] private Transform generationTrm;
+
+    private Portal portal;
     
+    [Header("Wall")]
+    public GameObject EastWall;
+    public GameObject WestWall;
+    public GameObject NorthWall;
+    public GameObject SouthWall;
+    
+    [Header("Door")]
+    public GameObject EastWall_Door;
+    public GameObject WestWall_Door;
+    public GameObject NorthWall_Door;
+    public GameObject SouthWall_Door;
     private void Start()
     {
-        corridor = GetComponentInChildren<Corridor>();
+        if (gameObject.name == "EndRoom")
+        {
+            portal = GetComponentInChildren<Portal>();
+            portal.gameObject.SetActive(false);
+        }
+        else
+        {
+            corridor = GetComponentInChildren<Corridor>();
+        }
     }
 
     private void Update()
@@ -44,14 +65,22 @@ public class Room : MonoBehaviour
     public void EnterRoom()
     {
         _isInPlayer = true;
-                    
-        if (type == RoomType.Special) return;
+        
+        if (type == RoomType.Special){ return;}
         GenerationEnemy();
     }
     private void FinishRoom()
     {
         _isInPlayer = false;
+
+        if (portal !=null && MapManager.Instance.chapterCount >= 1)
+        {
+            MapManager.Instance.chapterCount--;
+            portal.gameObject.SetActive(true);
+        }
+        
         corridor?.DoorOpen();
+        
     }
     private void GenerationEnemy()
     {

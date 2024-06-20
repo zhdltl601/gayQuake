@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bottleDataSo: {fileID: 11400000, guid: 41a0c7a7a8ed97f45a10a48757cc122c, type: 2}
-  AnimatorController: {fileID: 9100000, guid: 4b3710fd6978e9446a88b10b72b48a55, type: 2}
+  AnimatorController: {fileID: 22100000, guid: 4edcff8c2ce54324d8487beee065148c, type: 2}
   piv: {fileID: 755448596188471498}
 --- !u!4 &1960007036026884706 stripped
 Transform:

@@ -36,5 +36,7 @@ public class EnemyShot : MonoBehaviour
         newBullet.GetComponent<Bullet>().SetBullet(firePos.forward);
         
         ObjectPooling.Instance.ReTurnObject(newBullet , 1.5f);
+
+        SoundManager.Instance.PlayEnemyrSound("Enemy_Shot");
     }
 }
