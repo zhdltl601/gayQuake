@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
@@ -42,11 +43,16 @@ public class MapManager : MonoSingleton<MapManager>
         
         ChapterGeneration();
     }
-    
+
+    private void Start()
+    {
+        UIManager.Instance.PopupText($"{curruentChpter + 1}번째 챕터");            
+    }
+
     public void ChapterGeneration()
     {
         curruentChpter++;
-        
+                
         DefaultSetting();
         
         GenerationStartRoom();
@@ -57,7 +63,9 @@ public class MapManager : MonoSingleton<MapManager>
 
         specialRoomSpawn = false;
         _maps[0].GetComponent<Room>().EnterRoom();
+        
     }
+    
     public void ClearMap()
     {
         for (int i = 0; i < _maps.Count; i++)
