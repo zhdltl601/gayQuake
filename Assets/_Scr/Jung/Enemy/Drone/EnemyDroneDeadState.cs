@@ -16,6 +16,8 @@ public class EnemyDroneDeadState : EnemyDroneBaseState
         _enemyDrone.Rigidbody.useGravity = true;
 
         _enemyDrone.isDead = true;
+        
+        UIManager.Instance.CoinText();
     }
 
     public override void Update()

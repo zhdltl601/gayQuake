@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public enum BottleType
 {
@@ -10,6 +11,7 @@ public enum BottleType
 public class BottleDataSO : ScriptableObject
 {
     public string bottleName;
+    [TextArea] public string bottleExplain;
     public BottleType bottleType;
     public StatType statType;
     
@@ -18,4 +20,5 @@ public class BottleDataSO : ScriptableObject
     
     public float decreaseTime;
     public int decreaseAmount;
+
 }

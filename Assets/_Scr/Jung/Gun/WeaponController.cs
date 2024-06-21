@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class WeaponController : MonoBehaviour
 {
@@ -26,7 +28,12 @@ public class WeaponController : MonoBehaviour
     private Transform playerCam;
 
     private bool equip = false;
-    
+
+    private void Awake()
+    {
+        Time.timeScale = 1;
+    }
+
     private void Start()
     {
         Cursor.visible = false;
@@ -34,6 +41,9 @@ public class WeaponController : MonoBehaviour
         
         playerCam = Camera.main.transform;
         _player = GetComponent<Player>();
+        
+        UIManager.Instance.CoinText();
+        UIManager.Instance.SetBottleUI($"<color=#40739e>{currentBottle._bottleDataSo.bottleName}</color>: {currentBottle._bottleDataSo.bottleExplain}");
         
         PlayerAnimator.rightArmAnimator.runtimeAnimatorController = currentBottle.AnimatorController;
         PlayerAnimator.rightArmAnimator.Play("Equip" , -1 , 0f);
@@ -165,6 +175,9 @@ public class WeaponController : MonoBehaviour
         currentBottle.gameObject.SetActive(false);
         currentBottle = bottleList[index];
         currentBottle.gameObject.SetActive(true);
+
+        UIManager.Instance.SetBottleUI($"<color=#40739e>{currentBottle._bottleDataSo.bottleName}</color>: {currentBottle._bottleDataSo.bottleExplain}");
+
     }
     private void DrinkBottle()
     {

@@ -12,6 +12,7 @@ public class EnemyDeadState : EnemyState
     {
         base.Enter();
         _enemy.Collider.enabled = false;
+        UIManager.Instance.CoinText();
     }
 
     public override void Update()

@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
-
+using Random = UnityEngine.Random;
+using Vector3 = UnityEngine.Vector3;
 
 public abstract class Gun : MonoBehaviour
 {
@@ -100,7 +101,7 @@ public abstract class Gun : MonoBehaviour
 
     protected void ApplyDamage(Health enemyHealth , Vector3 normal , Vector3 point)
     {
-        if (_weaponController.GetCurrenBottle() is AttackBottle)
+        if (_weaponController.GetCurrenBottle()._bottleDataSo.statType ==  StatType.Attack)
         {
             enemyHealth.ApplyDamage(
                 PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Attack].GetValue() + gunData.damage,

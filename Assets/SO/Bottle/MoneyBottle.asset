@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: MoneyBottle
   m_EditorClassIdentifier: 
   bottleName: "\uB3C8\uBCD1"
+  bottleExplain: "\uC801\uC744 \uC8FD\uC774\uBA74 \uB3C8\uC744 \uC5BB\uC2B5\uB2C8\uB2E4."
   bottleType: 0
   statType: 1
-  increaseAmount: 40
+  increaseAmount: 5
   drinkAmount: 0
   decreaseTime: 99999
   decreaseAmount: 0
