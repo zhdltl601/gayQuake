@@ -18,6 +18,7 @@ MonoBehaviour:
     - f6c93b2225a66c547a51441959af176c
     - 02b766c785d20c34abff82a01a2d5aa9
     - 0a9657373699f5b4a93684b0114d6ccb
+    - 45d8c501658bede4d968940e446e2e5e
     values:
     - goDatas_byGlobalId:
         keys:
@@ -49,3 +50,6 @@ MonoBehaviour:
           iconNameOrGuid: 
         - colorIndex: 5
           iconNameOrGuid: 
+    - goDatas_byGlobalId:
+        keys: []
+        values: []
