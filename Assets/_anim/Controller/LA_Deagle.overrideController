@@ -7,5 +7,11 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LA_Deagle
-  m_Controller: {fileID: 0}
-  m_Clips: []
+  m_Controller: {fileID: 9100000, guid: cc804681254b93c4a987e24fed042377, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: cbc37ba2674e94b41801c4120b6f48aa, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 2aa0e070b3b04f84182c2b9ff893051c, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 806e35210eea687499179bbaedb18c6d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ca01182c8338d354ea4b67079b3c8e9d, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 1362caf60c1b602478b84acba6e56920, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e882a0e555641d14cae45439e0bf3fa8, type: 2}
