@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float speedWalk;
     public float jumpForce;
+    public float delayDash = 1;
 
     [Header("Wallrun")]
     public float speedWall;
@@ -91,6 +92,8 @@ public class Player : MonoBehaviour
     {
         playerStateMachine.UpdateState();
         PlayerInput();
+        delayDash += Time.deltaTime;
+        delayDash = delayDash > 1 ? 1 : delayDash;
         //PlayerUI.Instance.lists[0].text = playerStateMachine.CurrentState.ToString();
         //PlayerUI.Instance.lists[2].text = playerStateMachine.CurrentState.ToString();
         //if (Input.GetKeyDown(KeyCode.Backspace)) AddMovementImpulse(Vector3.forward, 1, 0);
@@ -197,9 +200,13 @@ public class Player : MonoBehaviour
 
         void Dash()
         {
-            yVal = 0;
-            dashMulti = 0.09f;//length of m_dashCurve
-            OnDash?.Invoke();
+            if(delayDash > 0)
+            {
+                delayDash -= 1;
+                yVal = 0;
+                dashMulti = 0.09f;//length of m_dashCurve
+                OnDash?.Invoke();
+            }
         }
         if (Input.GetKeyDown(KeyCode.LeftShift)) Dash(); 
         if (dashMulti > 0) dashMulti -= Time.deltaTime; // will change later 
