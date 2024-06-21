@@ -14,7 +14,7 @@ public class PlayerStateOnGround : PlayerStateBaseDefault
     public override void Enter()
     {
         base.Enter();
-        delayWallrun = 0.4f;
+        delayWallrun = 0.25f;
         wallRunHoldTime = 0;
     }
     protected override Vector3 GetDirection(Vector3 inputDirection)

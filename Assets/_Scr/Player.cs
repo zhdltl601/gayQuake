@@ -263,16 +263,16 @@ public class Player : MonoBehaviour
     {
         Transform camTrm = playerCamera.GetCameraRotTransform();
         float range = rangeWallRun;
-        bool result = Physics.Raycast(camTrm.position, camTrm.right, out raycastHit, range, lm_wallrunable);
+        bool result = Physics.Raycast(camTrm.position - new Vector3(0, 0.25f, 0), camTrm.right, out raycastHit, range, lm_wallrunable);
         isRight = result;
-        result = result ? true : Physics.Raycast(camTrm.position, camTrm.TransformDirection(Vector3.left), out raycastHit, range, lm_wallrunable);
+        result = result ? true : Physics.Raycast(camTrm.position - new Vector3(0, 0.25f, 0), camTrm.TransformDirection(Vector3.left), out raycastHit, range, lm_wallrunable);
         return result;
     }
     public bool CheckWall(out RaycastHit raycastHit, out bool isRight, out Collider col)
     {
         Transform camTrm = playerCamera.GetCameraRotTransform();
         float range = rangeWallRun;
-        bool result = Physics.Raycast(camTrm.position, camTrm.right, out raycastHit, range, lm_wallrunable);
+        bool result = Physics.Raycast(camTrm.position - new Vector3(0, 0.25f, 0), camTrm.right, out raycastHit, range, lm_wallrunable);
         isRight = result;
         result = result ? true : Physics.Raycast(camTrm.position, camTrm.TransformDirection(Vector3.left), out raycastHit, range, lm_wallrunable);
 
@@ -292,9 +292,9 @@ public class Player : MonoBehaviour
     public bool CheckWall(out RaycastHit raycastHit, ref Vector3 dir)
     {
         Transform camTrm = playerCamera.GetCameraRotTransform();
-        float range = rangeWallRun;
+        float range = rangeWallRun * 2;
         Debug.DrawRay(camTrm.position, dir, Color.yellow, Time.deltaTime);
-        bool result = Physics.Raycast(camTrm.position, dir, out raycastHit, range, lm_wallrunable);
+        bool result = Physics.Raycast(camTrm.position - new Vector3(0, 0.25f, 0), dir, out raycastHit, range, lm_wallrunable);
         dir = -raycastHit.normal;
         dir.Normalize();
         return result;

@@ -12,7 +12,7 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     public override void Enter()
     {
         base.Enter();
-        player.SetYVal(2.16f);
+        player.SetYVal(player.jumpForce * 0.2f);
         timerSinceEnter = 0;
         player.CheckWall(out raycastHit, out bool isRight);
         player.playerAnimator.camAnimator.Play("OnWall");
@@ -27,7 +27,7 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     protected override void HandleOnJump()
     {
         StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
-        player.SetYVal(9.5f);
+        player.SetYVal(player.jumpForce);
     }
     protected override float GetGravitiyMultiplier()
     {
@@ -51,7 +51,8 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
             player.AddForce(currentDir.normalized, 4);
         }
         Vector3 forwardVector = Vector3.ProjectOnPlane(inputDirection, raycastHit.normal);
-        forwardVector = forwardVector.sqrMagnitude < 1 ? forwardVector : forwardVector.normalized;
+        forwardVector.Normalize();
+        //forwardVector = forwardVector.sqrMagnitude < 1 ? forwardVector : forwardVector.normalized;
         return forwardVector;
     }
     protected override void HandleState()
@@ -69,7 +70,7 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
         if (player.playerController.IsGround)
         {
             StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
-            player.AddForce(currentDir, 2.6f);
+            player.AddForce(currentDir, 2.1f);
         }
     }
 
@@ -79,7 +80,7 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
         player.playerViewmodel.WallRun(0);
         float wallrunCurveClamped = player.GetWallrunCurve(timerSinceEnter);
         wallrunCurveClamped = Mathf.Clamp(wallrunCurveClamped, 1, 1.4f);
-        player.AddForce(-currentDir, 3.2f * wallrunCurveClamped);
+        player.AddForce(-currentDir, 2.1f * wallrunCurveClamped);
 
         float wallrunCurveClampedForward = Mathf.Clamp(wallrunCurveClamped, 0.5f, 1.6f);
         Vector3 forwardVector = player.playerCamera.GetCameraRotTransform().forward;
