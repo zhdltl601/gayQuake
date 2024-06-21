@@ -227,7 +227,7 @@ public class MapManager : MonoSingleton<MapManager>
             Room cRoom = currentRoom.GetComponent<Room>();
             Room nRoom = nextRoom.GetComponent<Room>();
             
-            if (Mathf.Approximately(direction.x, 1))
+            if (direction.x >= 1)
             {
                 cRoom.EastWall.SetActive(false);
                 cRoom.EastWall_Door.SetActive(true);
@@ -235,7 +235,7 @@ public class MapManager : MonoSingleton<MapManager>
                 nRoom.WestWall.SetActive(false);
                 nRoom.WestWall_Door.SetActive(true);
             }
-            else if (Mathf.Approximately(direction.x, -1))
+            else if (direction.x <= -1)
             {
                 cRoom.WestWall.SetActive(false);
                 cRoom.WestWall_Door.SetActive(true);
@@ -243,7 +243,7 @@ public class MapManager : MonoSingleton<MapManager>
                 nRoom.EastWall.SetActive(false);
                 nRoom.EastWall_Door.SetActive(true);
             }
-            else if (Mathf.Approximately(direction.z, 1))
+            else if (direction.z >= 1)
             {
                 cRoom.NorthWall.SetActive(false);
                 cRoom.NorthWall_Door.SetActive(true);
@@ -251,7 +251,7 @@ public class MapManager : MonoSingleton<MapManager>
                 nRoom.SouthWall.SetActive(false);
                 nRoom.SouthWall_Door.SetActive(true);
             }
-            else if (Mathf.Approximately(direction.z, -1))
+            else if (direction.z <= 1)
             {
                 cRoom.SouthWall.SetActive(false);
                 cRoom.SouthWall_Door.SetActive(true);
