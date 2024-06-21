@@ -24,10 +24,16 @@ public class Cabinet : MonoBehaviour
         _camera = Camera.main.transform;
         priceText.SetText(price.ToString());
         
-        int random = Random.Range(0, lists.goods.Length - 1);
+        int random = Random.Range(0, lists.goods.Count - 1);
         goods = Instantiate(lists.goods[random], transform.position + Vector3.up * 1.5f,Quaternion.identity);
         goods.transform.parent = transform;
         goods.name = lists.goods[random].name;
+
+        lists.goods.RemoveAt(random);
+        if (lists.goods.Count >= 0)
+        {
+            lists.ResetList();
+        }
     }
 
     private void Update()

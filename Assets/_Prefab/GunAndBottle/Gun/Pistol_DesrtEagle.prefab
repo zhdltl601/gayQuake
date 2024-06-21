@@ -115,7 +115,8 @@ MonoBehaviour:
     maxAmmoInMagazine: 0
     ammoInMagazine: 0
     totalAmmo: 0
-  runtimeAnimatorController: {fileID: 0}
+  runtimeAnimatorController: {fileID: 22100000, guid: 529f055c25722f349b589841ff268326,
+    type: 2}
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 64
@@ -258,6 +259,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3890761801973033254}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7c43060bca698b345bd677c52ff3f601,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7500372919782886280}
   m_SourcePrefab: {fileID: 100100000, guid: 7c43060bca698b345bd677c52ff3f601, type: 3}
 --- !u!1 &1695688847304393660 stripped
 GameObject:
@@ -279,6 +284,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePos: {fileID: 3585338686351478965}
   caseShell: {fileID: 7908569909808465703}
+--- !u!65 &7500372919782886280
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695688847304393660}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.20684586, y: 0.37809482, z: 0.5187927}
+  m_Center: {x: -0.0033683851, y: 0.0074141473, z: 0.021534413}
 --- !u!4 &2072672504720906502 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7c43060bca698b345bd677c52ff3f601,

@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b24903ce2a529d45ac83d002094586c, type: 3}
   m_Name: GoodsList
   m_EditorClassIdentifier: 
-  goods:
-  - {fileID: 50618607230761338, guid: d582cb4ce82c6204ea9488c996ffd49b, type: 3}
-  - {fileID: 1186848788507412696, guid: e75dedc34d3e5af4f83f637258f76e6a, type: 3}
+  lists:
   - {fileID: 7702447783540567042, guid: 1b915ef09c589d14ea6ef49efabc843f, type: 3}
+  - {fileID: 9108733920280302094, guid: 25c44ade8a7f5664e94fa9c98ea92fa4, type: 3}
+  - {fileID: 7936647765437962897, guid: d67a72da1d443f643bfcfdeb5c0f5025, type: 3}
   - {fileID: 8954885641401316218, guid: e3ae674de7666094e9950d01e5862665, type: 3}
+  - {fileID: 8154681273174569824, guid: a8e5b26583365d1489eaa60fd5967780, type: 3}
   - {fileID: 53626345523260558, guid: 69c8513b9ff8c684b980ca21583d0b13, type: 3}
   - {fileID: 7117108458355762394, guid: 23f2a8a4868fdc94cb2edbfa82dfd7b8, type: 3}
-  - {fileID: 8154681273174569824, guid: a8e5b26583365d1489eaa60fd5967780, type: 3}
-  - {fileID: 7936647765437962897, guid: d67a72da1d443f643bfcfdeb5c0f5025, type: 3}
+  - {fileID: 50618607230761338, guid: d582cb4ce82c6204ea9488c996ffd49b, type: 3}
+  - {fileID: 1186848788507412696, guid: e75dedc34d3e5af4f83f637258f76e6a, type: 3}
+  - {fileID: 1653353522389585210, guid: c55dc692dc8fbb64bbcb8559231d90b3, type: 3}
+  goods: []
