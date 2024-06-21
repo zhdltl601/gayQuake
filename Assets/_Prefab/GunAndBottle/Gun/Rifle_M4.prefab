@@ -115,7 +115,8 @@ MonoBehaviour:
     maxAmmoInMagazine: 0
     ammoInMagazine: 0
     totalAmmo: 0
-  runtimeAnimatorController: {fileID: 0}
+  runtimeAnimatorController: {fileID: 22100000, guid: f605af49ba0fcba478bb2747b300f925,
+    type: 2}
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 64
