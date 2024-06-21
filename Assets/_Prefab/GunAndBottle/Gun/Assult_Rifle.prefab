@@ -73,7 +73,8 @@ MonoBehaviour:
     maxAmmoInMagazine: 0
     ammoInMagazine: 0
     totalAmmo: 0
-  runtimeAnimatorController: {fileID: 0}
+  runtimeAnimatorController: {fileID: 22100000, guid: 7aedd290711c19b46b09bd6b8531f29f,
+    type: 2}
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 64
