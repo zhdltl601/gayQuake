@@ -1,19 +1,25 @@
 using System.Collections.Generic;
-using System.Resources;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
+
+[System.Serializable]
+public struct Chapter
+{
+    public List<GameObject> normalMapTypes;
+    public List<GameObject> specialMapTypes;
+}
 
 public class MapManager : MonoSingleton<MapManager>
 {
     public int chapterCount;
     public int mapCount;
     
-    public List<GameObject> normalMapTypes;
-    public List<GameObject> specialMapTypes;
+    public Chapter[] _chapters;
+
+    private int curruentChpter = -1;
     
     [Space]
     
@@ -39,14 +45,16 @@ public class MapManager : MonoSingleton<MapManager>
     
     public void ChapterGeneration()
     {
+        curruentChpter++;
+        
         DefaultSetting();
-
+        
         GenerationStartRoom();
         GenerateMap();
         GenerationEndRoom();
 
         GenerateCorridor();
-        
+
         specialRoomSpawn = false;
         _maps[0].GetComponent<Room>().EnterRoom();
     }
@@ -56,6 +64,7 @@ public class MapManager : MonoSingleton<MapManager>
         {
             Destroy(_maps[i].gameObject);
         }
+        _maps.Clear();
     }
     
     private void DefaultSetting()
@@ -107,6 +116,10 @@ public class MapManager : MonoSingleton<MapManager>
         GameObject newPortal = Instantiate(potal);
         newPortal.transform.parent = room.transform;
         newPortal.transform.localPosition = Vector3.zero;
+
+        Vector3 endRoomPos = _maps[_maps.Count - 1].position;
+        Vector3 lastRoomPos = _maps[_maps.Count - 2].position;
+        newPortal.transform.forward = (lastRoomPos - endRoomPos).normalized;
         
         room.name = "EndRoom";
     }
@@ -120,7 +133,7 @@ public class MapManager : MonoSingleton<MapManager>
             int mapType = Random.Range(0, 2);
             bool mapGenerated = false;
             
-            if (mapType == 0 && specialMapTypes.Count > 0 && generatedMaps >= mapCount / 3 && specialRoomSpawn == false)
+            if (mapType == 0 && _chapters[curruentChpter].specialMapTypes.Count > 0 && generatedMaps >= mapCount / 3 && specialRoomSpawn == false)
             {
                 mapGenerated = GenerationSpecial();
                 specialRoomSpawn = true;
@@ -166,13 +179,13 @@ public class MapManager : MonoSingleton<MapManager>
     private bool GenerationSpecial()
     {
         Vector3 position = _lastRoomTrm.position + _mapDir[Random.Range(0, _mapDir.Length)] * 60;
-        return Generation(position, specialMapTypes);
+        return Generation(position, _chapters[curruentChpter].specialMapTypes);
     }
 
     private bool GenerationNormal()
     {
         Vector3 position = _lastRoomTrm.position + _mapDir[Random.Range(0, _mapDir.Length)] * 60;
-        return Generation(position, normalMapTypes);
+        return Generation(position,_chapters[curruentChpter].normalMapTypes);
     }
 
     private void GenerateCorridor()
@@ -201,33 +214,33 @@ public class MapManager : MonoSingleton<MapManager>
             if (Mathf.Approximately(direction.x, 1))
             {
                 cRoom.EastWall.SetActive(false);
-                nRoom.WestWall.SetActive(false);
-                
                 cRoom.EastWall_Door.SetActive(true);
+                
+                nRoom.WestWall.SetActive(false);
                 nRoom.WestWall_Door.SetActive(true);
             }
             else if (Mathf.Approximately(direction.x, -1))
             {
                 cRoom.WestWall.SetActive(false);
-                nRoom.EastWall.SetActive(false);
-                
                 cRoom.WestWall_Door.SetActive(true);
+                
+                nRoom.EastWall.SetActive(false);
                 nRoom.EastWall_Door.SetActive(true);
             }
             else if (Mathf.Approximately(direction.z, 1))
             {
                 cRoom.NorthWall.SetActive(false);
-                nRoom.SouthWall.SetActive(false);
-
                 cRoom.NorthWall_Door.SetActive(true);
+
+                nRoom.SouthWall.SetActive(false);
                 nRoom.SouthWall_Door.SetActive(true);
             }
             else if (Mathf.Approximately(direction.z, -1))
             {
                 cRoom.SouthWall.SetActive(false);
-                nRoom.NorthWall.SetActive(false);
-                
                 cRoom.SouthWall_Door.SetActive(true);
+                
+                nRoom.NorthWall.SetActive(false);
                 nRoom.NorthWall_Door.SetActive(true);
             }
         }

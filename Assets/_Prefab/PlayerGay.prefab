@@ -414,13 +414,15 @@ MonoBehaviour:
   ySens: 1
   xRotation: 0
   yRotation: 0
-  speedWalk: 5
-  jumpForce: 7
+  speedWalk: 5.13
+  jumpForce: 9
   speedWall: 5
-  allowedWallrunAngleMin: 85
-  allowedWallrunAngleMax: 25
-  wallrunViewmodelAngle: 25
+  allowedWallrunAngleMin: 25
+  allowedWallrunAngleMax: 80
+  wallrunViewmodelAngle: 6
   gravity: -9.81
+  gravityMultiOnGround: 2.3
+  gravityMultiOnWall: 0.32
   onGroundYVal: -1
   rangeWallRun: 0.45
   dashCurve:
@@ -429,15 +431,24 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 78.58067
-      outSlope: 78.58067
+      inSlope: -60.1111
+      outSlope: -60.1111
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.10841324
+      outWeight: 0.40137452
     - serializedVersion: 3
-      time: 0.100457765
-      value: 5.0127525
+      time: 0.027439464
+      value: 2.964371
+      inSlope: 104.85521
+      outSlope: 104.85521
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.22910583
+      outWeight: 0.1283868
+    - serializedVersion: 3
+      time: 0.09
+      value: 5
       inSlope: -1.5062664
       outSlope: -1.5062664
       tangentMode: 0
@@ -527,6 +538,48 @@ MonoBehaviour:
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.19055426
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  speedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 3
+      inSlope: 2.7128894
+      outSlope: 2.7128894
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.05325976
+    - serializedVersion: 3
+      time: 0.40401134
+      value: 2.9175713
+      inSlope: -2.1568408
+      outSlope: -2.1568408
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.23825735
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.76360226
+      value: 1.6093507
+      inSlope: -4.288942
+      outSlope: -4.288942
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.1844036
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.033424675
+      outSlope: 0.033424675
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.46374068
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1531,7 +1584,7 @@ Transform:
   m_GameObject: {fileID: 7798211447082631257}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2323,7 +2376,7 @@ PrefabInstance:
     - target: {fileID: 4901771741241673434, guid: a4ec6ddfeb3d036418919542e8f20b6a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8040062485644718956, guid: a4ec6ddfeb3d036418919542e8f20b6a,
         type: 3}

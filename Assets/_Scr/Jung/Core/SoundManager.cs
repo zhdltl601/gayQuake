@@ -20,8 +20,7 @@ public class SoundManager : MonoSingleton<SoundManager>
         
         if (s.name != null)
         {
-            playerSfxPlayer.clip = s.AudioClip;
-            playerSfxPlayer.Play();
+            playerSfxPlayer.PlayOneShot(s.AudioClip);
         }
         
     }
@@ -32,8 +31,7 @@ public class SoundManager : MonoSingleton<SoundManager>
         
         if (s.name != null)
         {
-            enemySfxPlayer.clip = s.AudioClip;
-            enemySfxPlayer.Play();
+            enemySfxPlayer.PlayOneShot(s.AudioClip);
         }
     }
     
