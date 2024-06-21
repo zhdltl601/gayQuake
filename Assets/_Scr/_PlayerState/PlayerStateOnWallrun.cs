@@ -12,7 +12,7 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     public override void Enter()
     {
         base.Enter();
-        player.SetYVal(2f);
+        player.SetYVal(player.jumpForce * 0.2f);
         timerSinceEnter = 0;
         player.CheckWall(out raycastHit, out bool isRight);
         player.playerAnimator.camAnimator.Play("OnWall");
@@ -27,7 +27,7 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     protected override void HandleOnJump()
     {
         StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
-        player.SetYVal(9.5f);
+        player.SetYVal(player.jumpForce);
     }
     protected override float GetGravitiyMultiplier()
     {
