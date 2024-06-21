@@ -135,17 +135,19 @@ public class MapManager : MonoSingleton<MapManager>
   
     private void GenerateMap()
     {
+        if (curruentChpter >= chapterCount)
+        {
+            SceneManager.LoadScene("Ending");
+            return;
+        }
+        
         int generatedMaps = 0;
         while (generatedMaps < mapCount)
         {
             int mapType = Random.Range(0, 2);
             bool mapGenerated = false;
 
-            if (curruentChpter >= chapterCount)
-            {
-                SceneManager.LoadScene("Ending");
-                return;
-            }
+            
             
             if (mapType == 0 && _chapters[curruentChpter].specialMapTypes.Count > 0 && generatedMaps >= mapCount / 3 && specialRoomSpawn == false)
             {

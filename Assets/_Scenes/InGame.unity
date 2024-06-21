@@ -2279,8 +2279,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f3582e76a9b6d2438d2738a0a0e9a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chapterCount: 1
-  mapCount: 1
+  chapterCount: 3
+  mapCount: 10
   _chapters:
   - normalMapTypes:
     - {fileID: 2059590313112161601, guid: f72abaeedc3fd0241b03813521586bdd, type: 3}
