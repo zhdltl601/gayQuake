@@ -16,7 +16,7 @@ MonoBehaviour:
   gunName: "\uC5B4\uC124\uD2B8\uB77C\uC774"
   reloadTime: 0.55
   maxAmmoInMagazine: 30
-  totalAmmo: 699996694
+  totalAmmo: 200
   damage: 40
   shotRate: 0.5
   bulletSpeed: 3000

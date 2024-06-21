@@ -19,19 +19,15 @@ public class Cabinet : MonoBehaviour
 
     private bool isSell;
 
-    private void Awake()
-    {
-        int random = Random.Range(0, lists.goods.Length - 1);
-        goods = Instantiate(lists.goods[random], transform.position + Vector3.up * 1.5f,Quaternion.identity);
-        goods.transform.parent = transform;
-        goods.name = lists.goods[random].name;
-        
-    }
-
     private void Start()
     {
         _camera = Camera.main.transform;
         priceText.SetText(price.ToString());
+        
+        int random = Random.Range(0, lists.goods.Length - 1);
+        goods = Instantiate(lists.goods[random], transform.position + Vector3.up * 1.5f,Quaternion.identity);
+        goods.transform.parent = transform;
+        goods.name = lists.goods[random].name;
     }
 
     private void Update()
@@ -71,7 +67,7 @@ public class Cabinet : MonoBehaviour
     {
         if (PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Money].GetValue() - price >= 0)
         {
-            if (goods != null && goods.GetComponent<Gun>())
+            if (goods != null && goods.GetComponent<Gun>() && interaction.GetComponent<Gun>() != goods.GetComponent<Gun>())
             {
                 goods.GetComponent<Gun>().ThrowGun();
                 goods.GetComponent<Rigidbody>().AddForce(Vector3.up * 250);
@@ -102,6 +98,7 @@ public class Cabinet : MonoBehaviour
     {
         interaction.onInteraction -= OnBuy;
         
+        UIManager.Instance.CoinText();
         PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Money].RemoveValue(price);
         SoundManager.Instance.PlayPlayerSOund("Buy");
         priceText.SetText("");

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0033299931760c40b456c0120b95532, type: 3}
   m_Name: AttackBottle
   m_EditorClassIdentifier: 
-  bottleName: AttackBottle
+  bottleName: "\uACF5\uACA9\uBCD1"
+  bottleExplain: "\uC801\uC744 \uC8FD\uC774\uBA74 \uACF5\uACA9\uB825\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4."
   bottleType: 1
   statType: 2
   increaseAmount: 60

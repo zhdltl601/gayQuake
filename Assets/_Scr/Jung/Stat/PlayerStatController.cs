@@ -32,7 +32,7 @@ public class PlayerStatController : MonoSingleton<PlayerStatController>
                 if (isDie == false)
                 {
                     isDie = true;
-                    //UIManager.Instance.OnDiePanel();
+                    UIManager.Instance.OnDiePanel();
                 }
             }
         }

@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Vector3 = UnityEngine.Vector3;
 
@@ -11,12 +12,16 @@ public class UIManager : MonoSingleton<UIManager>
 {
     [Header("Player")]
     public TextMeshProUGUI _ammoText;
+    public TextMeshProUGUI bottleText;
+    public TextMeshProUGUI coinText;
     public WeaponController Player;
     public Transform minimapCam;
     public Image hitCrossHair;
     public Image crossHair;
     public Image reloadImage;
+    
     private bool isCrossChange;
+    
     
     [Header("Graphic")]
     public Volume Volume;
@@ -73,6 +78,11 @@ public class UIManager : MonoSingleton<UIManager>
     public void OnDiePanel()
     {
         DiePanel.OnPanel();
+    }
+
+    public void CoinText()
+    {
+        coinText.SetText($"돈: {PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Money].GetValue()}");
     }
     
     IEnumerator BloodScreenCoroutine(Vignette vignette , float _duration , float _targetIntensity , float screenTime)
@@ -181,15 +191,20 @@ public class UIManager : MonoSingleton<UIManager>
     {
        OffSettingPanel();
     }
-    public void GoToTitleBtn()
+    public void GoToTitleBtn(string main)
     {
-        //타이틀 씬으로 이동하는거 만들어야함.
+        SceneManager.LoadScene(main);
     }
     public void GoToExitBtn()
     {
         Application.Quit();
     }
 
+    public void SetBottleUI(string str)
+    {
+        bottleText.SetText(str);
+    }
+    
     public void Reload(float duration)
     {
         reloadImage.fillAmount = 1;

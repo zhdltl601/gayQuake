@@ -976,18 +976,25 @@ MonoBehaviour:
   corridor: {fileID: 0}
   _enemySettingsArray:
   - enemy: {fileID: 6425937166378154614, guid: f9668bc55661c1c4686b2b457aa23a4c, type: 3}
-    enemyCount: 0
+    enemyCount: 2
+    enemyPos: []
   - enemy: {fileID: 8414851538182959628, guid: 8643348e80ca899458b03e67aff4871f, type: 3}
-    enemyCount: 0
+    enemyCount: 2
+    enemyPos: []
   - enemy: {fileID: 1697891891729884436, guid: 7ec5f5e45cd40364698abeb4b2fe4b35, type: 3}
-    enemyCount: 0
+    enemyCount: 1
+    enemyPos: []
   - enemy: {fileID: 1146452743183490814, guid: 0b0e604325413a642b9dd057657d32ac, type: 3}
-    enemyCount: 0
+    enemyCount: 2
+    enemyPos: []
   - enemy: {fileID: 4513811498531013135, guid: e0a859a63d7be7045ad6eaf3f14ac7e2, type: 3}
     enemyCount: 0
+    enemyPos: []
   - enemy: {fileID: 3780603835876572747, guid: e1c57e4bd243bda4aaf4bbc4ffe0378a, type: 3}
-    enemyCount: 0
+    enemyCount: 3
+    enemyPos: []
   aliveEnemys: []
+  customMap: 0
   generationTrm: {fileID: 5330329112766187415}
   EastWall: {fileID: 3610922709050550307}
   WestWall: {fileID: 1056176890322040706}

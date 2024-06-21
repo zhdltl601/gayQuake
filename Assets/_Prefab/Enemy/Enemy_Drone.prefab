@@ -172,13 +172,12 @@ MonoBehaviour:
   moveSpeed: 8
   runAwayDistance: 35
   attackDistance: 5
-  increaseAmount: 50
   firePos:
   - {fileID: 5352973178703802625}
   - {fileID: 759700940832168658}
   bullet: {fileID: 7383199481331753142, guid: 85124f15db9531e408640d6c8cd4d038, type: 3}
   attackTime: 1
-  damage: 20
+  damage: 40
   isDead: 0
   explosionParticleList:
   - {fileID: 4432784657503819382}
@@ -200,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c9822a63190c24899a0eebd0bda136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 340
+  health: 100
   onHitEvent:
     m_PersistentCalls:
       m_Calls:

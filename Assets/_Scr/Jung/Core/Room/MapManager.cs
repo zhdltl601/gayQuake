@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
@@ -19,9 +20,8 @@ public class MapManager : MonoSingleton<MapManager>
     public int mapCount;
     
     public Chapter[] _chapters;
-
-    private int curruentChpter = -1;
     
+    public int curruentChpter = -1;
     [Space]
     
     public GameObject startRoom;
@@ -36,7 +36,7 @@ public class MapManager : MonoSingleton<MapManager>
     private List<Transform> _maps;
 
     private bool specialRoomSpawn;
-    
+
     protected override void Awake()
     {
         base.Awake();
@@ -44,15 +44,15 @@ public class MapManager : MonoSingleton<MapManager>
         ChapterGeneration();
     }
 
-    private void Start()
+    public void RoomText()
     {
-        UIManager.Instance.PopupText($"{curruentChpter + 1}번째 챕터");            
+        UIManager.Instance.PopupText($"{++curruentChpter}번째 방");         
     }
-
+    
     public void ChapterGeneration()
     {
-        curruentChpter++;
-                
+        RoomText();
+        
         DefaultSetting();
         
         GenerationStartRoom();
@@ -140,6 +140,12 @@ public class MapManager : MonoSingleton<MapManager>
         {
             int mapType = Random.Range(0, 2);
             bool mapGenerated = false;
+
+            if (curruentChpter >= chapterCount)
+            {
+                SceneManager.LoadScene("Ending");
+                return;
+            }
             
             if (mapType == 0 && _chapters[curruentChpter].specialMapTypes.Count > 0 && generatedMaps >= mapCount / 3 && specialRoomSpawn == false)
             {

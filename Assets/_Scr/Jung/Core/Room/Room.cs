@@ -67,6 +67,8 @@ public class Room : MonoBehaviour
         _isInPlayer = true;
         
         if (type == RoomType.Special){ return;}
+
+        MapManager.Instance.RoomText();
         GenerationEnemy();
     }
     private void FinishRoom()

@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0033299931760c40b456c0120b95532, type: 3}
   m_Name: BadDragon
   m_EditorClassIdentifier: 
-  bottleName: "\uD788\uD788\uD788\uBCA0\uB4DC\uB4DC\uB798"
+  bottleName: "\uD070\uACF5\uACA9\uBCD1"
+  bottleExplain: "\uC801\uC744 \uC8FD\uC774\uBA74 \uACF5\uACA9\uB825\uC774 \uD06C\uAC8C
+    \uC911\uAC00\uD569\uB2C8\uB2E4."
   bottleType: 1
-  statType: 3
-  increaseAmount: 400
+  statType: 2
+  increaseAmount: 120
   drinkAmount: 40
-  decreaseTime: 1
-  decreaseAmount: 5
+  decreaseTime: 0.2
+  decreaseAmount: 4

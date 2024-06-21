@@ -799,7 +799,7 @@ MonoBehaviour:
     m_Bits: 4096
   attackDistance: 4
   minDistance: 0
-  attackDamage: 49
+  attackDamage: 90
   attackTime: 1.42
   attackSpeed: {x: 1, y: 1.4}
   runAwayCount: 0
@@ -821,7 +821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c9822a63190c24899a0eebd0bda136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 700
+  health: 500
   onHitEvent:
     m_PersistentCalls:
       m_Calls:

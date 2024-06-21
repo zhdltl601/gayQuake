@@ -15,10 +15,10 @@ MonoBehaviour:
   gunType: 3
   gunName: "\uB9AC\uB85C\uBC8C\uBC84"
   reloadTime: 0.7
-  maxAmmoInMagazine: 16000
-  totalAmmo: 378
-  damage: 20
-  shotRate: 2.7
+  maxAmmoInMagazine: 5
+  totalAmmo: 6
+  damage: 55
+  shotRate: 0.4
   bulletSpeed: 3000
   bullet: {fileID: 7383199481331753142, guid: 3f834e4dd9eef9b4695d65797ae7cd8c, type: 3}
   maxShotCount: 0
