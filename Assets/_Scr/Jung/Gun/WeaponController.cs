@@ -121,7 +121,7 @@ public class WeaponController : MonoBehaviour
         {
             GameObject[] bullets = currentGun.Shoot();
                         
-            _player.playerCamera.CameraShakePos(0.11f);
+            _player.PlayerCamera.CameraShakePos(0.11f);
             
             for (int i = 0; i < bullets.Length; i++)
             {
@@ -138,7 +138,7 @@ public class WeaponController : MonoBehaviour
             float randomXRecoil = Random.Range(-currentGun.gunData.xBound,currentGun.gunData.xBound);
             Recoil(randomXRecoil * Time.deltaTime, currentGun.gunData.yBound * Time.deltaTime);
             
-            _player.playerAnimator.leftArmAnimator.Play("AutoShoot", -1, 0f);
+            _player.PlayerAnimator.leftArmAnimator.Play("AutoShoot", -1, 0f);
             
             UIManager.Instance.SetAmmoText();
           
@@ -186,7 +186,7 @@ public class WeaponController : MonoBehaviour
             if (currentBottle._bottleDataSo.bottleType == BottleType.Normal)
             {
                 Destroy(currentBottle.gameObject);
-                currentBottle.DrinkBottle(_player.playerAnimator.rightArmAnimator);
+                currentBottle.DrinkBottle(_player.PlayerAnimator.rightArmAnimator);
             
                 Invoke(nameof(SetBottleDefault), 1f);
                 bottleList.Remove(currentBottle);

@@ -12,15 +12,15 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     public override void Enter()
     {
         base.Enter();
-        player.SetYVal(player.jumpForce * 0.2f);
+        player.SetYVal(player.jumpForce * 0.3f);
         timerSinceEnter = 0;
         player.CheckWall(out raycastHit, out bool isRight);
-        player.playerAnimator.camAnimator.Play("OnWall");
+        player.PlayerAnimator.camAnimator.Play("OnWall");
 
         currentDir = -raycastHit.normal;
         currentDir.Normalize();
 
-        player.playerViewmodel.WallRun(isRight ? player.wallrunViewmodelAngle : -player.wallrunViewmodelAngle);
+        player.PlayerViewmodel.WallRun(isRight ? player.wallrunViewmodelAngle : -player.wallrunViewmodelAngle);
         gravityMultiplier = 0;
 
     }
@@ -42,22 +42,21 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     protected override Vector3 GetDirection(Vector3 inputDirection)
     {
         Vector3 igVector = inputDirection;
-        igVector = player.playerCamera.GetCameraRotTransform().InverseTransformDirection(igVector);
+        igVector = player.PlayerCamera.GetCameraRotTransform().InverseTransformDirection(igVector);
         igVector.x = 0f;
-        //Debug.DrawRay(Vector3.zero, igVector, Color.red, Time.deltaTime);
-        if (igVector.sqrMagnitude < 0.15f)
+        bool isNotOnlyHoldingInputdrectionX = igVector.sqrMagnitude > 0.15f;
+        if (!isNotOnlyHoldingInputdrectionX)
         {
             StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
             player.AddForce(currentDir.normalized, 4);
         }
         Vector3 forwardVector = Vector3.ProjectOnPlane(inputDirection, raycastHit.normal);
         forwardVector.Normalize();
-        //forwardVector = forwardVector.sqrMagnitude < 1 ? forwardVector : forwardVector.normalized;
         return forwardVector;
     }
     protected override void HandleState()
     {
-        Vector3 pForward = player.playerCamera.GetCameraRotTransform().forward;
+        Vector3 pForward = player.PlayerCamera.GetCameraRotTransform().forward;
         pForward.y = 0;
         pForward.Normalize();
 
@@ -67,7 +66,7 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
         {
             StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
         }
-        if (player.playerController.IsGround)
+        if (player.PlayerController.IsGround)
         {
             StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
             player.AddForce(currentDir, 2.1f);
@@ -77,13 +76,13 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     public override void Exit()
     {
         base.Exit();
-        player.playerViewmodel.WallRun(0);
+        player.PlayerViewmodel.WallRun(0);
         float wallrunCurveClamped = player.GetWallrunCurve(timerSinceEnter);
         wallrunCurveClamped = Mathf.Clamp(wallrunCurveClamped, 1, 1.4f);
         player.AddForce(-currentDir, 2.1f * wallrunCurveClamped);
 
         float wallrunCurveClampedForward = Mathf.Clamp(wallrunCurveClamped, 0.5f, 1.6f);
-        Vector3 forwardVector = player.playerCamera.GetCameraRotTransform().forward;
+        Vector3 forwardVector = player.PlayerCamera.GetCameraRotTransform().forward;
         forwardVector.y = 0;
         forwardVector.Normalize();
         player.AddForce(forwardVector, wallrunCurveClampedForward * 5.6f);

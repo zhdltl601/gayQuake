@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerUI : MonoSingleton<PlayerUI>
+public class DebugUI : MonoSingleton<DebugUI>
 {
-    public List<Text> lists;
+    public List<Text> list;
+
 }
