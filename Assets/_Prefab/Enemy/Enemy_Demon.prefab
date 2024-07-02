@@ -63,7 +63,7 @@ MonoBehaviour:
   dissolveDuration: 1.5
   whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 4352
   attackDistance: 19.5
   minDistance: 5
   attackDamage: 70

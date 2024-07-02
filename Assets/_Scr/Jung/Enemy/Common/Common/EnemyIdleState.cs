@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
 public class EnemyIdleState : EnemyState
 {
@@ -26,20 +27,11 @@ public class EnemyIdleState : EnemyState
             _enemy.StateMachine.ChangeState(_enemy.AttackState);
             return;
         }
-        
-        /*if (_enemy.target != null && Vector3.Distance(_enemy.transform.position , _enemy.target.position) >= _enemy.minDistance)
-        {
-            _enemy.isAttackMove = true;
-            _enemy.StateMachine.ChangeState(_enemy.MoveState);
-            return;
-        }*/
-        
         if (_enemy.target != null)
         {
             _enemy.StateMachine.ChangeState(_enemy.MoveState);
             return;
         }
-                
 
         Collider player = _enemy.IsPlayerDetected();
         if (player != null)
@@ -69,6 +61,8 @@ public class EnemyIdleState : EnemyState
     {
         base.Exit();
     }
+    
+    
     
     
 }

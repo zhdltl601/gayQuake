@@ -26,7 +26,7 @@ public abstract class Gun : MonoBehaviour
     protected Transform playerCam;
     public bool throwing;
 
-    protected WeaponController _weaponController;
+    public WeaponController _weaponController;
 
 
     private void Awake()
@@ -67,6 +67,7 @@ public abstract class Gun : MonoBehaviour
         {
             direction = hit.point - _firePos.position;
             Health enemyHealth = hit.transform.GetComponent<Health>();
+            
             ApplyDamage(enemyHealth, hit.normal , hit.point);  
             
             UIManager.Instance.ChangeCrosshair();
@@ -99,18 +100,13 @@ public abstract class Gun : MonoBehaviour
         return bullet;
     }
 
-    protected void ApplyDamage(Health enemyHealth , Vector3 normal , Vector3 point)
+    protected void ApplyDamage(Health enemyHealth, Vector3 normal, Vector3 point)
     {
-        if (_weaponController.GetCurrenBottle()._bottleDataSo.statType ==  StatType.Attack)
-        {
-            enemyHealth.ApplyDamage(
-                PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Attack].GetValue() + gunData.damage,
-                normal, point);
-        }
-        else
-        {
-            enemyHealth.ApplyDamage(gunData.damage, normal, point);
-        }
+        float damage = (_weaponController.GetCurrenBottle()._bottleDataSo.statType is StatType.Attack)
+            ? PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Attack].GetValue() + gunData.damage
+            : gunData.damage;
+
+        enemyHealth.ApplyDamage(damage, normal, point);
     }
 
     public virtual void ReLoad()
@@ -160,10 +156,11 @@ public abstract class Gun : MonoBehaviour
         if (other.gameObject.TryGetComponent(out WeaponController weaponController) && throwing == false)
         {
             if (weaponController.GetCurrentGun() != null) return;
+
+            _weaponController = weaponController;
             
-            weaponController.currentGun = this;
-            transform.parent = weaponController.gunTrm;
-                        
+            _weaponController.currentGun = this;
+            transform.parent = _weaponController.gunTrm;
             
             _rigidbody.isKinematic = true;
             _rigidbody.useGravity = false;

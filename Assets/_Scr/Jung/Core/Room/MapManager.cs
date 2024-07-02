@@ -126,13 +126,12 @@ public class MapManager : MonoSingleton<MapManager>
         newPortal.transform.localPosition = Vector3.zero;
 
         Vector3 endRoomPos = _maps[_maps.Count - 1].position;
-        Vector3 lastRoomPos = _maps[_maps.Count - 2].position;
-        newPortal.transform.forward = (lastRoomPos - endRoomPos).normalized;
+        Vector3 endLastRoomPos = _maps[_maps.Count - 2].position;
+        newPortal.transform.forward = (endLastRoomPos - endRoomPos).normalized;
         
         room.name = "EndRoom";
     }
-  
-  
+      
     private void GenerateMap()
     {
         if (curruentChpter >= chapterCount)
@@ -146,8 +145,6 @@ public class MapManager : MonoSingleton<MapManager>
         {
             int mapType = Random.Range(0, 2);
             bool mapGenerated = false;
-
-            
             
             if (mapType == 0 && _chapters[curruentChpter].specialMapTypes.Count > 0 && generatedMaps >= mapCount / 3 && specialRoomSpawn == false)
             {

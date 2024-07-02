@@ -26,9 +26,11 @@ public class EnemyMoveState : EnemyState
     {
         base.Update();
 
+        float distance = Vector3.Distance(_enemy.transform.position, _enemy.NavMeshAgent.destination);
+        
         if (_enemy.isAttackMove)
         {
-            if (Vector3.Distance(_enemy.transform.position, _enemy.NavMeshAgent.destination) <= 2)
+            if (distance <= 2)
             {
                 _enemy.isAttackMove = false;
                 _enemy.StateMachine.ChangeState(_enemy.IdleState);
@@ -41,7 +43,7 @@ public class EnemyMoveState : EnemyState
         }
         
         
-        bool isClose = Vector3.Distance(_enemy.transform.position, _enemy.target.position) <= _enemy.attackDistance;
+        bool isClose =distance <= _enemy.attackDistance;
         
         if(isClose && 
            _enemy.CanAction() && _enemy.IsObstacleInLine(100 , (_enemy.target.position - _enemy.transform.position).normalized) == false)
