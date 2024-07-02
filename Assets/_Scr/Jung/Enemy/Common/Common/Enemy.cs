@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour,EnemyMapSetting
 {
@@ -41,9 +43,9 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     [Header("Default Values")]
     public float moveSpeed;
     public float checkPlayerDistance;
-    public bool isDead = false;
     public float dissolveDuration;
     public LayerMask whatIsObstacle;
+    public bool isDead = false;
     
     [Header("AttackValue")]
     public float attackDistance;
@@ -76,7 +78,6 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         RunAwayState = new EnemyRunAwayState(this , Animator , "Move");
         AttackState = new EnemyAttackState(this , Animator , "Attack");
         DeadState = new EnemyDeadState(this , Animator , "Dead");
-        
         #endregion
 
         runAwayTrm.position -= (transform.forward * runAwayDistance);
@@ -93,7 +94,7 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         StateMachine.Init(IdleState);
 
         NavMeshAgent.speed = Random.Range(moveSpeed - 2f,moveSpeed);
-        Animator.speed =  Random.Range(attackSpeed.x , attackSpeed.y);;
+        Animator.speed =  Random.Range(attackSpeed.x , attackSpeed.y);
     }
 
     private void Update()
@@ -219,7 +220,8 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     }
 
     #endregion
-   
+
+    #region Detecteced
     public virtual Collider IsPlayerDetected()
     {
         int cnt = Physics.OverlapSphereNonAlloc(transform.position, checkPlayerDistance, _enemyCheckCollider, _whatIsPlayer);
@@ -230,6 +232,9 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     {
         return Physics.Raycast(transform.position, direction, distance , whatIsObstacle);
     }
+    
+
+    #endregion
 
     #region RoomSettings
     public void SetRoom(Room room)
@@ -241,25 +246,32 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         currentRoom.aliveEnemys.Remove(gameObject);
     }
     #endregion
+    
+    
      public void AnimationEnd()
     {
         StateMachine.currentState.AnimationFinish();;
     }
-
-    public bool CanAction()
+     public bool CanAction()
     {
         return Time.time >= lastAttackTime + attackTime;
     }
-    private void LookPlayer()
+     private void LookPlayer()
     {
         if(target == null || isDead || runningAway)return;
             
-        Vector3 targetPos = this.target.position - transform.position;
-        targetPos.y = 0;
+        Vector3 lookTargetPos = target.position - transform.position;
+        lookTargetPos.y = 0;
+        lookTargetPos.Normalize();
         
-        Quaternion targetRot = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetPos), 10 * Time.deltaTime);
+        Quaternion targetRot = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookTargetPos), 10 * Time.deltaTime);
         transform.rotation = targetRot;
         //_enemy.transform.rotation = Quaternion.LookRotation(target);
     }
-   
+     
+     private void OnDrawGizmos()
+     {
+         Gizmos.color = Color.red;
+         Gizmos.DrawWireSphere(runAwayTrm.position , 1);
+     }
 }

@@ -24,11 +24,11 @@ public class Cabinet : MonoBehaviour
         _camera = Camera.main.transform;
         priceText.SetText(price.ToString());
         
-        int random = Random.Range(0, lists.goods.Count - 1);
+        int random = Random.Range(0, lists.goods.Count);
         goods = Instantiate(lists.goods[random], transform.position + Vector3.up * 1.5f,Quaternion.identity);
         goods.transform.parent = transform;
         goods.name = lists.goods[random].name;
-
+        
         lists.goods.RemoveAt(random);
         if (lists.goods.Count >= 0)
         {
@@ -103,11 +103,12 @@ public class Cabinet : MonoBehaviour
     private void BuySetting()
     {
         interaction.onInteraction -= OnBuy;
-        
-        UIManager.Instance.CoinText();
-        PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Money].RemoveValue(price);
         SoundManager.Instance.PlayPlayerSOund("Buy");
+        
+        PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Money].RemoveValue(price);
         priceText.SetText("");
+        UIManager.Instance.CoinText();
+        
         Destroy(this);
     }
 

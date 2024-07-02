@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyRunAwayState : EnemyState
 {
-    private Vector3 targetPos;
+    private Vector3 runAwayTargetPos;
     
     public EnemyRunAwayState(Enemy enemy, Animator animator, string animBoolName) : base(enemy, animator, animBoolName)
     {
@@ -19,27 +19,29 @@ public class EnemyRunAwayState : EnemyState
         _enemy.NavMeshAgent.isStopped = false;
         _enemy.runningAway = true;
         
-        targetPos = _enemy.runAwayTrm.position;
+        runAwayTargetPos = _enemy.runAwayTrm.position;
     }
 
     public override void Update()
     {
         base.Update();
 
-        if (Vector3.Distance(_enemy.transform.position, targetPos) <= 0.4f || 
-            Physics.Raycast(_enemy.transform.position , _enemy.target.forward , 2f) == true)
+        if (Vector3.Distance(_enemy.transform.position, runAwayTargetPos) <=1.5f || 
+            Physics.Raycast(_enemy.transform.position , _enemy.transform.forward, 3f))
         {
            _enemy.StateMachine.ChangeState(_enemy.IdleState);
         }
-                        
-        _enemy.NavMeshAgent.SetDestination(targetPos);
+        else
+        {
+            _enemy.NavMeshAgent.SetDestination(runAwayTargetPos);
+        }
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _enemy.transform.rotation = Quaternion.LookRotation(_enemy.target.position);
+        //_enemy.transform.rotation = Quaternion.LookRotation(_enemy.target.position);
         
         _enemy.NavMeshAgent.isStopped = true;
         _enemy.runningAway = false;

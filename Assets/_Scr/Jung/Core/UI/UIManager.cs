@@ -57,12 +57,12 @@ public class UIManager : MonoSingleton<UIManager>
             OnOffSettingPanel();
         }
     }
-
+    
     private void LateUpdate()
     {
         minimapCam.position = new Vector3(Player.transform.position.x , minimapCam.position.y , Player.transform.position.z);
     }
-
+    
     public void BloodScreen(Color color ,float duration = 0.2f , float targetIntensity = 0.5f, float screenTime = 0f)
     {
         if(screenEffectting == true)return;
@@ -79,7 +79,6 @@ public class UIManager : MonoSingleton<UIManager>
     {
         DiePanel.OnPanel();
     }
-
     public void CoinText()
     {
         coinText.SetText($"돈: {PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Money].GetValue()}");
