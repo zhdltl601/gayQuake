@@ -206,6 +206,8 @@ public class Player : MonoBehaviour
                 yVal = 0;
                 dashMulti = 0.09f;//length of m_dashCurve
                 OnDash?.Invoke();
+                
+                UIManager.Instance.UseDash();
             }
         }
         if (Input.GetKeyDown(KeyCode.LeftShift)) Dash(); 

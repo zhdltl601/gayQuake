@@ -12,16 +12,20 @@ public class UIManager : MonoSingleton<UIManager>
 {
     [Header("Player")]
     public TextMeshProUGUI _ammoText;
-    public TextMeshProUGUI bottleText;
     public TextMeshProUGUI coinText;
     public WeaponController Player;
     public Transform minimapCam;
     public Image hitCrossHair;
     public Image crossHair;
     public Image reloadImage;
-    
+    public Slider dashSlider;
+    public CanvasGroup dashGroup;
     private bool isCrossChange;
     
+    
+    [Header("Bottle")] 
+    public Image bottleImage;
+    public TextMeshProUGUI bottleText;
     
     [Header("Graphic")]
     public Volume Volume;
@@ -47,7 +51,7 @@ public class UIManager : MonoSingleton<UIManager>
     
     public void SetAmmoText()
     {
-        _ammoText.SetText($"{Player.GetCurrentGun().gunMagazine.ammoInMagazine}/{Player.GetCurrentGun().gunMagazine.maxAmmoInMagazine} <color=#bdc3c7>{Player.GetCurrentGun().gunMagazine.totalAmmo}</color>");
+        _ammoText.SetText($"{Player.GetCurrentGun().gunMagazine.ammoInMagazine} <color=#bdc3c7>{Player.GetCurrentGun().gunMagazine.totalAmmo}</color>");
     }
 
     private void Update()
@@ -62,7 +66,6 @@ public class UIManager : MonoSingleton<UIManager>
     {
         minimapCam.position = new Vector3(Player.transform.position.x , minimapCam.position.y , Player.transform.position.z);
     }
-    
     public void BloodScreen(Color color ,float duration = 0.2f , float targetIntensity = 0.5f, float screenTime = 0f)
     {
         if(screenEffectting == true)return;
@@ -81,9 +84,8 @@ public class UIManager : MonoSingleton<UIManager>
     }
     public void CoinText()
     {
-        coinText.SetText($"돈: {PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Money].GetValue()}");
+        coinText.SetText($"coin:{PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Money].GetValue()}");
     }
-    
     IEnumerator BloodScreenCoroutine(Vignette vignette , float _duration , float _targetIntensity , float screenTime)
     {
         screenEffectting = true;
@@ -116,12 +118,10 @@ public class UIManager : MonoSingleton<UIManager>
         
         screenEffectting = false;
     }
-
     public void ChangeCrosshair()
     {
         StartCoroutine(ChangeCrosshairCoroutine());
     }
-    
     private IEnumerator ChangeCrosshairCoroutine()
     {
         Sequence sequence = DOTween.Sequence();
@@ -185,7 +185,6 @@ public class UIManager : MonoSingleton<UIManager>
         Time.timeScale = 1;
         SettingPanel.gameObject.SetActive(false);
     }
-
     public void GoToGameBtn()
     {
        OffSettingPanel();
@@ -198,15 +197,44 @@ public class UIManager : MonoSingleton<UIManager>
     {
         Application.Quit();
     }
-
-    public void SetBottleUI(string str)
+    public void SetBottleUI(string str,Sprite sprite)
     {
         bottleText.SetText(str);
+        bottleImage.sprite = sprite;
     }
-    
     public void Reload(float duration)
     {
         reloadImage.fillAmount = 1;
         reloadImage.DOFillAmount(0, duration);
     }
+    
+   
+    public void UseDash()
+    {
+        StopCoroutine(DashCoroutine());
+        StartCoroutine(DashCoroutine());
+    }
+    
+    private IEnumerator DashCoroutine()
+    {
+        dashSlider.value = 0;
+        dashGroup.alpha = 0.2f;
+
+        float elapsedTime = 0;
+
+        while (elapsedTime < 1)
+        {
+            dashSlider.value = Mathf.Lerp(0, 1, elapsedTime / 1);
+            if (dashSlider.value >= 1)
+            {
+                dashGroup.alpha = 1.0f;
+            }
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        dashSlider.value = 1;
+        dashGroup.alpha = 1.0f;
+    }
 }
+

@@ -42,7 +42,8 @@ public class WeaponController : MonoBehaviour
         _player = GetComponent<Player>();
         
         UIManager.Instance.CoinText();
-        UIManager.Instance.SetBottleUI($"<color=#40739e>{currentBottle._bottleDataSo.bottleName}</color>: {currentBottle._bottleDataSo.bottleExplain}");
+        UIManager.Instance.SetBottleUI($"<color=#40739e>{currentBottle._bottleDataSo.bottleName}</color>: {currentBottle._bottleDataSo.bottleExplain}" , currentBottle._bottleDataSo.icon);
+        UIManager.Instance.SetBottleUI($"<color=#40739e>{currentBottle._bottleDataSo.bottleName}</color>: {currentBottle._bottleDataSo.bottleExplain}" , currentBottle._bottleDataSo.icon);
         
        playerAnimator.rightArmAnimator.runtimeAnimatorController = currentBottle.AnimatorController;
        playerAnimator.rightArmAnimator.Play("Equip" , -1 , 0f);
@@ -177,7 +178,8 @@ public class WeaponController : MonoBehaviour
         currentBottle = bottleList[index];
         currentBottle.gameObject.SetActive(true);
 
-        UIManager.Instance.SetBottleUI($"<color=#40739e>{currentBottle._bottleDataSo.bottleName}</color>: {currentBottle._bottleDataSo.bottleExplain}");
+        UIManager.Instance.SetBottleUI($"<color=#40739e>{currentBottle._bottleDataSo.bottleName}</color>: {currentBottle._bottleDataSo.bottleExplain}" ,
+            currentBottle._bottleDataSo.icon);
 
     }
     private void DrinkBottle()

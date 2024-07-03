@@ -21,4 +21,6 @@ public class BottleDataSO : ScriptableObject
     public float decreaseTime;
     public int decreaseAmount;
 
+    public Sprite icon;
+
 }

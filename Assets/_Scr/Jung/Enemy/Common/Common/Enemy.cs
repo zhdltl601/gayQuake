@@ -259,7 +259,7 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
      private void LookPlayer()
     {
         if(target == null || isDead || runningAway)return;
-            
+        
         Vector3 lookTargetPos = target.position - transform.position;
         lookTargetPos.y = 0;
         lookTargetPos.Normalize();
