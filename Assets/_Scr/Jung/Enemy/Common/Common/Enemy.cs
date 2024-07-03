@@ -102,7 +102,6 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         StateMachine.currentState.Update();
         
         LookPlayer();
-        DebugUI.Instance.list[0].text = StateMachine.currentState.ToString();
         if(target != null)
         {
             Vector3 pos = transform.position; pos.y = 0;
@@ -269,7 +268,7 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
      private void LookPlayer()
     {
         if(target == null || isDead || runningAway)return;
-            
+        
         Vector3 lookTargetPos = target.position - transform.position;
         lookTargetPos.y = 0;
         lookTargetPos.Normalize();
@@ -284,14 +283,14 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(runAwayTrm.position , 1);
 
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, runAwayDistance);
+        //Gizmos.color = Color.yellow;
+        //Gizmos.DrawWireSphere(transform.position, runAwayDistance);
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, minDistance);
+        //Gizmos.color = Color.blue;
+        //Gizmos.DrawWireSphere(transform.position, minDistance);
 
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position, attackDistance);
+        //Gizmos.color = Color.white;
+        //Gizmos.DrawWireSphere(transform.position, attackDistance);
 
     }
 }
