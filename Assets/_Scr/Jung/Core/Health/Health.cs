@@ -1,4 +1,3 @@
-using System.Numerics;
 using UnityEngine;
 using UnityEngine.Events;
 using Vector3 = UnityEngine.Vector3;
@@ -22,7 +21,6 @@ public class Health : MonoBehaviour
 
         if (health <= 0)
         {
-            UIManager.Instance.CoinText();
             onDieEvent?.Invoke();
         }
     }
