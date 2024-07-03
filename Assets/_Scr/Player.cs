@@ -3,69 +3,63 @@ using System.Collections;
 using UnityEngine;
 public class Player : MonoBehaviour
 {
-    [Header("Components")]
-    public PlayerCamera playerCamera;
-    public PlayerViewmodel playerViewmodel;
-    public PlayerController playerController;
-    public PlayerAnimator playerAnimator;
+    public PlayerCamera PlayerCamera { get; private set; }
+    public PlayerViewmodel PlayerViewmodel { get; private set; }
+    public PlayerController PlayerController { get; private set; }
+    public PlayerAnimator PlayerAnimator { get; private set; }
 
     [Header("Camera")]
     [SerializeField] private float xSens;
     [SerializeField] private float ySens;
     private float xRecoil;
     private float yRecoil;
-    
-    public float xRotation;//임시로 퍼블릭 박은거임..
-    public float yRotation;//임시로 퍼블릭 박은거임..
-    //private float xFucker;
-    //private float yFucker;
+    private float xRotation;
+    private float yRotation;
 
     [Header("Movement")]
     [SerializeField] private float speedWalk;
+    [SerializeField] private float delayDash = 1;
     public float jumpForce;
-    public float delayDash = 1;
+    public float Speed { get; private set; }
 
     [Header("Wallrun")]
     public float speedWall;
     public float allowedWallrunAngleMin;
     public float allowedWallrunAngleMax;
     public float wallrunViewmodelAngle;
+    public LayerMask lm_wallrunable;
 
     [Header("Movement/Physics")]
     [SerializeField] private float gravity = -9.81f;
     public float gravityMultiOnGround = 1;
     public float gravityMultiOnWall = 0.4f;
     [SerializeField] private float onGroundYVal;
-    public float rangeWallRun;
+    public float rangeWallrunCheck;
 
-    //Additional Movement
-    [SerializeField] private AnimationCurve dashCurve;
-    [SerializeField] private AnimationCurve wallRunCurve;
-    [SerializeField] private AnimationCurve forceVectorCurve;
+    [Header("Movement/Curves")]
     [SerializeField] private AnimationCurve speedCurve;
+    [SerializeField] private AnimationCurve speedStopCurve;
+    [SerializeField] private AnimationCurve wallRunCurve;
+    [SerializeField] private AnimationCurve dashCurve;
+    [SerializeField] private AnimationCurve forceVectorCurve;
     private float dashMulti;
     private float forceMulti;
+    private float yVal;
+
+    [Header("Actions")]
+    public Action<Vector3> Mov;
+    public Action OnJump;
+    public Action OnDash;
 
     //private members
     private Vector3 inputDirection;
     private Vector3 forceVec = Vector3.zero;
 
-    public float Speed { get; private set; }
-    private float yVal;
-
     private StateMachine<PlayerStateEnum> playerStateMachine;//will be removed, check Awake() 
-    public Action<Vector3> Mov;
-    public Action OnJump;
-    public Action OnDash;
 
     [Header("Debug")]
     [Header("Debug/Viewmodel")]
-    [SerializeField] private float viewmodelValue;
-    private float viewmodelY = 0;
-    private float viewmodelX = 0;
-    private bool b_value;
-    [Header("Debug/Wallrun")]
-    public LayerMask lm_wallrunable;
+    [SerializeField] private float viewmodelBobbingX;
     private void Awake()
     {
         playerStateMachine = new StateMachine<PlayerStateEnum>();// will change to ref singleton, singleton will automaticaly make instance when not initialized
@@ -73,16 +67,18 @@ public class Player : MonoBehaviour
         playerStateMachine.AddState(PlayerStateEnum.OnWallrun, new PlayerStateOnWallrun(this));
         playerStateMachine.Initialize(PlayerStateEnum.OnGround);
 
-        playerCamera = GetComponentInChildren<PlayerCamera>();
-        playerAnimator = GetComponentInChildren<PlayerAnimator>();
-        playerViewmodel = GetComponentInChildren<PlayerViewmodel>();
-        playerController = GetComponentInChildren<PlayerController>();
+        PlayerCamera = GetComponentInChildren<PlayerCamera>();
+        PlayerAnimator = GetComponentInChildren<PlayerAnimator>();
+        PlayerViewmodel = GetComponentInChildren<PlayerViewmodel>();
+        PlayerController = GetComponentInChildren<PlayerController>();
     }
+
+
     private void Start()
     {
         //player Looks down when start?
-        //playerCamera.SetCameraPosition(0, 0, 0);
-        //playerCamera.SetCameraRotation(0, 0, 0);
+        //PlayerCamera.SetCameraPosition(0, 0, 0);
+        //PlayerCamera.SetCameraRotation(0, 0, 0);
         xRotation = 0;
         yRotation = 0;
 
@@ -93,24 +89,29 @@ public class Player : MonoBehaviour
         playerStateMachine.UpdateState();
         PlayerInput();
         delayDash += Time.deltaTime;
-        delayDash = delayDash > 1 ? 1 : delayDash;
+        delayDash = delayDash > 0.7f ? 0.7f : delayDash;
         //PlayerUI.Instance.lists[0].text = playerStateMachine.CurrentState.ToString();
         //PlayerUI.Instance.lists[2].text = playerStateMachine.CurrentState.ToString();
         //if (Input.GetKeyDown(KeyCode.Backspace)) AddMovementImpulse(Vector3.forward, 1, 0);
-        //if (Input.GetKeyDown(KeyCode.Mouse0)) playerAnimator.leftArmAnimator.Play("AutoShoot", -1, 0f);
+        //if (Input.GetKeyDown(KeyCode.Mouse0)) PlayerAnimator.leftArmAnimator.Play("AutoShoot", -1, 0f);
     }
     private void FixedUpdate()
     {
         Mov?.Invoke(inputDirection);
 
-        playerCamera.SetCameraRotation(xRotation, yRotation);
-        playerViewmodel.SetViewmodelRotation(xRotation, yRotation);
+        PlayerCamera.SetCameraRotation(xRotation, yRotation);
+        PlayerViewmodel.SetViewmodelRotation(xRotation, yRotation);
+        Vector3 a = inputDirection;
+        a.y = 0;
+        a.Normalize();
+        PlayerViewmodel.SetViewmodelHintPosition(a.x * viewmodelBobbingX, 0, a.z * viewmodelBobbingX);
+        //PlayerViewmodel.UpdateViewmodel();
     }
     public void PlayerApplyMovement(Vector3 direction, float speed, float gravityMultiplier = 0, float forceMulti = 1)
     {
         direction *= speed;
 
-        bool isGround = playerController.IsGround;
+        bool isGround = PlayerController.IsGround;
 
         if (isGround && yVal < 0) yVal = onGroundYVal;
         else yVal += gravity * gravityMultiplier * Time.deltaTime;
@@ -121,7 +122,7 @@ public class Player : MonoBehaviour
         direction.y = yVal;
         direction *= Time.deltaTime;
 
-        playerController.Move(direction + forceVec * Time.deltaTime);
+        PlayerController.Move(direction + forceVec * Time.deltaTime);
     }
     //private void PlayerApplyMovement()
     //{
@@ -129,7 +130,7 @@ public class Player : MonoBehaviour
     //    direction = direction.magnitude < 1 ? direction : direction.normalized; // needs optimazation
     //    direction *= speed;
     //
-    //    Transform camTrm = playerCamera.GetCameraRotTransform();
+    //    Transform camTrm = PlayerCamera.GetCameraRotTransform();
     //
     //    bool CheckWall(out RaycastHit raycastHit, out bool isRight)
     //    {
@@ -172,14 +173,14 @@ public class Player : MonoBehaviour
     //        //if (b_bufferJump && isGround) PlayerJump(); // jumpbuffer needs implementation
     //    }
     //    PlayerAdditionalPhysics();
-    //    bool isGround = playerController.IsGround;
+    //    bool isGround = PlayerController.IsGround;
     //
     //    if (isGround && yVal < 0) yVal = onGroundYVal;
     //    else yVal += gravity * Time.deltaTime;
     //    direction.y = yVal;
     //    //PlayerAdditionalRaycast(); //lost
     //    direction *= Time.deltaTime;
-    //    playerController.SetVelocity(direction);
+    //    PlayerController.SetVelocity(direction);
     //}
     private void PlayerInput()
     {
@@ -189,7 +190,7 @@ public class Player : MonoBehaviour
         yRotation += Input.GetAxisRaw("Mouse X") * xSens + xRecoil;
         
         //movement
-        Transform camTrm = playerCamera.GetCameraRotTransform();
+        Transform camTrm = PlayerCamera.GetCameraRotTransform();
         Vector3 camForward = camTrm.forward;
         camForward.y = 0;
         camForward.Normalize();
@@ -200,9 +201,9 @@ public class Player : MonoBehaviour
 
         void Dash()
         {
-            if(delayDash > 0)
+            if(delayDash == 0.7f)
             {
-                delayDash -= 1;
+                delayDash = 0;
                 yVal = 0;
                 dashMulti = 0.09f;//length of m_dashCurve
                 OnDash?.Invoke();
@@ -215,13 +216,13 @@ public class Player : MonoBehaviour
         else dashMulti = 0;
 
         #region debug
-        b_value = Input.GetKeyDown(KeyCode.C);
-        float amount = viewmodelValue;
-        if (Input.GetKey(KeyCode.I)) viewmodelY += Time.deltaTime * amount;
-        if (Input.GetKey(KeyCode.K)) viewmodelY -= Time.deltaTime * amount;
-        if (Input.GetKey(KeyCode.J)) viewmodelX -= Time.deltaTime * amount;
-        if (Input.GetKey(KeyCode.L)) viewmodelX += Time.deltaTime * amount;
-        //playerViewmodel.SetViewmodelHintPosition(viewmodelX, viewmodelY, 0);
+        //b_value = Input.GetKeyDown(KeyCode.C);
+        //float amount = viewmodelBobbingX;
+        //if (Input.GetKey(KeyCode.I)) viewmodelY += Time.deltaTime * amount;
+        //if (Input.GetKey(KeyCode.K)) viewmodelY -= Time.deltaTime * amount;
+        //if (Input.GetKey(KeyCode.J)) viewmodelX -= Time.deltaTime * amount;
+        //if (Input.GetKey(KeyCode.L)) viewmodelX += Time.deltaTime * amount;
+        //PlayerViewmodel.SetViewmodelHintPosition(viewmodelX, viewmodelY, 0);
         #endregion
     }
 
@@ -249,29 +250,33 @@ public class Player : MonoBehaviour
         yVal += value;
     }
     #region state
+    public float GetSpeedCurve(float x)
+    {
+        return speedCurve.Evaluate(x);
+    }
+    public float GetSpeedStopCurve(float value)
+    {
+        return speedStopCurve.Evaluate(value);
+    }
 
+    public float GetWallrunCurve(float x)
+    {
+        return wallRunCurve.Evaluate(x);
+    }
     public float GetDashCurve(float x = -1)
     {
         x = x == -1 ? dashMulti : x;
         return dashCurve.Evaluate(x);
-    }
-    public float GetWallrunCurve(float x)
-    {
-        return wallRunCurve.Evaluate(x);
     }
     public float GetForceVectorCurve(float x = -1)
     {
         x = x == -1 ? forceMulti : x;
         return forceVectorCurve.Evaluate(x);
     }
-    public float GetSpeedCurve(float x)
-    {
-        return speedCurve.Evaluate(x);
-    }
     public bool CheckWall(out RaycastHit raycastHit, out bool isRight)
     {
-        Transform camTrm = playerCamera.GetCameraRotTransform();
-        float range = rangeWallRun;
+        Transform camTrm = PlayerCamera.GetCameraRotTransform();
+        float range = rangeWallrunCheck;
         bool result = Physics.Raycast(camTrm.position - new Vector3(0, 0.25f, 0), camTrm.right, out raycastHit, range, lm_wallrunable);
         isRight = result;
         result = result ? true : Physics.Raycast(camTrm.position - new Vector3(0, 0.25f, 0), camTrm.TransformDirection(Vector3.left), out raycastHit, range, lm_wallrunable);
@@ -279,15 +284,15 @@ public class Player : MonoBehaviour
     }
     public bool CheckWall(out RaycastHit raycastHit, out bool isRight, out Collider col)
     {
-        Transform camTrm = playerCamera.GetCameraRotTransform();
-        float range = rangeWallRun;
+        Transform camTrm = PlayerCamera.GetCameraRotTransform();
+        float range = rangeWallrunCheck;
         bool result = Physics.Raycast(camTrm.position - new Vector3(0, 0.25f, 0), camTrm.right, out raycastHit, range, lm_wallrunable);
         isRight = result;
         result = result ? true : Physics.Raycast(camTrm.position, camTrm.TransformDirection(Vector3.left), out raycastHit, range, lm_wallrunable);
 
         //angle
         //need optimazation
-        Vector3 pForward = playerCamera.GetCameraRotTransform().forward;
+        Vector3 pForward = PlayerCamera.GetCameraRotTransform().forward;
         pForward.y = 0;
         pForward.Normalize();
         Vector3 currentDir = -raycastHit.normal;
@@ -300,8 +305,8 @@ public class Player : MonoBehaviour
     }
     public bool CheckWall(out RaycastHit raycastHit, ref Vector3 dir)
     {
-        Transform camTrm = playerCamera.GetCameraRotTransform();
-        float range = rangeWallRun * 2;
+        Transform camTrm = PlayerCamera.GetCameraRotTransform();
+        float range = rangeWallrunCheck * 2;
         Debug.DrawRay(camTrm.position, dir, Color.yellow, Time.deltaTime);
         bool result = Physics.Raycast(camTrm.position - new Vector3(0, 0.25f, 0), dir, out raycastHit, range, lm_wallrunable);
         dir = -raycastHit.normal;
@@ -309,9 +314,4 @@ public class Player : MonoBehaviour
         return result;
     }
     #endregion
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(playerCamera.GetCameraRotTransform().position, rangeWallRun);
-    }
 }
