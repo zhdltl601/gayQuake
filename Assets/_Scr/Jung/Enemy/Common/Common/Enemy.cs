@@ -54,8 +54,8 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     public float attackTime;
     public Vector2 attackSpeed;
     //min =x max = y;    
-    
-    [Header("RumAway")] 
+
+    [Header("RumAway")]
     public int runAwayCount;
     public float runAwayDistance;
     public Transform runAwayTrm;
