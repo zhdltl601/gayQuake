@@ -21,7 +21,8 @@ public class MapManager : MonoSingleton<MapManager>
     
     public Chapter[] _chapters;
     
-    public int curruentChpter = -1;
+    public int currentRoom = 1;
+    private int currentChpater = -1;
     [Space]
     
     public GameObject startRoom;
@@ -35,8 +36,6 @@ public class MapManager : MonoSingleton<MapManager>
     private Vector3[] _mapDir;
     private List<Transform> _maps;
 
-    private bool specialRoomSpawn;
-
     protected override void Awake()
     {
         base.Awake();
@@ -46,7 +45,7 @@ public class MapManager : MonoSingleton<MapManager>
 
     public void RoomText()
     {
-        UIManager.Instance.PopupText($"{++curruentChpter}번째 방");         
+        UIManager.Instance.PopupText($"{++currentRoom}번째 방");         
     }
     
     public void ChapterGeneration()
@@ -61,7 +60,6 @@ public class MapManager : MonoSingleton<MapManager>
 
         GenerateCorridor();
 
-        specialRoomSpawn = false;
         _maps[0].GetComponent<Room>().EnterRoom();
         
     }
@@ -134,22 +132,25 @@ public class MapManager : MonoSingleton<MapManager>
       
     private void GenerateMap()
     {
-        if (curruentChpter >= chapterCount)
+        if ( currentChpater >= chapterCount)
         {
             SceneManager.LoadScene("Ending");
             return;
         }
+       
+        
+        currentChpater++;
         
         int generatedMaps = 0;
         while (generatedMaps < mapCount)
         {
             int mapType = Random.Range(0, 2);
-            bool mapGenerated = false;
             
-            if (mapType == 0 && _chapters[curruentChpter].specialMapTypes.Count > 0 && generatedMaps >= mapCount / 3 && specialRoomSpawn == false)
+
+            bool mapGenerated = false;
+            if (mapType == 0)
             {
                 mapGenerated = GenerationSpecial();
-                specialRoomSpawn = true;
             }
             else 
             {
@@ -163,6 +164,19 @@ public class MapManager : MonoSingleton<MapManager>
         }
     }
     
+    
+
+    private bool GenerationSpecial()
+    {
+        Vector3 position = _lastRoomTrm.position + _mapDir[Random.Range(0, _mapDir.Length)] * 60;
+        return Generation(position, _chapters[currentChpater].specialMapTypes);
+    }
+
+    private bool GenerationNormal()
+    {
+        Vector3 position = _lastRoomTrm.position + _mapDir[Random.Range(0, _mapDir.Length)] * 60;
+        return Generation(position,_chapters[currentChpater].normalMapTypes);
+    }
     private bool Generation(Vector3 position, List<GameObject> mapTypes)
     {
         bool positionOccupied = false;
@@ -188,19 +202,7 @@ public class MapManager : MonoSingleton<MapManager>
         }
         return false; 
     }
-
-    private bool GenerationSpecial()
-    {
-        Vector3 position = _lastRoomTrm.position + _mapDir[Random.Range(0, _mapDir.Length)] * 60;
-        return Generation(position, _chapters[curruentChpter].specialMapTypes);
-    }
-
-    private bool GenerationNormal()
-    {
-        Vector3 position = _lastRoomTrm.position + _mapDir[Random.Range(0, _mapDir.Length)] * 60;
-        return Generation(position,_chapters[curruentChpter].normalMapTypes);
-    }
-
+    
     private void GenerateCorridor()
     {
         for (int i = 0; i < _maps.Count - 1; i++)

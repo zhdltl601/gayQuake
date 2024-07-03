@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -33,7 +32,6 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     #endregion
     
     private Collider[] _enemyCheckCollider;
-    private StatType dieStat;
     
     public Transform target;
     public LayerMask _whatIsPlayer;
@@ -79,7 +77,7 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         AttackState = new EnemyAttackState(this , Animator , "Attack");
         DeadState = new EnemyDeadState(this , Animator , "Dead");
         #endregion
-
+        
         runAwayTrm.position -= (transform.forward * runAwayDistance);
     }
     
@@ -92,7 +90,7 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     {
         _enemyCheckCollider = new Collider[1];
         StateMachine.Init(IdleState);
-
+        
         NavMeshAgent.speed = Random.Range(moveSpeed - 2f,moveSpeed);
         Animator.speed =  Random.Range(attackSpeed.x , attackSpeed.y);
     }
@@ -116,6 +114,8 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
             
             PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].
                 AddValue(_playerBottle._bottleDataSo.increaseAmount);
+            
+            UIManager.Instance.CoinText();
         }
         
         RemoveEnemy();

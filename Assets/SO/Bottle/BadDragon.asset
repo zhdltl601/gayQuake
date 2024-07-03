@@ -21,4 +21,4 @@ MonoBehaviour:
   drinkAmount: 40
   decreaseTime: 0.2
   decreaseAmount: 4
-  icon: {fileID: 21300000, guid: 76855fbdf15b27f4d93e1bef0d41fd38, type: 3}
+  icon: {fileID: 21300000, guid: e17203397c1e765488076e2eacf65116, type: 3}
