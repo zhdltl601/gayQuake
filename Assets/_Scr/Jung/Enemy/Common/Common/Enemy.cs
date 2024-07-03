@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     public float dissolveDuration;
     public LayerMask whatIsObstacle;
     public bool isDead = false;
-    
+
     [Header("AttackValue")]
     public float attackDistance;
     public float minDistance;
@@ -102,6 +102,16 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         StateMachine.currentState.Update();
         
         LookPlayer();
+        DebugUI.Instance.list[0].text = StateMachine.currentState.ToString();
+        if(target != null)
+        {
+            Vector3 pos = transform.position; pos.y = 0;
+            Vector3 tar = target.position; tar.y = 0;
+            Vector3 dr = pos - tar;
+            dr.y = 0;
+            dr.Normalize();
+            runAwayTrm.position = transform.position +  dr * runAwayDistance;
+        }
     }
     
     #region DieLogic
@@ -271,7 +281,17 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
      
      private void OnDrawGizmos()
      {
-         Gizmos.color = Color.red;
-         Gizmos.DrawWireSphere(runAwayTrm.position , 1);
-     }
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(runAwayTrm.position , 1);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, runAwayDistance);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, minDistance);
+
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, attackDistance);
+
+    }
 }

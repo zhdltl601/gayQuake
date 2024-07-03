@@ -66,7 +66,7 @@ public class PlayerStateOnGround : PlayerStateBaseDefault
         if (isHoldingAnyInput)
         {
             additionalSpeed = player.GetSpeedCurve(timeSinceMoving);
-            DebugUI.Instance.list[0].text = additionalSpeed.ToString();
+            //DebugUI.Instance.list[0].text = additionalSpeed.ToString();
         }
         else 
         {

@@ -20,21 +20,23 @@ public class EnemyRunAwayState : EnemyState
         _enemy.runningAway = true;
         
         runAwayTargetPos = _enemy.runAwayTrm.position;
+
+        _enemy.NavMeshAgent.SetDestination(runAwayTargetPos);
     }
 
     public override void Update()
     {
         base.Update();
-
-        if (Vector3.Distance(_enemy.transform.position, runAwayTargetPos) <=1.5f || 
-            Physics.Raycast(_enemy.transform.position , _enemy.transform.forward, 3f))
+        Debug.DrawRay(_enemy.transform.position + new Vector3(0,1,0), -(_enemy.transform.position - runAwayTargetPos).normalized * 3, Color.green, Time.deltaTime);
+        if (Vector3.Distance(_enemy.transform.position, runAwayTargetPos) <= 1.5f || 
+            Physics.Raycast(_enemy.transform.position, -(_enemy.transform.position - runAwayTargetPos).normalized, 3f))
         {
            _enemy.StateMachine.ChangeState(_enemy.IdleState);
         }
-        else
-        {
-            _enemy.NavMeshAgent.SetDestination(runAwayTargetPos);
-        }
+        //else
+        //{
+        //    _enemy.NavMeshAgent.SetDestination(runAwayTargetPos);
+        //}
     }
 
     public override void Exit()

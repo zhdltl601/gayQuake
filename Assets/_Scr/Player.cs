@@ -105,7 +105,7 @@ public class Player : MonoBehaviour
         a.y = 0;
         a.Normalize();
         PlayerViewmodel.SetViewmodelHintPosition(a.x * viewmodelBobbingX, 0, a.z * viewmodelBobbingX);
-        PlayerViewmodel.UpdateViewmodel();
+        //PlayerViewmodel.UpdateViewmodel();
     }
     public void PlayerApplyMovement(Vector3 direction, float speed, float gravityMultiplier = 0, float forceMulti = 1)
     {
