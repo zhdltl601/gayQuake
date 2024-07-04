@@ -7,20 +7,22 @@ public class EnemyIdleState : EnemyState
     {
         
     }
+
     public override void Update()
     {
         base.Update();
-        
-        if(_enemy.CanAction() == false)
+
+        if (_enemy.CanAction() == false)
             return;
 
         if (RunAway()) return;
-                
-        if (_enemy.target != null && Vector3.Distance(_enemy.transform.position , _enemy.target.position) <= _enemy.attackDistance)
+
+        if (_enemy.target != null && Vector3.Distance(_enemy.transform.position, _enemy.target.position) <= _enemy.attackDistance)
         {
             _enemy.StateMachine.ChangeState(_enemy.AttackState);
             return;
         }
+
         if (_enemy.target != null)
         {
             _enemy.StateMachine.ChangeState(_enemy.MoveState);
@@ -32,16 +34,15 @@ public class EnemyIdleState : EnemyState
         {
             _enemy.target = player.transform;
         }
-        
+
     }
 
     private bool RunAway()
     {
-            //Debug.DrawRay(_enemy.transform.position + new Vector3(0, 1, 0), (_enemy.runAwayTrm.position - _enemy.transform.position).normalized, Color.green, 1);
-        if (_enemy.target != null && _enemy.runAwayCount > 0 &&Vector3.Distance(_enemy.transform.position, _enemy.target.position) <= _enemy.runAwayDistance)
+        if (_enemy.target != null && _enemy.runAwayCount > 0 && Vector3.Distance(_enemy.transform.position, _enemy.target.position) <= _enemy.runAwayDistance)
         {
             if (_enemy.runAwayAble &&
-                Physics.Raycast(_enemy.transform.position + new Vector3(0, 1, 0), (_enemy.runAwayTrm.position - _enemy.transform.position).normalized,
+                Physics.Raycast(_enemy.transform.position + new Vector3(0, 1, 0), -_enemy.transform.forward,
                     out RaycastHit hit,
                     _enemy.runAwayDistance) == false)
             {

@@ -100,15 +100,15 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         StateMachine.currentState.Update();
         
         LookPlayer();
-        if(target != null)
-        {
-            Vector3 pos = transform.position; pos.y = 0;
-            Vector3 tar = target.position; tar.y = 0;
-            Vector3 dr = pos - tar;
-            dr.y = 0;
-            dr.Normalize();
-            runAwayTrm.position = transform.position +  dr * runAwayDistance;
-        }
+        //if(target != null)
+        //{
+        //    Vector3 pos = transform.position; pos.y = 0;
+        //    Vector3 tar = target.position; tar.y = 0;
+        //    Vector3 dr = pos - tar;
+        //    dr.y = 0;
+        //    dr.Normalize();
+        //    runAwayTrm.position = transform.position +  dr * runAwayDistance;
+        //}
     }
     
     #region DieLogic
