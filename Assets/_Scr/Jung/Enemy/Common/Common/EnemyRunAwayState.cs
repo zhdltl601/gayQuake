@@ -33,10 +33,10 @@ public class EnemyRunAwayState : EnemyState
         {
            _enemy.StateMachine.ChangeState(_enemy.IdleState);
         }
-        //else
-        //{
-        //    _enemy.NavMeshAgent.SetDestination(runAwayTargetPos);
-        //}
+        else
+        {
+            _enemy.NavMeshAgent.SetDestination(runAwayTargetPos);
+        }
     }
 
     public override void Exit()

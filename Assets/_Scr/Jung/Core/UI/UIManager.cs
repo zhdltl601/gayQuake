@@ -211,12 +211,14 @@ public class UIManager : MonoSingleton<UIManager>
    
     public void UseDash()
     {
-        StopCoroutine(DashCoroutine());
+        //StopCoroutine(DashCoroutine());
         StartCoroutine(DashCoroutine());
     }
     
     private IEnumerator DashCoroutine()
     {
+        
+        
         dashSlider.value = 0;
         dashGroup.alpha = 0.2f;
 

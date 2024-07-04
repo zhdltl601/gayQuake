@@ -792,15 +792,15 @@ MonoBehaviour:
     m_Bits: 128
   moveSpeed: 5
   checkPlayerDistance: 20
-  isDead: 0
   dissolveDuration: 3
   whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 4096
-  attackDistance: 4
+    m_Bits: 4352
+  isDead: 0
+  attackDistance: 3.5
   minDistance: 0
   attackDamage: 90
-  attackTime: 1.42
+  attackTime: 1.2
   attackSpeed: {x: 1, y: 1.4}
   runAwayCount: 0
   runAwayDistance: 0

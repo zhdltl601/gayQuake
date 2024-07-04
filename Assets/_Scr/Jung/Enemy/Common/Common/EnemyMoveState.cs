@@ -17,7 +17,6 @@ public class EnemyMoveState : EnemyState
             if (Vector3.Distance(_enemy.transform.position , _enemy.target.position) >= _enemy.minDistance)
             {
                 GetAttackMoveDir();
-                _enemy.NavMeshAgent.SetDestination(attackMoveTarget);
             }
         }
     }   
@@ -26,7 +25,7 @@ public class EnemyMoveState : EnemyState
     {
         base.Update();
 
-        float distance = Vector3.Distance(_enemy.transform.position, _enemy.NavMeshAgent.destination);
+        float distance = Vector3.Distance(_enemy.transform.position, _enemy.target.position);
         
         if (_enemy.isAttackMove)
         {
@@ -43,7 +42,7 @@ public class EnemyMoveState : EnemyState
         }
         
         
-        bool isClose =distance <= _enemy.attackDistance;
+        bool isClose = distance <= _enemy.attackDistance;
         
         if(isClose && 
            _enemy.CanAction() && _enemy.IsObstacleInLine(100 , (_enemy.target.position - _enemy.transform.position).normalized) == false)
