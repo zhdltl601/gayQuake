@@ -1218,11 +1218,11 @@ MonoBehaviour:
     m_Bits: 128
   moveSpeed: 11
   checkPlayerDistance: 40
-  isDead: 0
   dissolveDuration: 3
   whatIsObstacle:
     serializedVersion: 2
     m_Bits: 4096
+  isDead: 0
   attackDistance: 2
   minDistance: 0
   attackDamage: 110

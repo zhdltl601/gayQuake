@@ -795,7 +795,7 @@ MonoBehaviour:
   dissolveDuration: 3
   whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 4352
+    m_Bits: 4096
   isDead: 0
   attackDistance: 3.5
   minDistance: 0
