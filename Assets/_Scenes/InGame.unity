@@ -470,7 +470,6 @@ GameObject:
   - component: {fileID: 279618298}
   - component: {fileID: 279618297}
   - component: {fileID: 279618296}
-  - component: {fileID: 279618300}
   - component: {fileID: 279618301}
   m_Layer: 5
   m_Name: UIManager
@@ -574,18 +573,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &279618300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 279618295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03dc1a06e3baacb42ae1bc30e7758f6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &279618301
 MonoBehaviour:
   m_ObjectHideFlags: 0
