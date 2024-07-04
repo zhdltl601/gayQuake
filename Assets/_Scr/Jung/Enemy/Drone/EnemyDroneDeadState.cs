@@ -17,7 +17,7 @@ public class EnemyDroneDeadState : EnemyDroneBaseState
 
         _enemyDrone.isDead = true;
         
-        UIManager.Instance.CoinText();
+       
     }
 
     public override void Update()
@@ -28,6 +28,7 @@ public class EnemyDroneDeadState : EnemyDroneBaseState
     public override void Exit()
     {
         base.Exit();
+       
     }
 
    

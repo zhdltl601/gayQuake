@@ -1,18 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class WeaponController : MonoBehaviour
 {
-    public PlayerAnimator PlayerAnimator;
+    public PlayerAnimator playerAnimator;
 
     [Header("Gun Settings")]
     public Gun currentGun;
     private float _lastShootTime;
-    private bool reloading;
+    private bool _reloading;
     
     [Header("Bottle Settings")] 
     public Bottle currentBottle;
@@ -22,12 +21,12 @@ public class WeaponController : MonoBehaviour
     public Transform gunTrm;
     public Transform bottleTrm;
     
-    private int currentBottleIndex;
+    private int _currentBottleIndex;
     
     private Player _player;
-    private Transform playerCam;
+    private Transform _playerCam;
 
-    private bool equip = false;
+    private bool _equip = false;
 
     private void Awake()
     {
@@ -39,14 +38,17 @@ public class WeaponController : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         
-        playerCam = Camera.main.transform;
+        _playerCam = Camera.main.transform;
         _player = GetComponent<Player>();
         
         UIManager.Instance.CoinText();
-        UIManager.Instance.SetBottleUI($"<color=#40739e>{currentBottle._bottleDataSo.bottleName}</color>: {currentBottle._bottleDataSo.bottleExplain}");
+        UIManager.Instance.SetBottleUI($"<color=#40739e>{currentBottle._bottleDataSo.bottleName}</color>: {currentBottle._bottleDataSo.bottleExplain}" , currentBottle._bottleDataSo.icon);
+        UIManager.Instance.SetBottleUI($"<color=#40739e>{currentBottle._bottleDataSo.bottleName}</color>: {currentBottle._bottleDataSo.bottleExplain}" , currentBottle._bottleDataSo.icon);
         
-        PlayerAnimator.rightArmAnimator.runtimeAnimatorController = currentBottle.AnimatorController;
-        PlayerAnimator.rightArmAnimator.Play("Equip" , -1 , 0f);
+       playerAnimator.rightArmAnimator.runtimeAnimatorController = currentBottle.AnimatorController;
+       playerAnimator.rightArmAnimator.Play("Equip" , -1 , 0f);
+        
+        //Equip();
     }
     private void Update()
     {
@@ -60,7 +62,7 @@ public class WeaponController : MonoBehaviour
         }
         else
         {
-            equip = false;
+            _equip = false;
         }
 
         if (currentBottle != null && currentBottle)
@@ -69,23 +71,27 @@ public class WeaponController : MonoBehaviour
             currentBottle.DecreaseBottle();
         }
         
-        if (currentGun != null && currentBottle as AmmoBottle)
-        {
-            currentGun.gunMagazine.totalAmmo += (currentBottle as AmmoBottle).GetAmmo();
-        }
-        
+        ApplyAmmoBottle();
         ChangeBottle();
-       
     }
+
+    private void ApplyAmmoBottle()
+    {
+        if (currentGun != null && currentBottle is AmmoBottle)
+        {
+            currentGun.gunMagazine.totalAmmo += ((AmmoBottle)currentBottle).GetAmmo();
+        }
+    }
+
     private void Equip()
     {
-        if (equip == false)
+        if (_equip == false)
         {
-            equip = true;
-            PlayerAnimator.leftArmAnimator.runtimeAnimatorController = currentGun.runtimeAnimatorController;
-            PlayerAnimator.leftArmAnimator.enabled = true;
-            PlayerAnimator.leftArmAnimator.Rebind();
-            PlayerAnimator.leftArmAnimator.Play("Equip", -1, 0);
+            _equip = true;
+            playerAnimator.leftArmAnimator.runtimeAnimatorController = currentGun.runtimeAnimatorController;
+            playerAnimator.leftArmAnimator.enabled = true;
+            playerAnimator.leftArmAnimator.Rebind();
+            playerAnimator.leftArmAnimator.Play("Equip", -1, 0);
             
             UIManager.Instance.SetCrosshair(currentGun.gunData.crossHair);
             SoundManager.Instance.PlayPlayerSOund("Equip");
@@ -104,9 +110,9 @@ public class WeaponController : MonoBehaviour
     }
     private void ThrowGun()
     {
-        if (Input.GetKeyDown(KeyCode.G) && reloading == false)
+        if (Input.GetKeyDown(KeyCode.G) && _reloading == false)
         {
-            PlayerAnimator.leftArmAnimator.enabled = false;
+            playerAnimator.leftArmAnimator.enabled = false;
             currentGun.ThrowGun();
             currentGun = null;
             
@@ -115,13 +121,13 @@ public class WeaponController : MonoBehaviour
     private void Shot()
     {
         bool shootAble = currentGun.gunMagazine.ammoInMagazine > 0 &&
-                         _lastShootTime + currentGun.gunData.shotRate < Time.time && !reloading;
+                         _lastShootTime + currentGun.gunData.shotRate < Time.time && !_reloading;
         
         if (Input.GetKey(KeyCode.Mouse0) && shootAble)
         {
             GameObject[] bullets = currentGun.Shoot();
                         
-            _player.playerCamera.CameraShakePos(0.11f);
+            _player.PlayerCamera.CameraShakePos(0.11f);
             
             for (int i = 0; i < bullets.Length; i++)
             {
@@ -130,7 +136,7 @@ public class WeaponController : MonoBehaviour
                 }
                 
                 Bullet newBullet = bullets[i].GetComponent<Bullet>();
-                newBullet.SetBullet(playerCam.transform.forward);
+                newBullet.SetBullet(_playerCam.transform.forward);
             }
             
             _lastShootTime = Time.time;
@@ -138,7 +144,7 @@ public class WeaponController : MonoBehaviour
             float randomXRecoil = Random.Range(-currentGun.gunData.xBound,currentGun.gunData.xBound);
             Recoil(randomXRecoil * Time.deltaTime, currentGun.gunData.yBound * Time.deltaTime);
             
-            _player.playerAnimator.leftArmAnimator.Play("AutoShoot", -1, 0f);
+            _player.PlayerAnimator.leftArmAnimator.Play("AutoShoot", -1, 0f);
             
             UIManager.Instance.SetAmmoText();
           
@@ -157,16 +163,12 @@ public class WeaponController : MonoBehaviour
         float scroll = -Input.GetAxisRaw("Mouse ScrollWheel") * 10;
         
         if(scroll == 0)return;
-        currentBottleIndex += (int)scroll;
-        currentBottleIndex = Mathf.Clamp(currentBottleIndex,0 ,bottleList.Count - 1);
-        SwitchBottle(currentBottleIndex);
+        _currentBottleIndex += (int)scroll;
+        _currentBottleIndex = Mathf.Clamp(_currentBottleIndex,0 ,bottleList.Count - 1);
+        SwitchBottle(_currentBottleIndex);
         
-        PlayerAnimator.rightArmAnimator.runtimeAnimatorController = currentBottle.AnimatorController;
-        //PlayerAnimator.rightArmAnimator.Rebind();
-        PlayerAnimator.rightArmAnimator.Play("Equip" , -1 , 0f);
-        
-        
-       
+        playerAnimator.rightArmAnimator.runtimeAnimatorController = currentBottle.AnimatorController;
+        playerAnimator.rightArmAnimator.Play("Equip" , -1 , 0f);
     }
     private void SwitchBottle(int index)
     {
@@ -176,7 +178,8 @@ public class WeaponController : MonoBehaviour
         currentBottle = bottleList[index];
         currentBottle.gameObject.SetActive(true);
 
-        UIManager.Instance.SetBottleUI($"<color=#40739e>{currentBottle._bottleDataSo.bottleName}</color>: {currentBottle._bottleDataSo.bottleExplain}");
+        UIManager.Instance.SetBottleUI($"<color=#40739e>{currentBottle._bottleDataSo.bottleName}</color>: {currentBottle._bottleDataSo.bottleExplain}" ,
+            currentBottle._bottleDataSo.icon);
 
     }
     private void DrinkBottle()
@@ -186,7 +189,7 @@ public class WeaponController : MonoBehaviour
             if (currentBottle._bottleDataSo.bottleType == BottleType.Normal)
             {
                 Destroy(currentBottle.gameObject);
-                currentBottle.DrinkBottle(_player.playerAnimator.rightArmAnimator);
+                currentBottle.DrinkBottle(_player.PlayerAnimator.rightArmAnimator);
             
                 Invoke(nameof(SetBottleDefault), 1f);
                 bottleList.Remove(currentBottle);
@@ -201,9 +204,9 @@ public class WeaponController : MonoBehaviour
 
     IEnumerator ReloadCoroutine(float duration)
     {
-        reloading = true;
+        _reloading = true;
         yield return new WaitForSeconds(duration);
-        reloading = false;
+        _reloading = false;
 
 
         UIManager.Instance.SetAmmoText();
@@ -216,6 +219,6 @@ public class WeaponController : MonoBehaviour
 
     public Bottle GetCurrenBottle()
     {
-        return currentBottle;
+        return  currentBottle == null ? null : currentBottle;
     }
 }

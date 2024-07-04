@@ -13,7 +13,10 @@ public class SoundManager : MonoSingleton<SoundManager>
     public SFX[] sfxes;
     
     private int _bgmIndex = 0;
-    
+    private void Start()
+    {
+        SetMusicVolume();
+    }
     public void PlayPlayerSOund(string str)
     {
         SFX s = Array.Find(sfxes,x => x.name == str);

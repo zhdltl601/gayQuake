@@ -15,10 +15,10 @@ public class EnemyRunAwayState : EnemyState
     public override void Enter()
     {
         base.Enter();
-        
+
         _enemy.NavMeshAgent.isStopped = false;
         _enemy.runningAway = true;
-        
+
         targetPos = _enemy.runAwayTrm.position;
     }
 
@@ -26,12 +26,12 @@ public class EnemyRunAwayState : EnemyState
     {
         base.Update();
 
-        if (Vector3.Distance(_enemy.transform.position, targetPos) <= 0.4f || 
-            Physics.Raycast(_enemy.transform.position , _enemy.target.forward , 2f) == true)
+        if (Vector3.Distance(_enemy.transform.position, targetPos) <= 0.4f ||
+            Physics.Raycast(_enemy.transform.position, _enemy.target.forward, 2f) == true)
         {
-           _enemy.StateMachine.ChangeState(_enemy.IdleState);
+            _enemy.StateMachine.ChangeState(_enemy.IdleState);
         }
-                        
+
         _enemy.NavMeshAgent.SetDestination(targetPos);
     }
 
@@ -40,7 +40,7 @@ public class EnemyRunAwayState : EnemyState
         base.Exit();
 
         _enemy.transform.rotation = Quaternion.LookRotation(_enemy.target.position);
-        
+
         _enemy.NavMeshAgent.isStopped = true;
         _enemy.runningAway = false;
         _enemy.runAwayCount--;

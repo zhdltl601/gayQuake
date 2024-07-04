@@ -9,6 +9,12 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene(stage1);
     }
+
+    private void Start()
+    {
+        Time.timeScale = 1;
+    }
+    
     public void Quit()
     {
         //ming

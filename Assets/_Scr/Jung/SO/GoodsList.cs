@@ -17,7 +17,8 @@ public class GoodsList : ScriptableObject
 
     public void ResetList()
     {
-        
+        goods.Clear();
+
         foreach (var item in lists)
         {
             goods.Add(item);

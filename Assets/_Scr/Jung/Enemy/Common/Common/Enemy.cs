@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour,EnemyMapSetting
 {
@@ -31,7 +32,6 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     #endregion
     
     private Collider[] _enemyCheckCollider;
-    private StatType dieStat;
     
     public Transform target;
     public LayerMask _whatIsPlayer;
@@ -41,10 +41,10 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     [Header("Default Values")]
     public float moveSpeed;
     public float checkPlayerDistance;
-    public bool isDead = false;
     public float dissolveDuration;
     public LayerMask whatIsObstacle;
-    
+    public bool isDead = false;
+
     [Header("AttackValue")]
     public float attackDistance;
     public float minDistance;
@@ -52,8 +52,8 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     public float attackTime;
     public Vector2 attackSpeed;
     //min =x max = y;    
-    
-    [Header("RumAway")] 
+
+    [Header("RumAway")]
     public int runAwayCount;
     public float runAwayDistance;
     public Transform runAwayTrm;
@@ -76,9 +76,8 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         RunAwayState = new EnemyRunAwayState(this , Animator , "Move");
         AttackState = new EnemyAttackState(this , Animator , "Attack");
         DeadState = new EnemyDeadState(this , Animator , "Dead");
-        
         #endregion
-
+        
         runAwayTrm.position -= (transform.forward * runAwayDistance);
     }
     
@@ -91,9 +90,9 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     {
         _enemyCheckCollider = new Collider[1];
         StateMachine.Init(IdleState);
-
+        
         NavMeshAgent.speed = Random.Range(moveSpeed - 2f,moveSpeed);
-        Animator.speed =  Random.Range(attackSpeed.x , attackSpeed.y);;
+        Animator.speed =  Random.Range(attackSpeed.x , attackSpeed.y);
     }
 
     private void Update()
@@ -101,6 +100,15 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         StateMachine.currentState.Update();
         
         LookPlayer();
+        //if(target != null)
+        //{
+        //    Vector3 pos = transform.position; pos.y = 0;
+        //    Vector3 tar = target.position; tar.y = 0;
+        //    Vector3 dr = pos - tar;
+        //    dr.y = 0;
+        //    dr.Normalize();
+        //    runAwayTrm.position = transform.position +  dr * runAwayDistance;
+        //}
     }
     
     #region DieLogic
@@ -115,6 +123,8 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
             
             PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].
                 AddValue(_playerBottle._bottleDataSo.increaseAmount);
+            
+            UIManager.Instance.CoinText();
         }
         
         RemoveEnemy();
@@ -219,7 +229,8 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     }
 
     #endregion
-   
+
+    #region Detecteced
     public virtual Collider IsPlayerDetected()
     {
         int cnt = Physics.OverlapSphereNonAlloc(transform.position, checkPlayerDistance, _enemyCheckCollider, _whatIsPlayer);
@@ -230,6 +241,9 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     {
         return Physics.Raycast(transform.position, direction, distance , whatIsObstacle);
     }
+    
+
+    #endregion
 
     #region RoomSettings
     public void SetRoom(Room room)
@@ -241,6 +255,8 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         currentRoom.aliveEnemys.Remove(gameObject);
     }
     #endregion
+    
+    
      public void AnimationEnd()
     {
         StateMachine.currentState.AnimationFinish();;

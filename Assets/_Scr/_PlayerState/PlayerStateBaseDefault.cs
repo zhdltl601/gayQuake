@@ -26,6 +26,7 @@ public abstract class PlayerStateBaseDefault : State
         HandleState();
         Vector3 result = GetDirection(inputDirection);
         float speed = GetSpeed();
+        
         float gravityMultiplier = GetGravitiyMultiplier();
         float forceMulti = GetForceMultiplier();
         player.PlayerApplyMovement(result, speed, gravityMultiplier, forceMulti);
@@ -47,7 +48,7 @@ public abstract class PlayerStateBaseDefault : State
     }
     protected void Dash()
     {
-        player.playerAnimator.camAnimator.Play("OnDash", -1, 0);
+        player.PlayerAnimator.camAnimator.Play("OnDash", -1, 0);
     }
     protected virtual float GetGravitiyMultiplier()
     {

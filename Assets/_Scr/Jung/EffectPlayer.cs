@@ -5,13 +5,13 @@ public class EffectPlayer : MonoBehaviour
 {
     [SerializeField] private List<ParticleSystem> _particleSystem;
     private Health _enemy;
-
+    
     private void Start() {
         _enemy = GetComponent<Health>();
     }
     public void PlayParticle()
     {
-        ActionData _actionData = _enemy._actionData;
+        ActionData _actionData = _enemy.ActionData;
         
         foreach (var item in _particleSystem)
         {
