@@ -261,21 +261,36 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     {
         StateMachine.currentState.AnimationFinish();;
     }
-
-    public bool CanAction()
+     public bool CanAction()
     {
         return Time.time >= lastAttackTime + attackTime;
     }
-    private void LookPlayer()
+     private void LookPlayer()
     {
         if(target == null || isDead || runningAway)return;
-            
-        Vector3 targetPos = this.target.position - transform.position;
-        targetPos.y = 0;
         
-        Quaternion targetRot = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetPos), 10 * Time.deltaTime);
+        Vector3 lookTargetPos = target.position - transform.position;
+        lookTargetPos.y = 0;
+        lookTargetPos.Normalize();
+        
+        Quaternion targetRot = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookTargetPos), 10 * Time.deltaTime);
         transform.rotation = targetRot;
         //_enemy.transform.rotation = Quaternion.LookRotation(target);
     }
-   
+     
+     private void OnDrawGizmos()
+     {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(runAwayTrm.position , 1);
+
+        //Gizmos.color = Color.yellow;
+        //Gizmos.DrawWireSphere(transform.position, runAwayDistance);
+
+        //Gizmos.color = Color.blue;
+        //Gizmos.DrawWireSphere(transform.position, minDistance);
+
+        //Gizmos.color = Color.white;
+        //Gizmos.DrawWireSphere(transform.position, attackDistance);
+
+    }
 }

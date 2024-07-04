@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Quaternion = UnityEngine.Quaternion;
@@ -31,7 +31,8 @@ public class MapManager : MonoSingleton<MapManager>
     public GameObject corridor;
 
     public GameObject potal;
-    
+
+    private bool spawnSpeical = false;
     private Transform _lastRoomTrm;
     private Vector3[] _mapDir;
     private List<Transform> _maps;
@@ -61,7 +62,7 @@ public class MapManager : MonoSingleton<MapManager>
         GenerateCorridor();
 
         _maps[0].GetComponent<Room>().EnterRoom();
-        
+        spawnSpeical = false;
     }
     
     public void ClearMap()
@@ -83,6 +84,7 @@ public class MapManager : MonoSingleton<MapManager>
         _mapDir[2] = -transform.right;
         
         _lastRoomTrm = transform;
+        spawnSpeical = false;
     }
     
     #region GenerationMethos
@@ -117,19 +119,14 @@ public class MapManager : MonoSingleton<MapManager>
         GameObject room = Instantiate(endRoom, position, Quaternion.identity);
         _lastRoomTrm = room.transform;
         _maps.Add(room.transform);
-        
-        
+                
         GameObject newPortal = Instantiate(potal);
         newPortal.transform.parent = room.transform;
         newPortal.transform.localPosition = Vector3.zero;
-
-        Vector3 endRoomPos = _maps[_maps.Count - 1].position;
-        Vector3 endLastRoomPos = _maps[_maps.Count - 2].position;
-        newPortal.transform.forward = (endLastRoomPos - endRoomPos).normalized;
         
         room.name = "EndRoom";
     }
-      
+    
     private void GenerateMap()
     {
         if ( currentChpater >= chapterCount)
@@ -145,10 +142,14 @@ public class MapManager : MonoSingleton<MapManager>
         while (generatedMaps < mapCount)
         {
             int mapType = Random.Range(0, 2);
-            
 
             bool mapGenerated = false;
-            if (mapType == 0)
+            if (mapType == 0 && spawnSpeical == false)
+            {
+                if(generatedMaps >= mapCount/2)
+                    mapGenerated = GenerationSpecial();
+            }
+            else if (mapCount - generatedMaps <= 1  && spawnSpeical == false)
             {
                 mapGenerated = GenerationSpecial();
             }
@@ -169,15 +170,16 @@ public class MapManager : MonoSingleton<MapManager>
     private bool GenerationSpecial()
     {
         Vector3 position = _lastRoomTrm.position + _mapDir[Random.Range(0, _mapDir.Length)] * 60;
-        return Generation(position, _chapters[currentChpater].specialMapTypes);
+        return Generation(position, _chapters[currentChpater].specialMapTypes,true);
+
     }
 
     private bool GenerationNormal()
     {
         Vector3 position = _lastRoomTrm.position + _mapDir[Random.Range(0, _mapDir.Length)] * 60;
-        return Generation(position,_chapters[currentChpater].normalMapTypes);
+        return Generation(position,_chapters[currentChpater].normalMapTypes,false);
     }
-    private bool Generation(Vector3 position, List<GameObject> mapTypes)
+    private bool Generation(Vector3 position, List<GameObject> mapTypes,bool special)
     {
         bool positionOccupied = false;
         foreach (Transform map in _maps)
@@ -196,8 +198,13 @@ public class MapManager : MonoSingleton<MapManager>
             
             _lastRoomTrm = newMapObj.transform;
             _maps.Add(newMapObj.transform);
-            
 
+
+            if (special)
+            {
+                spawnSpeical = true;
+            }
+            
             return true;
         }
         return false; 
