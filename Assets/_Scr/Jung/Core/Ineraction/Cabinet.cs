@@ -25,12 +25,14 @@ public class Cabinet : MonoBehaviour
         priceText.SetText(price.ToString());
         
         int random = Random.Range(0, lists.goods.Count);
+        
         goods = Instantiate(lists.goods[random], transform.position + Vector3.up * 1.5f,Quaternion.identity);
         goods.transform.parent = transform;
         goods.name = lists.goods[random].name;
         
         lists.goods.RemoveAt(random);
-        if (lists.goods.Count >= 0)
+        
+        if (lists.goods.Count <= 0)
         {
             lists.ResetList();
         }
