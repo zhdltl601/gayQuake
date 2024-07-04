@@ -797,7 +797,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4352
   isDead: 0
-  attackDistance: 3.5
+  attackDistance: 4
   minDistance: 0
   attackDamage: 90
   attackTime: 1.2
