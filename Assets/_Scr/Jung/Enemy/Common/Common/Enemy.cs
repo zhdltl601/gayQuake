@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     
     [HideInInspector] public float lastAttackTime;
     [HideInInspector] public bool isAttackMove;
-    
+
     private void Awake()
     {
         Animator = GetComponentInChildren<Animator>();
@@ -71,46 +71,38 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         StateMachine = new EnemyStateMachine();
 
         #region states
-        IdleState = new EnemyIdleState(this , Animator , "Idle");
-        MoveState = new EnemyMoveState(this , Animator , "Move");
-        RunAwayState = new EnemyRunAwayState(this , Animator , "Move");
-        AttackState = new EnemyAttackState(this , Animator , "Attack");
-        DeadState = new EnemyDeadState(this , Animator , "Dead");
+        IdleState = new EnemyIdleState(this, Animator, "Idle");
+        MoveState = new EnemyMoveState(this, Animator, "Move");
+        RunAwayState = new EnemyRunAwayState(this, Animator, "Move");
+        AttackState = new EnemyAttackState(this, Animator, "Attack");
+        DeadState = new EnemyDeadState(this, Animator, "Dead");
+
         #endregion
-        
+
         runAwayTrm.position -= (transform.forward * runAwayDistance);
     }
-    
-    private void OnEnable() 
+
+    private void OnEnable()
     {
-        Dissolve(-2, 5 , false);    
+        Dissolve(-2, 5, false);
     }
 
     private void Start()
     {
         _enemyCheckCollider = new Collider[1];
         StateMachine.Init(IdleState);
-        
-        NavMeshAgent.speed = Random.Range(moveSpeed - 2f,moveSpeed);
-        Animator.speed =  Random.Range(attackSpeed.x , attackSpeed.y);
+
+        NavMeshAgent.speed = Random.Range(moveSpeed - 2f, moveSpeed);
+        Animator.speed = Random.Range(attackSpeed.x, attackSpeed.y); ;
     }
 
     private void Update()
     {
         StateMachine.currentState.Update();
-        
+
         LookPlayer();
-        //if(target != null)
-        //{
-        //    Vector3 pos = transform.position; pos.y = 0;
-        //    Vector3 tar = target.position; tar.y = 0;
-        //    Vector3 dr = pos - tar;
-        //    dr.y = 0;
-        //    dr.Normalize();
-        //    runAwayTrm.position = transform.position +  dr * runAwayDistance;
-        //}
     }
-    
+
     #region DieLogic
 
     public void DieEvent()
@@ -120,24 +112,22 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         if (target != null)
         {
             Bottle _playerBottle = target.GetComponent<WeaponController>().currentBottle;
-            
+
             PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].
                 AddValue(_playerBottle._bottleDataSo.increaseAmount);
-            
-            UIManager.Instance.CoinText();
         }
-        
+
         RemoveEnemy();
-        
-        Animator.SetLayerWeight(1 , 0);
+
+        Animator.SetLayerWeight(1, 0);
         NavMeshAgent.isStopped = true;
-       
+
     }
-    public void Dissolve(float startValue , float endValue , bool isEead)
+    public void Dissolve(float startValue, float endValue, bool isEead)
     {
-        StartCoroutine(StartDissolve(startValue , endValue , isDead));
+        StartCoroutine(StartDissolve(startValue, endValue, isDead));
     }
-    private IEnumerator StartDissolve(float startValue , float endValue , bool isDead)
+    private IEnumerator StartDissolve(float startValue, float endValue, bool isDead)
     {
         Material[] mat;
         if (_MeshRenderer.Length >= 2)
@@ -151,28 +141,29 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         else
         {
             mat = _MeshRenderer[0].materials;
-           
-        } 
-        
+
+        }
+
         float currentTime = 0;
-        while(currentTime <= dissolveDuration)
+        while (currentTime <= dissolveDuration)
         {
             currentTime += Time.deltaTime;
-            float currentDissolve = Mathf.Lerp(startValue, endValue, currentTime/dissolveDuration);
+            float currentDissolve = Mathf.Lerp(startValue, endValue, currentTime / dissolveDuration);
 
             foreach (var item in mat)
             {
                 item.SetFloat(_dissolveHash, currentDissolve);
-            }   
-            
+            }
+
             yield return null;
         }
 
-        if(isDead){
+        if (isDead)
+        {
             yield return new WaitForSeconds(0.1f);
             Destroy(gameObject);
-        }        
-       
+        }
+
     }
 
     #endregion
@@ -182,7 +173,7 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     public void HitEvent()
     {
         if (_IsHit) return;
-        
+
         Animator.SetTrigger("Hit");
         StartCoroutine(HitCoroutine());
     }
@@ -202,48 +193,44 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         else
         {
             mat = _MeshRenderer[0].materials;
-           
-        } 
-                
+
+        }
+
         for (int i = 0; i < _MeshRenderer.Length; i++)
         {
             mat[i] = _MeshRenderer[i].material;
         }
-                    
+
         foreach (var item in mat)
         {
-            item.SetFloat(_blinkValue,1);
+            item.SetFloat(_blinkValue, 1);
         }
-            
+
         yield return new WaitForSeconds(0.4f);
         _IsHit = false;
-            
+
         NavMeshAgent.speed = moveSpeed / 5;
-     
+
         foreach (var item in mat)
         {
-            item.SetFloat(_blinkValue,0);
+            item.SetFloat(_blinkValue, 0);
         }
-                
+
         NavMeshAgent.speed = moveSpeed;
     }
 
     #endregion
 
-    #region Detecteced
     public virtual Collider IsPlayerDetected()
     {
         int cnt = Physics.OverlapSphereNonAlloc(transform.position, checkPlayerDistance, _enemyCheckCollider, _whatIsPlayer);
         return cnt == 1 ? _enemyCheckCollider[0] : null;
     }
-    
+
     public virtual bool IsObstacleInLine(float distance, Vector3 direction)
     {
-        return Physics.Raycast(transform.position, direction, distance , whatIsObstacle);
+        return Physics.Raycast(transform.position, direction, distance, whatIsObstacle);
     }
-    
-
-    #endregion
 
     #region RoomSettings
     public void SetRoom(Room room)
@@ -255,42 +242,30 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         currentRoom.aliveEnemys.Remove(gameObject);
     }
     #endregion
-    
-    
-     public void AnimationEnd()
+    public void AnimationEnd()
     {
-        StateMachine.currentState.AnimationFinish();;
+        StateMachine.currentState.AnimationFinish(); ;
     }
-     public bool CanAction()
+
+    public bool CanAction()
     {
         return Time.time >= lastAttackTime + attackTime;
     }
-     private void LookPlayer()
+    private void LookPlayer()
     {
-        if(target == null || isDead || runningAway)return;
-        
-        Vector3 lookTargetPos = target.position - transform.position;
-        lookTargetPos.y = 0;
-        lookTargetPos.Normalize();
-        
-        Quaternion targetRot = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookTargetPos), 10 * Time.deltaTime);
+        if (target == null || isDead || runningAway) return;
+
+        Vector3 targetPos = this.target.position - transform.position;
+        targetPos.y = 0;
+
+        Quaternion targetRot = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetPos), 10 * Time.deltaTime);
         transform.rotation = targetRot;
         //_enemy.transform.rotation = Quaternion.LookRotation(target);
     }
-     
-     private void OnDrawGizmos()
-     {
+
+    private void OnDrawGizmos()
+    {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(runAwayTrm.position , 1);
-
-        //Gizmos.color = Color.yellow;
-        //Gizmos.DrawWireSphere(transform.position, runAwayDistance);
-
-        //Gizmos.color = Color.blue;
-        //Gizmos.DrawWireSphere(transform.position, minDistance);
-
-        //Gizmos.color = Color.white;
-        //Gizmos.DrawWireSphere(transform.position, attackDistance);
-
+        Gizmos.DrawWireSphere(runAwayTrm.position, 1);
     }
 }

@@ -23,11 +23,13 @@ public class EnemyIdleState : EnemyState
             return;
         }
 
+
         if (_enemy.target != null)
         {
             _enemy.StateMachine.ChangeState(_enemy.MoveState);
             return;
         }
+
 
         Collider player = _enemy.IsPlayerDetected();
         if (player != null)
