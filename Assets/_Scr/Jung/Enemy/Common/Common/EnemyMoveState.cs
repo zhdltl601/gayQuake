@@ -5,6 +5,7 @@ public class EnemyMoveState : EnemyState
     private Vector3 attackMoveTarget;
     public EnemyMoveState(Enemy enemy, Animator animator, string animBoolName) : base(enemy, animator, animBoolName)
     {
+        
     }
 
     public override void Enter()
