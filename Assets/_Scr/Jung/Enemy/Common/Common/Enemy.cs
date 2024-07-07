@@ -115,12 +115,18 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
 
             PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].
                 AddValue(_playerBottle._bottleDataSo.increaseAmount);
+            
+            if(_playerBottle._bottleDataSo.statType == StatType.Money)
+                UIManager.Instance.CoinText();
         }
-
-        RemoveEnemy();
-
+        
+        
         Animator.SetLayerWeight(1, 0);
         NavMeshAgent.isStopped = true;
+        s
+        
+       
+        RemoveEnemy();
 
     }
     public void Dissolve(float startValue, float endValue, bool isEead)
