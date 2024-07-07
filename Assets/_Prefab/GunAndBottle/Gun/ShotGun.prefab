@@ -286,8 +286,8 @@ MonoBehaviour:
   _firePos: {fileID: 0}
   throwing: 0
   _weaponController: {fileID: 0}
-  shotGunDistance: 10
-  shotgunRadius: 4.68
+  shotGunDistance: 13
+  shotgunRadius: 4.6
 --- !u!54 &1057293400103163340
 Rigidbody:
   m_ObjectHideFlags: 0
