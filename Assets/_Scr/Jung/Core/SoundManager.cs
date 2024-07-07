@@ -14,6 +14,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     private void Start()
     {
         SetMusicVolume();
+        SetSfxVolume();
     }
     public void PlayPlayerSOund(string str)
     {
