@@ -15,7 +15,7 @@ public abstract class PlayerStateBaseDefault : State
         player.Mov += HandleMove;
         player.OnJump += HandleOnJump;
         player.OnDash += HandleOnDash;
-        player.OnViewmodelHint += HandleOnViewmodel;
+        player.OnViewmodelHintPos += HandleOnViewmodel;
     }
     public override void Exit()
     {
@@ -23,11 +23,11 @@ public abstract class PlayerStateBaseDefault : State
         player.Mov -= HandleMove;
         player.OnJump -= HandleOnJump;
         player.OnDash -= HandleOnDash;
-        player.OnViewmodelHint -= HandleOnViewmodel;
+        player.OnViewmodelHintPos -= HandleOnViewmodel;
     }
     protected virtual void HandleOnViewmodel(Vector3 obj)
     {
-        viewmodelHintPos = obj;// Vector3.SmoothDamp(viewmodelHintPos, obj, ref vel, Time.deltaTime * 0.02f);
+        viewmodelHintPos = Vector3.SmoothDamp(viewmodelHintPos, obj, ref vel, Time.deltaTime * 0.3f);
         player.PlayerViewmodel.SetViewmodelHintPosition(viewmodelHintPos.x * player.viewmodelBobbingX, 0, viewmodelHintPos.z * player.viewmodelBobbingX);
         player.PlayerViewmodel.UpdateViewmodel();
     }

@@ -18,7 +18,7 @@ MonoBehaviour:
   maxAmmoInMagazine: 15
   totalAmmo: 12
   damage: 20
-  shotRate: 1.2
+  shotRate: 1
   bulletSpeed: 1200
   bullet: {fileID: 7383199481331753142, guid: 3f834e4dd9eef9b4695d65797ae7cd8c, type: 3}
   maxShotCount: 12

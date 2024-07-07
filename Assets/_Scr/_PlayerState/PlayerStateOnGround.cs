@@ -6,9 +6,6 @@ public class PlayerStateOnGround : PlayerStateBaseDefault
     private const float wallRunHoldTimerEnd = 0.12f;// wall holdTime to change state
 
     private float timeSinceMoving = 0; //timer 2
-    private float t = 0;
-
-    private float lastDirSqr;
 
     private Collider lastWall = null;
     //private bool? isRightLast = null;
