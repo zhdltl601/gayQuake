@@ -19,5 +19,5 @@ MonoBehaviour:
   increaseAmount: 300
   drinkAmount: 0
   decreaseTime: 0.2
-  decreaseAmount: 1
+  decreaseAmount: 5
   icon: {fileID: 21300000, guid: 2c36633b3f4616d429aaef19f8e28ca4, type: 3}
