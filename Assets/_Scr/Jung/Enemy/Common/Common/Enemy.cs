@@ -123,7 +123,7 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
         
         Animator.SetLayerWeight(1, 0);
         NavMeshAgent.isStopped = true;
-        s
+        
         
        
         RemoveEnemy();
