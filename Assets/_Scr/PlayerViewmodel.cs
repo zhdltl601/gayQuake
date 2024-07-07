@@ -12,7 +12,7 @@ public class PlayerViewmodel : MonoBehaviour
     public void UpdateViewmodel()
     {
         viewmodelPivot.localPosition = viewmodelPivotHint.localPosition;
-        //viewmodelPivot.localPosition = Vector3.MoveTowards(viewmodelPivot.localPosition, viewmodelPivotHint.localPosition, Time.deltaTime * 0.5f);
+        //viewmodelPivot.localRotation = viewmodelPivotHint.localRotation;
     }
     
     public void SetViewmodelHintPosition(float x, float y, float z)

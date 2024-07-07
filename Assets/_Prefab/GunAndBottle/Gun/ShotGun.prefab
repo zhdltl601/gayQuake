@@ -285,7 +285,8 @@ MonoBehaviour:
   - {fileID: 1076669524471564015}
   _firePos: {fileID: 0}
   throwing: 0
-  shotGunDistance: 3.48
+  _weaponController: {fileID: 0}
+  shotGunDistance: 10
   shotgunRadius: 4.68
 --- !u!54 &1057293400103163340
 Rigidbody:

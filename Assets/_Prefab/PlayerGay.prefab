@@ -147,6 +147,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2221683057318393462}
+  - {fileID: 1515455425483475931}
   m_Father: {fileID: 289515780488407147}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &634523962874162247
@@ -404,26 +405,143 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 518265f9ec23d284ca4ad3f71c19a13b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 1110494500001857594}
-  playerViewmodel: {fileID: 0}
-  playerController: {fileID: 0}
-  playerAnimator: {fileID: 0}
   xSens: 1
   ySens: 1
-  xRotation: 0
-  yRotation: 0
-  speedWalk: 5.13
-  jumpForce: 9
+  speedWalk: 7
   delayDash: 1
+  jumpForce: 9
   speedWall: 5
   allowedWallrunAngleMin: 25
   allowedWallrunAngleMax: 80
   wallrunViewmodelAngle: 6
+  lm_wallrunable:
+    serializedVersion: 2
+    m_Bits: 256
   gravity: -9.81
-  gravityMultiOnGround: 2.3
+  gravityMultiOnGround: 2.5
   gravityMultiOnWall: 0.32
   onGroundYVal: -1
-  rangeWallRun: 0.45
+  rangeWallrunCheck: 1
+  speedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 49.220074
+      outSlope: 49.220074
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.11962615
+    - serializedVersion: 3
+      time: 0.021317387
+      value: 0.4910857
+      inSlope: 8.473086
+      outSlope: 8.473086
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.2057506
+    - serializedVersion: 3
+      time: 0.09158226
+      value: 0.82751435
+      inSlope: 2.205232
+      outSlope: 2.205232
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2137717
+      outWeight: 0.10097391
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0.03792726
+      outSlope: 0.03792726
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.1558386
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  wallRunCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5
+      inSlope: 41.701405
+      outSlope: 41.701405
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.041114237
+    - serializedVersion: 3
+      time: 0.074734986
+      value: 0.8169251
+      inSlope: 0.34772572
+      outSlope: 0.34772572
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.085751526
+      value: 0.81713146
+      inSlope: 0.93816566
+      outSlope: 0.93816566
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.15108255
+      value: 2.7898827
+      inSlope: 8.785737
+      outSlope: 8.785737
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.19341415
+    - serializedVersion: 3
+      time: 0.3141945
+      value: 2.9351914
+      inSlope: -0.6312372
+      outSlope: -0.6312372
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.96357596
+      outWeight: 0.5473182
+    - serializedVersion: 3
+      time: 0.5421343
+      value: 2.8162627
+      inSlope: -0.47636738
+      outSlope: -0.47636738
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.37434292
+      outWeight: 0.40551162
+    - serializedVersion: 3
+      time: 0.81776255
+      value: 2.5144713
+      inSlope: -2.2005713
+      outSlope: -2.2005713
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.58292985
+      outWeight: 0.14890471
+    - serializedVersion: 3
+      time: 1.4918902
+      value: 1.7427304
+      inSlope: -0.28173208
+      outSlope: -0.28173208
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.30948734
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   dashCurve:
     serializedVersion: 2
     m_Curve:
@@ -437,73 +555,22 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.40137452
     - serializedVersion: 3
-      time: 0.027439464
-      value: 2.964371
-      inSlope: 104.85521
-      outSlope: 104.85521
+      time: 0.02347313
+      value: 3.2758336
+      inSlope: 130.51378
+      outSlope: 130.51378
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.22910583
-      outWeight: 0.1283868
+      outWeight: 0.07342498
     - serializedVersion: 3
       time: 0.09
       value: 5
-      inSlope: -1.5062664
-      outSlope: -1.5062664
+      inSlope: -33.402836
+      outSlope: -33.402836
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.1707355
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  wallRunCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: -0.0015869141
-      inSlope: 6.786523
-      outSlope: 6.786523
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.3784851
-    - serializedVersion: 3
-      time: 0.08764603
-      value: 0.49523044
-      inSlope: 1.4601068
-      outSlope: 1.4601068
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 1
-    - serializedVersion: 3
-      time: 0.1820662
-      value: 0.22696273
-      inSlope: 1.9550023
-      outSlope: 1.9550023
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 1
-      outWeight: 1
-    - serializedVersion: 3
-      time: 0.24642421
-      value: 0.9426693
-      inSlope: 9.006731
-      outSlope: 9.006731
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.4543367
-      outWeight: 0.03551889
-    - serializedVersion: 3
-      time: 0.99816895
-      value: 1
-      inSlope: -5.928485
-      outSlope: -5.928485
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.044209365
+      inWeight: 0.15194991
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -541,52 +608,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  speedCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 3
-      inSlope: 2.7128894
-      outSlope: 2.7128894
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.05325976
-    - serializedVersion: 3
-      time: 0.40401134
-      value: 2.9175713
-      inSlope: -2.1568408
-      outSlope: -2.1568408
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.23825735
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.76360226
-      value: 1.6093507
-      inSlope: -4.288942
-      outSlope: -4.288942
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.1844036
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0.033424675
-      outSlope: 0.033424675
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.46374068
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  viewmodelValue: 5
-  lm_wallrunable:
-    serializedVersion: 2
-    m_Bits: 256
+  viewmodelBobbingX: 0.006
 --- !u!114 &809934970354213671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1077,6 +1099,134 @@ MonoBehaviour:
   - m_Rig: {fileID: 617734593687416286}
     m_Active: 1
   m_Effectors: []
+--- !u!1 &5440315851612401500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1515455425483475931}
+  - component: {fileID: 1205145404545955416}
+  - component: {fileID: 1612194006572746667}
+  m_Layer: 13
+  m_Name: ViewmodelCam
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1515455425483475931
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5440315851612401500}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8606405012016028599}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1205145404545955416
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5440315851612401500}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 13.804421
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.01
+  far clip plane: 100
+  field of view: 82
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 8192
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 8400000, guid: 94bef290807684c4cb8552d54bbb8199, type: 2}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!114 &1612194006572746667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5440315851612401500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 0
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 1
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1 &5956327702721694534
 GameObject:
   m_ObjectHideFlags: 0

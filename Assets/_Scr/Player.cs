@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
     public Action<Vector3> Mov;
     public Action OnJump;
     public Action OnDash;
-    public Action<Vector3> OnViewmodelHint;
+    public Action<Vector3> OnViewmodelHintPos;
 
     //private members
     private Vector3 inputDirection;
@@ -109,7 +109,7 @@ public class Player : MonoBehaviour
         a.Normalize();
         Vector3 tar = IsHoldingAnyInput ? a : Vector3.zero;
         re = Vector3.MoveTowards(re, tar, Time.deltaTime * 6f);
-        OnViewmodelHint?.Invoke(re);
+        OnViewmodelHintPos?.Invoke(re);
     }
     private void FixedUpdate()
     {

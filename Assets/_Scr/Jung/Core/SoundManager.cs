@@ -13,7 +13,8 @@ public class SoundManager : MonoSingleton<SoundManager>
     private int _bgmIndex = 0;
     private void Start()
     {
-        SetMusicVolume();
+        //SetMusicVolume();
+        SetSfxVolume();
     }
     public void PlayPlayerSound(string str)
     {

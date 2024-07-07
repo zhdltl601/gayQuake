@@ -2174,6 +2174,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerGay
       objectReference: {fileID: 0}
+    - target: {fileID: 1205145404545955416, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 10240
+      objectReference: {fileID: 0}
     - target: {fileID: 1559960562843002453, guid: d2051f78688dbf549a4afa281dbb790a,
         type: 3}
       propertyPath: currentGun
