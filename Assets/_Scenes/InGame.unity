@@ -2213,7 +2213,12 @@ PrefabInstance:
     - target: {fileID: 4329664278890721209, guid: d2051f78688dbf549a4afa281dbb790a,
         type: 3}
       propertyPath: speedWalk
-      value: 5
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329664278890721209, guid: d2051f78688dbf549a4afa281dbb790a,
+        type: 3}
+      propertyPath: rangeWallrunCheck
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 5635063621471903205, guid: d2051f78688dbf549a4afa281dbb790a,
         type: 3}
