@@ -15,7 +15,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         SetMusicVolume();
     }
-    public void PlayPlayerSOund(string str)
+    public void PlayPlayerSound(string str)
     {
         SFX s = Array.Find(sfxes,x => x.name == str);
         

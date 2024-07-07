@@ -46,6 +46,7 @@ public class WeaponController : MonoBehaviour
         UIManager.Instance.SetBottleUI($"<color=#40739e>{currentBottle._bottleDataSo.bottleName}</color>: {currentBottle._bottleDataSo.bottleExplain}" , currentBottle._bottleDataSo.icon);
         
        playerAnimator.rightArmAnimator.runtimeAnimatorController = currentBottle.AnimatorController;
+       playerAnimator.rightArmAnimator.Rebind();
        playerAnimator.rightArmAnimator.Play("Equip" , -1 , 0f);
         
         //Equip();
@@ -94,7 +95,7 @@ public class WeaponController : MonoBehaviour
             playerAnimator.leftArmAnimator.Play("Equip", -1, 0);
             
             UIManager.Instance.SetCrosshair(currentGun.gunData.crossHair);
-            SoundManager.Instance.PlayPlayerSOund("Equip");
+            SoundManager.Instance.PlayPlayerSound("Equip");
         }
     }
 
