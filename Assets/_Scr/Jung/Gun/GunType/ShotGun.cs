@@ -68,6 +68,7 @@ public class ShotGun : Gun
         
         
         ObjectPooling.Instance.ReTurnObject(newCaseShell , 3);
+        SoundManager.Instance.PlayPlayerSound("Shot");
         
         //muzzle Effect
         foreach (var item in muzzles)

@@ -105,7 +105,7 @@ public class Cabinet : MonoBehaviour
     private void BuySetting()
     {
         interaction.onInteraction -= OnBuy;
-        SoundManager.Instance.PlayPlayerSOund("Buy");
+        SoundManager.Instance.PlayPlayerSound("Buy");
         
         PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Money].RemoveValue(price);
         priceText.SetText("");
