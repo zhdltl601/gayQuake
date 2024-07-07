@@ -2373,7 +2373,7 @@ MonoBehaviour:
     specialMapTypes:
     - {fileID: 2059590313112161601, guid: 8f897a96ab55d724684b788dd4fac635, type: 3}
   currentRoom: 0
-  startRoom: {fileID: 2059590313112161601, guid: a1f0634ebdd15ce4eaf895f232f37ef3,
+  startRoom: {fileID: 2059590313112161601, guid: 8f897a96ab55d724684b788dd4fac635,
     type: 3}
   endRoom: {fileID: 2059590313112161601, guid: a1f0634ebdd15ce4eaf895f232f37ef3, type: 3}
   corridor: {fileID: 4106773513821359745, guid: 0df68066e1475084d8db46fa68ce4c79,
