@@ -192,7 +192,7 @@ public class WeaponController : MonoBehaviour
             if (currentBottle._bottleDataSo.bottleType == BottleType.Normal)
             {
                 currentBottle.DrinkBottle(_player.PlayerAnimator.rightArmAnimator);
-                Invoke(nameof(SetBottleDefault), 1f);
+                Invoke(nameof(SetBottleDefault), 1.8f);
                 bottleList.Remove(currentBottle);
             }
         }
