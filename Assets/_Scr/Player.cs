@@ -38,7 +38,6 @@ public class Player : MonoBehaviour
 
     [Header("Movement/Curves")]
     [SerializeField] private AnimationCurve speedCurve;
-    [SerializeField] private AnimationCurve speedStopCurve;
     [SerializeField] private AnimationCurve wallRunCurve;
     [SerializeField] private AnimationCurve dashCurve;
     [SerializeField] private AnimationCurve forceVectorCurve;
@@ -50,16 +49,22 @@ public class Player : MonoBehaviour
     public Action<Vector3> Mov;
     public Action OnJump;
     public Action OnDash;
+    public Action<Vector3> OnViewmodelHint;
 
     //private members
     private Vector3 inputDirection;
+    private float lastDirSqr;
+    public bool IsHoldingAnyInput { get; private set; }
     private Vector3 forceVec = Vector3.zero;
+    private Vector3 re;
 
     private StateMachine<PlayerStateEnum> playerStateMachine;//will be removed, check Awake() 
 
     [Header("Debug")]
     [Header("Debug/Viewmodel")]
-    [SerializeField] private float viewmodelBobbingX;
+    public float viewmodelBobbingX;
+
+
     private void Awake()
     {
         playerStateMachine = new StateMachine<PlayerStateEnum>();// will change to ref singleton, singleton will automaticaly make instance when not initialized
@@ -81,7 +86,6 @@ public class Player : MonoBehaviour
         //PlayerCamera.SetCameraRotation(0, 0, 0);
         xRotation = 0;
         yRotation = 0;
-
         Speed = speedWalk;
     }
     private void Update()
@@ -90,10 +94,22 @@ public class Player : MonoBehaviour
         PlayerInput();
         delayDash += Time.deltaTime;
         delayDash = delayDash > 0.7f ? 0.7f : delayDash;
-        //PlayerUI.Instance.lists[0].text = playerStateMachine.CurrentState.ToString();
-        //PlayerUI.Instance.lists[2].text = playerStateMachine.CurrentState.ToString();
-        //if (Input.GetKeyDown(KeyCode.Backspace)) AddMovementImpulse(Vector3.forward, 1, 0);
-        //if (Input.GetKeyDown(KeyCode.Mouse0)) PlayerAnimator.leftArmAnimator.Play("AutoShoot", -1, 0f);
+
+        //calculates if moving or not
+        Vector3 currentInput = inputDirection;
+        bool isHoldingInput = currentInput.sqrMagnitude > lastDirSqr;
+        currentInput = currentInput.sqrMagnitude < 1 ? currentInput : currentInput.normalized;
+        isHoldingInput |= currentInput.sqrMagnitude + 0.01f >= 1;
+
+        lastDirSqr = inputDirection.sqrMagnitude;
+        IsHoldingAnyInput = isHoldingInput;
+
+        Vector3 a = inputDirection;
+        a.y = 0;
+        a.Normalize();
+        Vector3 tar = IsHoldingAnyInput ? a : Vector3.zero;
+        re = Vector3.MoveTowards(re, tar, Time.deltaTime * 6f);
+        OnViewmodelHint?.Invoke(re);
     }
     private void FixedUpdate()
     {
@@ -101,11 +117,6 @@ public class Player : MonoBehaviour
 
         PlayerCamera.SetCameraRotation(xRotation, yRotation);
         PlayerViewmodel.SetViewmodelRotation(xRotation, yRotation);
-        Vector3 a = inputDirection;
-        a.y = 0;
-        a.Normalize();
-        PlayerViewmodel.SetViewmodelHintPosition(a.x * viewmodelBobbingX, 0, a.z * viewmodelBobbingX);
-        //PlayerViewmodel.UpdateViewmodel();
     }
     public void PlayerApplyMovement(Vector3 direction, float speed, float gravityMultiplier = 0, float forceMulti = 1)
     {
@@ -124,64 +135,6 @@ public class Player : MonoBehaviour
 
         PlayerController.Move(direction + forceVec * Time.deltaTime);
     }
-    //private void PlayerApplyMovement()
-    //{
-    //    Vector3 direction = inputDirection;
-    //    direction = direction.magnitude < 1 ? direction : direction.normalized; // needs optimazation
-    //    direction *= speed;
-    //
-    //    Transform camTrm = PlayerCamera.GetCameraRotTransform();
-    //
-    //    bool CheckWall(out RaycastHit raycastHit, out bool isRight)
-    //    {
-    //        bool a = false;
-    //        isRight = false;
-    //        float range = 0.5f;
-    //        if(Physics.Raycast(camTrm.position, camTrm.TransformDirection(Vector3.right), out raycastHit, range, lm_wallrunable))
-    //        {
-    //            //Debug.DrawRay(camTrm.position, camTrm.TransformDirection(Vector3.right) * range, Color.red);
-    //            a = true;
-    //            isRight = true;
-    //        }
-    //        else if (Physics.Raycast(camTrm.position, camTrm.TransformDirection(Vector3.left), out raycastHit, range, lm_wallrunable))
-    //        {
-    //            //Debug.DrawRay(camTrm.position, camTrm.TransformDirection(Vector3.left) * range, Color.red);
-    //            a = true;
-    //        }
-    //        return a;
-    //    }
-    //    void PlayerAdditionalPhysics()
-    //    {
-    //        //dash
-    //        direction *= dashCurve.Evaluate(dashMulti);
-    //
-    //        //wallRun
-    //        bool isWallRunning = CheckWall(out RaycastHit raycastHit, out bool isRight);
-    //        if (isWallRunning)
-    //        {
-    //            //playerStateMachine.ChangeState2(PlayerStateEnum.OnWallrun);
-    //            //Debug.DrawRay(raycastHit.point, raycastHit.normal, Color.yellow); //collider normal
-    //
-    //            Vector3 forwardVector = Vector3.ProjectOnPlane(inputDirection, raycastHit.normal);
-    //            Debug.DrawRay(camTrm.position, inputDirection, Color.red);
-    //            Debug.DrawRay(camTrm.position, forwardVector, Color.green);
-    //            forwardVector = forwardVector.magnitude < 1 ? forwardVector : forwardVector.normalized; // needs optimazation as well
-    //            forwardVector *= speedWall;
-    //
-    //            direction = forwardVector;
-    //        }
-    //        //if (b_bufferJump && isGround) PlayerJump(); // jumpbuffer needs implementation
-    //    }
-    //    PlayerAdditionalPhysics();
-    //    bool isGround = PlayerController.IsGround;
-    //
-    //    if (isGround && yVal < 0) yVal = onGroundYVal;
-    //    else yVal += gravity * Time.deltaTime;
-    //    direction.y = yVal;
-    //    //PlayerAdditionalRaycast(); //lost
-    //    direction *= Time.deltaTime;
-    //    PlayerController.SetVelocity(direction);
-    //}
     private void PlayerInput()
     {
         //mouse
@@ -214,7 +167,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift)) Dash(); 
         if (dashMulti > 0) dashMulti -= Time.deltaTime; // will change later 
         else dashMulti = 0;
-
         #region debug
         //b_value = Input.GetKeyDown(KeyCode.C);
         //float amount = viewmodelBobbingX;
@@ -222,7 +174,7 @@ public class Player : MonoBehaviour
         //if (Input.GetKey(KeyCode.K)) viewmodelY -= Time.deltaTime * amount;
         //if (Input.GetKey(KeyCode.J)) viewmodelX -= Time.deltaTime * amount;
         //if (Input.GetKey(KeyCode.L)) viewmodelX += Time.deltaTime * amount;
-        //PlayerViewmodel.SetViewmodelHintPosition(viewmodelX, viewmodelY, 0);
+        //PlayerViewmodel.SetViewmodelviewmodelHintPosition(viewmodelX, viewmodelY, 0);
         #endregion
     }
 
@@ -254,11 +206,6 @@ public class Player : MonoBehaviour
     {
         return speedCurve.Evaluate(x);
     }
-    public float GetSpeedStopCurve(float value)
-    {
-        return speedStopCurve.Evaluate(value);
-    }
-
     public float GetWallrunCurve(float x)
     {
         return wallRunCurve.Evaluate(x);
@@ -307,7 +254,7 @@ public class Player : MonoBehaviour
     {
         Transform camTrm = PlayerCamera.GetCameraRotTransform();
         float range = rangeWallrunCheck * 2;
-        Debug.DrawRay(camTrm.position, dir, Color.yellow, Time.deltaTime);
+        //Debug.DrawRay(camTrm.position, dir, Color.yellow, Time.deltaTime);
         bool result = Physics.Raycast(camTrm.position - new Vector3(0, 0.25f, 0), dir, out raycastHit, range, lm_wallrunable);
         dir = -raycastHit.normal;
         dir.Normalize();

@@ -24,6 +24,10 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
         gravityMultiplier = 0;
 
     }
+    protected override void HandleOnViewmodel(Vector3 obj)
+    {
+        //base.HandleOnViewmodel(obj);
+    }
     protected override void HandleOnJump()
     {
         StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
