@@ -19,7 +19,6 @@ public class UIManager : MonoSingleton<UIManager>
     public Image crossHair;
     public Image reloadImage;
     public Slider dashSlider;
-    public CanvasGroup dashGroup;
     private bool isCrossChange;
     
     
@@ -217,26 +216,16 @@ public class UIManager : MonoSingleton<UIManager>
     
     private IEnumerator DashCoroutine()
     {
-        
-        
         dashSlider.value = 0;
-        dashGroup.alpha = 0.2f;
-
         float elapsedTime = 0;
 
         while (elapsedTime < 1)
         {
             dashSlider.value = Mathf.Lerp(0, 1, elapsedTime / 1);
-            if (dashSlider.value >= 1)
-            {
-                dashGroup.alpha = 1.0f;
-            }
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
         dashSlider.value = 1;
-        dashGroup.alpha = 1.0f;
     }
 }
 

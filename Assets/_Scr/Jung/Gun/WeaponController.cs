@@ -175,6 +175,8 @@ public class WeaponController : MonoBehaviour
     {
         if(currentGun == null)return;
         
+       
+        
         currentBottle.gameObject.SetActive(false);
         currentBottle = bottleList[index];
         currentBottle.gameObject.SetActive(true);
@@ -189,9 +191,7 @@ public class WeaponController : MonoBehaviour
         {
             if (currentBottle._bottleDataSo.bottleType == BottleType.Normal)
             {
-                Destroy(currentBottle.gameObject);
                 currentBottle.DrinkBottle(_player.PlayerAnimator.rightArmAnimator);
-            
                 Invoke(nameof(SetBottleDefault), 1f);
                 bottleList.Remove(currentBottle);
             }
@@ -199,10 +199,14 @@ public class WeaponController : MonoBehaviour
     }
     private void SetBottleDefault()
     {
-        currentBottle = bottleList[0];
-        currentBottle.gameObject.SetActive(true);
+        Destroy(currentBottle);
+        
+        SwitchBottle(0);
+        
+        playerAnimator.rightArmAnimator.runtimeAnimatorController = currentBottle.AnimatorController;
+        playerAnimator.rightArmAnimator.Play("Equip" , -1 , 0f);
     }
-
+        
     IEnumerator ReloadCoroutine(float duration)
     {
         _reloading = true;
