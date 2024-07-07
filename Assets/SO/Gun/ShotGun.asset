@@ -17,12 +17,12 @@ MonoBehaviour:
   reloadTime: 1.4
   maxAmmoInMagazine: 15
   totalAmmo: 12
-  damage: 100
+  damage: 150
   shotRate: 0.7
   bulletSpeed: 1200
   bullet: {fileID: 7383199481331753142, guid: 3f834e4dd9eef9b4695d65797ae7cd8c, type: 3}
   maxShotCount: 12
   minShotCount: 7
-  xBound: 149
+  xBound: 117
   yBound: 181
   crossHair: {fileID: 21300000, guid: e7e80d39e3e102147a3be13caa7cd3d7, type: 3}
