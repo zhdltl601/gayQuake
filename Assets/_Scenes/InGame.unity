@@ -561,10 +561,10 @@ RectTransform:
   - {fileID: 1277340188}
   - {fileID: 1239569172}
   - {fileID: 703776981}
-  - {fileID: 1735444155}
   - {fileID: 167642625}
   - {fileID: 1868463700}
   - {fileID: 1346711356}
+  - {fileID: 1735444155}
   - {fileID: 695135679}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
