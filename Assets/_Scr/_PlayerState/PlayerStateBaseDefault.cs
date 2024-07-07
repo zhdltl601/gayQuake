@@ -3,6 +3,8 @@ using UnityEngine;
 public abstract class PlayerStateBaseDefault : State
 {
     protected Player player;
+    protected Vector3 viewmodelHintPos;
+    protected Vector3 vel = Vector3.zero;
     protected PlayerStateBaseDefault(Player player)
     {
         this.player = player;
@@ -13,6 +15,7 @@ public abstract class PlayerStateBaseDefault : State
         player.Mov += HandleMove;
         player.OnJump += HandleOnJump;
         player.OnDash += HandleOnDash;
+        player.OnViewmodelHint += HandleOnViewmodel;
     }
     public override void Exit()
     {
@@ -20,6 +23,13 @@ public abstract class PlayerStateBaseDefault : State
         player.Mov -= HandleMove;
         player.OnJump -= HandleOnJump;
         player.OnDash -= HandleOnDash;
+        player.OnViewmodelHint -= HandleOnViewmodel;
+    }
+    protected virtual void HandleOnViewmodel(Vector3 obj)
+    {
+        viewmodelHintPos = obj;// Vector3.SmoothDamp(viewmodelHintPos, obj, ref vel, Time.deltaTime * 0.02f);
+        player.PlayerViewmodel.SetViewmodelHintPosition(viewmodelHintPos.x * player.viewmodelBobbingX, 0, viewmodelHintPos.z * player.viewmodelBobbingX);
+        player.PlayerViewmodel.UpdateViewmodel();
     }
     protected virtual void HandleMove(Vector3 inputDirection)
     {

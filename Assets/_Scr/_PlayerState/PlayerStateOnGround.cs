@@ -1,18 +1,19 @@
 using UnityEngine;
 public class PlayerStateOnGround : PlayerStateBaseDefault
 {
-    private float delayWallrun; // for preventing player from wallrunnign real fast
-    private float wallRunHoldTime; 
+    private float delayWallrun; // for preventing player from wallrunning real fast
+    private float wallRunHoldTime; //timer
     private const float wallRunHoldTimerEnd = 0.12f;// wall holdTime to change state
-    private float timeSinceMoving = 0;
 
-    private float t;
+    private float timeSinceMoving = 0; //timer 2
+    private float t = 0;
+
     private float lastDirSqr;
 
     private Collider lastWall = null;
     //private bool? isRightLast = null;
-    private Vector3 dir;
-    private bool isHoldingAnyInput;
+
+    private Vector3 inputDir;
 
     public PlayerStateOnGround(Player player) : base(player)
     {
@@ -26,7 +27,11 @@ public class PlayerStateOnGround : PlayerStateBaseDefault
     }
     protected override Vector3 GetDirection(Vector3 inputDirection)
     {
-        dir = inputDirection;
+        if (player.IsHoldingAnyInput)
+        {
+            inputDirection.Normalize();
+            return inputDirection + inputDirection * player.GetDashCurve();
+        }
         return base.GetDirection(inputDirection) + inputDirection.normalized * player.GetDashCurve();
     }
     protected override void HandleState()
@@ -40,10 +45,10 @@ public class PlayerStateOnGround : PlayerStateBaseDefault
         bool isSameWall = lastWall == col;
         //bool isSameDirection = isRightLast == isRight;
 
-        Vector3 igDir = dir;
+        Vector3 igDir = inputDir;
         igDir = player.PlayerCamera.GetCameraRotTransform().InverseTransformDirection(igDir);
         igDir.x = 0;
-        Debug.DrawRay(Vector3.zero, igDir, Color.red, Time.deltaTime);
+        //Debug.DrawRay(Vector3.zero, igDir, Color.red, Time.deltaTime);
         bool isNotOnlyHoldingInputdrectionX = igDir.sqrMagnitude > 0.15f;
 
         //isRightLast = isGround ? null : isRightLast;
@@ -58,39 +63,24 @@ public class PlayerStateOnGround : PlayerStateBaseDefault
         }
         wallRunHoldTime = isOnWall ? wallRunHoldTime : 0;
         wallRunHoldTime += isPlWallrunable? Time.deltaTime * 2.2f : 0;
-        delayWallrun -= Time.deltaTime * 2.2f;
+        delayWallrun -= Time.deltaTime;
     }
     protected override float GetSpeed()
     {
-        float additionalSpeed;
-        if (isHoldingAnyInput)
+        float additionalSpeed = 1;
+        if (player.IsHoldingAnyInput)
         {
             additionalSpeed = player.GetSpeedCurve(timeSinceMoving);
-            //DebugUI.Instance.list[0].text = additionalSpeed.ToString();
         }
-        else 
-        {
-            timeSinceMoving = 0;
-            //later
-            //t = timeSinceMoving;
-            additionalSpeed = 1;
-            //speed = player.GetSpeedStopCurve(t - timeSinceMoving);
-        }
-        return base.GetSpeed() + additionalSpeed;
+        return base.GetSpeed() * additionalSpeed;
     }
     protected override void HandleMove(Vector3 inputDirection)
     {
-        Vector3 currentInput = inputDirection;
-        bool isHoldingInput = currentInput.sqrMagnitude > lastDirSqr;
-        currentInput = currentInput.sqrMagnitude < 1 ? currentInput : currentInput.normalized;
-        isHoldingInput |= currentInput.sqrMagnitude + 0.01f >= 1;
-
-        isHoldingAnyInput = isHoldingInput;
-        lastDirSqr = inputDirection.sqrMagnitude;
+        inputDir = inputDirection;
 
         base.HandleMove(inputDirection);
 
-        timeSinceMoving += isHoldingAnyInput ? Time.deltaTime : -Time.deltaTime;
+        timeSinceMoving += player.IsHoldingAnyInput ? Time.deltaTime : - Time.deltaTime;
         timeSinceMoving = Mathf.Clamp(timeSinceMoving, 0, 0.5f);
     }
     protected override void HandleOnDash()
