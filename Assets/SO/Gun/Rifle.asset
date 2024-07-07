@@ -17,7 +17,7 @@ MonoBehaviour:
   reloadTime: 0.35
   maxAmmoInMagazine: 40
   totalAmmo: 240
-  damage: 20
+  damage: 40
   shotRate: 0.125
   bulletSpeed: 3000
   bullet: {fileID: 7383199481331753142, guid: 3f834e4dd9eef9b4695d65797ae7cd8c, type: 3}
