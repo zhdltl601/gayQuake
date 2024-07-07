@@ -46,7 +46,7 @@ public class Portal : MonoBehaviour
         if (other.TryGetComponent(out CharacterController characterController))
         {
             characterController.enabled = false;
-            characterController.gameObject.transform.localPosition = Vector3.zero;
+            characterController.gameObject.transform.localPosition = new Vector3(0,1,-2);
             characterController.enabled = true;
             
             MapManager.Instance.ClearMap();
