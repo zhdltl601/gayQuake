@@ -167,6 +167,7 @@ public abstract class Gun : MonoBehaviour
             
             _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             
+            UIManager.Instance.SetAmmoText();
         }
     }
 }
