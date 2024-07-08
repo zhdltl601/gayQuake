@@ -23,7 +23,7 @@ public class PlayerStatController : MonoSingleton<PlayerStatController>
         if (_timer > healthBottleSo.decreaseTime)
         {
             _timer = 0;
-            if (health.GetValue() >= 0)
+            if (health.GetValue() > 0)
             {
                 health.RemoveValue(healthBottleSo.decreaseAmount);
             }

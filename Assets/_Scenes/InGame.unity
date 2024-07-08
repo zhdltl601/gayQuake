@@ -2187,7 +2187,7 @@ PrefabInstance:
         type: 3}
       propertyPath: currentBottle
       value: 
-      objectReference: {fileID: 1585594348}
+      objectReference: {fileID: 2070094653}
     - target: {fileID: 1559960562843002453, guid: d2051f78688dbf549a4afa281dbb790a,
         type: 3}
       propertyPath: bottleList.Array.size
@@ -4715,18 +4715,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1570562311}
   m_CullTransparentMesh: 1
---- !u!114 &1585594348 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3085686421301322321, guid: d2051f78688dbf549a4afa281dbb790a,
-    type: 3}
-  m_PrefabInstance: {fileID: 775563022}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2e3b001ec3f370429d09439597cf59c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1679615247
 GameObject:
   m_ObjectHideFlags: 0
@@ -5499,6 +5487,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1912917984}
   m_CullTransparentMesh: 1
+--- !u!114 &2070094653 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3085686421301322321, guid: d2051f78688dbf549a4afa281dbb790a,
+    type: 3}
+  m_PrefabInstance: {fileID: 775563022}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2e3b001ec3f370429d09439597cf59c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2132921328
 GameObject:
   m_ObjectHideFlags: 0
