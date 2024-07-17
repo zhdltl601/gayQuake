@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: GoodsList
   m_EditorClassIdentifier: 
   lists:
-  - {fileID: 7702447783540567042, guid: 1b915ef09c589d14ea6ef49efabc843f, type: 3}
   - {fileID: 9108733920280302094, guid: 25c44ade8a7f5664e94fa9c98ea92fa4, type: 3}
   - {fileID: 7936647765437962897, guid: d67a72da1d443f643bfcfdeb5c0f5025, type: 3}
   - {fileID: 8954885641401316218, guid: e3ae674de7666094e9950d01e5862665, type: 3}
