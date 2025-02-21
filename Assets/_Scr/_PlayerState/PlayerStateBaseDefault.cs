@@ -84,8 +84,8 @@ Ps
 -Def
 //viewmodel difference?
 //
---OnGround { fuck2 }
---OnDash   { fuck3 }
+--OnGround {  }
+--OnDash   {  }
 --OnJump   { jump  }
 --OnWallrun{ Lean to R/L }
 -Dead
