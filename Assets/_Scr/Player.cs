@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
         xRotation -= Input.GetAxisRaw("Mouse Y") * ySens + yRecoil;
         xRotation = Mathf.Clamp(xRotation, -89, 89);
         yRotation += Input.GetAxisRaw("Mouse X") * xSens + xRecoil;
-        
+
         //movement
         Transform camTrm = PlayerCamera.GetCameraRotTransform();
         Vector3 camForward = camTrm.forward;
@@ -154,17 +154,17 @@ public class Player : MonoBehaviour
 
         void Dash()
         {
-            if(delayDash == 0.7f)
+            if (delayDash == 0.7f)
             {
                 delayDash = 0;
                 yVal = 0;
                 dashMulti = 0.09f;//length of m_dashCurve
                 OnDash?.Invoke();
-                
+
                 UIManager.Instance.UseDash();
             }
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift)) Dash(); 
+        if (Input.GetKeyDown(KeyCode.LeftShift)) Dash();
         if (dashMulti > 0) dashMulti -= Time.deltaTime; // will change later 
         else dashMulti = 0;
         #region debug
@@ -178,7 +178,7 @@ public class Player : MonoBehaviour
         #endregion
     }
 
-    public void AddRecoil(float xRecoil , float yRecoil)
+    public void AddRecoil(float xRecoil, float yRecoil)
     {
         this.xRecoil = xRecoil;
         this.yRecoil = yRecoil;

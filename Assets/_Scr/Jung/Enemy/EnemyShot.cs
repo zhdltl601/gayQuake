@@ -13,17 +13,17 @@ public class EnemyShot : MonoBehaviour
     [SerializeField] private float screenTime = 0;
     public void Shot()
     {
-        bool isHit = Physics.Raycast(firePos.position  , firePos.forward ,out RaycastHit hit,_enemy.attackDistance ,_enemy._whatIsPlayer | _enemy.whatIsObstacle);
+        bool isHit = Physics.Raycast(firePos.position, firePos.forward, out RaycastHit hit, _enemy.attackDistance, _enemy._whatIsPlayer | _enemy.whatIsObstacle);
 
         GameObject newBullet = ObjectPooling.Instance.GetObject(bullet);
         newBullet.transform.position = firePos.position;
-        
+
         Vector3 dir;
         if (isHit)
         {
             PlayerStatController.Instance.PlayerStatSo._statDic[StatType.Health].RemoveValue(_enemy.attackDamage);
-            UIManager.Instance.BloodScreen(Color.red ,duration , targetIntensity , screenTime);
-            
+            UIManager.Instance.BloodScreen(Color.red, duration, targetIntensity, screenTime);
+
             dir = (hit.point - firePos.position);
         }
         else
@@ -31,11 +31,11 @@ public class EnemyShot : MonoBehaviour
             dir = (firePos.forward);
         }
         dir.Normalize();
-        
+
         newBullet.GetComponent<Rigidbody>().AddForce(dir * 1200);
         newBullet.GetComponent<Bullet>().SetBullet(firePos.forward);
-        
-        ObjectPooling.Instance.ReTurnObject(newBullet , 1.5f);
+
+        ObjectPooling.Instance.ReTurnObject(newBullet, 1.5f);
 
         SoundManager.Instance.PlayEnemyrSound("Enemy_Shot");
     }

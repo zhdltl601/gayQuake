@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemyDrone : MonoBehaviour,EnemyMapSetting
+public class EnemyDrone : MonoBehaviour, EnemyMapSetting
 {
     private readonly int _dissolveHash = Shader.PropertyToID("_DissolveHeight");
     private readonly int _blinkValue = Shader.PropertyToID("_BlinkValue");
     public StateMachine<EnemyStateEnum> StateMachine { get; private set; }
     public Collider Collider { get; private set; }
-    public Animator Animator  { get; private set; }
-    public Rigidbody Rigidbody  { get; private set; }
+    public Animator Animator { get; private set; }
+    public Rigidbody Rigidbody { get; private set; }
     public Transform target;
 
     private Room _room;
-    
+
     [HideInInspector] public Collider[] enemyCheckCollider;
     [Header("DefaultSettings")]
     public LayerMask whatIsPlayer;
@@ -24,37 +24,37 @@ public class EnemyDrone : MonoBehaviour,EnemyMapSetting
     public float attackDistance;
 
     private bool _IsHit;
-    
+
     [Header("Attack Settings")]
     public Transform[] firePos;
     public GameObject bullet;
     public float attackTime;
     public int damage;
 
-    [Space] 
+    [Space]
     public bool isDead;
     public List<ParticleSystem> explosionParticleList;
     public float dissolveDuration;
-    
+
     private void Awake()
     {
         Animator = GetComponentInChildren<Animator>();
         Rigidbody = GetComponent<Rigidbody>();
         Collider = GetComponent<Collider>();
     }
-    
+
     private void Start()
     {
         enemyCheckCollider = new Collider[1];
         StateMachine = new StateMachine<EnemyStateEnum>();
-        
-        StateMachine.AddState(EnemyStateEnum.Idle , new EnemyDroneIdleState(this ,Animator));
-        StateMachine.AddState(EnemyStateEnum.Move , new EnemyDroneMoveState(this ,Animator));
-        StateMachine.AddState(EnemyStateEnum.Dead , new EnemyDroneDeadState(this ,Animator));
-        
+
+        StateMachine.AddState(EnemyStateEnum.Idle, new EnemyDroneIdleState(this, Animator));
+        StateMachine.AddState(EnemyStateEnum.Move, new EnemyDroneMoveState(this, Animator));
+        StateMachine.AddState(EnemyStateEnum.Dead, new EnemyDroneDeadState(this, Animator));
+
         StateMachine.Initialize(EnemyStateEnum.Idle);
 
-        transform.position = new Vector3(transform.position.x , 6, transform.position.z);
+        transform.position = new Vector3(transform.position.x, 6, transform.position.z);
     }
 
     private void Update()
@@ -67,61 +67,61 @@ public class EnemyDrone : MonoBehaviour,EnemyMapSetting
         Animator.SetTrigger("Hit");
         StartCoroutine(HitCoroutine());
     }
-    
+
     IEnumerator HitCoroutine()
     {
         if (_IsHit) yield break;
-        
+
         _IsHit = true;
 
         Material mat = meshRenderer.material;
-                
-        mat.SetFloat(_blinkValue,1);
-            
+
+        mat.SetFloat(_blinkValue, 1);
+
         yield return new WaitForSeconds(0.4f);
         _IsHit = false;
-     
-        mat.SetFloat(_blinkValue,0);      
+
+        mat.SetFloat(_blinkValue, 0);
     }
-    
+
     public void DeadEvent()
     {
-        if(isDead)return;
-        
+        if (isDead) return;
+
         if (target != null)
         {
             Bottle _playerBottle = target.GetComponent<WeaponController>().GetCurrenBottle();
-            
+
             PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].
                 AddValue(_playerBottle._bottleDataSo.increaseAmount);
         }
-        
-        foreach (var item in explosionParticleList )
+
+        foreach (var item in explosionParticleList)
         {
             item.Simulate(0);
             item.Play();
         }
         StateMachine.ChangeState(EnemyStateEnum.Dead);
-        
+
         SoundManager.Instance.PlayEnemyrSound("Explosion1");
-        
+
         StartDissolve();
         RemoveEnemy();
     }
-    
+
     public virtual Collider IsPlayerDetected()
     {
-        int cnt = Physics.OverlapSphereNonAlloc(transform.position,runAwayDistance, enemyCheckCollider,whatIsPlayer);
+        int cnt = Physics.OverlapSphereNonAlloc(transform.position, runAwayDistance, enemyCheckCollider, whatIsPlayer);
         return cnt == 1 ? enemyCheckCollider[0] : null;
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position , runAwayDistance);
+        Gizmos.DrawWireSphere(transform.position, runAwayDistance);
         Gizmos.color = Color.white;
     }
-        
+
     public void StartDissolve()
     {
         StartCoroutine(StartDissolveCoroutine(_dissolveHash));
@@ -131,17 +131,17 @@ public class EnemyDrone : MonoBehaviour,EnemyMapSetting
         Material mat = meshRenderer.material;
 
         float currentTime = 0;
-        while(currentTime <= dissolveDuration)
+        while (currentTime <= dissolveDuration)
         {
             currentTime += Time.deltaTime;
-            float currentDissolve = Mathf.Lerp(2f, -2f, currentTime/dissolveDuration);
-            
+            float currentDissolve = Mathf.Lerp(2f, -2f, currentTime / dissolveDuration);
+
             mat.SetFloat(_dissolveHash, currentDissolve);
             yield return null;
         }
-        
+
         yield return new WaitForSeconds(0.1f);
-        
+
         Destroy(gameObject);
     }
 
