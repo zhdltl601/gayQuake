@@ -3,15 +3,15 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-public class Enemy : MonoBehaviour,EnemyMapSetting
+public class Enemy : MonoBehaviour, EnemyMapSetting
 {
     public string dieSound;
     public EnemyStateMachine StateMachine { get; private set; }
-    
+
     private readonly int _blinkValue = Shader.PropertyToID("_BlinkValue");
     private readonly int _dissolveHash = Shader.PropertyToID("_DissolveHeight");
-    private bool _IsHit = false; 
-    
+    private bool _IsHit = false;
+
     #region states
 
     public EnemyIdleState IdleState { get; private set; }
@@ -30,14 +30,14 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     public Collider Collider { get; private set; }
 
     #endregion
-    
+
     private Collider[] _enemyCheckCollider;
-    
+
     public Transform target;
     public LayerMask _whatIsPlayer;
 
     private Room currentRoom;
-    
+
     [Header("Default Values")]
     public float moveSpeed;
     public float checkPlayerDistance;
@@ -59,7 +59,7 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
     public Transform runAwayTrm;
     public bool runAwayAble;
     public bool runningAway;
-    
+
     [HideInInspector] public float lastAttackTime;
     [HideInInspector] public bool isAttackMove;
 
@@ -115,17 +115,17 @@ public class Enemy : MonoBehaviour,EnemyMapSetting
 
             PlayerStatController.Instance.PlayerStatSo._statDic[_playerBottle._bottleDataSo.statType].
                 AddValue(_playerBottle._bottleDataSo.increaseAmount);
-            
-            if(_playerBottle._bottleDataSo.statType == StatType.Money)
+
+            if (_playerBottle._bottleDataSo.statType == StatType.Money)
                 UIManager.Instance.CoinText();
         }
-        
-        
+
+
         Animator.SetLayerWeight(1, 0);
         NavMeshAgent.isStopped = true;
-        
-        
-       
+
+
+
         RemoveEnemy();
 
     }

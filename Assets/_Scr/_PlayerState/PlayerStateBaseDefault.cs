@@ -36,7 +36,7 @@ public abstract class PlayerStateBaseDefault : State
         HandleState();
         Vector3 result = GetDirection(inputDirection);
         float speed = GetSpeed();
-        
+
         float gravityMultiplier = GetGravitiyMultiplier();
         float forceMulti = GetForceMultiplier();
         player.PlayerApplyMovement(result, speed, gravityMultiplier, forceMulti);
@@ -79,15 +79,4 @@ public abstract class PlayerStateBaseDefault : State
     {
 
     }
-    /*
-Ps
--Def
-//viewmodel difference?
-//
---OnGround {  }
---OnDash   {  }
---OnJump   { jump  }
---OnWallrun{ Lean to R/L }
--Dead
-*/
 }
