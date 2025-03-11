@@ -5,9 +5,12 @@ public abstract class PlayerStateBaseDefault : State
     protected Player player;
     protected Vector3 viewmodelHintPos;
     protected Vector3 vel = Vector3.zero;
-    protected PlayerStateBaseDefault(Player player)
+    protected StateMachine<PlayerStateEnum> stateMachine;
+
+    protected PlayerStateBaseDefault(Player player, StateMachine<PlayerStateEnum> stateMachine)
     {
         this.player = player;
+        this.stateMachine = stateMachine;
     }
     public override void Enter()
     {

@@ -10,10 +10,10 @@ public class StateMachine<stateEnum> where stateEnum : Enum
     //identifer "Instance" will change to property
 
     //? need to use generic manualy to get Instance
-    public static StateMachine<stateEnum> Instance { get; private set; }
+    //public static StateMachine<stateEnum> Instance { get; private set; }
     public StateMachine()
     {
-        Instance = this;// will be reworked
+        //Instance = this;// will be reworked
         StateDictionary = new Dictionary<stateEnum, State>();
     }
     public void AddState(stateEnum type, State instance)

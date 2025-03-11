@@ -6,7 +6,7 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     private float gravityMultiplier;
     private Vector3 currentDir;
     private RaycastHit raycastHit;
-    public PlayerStateOnWallrun(Player player) : base(player)
+    public PlayerStateOnWallrun(Player player, StateMachine<PlayerStateEnum> playerStateMachine) : base(player, playerStateMachine)
     {
     }
     public override void Enter()
@@ -30,7 +30,8 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
     }
     protected override void HandleOnJump()
     {
-        StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
+        //StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
+        stateMachine.ChangeState(PlayerStateEnum.OnGround);
         player.SetYVal(player.jumpForce);
     }
     protected override float GetGravitiyMultiplier()
@@ -51,7 +52,8 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
         bool isNotOnlyHoldingInputdrectionX = igVector.sqrMagnitude > 0.15f;
         if (!isNotOnlyHoldingInputdrectionX)
         {
-            StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
+            //StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
+            stateMachine.ChangeState(PlayerStateEnum.OnGround);
             player.AddForce(currentDir.normalized, 4);
         }
         Vector3 forwardVector = Vector3.ProjectOnPlane(inputDirection, raycastHit.normal);
@@ -68,11 +70,13 @@ public class PlayerStateOnWallrun : PlayerStateBaseDefault
         bool isOver = angle > 90 + player.allowedWallrunAngleMax || angle < 90 - player.allowedWallrunAngleMin;
         if (isOver || !player.CheckWall(out raycastHit, ref currentDir))
         {
-            StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
+            //StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
+            stateMachine.ChangeState(PlayerStateEnum.OnGround);
         }
         if (player.PlayerController.IsGround)
         {
-            StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
+            //StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnGround);
+            stateMachine.ChangeState(PlayerStateEnum.OnGround);
             player.AddForce(currentDir, 2.1f);
         }
     }
