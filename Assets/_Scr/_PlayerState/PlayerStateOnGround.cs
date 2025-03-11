@@ -12,7 +12,7 @@ public class PlayerStateOnGround : PlayerStateBaseDefault
 
     private Vector3 inputDir;
 
-    public PlayerStateOnGround(Player player) : base(player)
+    public PlayerStateOnGround(Player player, StateMachine<PlayerStateEnum> playerStateMachine) : base(player, playerStateMachine)
     {
     }
     public override void Enter()
@@ -54,7 +54,8 @@ public class PlayerStateOnGround : PlayerStateBaseDefault
 
         if (isPlWallrunable && isWallRunDealyEnded && !isSameWall && isNotOnlyHoldingInputdrectionX)
         {
-            StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnWallrun);
+            //StateMachine<PlayerStateEnum>.Instance.ChangeState(PlayerStateEnum.OnWallrun);
+            stateMachine.ChangeState(PlayerStateEnum.OnWallrun);
             lastWall = col;
             //this.isRightLast = isRight;
         }

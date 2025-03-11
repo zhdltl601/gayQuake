@@ -68,8 +68,8 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         playerStateMachine = new StateMachine<PlayerStateEnum>();// will change to ref singleton, singleton will automaticaly make instance when not initialized
-        playerStateMachine.AddState(PlayerStateEnum.OnGround, new PlayerStateOnGround(this));
-        playerStateMachine.AddState(PlayerStateEnum.OnWallrun, new PlayerStateOnWallrun(this));
+        playerStateMachine.AddState(PlayerStateEnum.OnGround, new PlayerStateOnGround(this, playerStateMachine));
+        playerStateMachine.AddState(PlayerStateEnum.OnWallrun, new PlayerStateOnWallrun(this, playerStateMachine));
         playerStateMachine.Initialize(PlayerStateEnum.OnGround);
 
         PlayerCamera = GetComponentInChildren<PlayerCamera>();

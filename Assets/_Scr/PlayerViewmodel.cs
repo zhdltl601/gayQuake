@@ -39,16 +39,17 @@ public class PlayerViewmodel : MonoBehaviour
     {
         //SetWallrunViewmodeAngle(z);
         StopAllCoroutines();
-        StartCoroutine(Gay(z));
+        StartCoroutine(WallRunCoroutine(z));
     }
-    private IEnumerator Gay(float tar, AnimationCurve animationCurve = null)
+    private IEnumerator WallRunCoroutine(float targetRotationZ, AnimationCurve animationCurve = null)
     {
-        float realGay = al_wallrun.localRotation.z;
-        while (realGay != tar)
+        float localRotationZ = al_wallrun.localRotation.z;
+        while (localRotationZ != targetRotationZ)
         {
             yield return null;
-            realGay = Mathf.MoveTowards(realGay, tar, Time.deltaTime * 15);
-            SetWallrunViewmodeAngle(realGay);
+            localRotationZ = Mathf.MoveTowards(localRotationZ, targetRotationZ, Time.deltaTime * 15);
+            SetWallrunViewmodeAngle(localRotationZ);
         }
+
     }
 }
