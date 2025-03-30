@@ -6,7 +6,7 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
     {
         get
         {
-            if (_instance is null) _instance = Initialize();
+            if (_instance is null) _instance = Initialize(); // using pattern check to bypass UnityEngine.Object's implicit operator
             return _instance;
         }
     }
